@@ -91,10 +91,3 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/moyan726
 
-nav:
-  - Home: index.md
-  - Python: python/index.md
-  - SQL: sql/index.md
-  - Power BI: powerbi/index.md
-  - Projects: projects/index.md
-
