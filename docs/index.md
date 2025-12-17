@@ -1,55 +1,39 @@
 # Data Analytics Knowledge Base
 
-✅ 部署验证：我在 2025-12-17 完成了第一次自动发布
+!!! info "我是谁"
+    你好！我是 **moyan726**，正在系统学习数据分析方向（**Python / SQL / Power BI**），这里记录我的学习笔记、项目实践与复盘。
 
-✅ 本地编辑验证：我在本地修改并通过 Git push 自动上线2025/12/17---16：36
+---
 
-欢迎来到数据分析学习知识库！
+## ✅ 你可以在这里看到什么？
 
-这是一个用于学习和参考数据分析相关知识的个人知识库，涵盖了 Python、SQL 和 Power BI 等关键技术和工具。
+### 📌 学习路径
+- **Python**：数据处理、分析、可视化（Pandas / NumPy / Matplotlib）
+- **SQL**：查询、聚合、连接、窗口函数、性能优化与最佳实践
+- **Power BI**：建模、DAX、可视化与仪表盘设计
 
-## 内容概览
+### 📂 内容导航
+- [Python](Python/index.md)
+- [SQL](SQL/index.md)
+- [Power BI](PowerBI/index.md)
+- [Projects](Projects/index.md)
 
-### 🐍 Python
+---
 
-Python 是数据分析和科学计算的强大工具。本节包含：
+## 🚀 项目展示（持续更新）
+!!! tip "推荐先看"
+    - [项目 1：Project 1](Projects/project1.md)  
+    - [项目 2：Project 2](Projects/project2.md)
 
-- Python 基础知识
-- 数据分析技术
-- 常用库的使用（Pandas、NumPy、Matplotlib 等）
+---
 
-[查看 Python 内容](Python/index.md){ .md-button }
+## 🧰 我常用的工具
+- Python（Pandas / NumPy）
+- SQL（MySQL / PostgreSQL 思路通用）
+- Power BI（Power Query / DAX）
+- Git + GitHub Pages（本网站自动部署）
 
-### 🗄️ SQL
-SQL 是数据查询和管理的核心技能。本节包含：
+---
 
-- SQL 基础语法
-- 高级查询技巧
-- 最佳实践
-
-[查看 SQL 内容](SQL/index.md){ .md-button }
-
-### 📊 Power BI
-Power BI 是强大的商业智能和数据可视化平台。本节包含：
-
-- Power BI 入门
-- DAX 公式
-- 可视化技巧
-
-[查看 Power BI 内容](PowerBI/index.md){ .md-button }
-
-### 📁 项目实践
-实际项目案例和应用。
-
-[查看项目内容](Projects/index.md){ .md-button }
-
-## 关于本知识库
-
-本知识库使用 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) 构建，并部署在 GitHub Pages 上。
-
-!!! tip "持续更新"
-    本知识库会持续更新，添加新的内容和示例。
-
-## 快速开始
-
-浏览左侧导航栏，选择您感兴趣的主题开始学习！
+## 📅 更新日志
+- 2025-12-17：完成 MkDocs Material +
