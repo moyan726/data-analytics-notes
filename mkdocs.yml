@@ -67,10 +67,13 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Python:
-      - Python/index.md
-      - Basic: Python/basic.md
-      - Data Analysis: Python/data-analysis.md
-      - Libraries: Python/libraries.md
+    - Python/index.md
+    - Basic: Python/basic.md
+    - Data Analysis: Python/data-analysis.md
+    - Libraries: Python/libraries.md
+    - 机器学习: Python/Machine-Learning/index.md
+    - 动手学数据分析: Python/hands-on-data-analysis/index.md
+    - 数据可视化基础: Python/Data_Visualization/index.md
   - SQL:
       - SQL/index.md
       - Basic: SQL/basic.md
