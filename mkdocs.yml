@@ -1,0 +1,92 @@
+site_name: Data Analytics Knowledge Base
+site_description: Personal knowledge base for data analytics learning (Python / SQL / Power BI)
+site_author: moyan726
+site_url: https://moyan726.github.io/data-analytics-notes/
+
+repo_name: moyan726/data-analytics-notes
+repo_url: https://github.com/moyan726/data-analytics-notes
+
+theme:
+  name: material
+  language: zh
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - attr_list
+  - md_in_html
+  - tables
+
+nav:
+  - Home: index.md
+  - Python:
+      - Python/index.md
+      - Basic: Python/basic.md
+      - Data Analysis: Python/data-analysis.md
+      - Libraries: Python/libraries.md
+  - SQL:
+      - SQL/index.md
+      - Basic: SQL/basic.md
+      - Advanced: SQL/advanced.md
+      - Best Practices: SQL/best-practices.md
+  - Power BI:
+      - PowerBI/index.md
+      - Getting Started: PowerBI/getting-started.md
+      - DAX: PowerBI/dax.md
+      - Visualization: PowerBI/visualization.md
+  - Projects:
+      - Projects/index.md
+      - Project 1: Projects/project1.md
+      - Project 2: Projects/project2.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/moyan726
