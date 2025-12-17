@@ -73,7 +73,7 @@ SELECT customer_name, email
 FROM customers
 WHERE country = 'USA';
 
--- 也可接受：全小写（保持一致即可）
+-- 备选方案：全小写（不如大写清晰，但如果选择此风格需保持全文一致）
 select customer_name, email
 from customers
 where country = 'USA';
