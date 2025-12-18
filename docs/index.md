@@ -12,7 +12,16 @@
 - **SQL**：查询、聚合、连接、窗口函数、性能优化与最佳实践
 - **Power BI**：建模、DAX、可视化与仪表盘设计
 
+### 📂 学习资料
+
+- [Hands-on-data-analysis](https://github.com/moyan726/data-analytics-notes/tree/main/Data%20and%20original%20files)动手学数据分析
+
+  > 官方源文档的资料
+  >
+  > 博主自己学习，在源文档之上扩展的Markdown和jupyter notebook笔记
+
 ### 📂 内容导航
+
 - [Python](Python/index.md)
 - [SQL](SQL/index.md)
 - [Power BI](PowerBI/index.md)
@@ -22,8 +31,7 @@
 
 ## 🚀 项目展示（持续更新）
 !!! tip "推荐先看"
-    - [项目 1：Project 1](Projects/project1.md)  
-    - [项目 2：Project 2](Projects/project2.md)
+暂未更新~稍等       努力学习ing！
 
 ---
 
