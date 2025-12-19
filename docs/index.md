@@ -14,11 +14,13 @@
 
 ### 📂 学习资料
 
-- [Hands-on-data-analysis](https://github.com/moyan726/data-analytics-notes/tree/main/Data%20and%20original%20files)动手学数据分析
+- [Hands-on-data-analysis](https://github.com/moyan726/data-analytics-notes/tree/main/Data%20and%20original%20files)   动手学数据分析
 
-  > 官方源文档的资料
+  > 资料包含以下内容：
   >
-  > 博主自己学习，在源文档之上扩展的Markdown和jupyter notebook笔记
+  > 1. 官方源文档的资料 包含使用的**数据集**  **空白练习文件**  【offical】
+  >
+  > 2. 博主自己学习，在源文档之上扩展的**Markdown笔记**和**jupyter notebook笔记**【Myself】
 
 ### 📂 内容导航
 
