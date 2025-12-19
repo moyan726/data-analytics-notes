@@ -91,6 +91,7 @@ nav:
       - Projects/index.md
       - Project 1: Projects/project1.md
       - Project 2: Projects/project2.md
+      - Project 3--Git批量提交脚本: Projects/Git批量提交脚本.md
 
 extra:
   social:
