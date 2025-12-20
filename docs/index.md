@@ -14,7 +14,7 @@
 
 ### 📂 学习资料
 
-- [Hands-on-data-analysis](https://github.com/moyan726/data-analytics-notes/tree/main/Data%20and%20original%20files)   动手学数据分析
+- [Hands-on-data-analysis](https://github.com/moyan726/data-analytics-notes/tree/main/Data_and_original_files/Python_Hands_on_data_analysis)   动手学数据分析
 
   > 资料包含以下内容：
   >
