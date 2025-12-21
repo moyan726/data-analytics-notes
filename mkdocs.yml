@@ -6,64 +6,158 @@ site_url: https://moyan726.github.io/data-analytics-notes/
 repo_name: moyan726/data-analytics-notes
 repo_url: https://github.com/moyan726/data-analytics-notes
 
+# 版权信息
+copyright: Copyright &copy; 2024 moyan726
+
 theme:
   name: material
+  custom_dir: overrides
   language: zh
+  # 自定义字体
+  font:
+    text: Noto Sans SC
+    code: JetBrains Mono
+  # 图标配置
+  icon:
+    repo: fontawesome/brands/github
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
   palette:
-    # Palette toggle for light mode
+    # light mode
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: deep purple
+      accent: pink
       toggle:
         icon: material/brightness-7
-        name: Switch to dark mode
-    # Palette toggle for dark mode
+        name: 切换到深色模式
+    # dark mode
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: deep purple
+      accent: pink
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: 切换到浅色模式
   features:
+    # 导航功能
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.prune
+    - navigation.indexes
     - navigation.top
     - navigation.footer
+    - navigation.tracking
+    - navigation.instant
+    - navigation.instant.prefetch
+    # 目录功能
+    - toc.follow
+    # 搜索功能
     - search.suggest
     - search.highlight
+    - search.share
+    # 内容功能
     - content.code.copy
     - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    # 头部功能
+    - header.autohide
+    - announce.dismiss
 
 plugins:
   - search:
       lang:
         - zh
         - en
+      separator: '[\s\u200b\-]'
+  # 注意：使用此插件需要先安装：pip install mkdocs-git-revision-date-localized-plugin
+  # 如果您的 mkdocs 使用不同的 Python 环境，请在该环境中安装
+  # - git-revision-date-localized:
+  #     enable_creation_date: true
+  #     type: timeago
+  #     fallback_to_build_date: true
+  #     locale: zh
 
 markdown_extensions:
+  - admonition
+  - pymdownx.details
+
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+      auto_title: true
+
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-  - admonition
-  - pymdownx.details
+
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
+
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+
   - pymdownx.arithmatex:
       generic: true
-  - footnotes
+
   - pymdownx.critic
   - pymdownx.caret
   - pymdownx.keys
   - pymdownx.mark
   - pymdownx.tilde
+  - pymdownx.smartsymbols
+
+  - footnotes
   - attr_list
   - md_in_html
   - tables
+  - abbr
+  - def_list
+
+  # 目录配置
+  - toc:
+      permalink: true
+      permalink_title: 锚点链接
+      toc_depth: 3
+      title: 目录
+
+# 自定义 CSS
+extra_css:
+  - stylesheets/custom.css
+  - stylesheets/announcement.css
+
+# JavaScript 配置
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
 
 nav:
   - Home: index.md
@@ -82,6 +176,7 @@ nav:
       - Basic: SQL/basic.md
       - Advanced: SQL/advanced.md
       - Best Practices: SQL/best-practices.md
+
   - Power BI:
       - PowerBI/index.md
       - Getting Started: PowerBI/getting-started.md
@@ -92,12 +187,25 @@ nav:
       - Project 1: Projects/project1.md
       - Project 2: Projects/project2.md
       - Project 3--Git批量提交脚本: Projects/Git批量提交脚本.md
+      - 功能测试页: Projects/TestClaude.md
 
 extra:
+  generator: false  # 隐藏 "Made with Material for MkDocs"
+  # 公告栏
+  announce:
+    dismiss: true
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/moyan726
+      name: GitHub
+    - icon: fontawesome/solid/blog
+      link: https://blog.csdn.net/2401_85669197
+      name: CSDN 博客
+    - icon: fontawesome/solid/envelope
+      link: mailto:moyan726@gmail.com
+      name: 发送邮件
   analytics:
     provider: google
     property: G-NBDDQJ7R97
+
 
