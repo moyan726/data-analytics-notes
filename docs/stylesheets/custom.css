@@ -1,0 +1,573 @@
+/* 自定义样式 - MkDocs Material 主题增强 */
+
+/* ========== 全局样式优化 ========== */
+:root {
+  /* 自定义颜色变量 */
+  --md-primary-fg-color: #5c6bc0;
+  --md-primary-fg-color--light: #8e99f3;
+  --md-primary-fg-color--dark: #26418f;
+  --md-accent-fg-color: #ff4081;
+}
+
+/* ========== 代码块美化 ========== */
+.highlight code {
+  border-radius: 8px;
+}
+
+/* 代码块阴影效果 */
+.md-typeset pre {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 行内代码样式 */
+.md-typeset code:not(pre code) {
+  background-color: rgba(92, 107, 192, 0.1);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.9em;
+}
+
+/* ========== 卡片效果 ========== */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* ========== 表格美化 ========== */
+.md-typeset table:not([class]) {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 600;
+}
+
+/* ========== 侧边栏优化 ========== */
+.md-nav__link {
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.md-nav__link:hover {
+  background-color: rgba(92, 107, 192, 0.1);
+  transform: translateX(4px);
+}
+
+/* 当前活跃链接 */
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+/* ========== 顶部导航栏 ========== */
+.md-header {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ========== 搜索框美化 ========== */
+.md-search__input {
+  border-radius: 20px;
+}
+
+/* ========== 内容区域优化 ========== */
+.md-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== 链接样式 ========== */
+.md-typeset a:not(.md-button) {
+  text-decoration: none;
+  border-bottom: 1px dashed var(--md-accent-fg-color);
+  transition: all 0.2s ease;
+}
+
+.md-typeset a:not(.md-button):hover {
+  border-bottom-style: solid;
+  color: var(--md-accent-fg-color);
+}
+
+/* ========== 标题样式 ========== */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 700;
+}
+
+.md-typeset h2 {
+  border-bottom: 2px solid var(--md-primary-fg-color--light);
+  padding-bottom: 0.3em;
+}
+
+/* ========== 滚动条美化 ========== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(92, 107, 192, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(92, 107, 192, 0.5);
+}
+
+/* ========== 暗色模式适配 ========== */
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #90caf9;
+}
+
+[data-md-color-scheme="slate"] .md-typeset code:not(pre code) {
+  background-color: rgba(144, 202, 249, 0.15);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: #37474f;
+}
+
+/* ========== 图片样式 ========== */
+.md-typeset img {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.md-typeset img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ========== 页脚优化 ========== */
+.md-footer {
+  margin-top: 2rem;
+}
+
+/* ========== 任务列表美化 ========== */
+.md-typeset .task-list-item input[type="checkbox"] {
+  accent-color: var(--md-primary-fg-color);
+}
+
+/* ========== 标签页样式 ========== */
+.md-typeset .tabbed-labels>label {
+  border-radius: 8px 8px 0 0;
+  transition: all 0.2s ease;
+}
+
+/* ========== 响应式优化 ========== */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__link:hover {
+    transform: none;
+  }
+}
+
+/* ========== Hero 区域样式 ========== */
+.hero-section {
+  background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-primary-fg-color--dark) 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  animation: heroGlow 15s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(10%, 10%);
+  }
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  border-bottom: none !important;
+  color: white !important;
+}
+
+.hero-section .hero-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.hero-section .hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.hero-section .md-button {
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  text-transform: none;
+  transition: all 0.3s ease;
+}
+
+.hero-section .md-button--primary {
+  background: white;
+  color: var(--md-primary-fg-color);
+  border: none;
+}
+
+.hero-section .md-button--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section .md-button--secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.hero-section .md-button--secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== 卡片网格布局 ========== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.card {
+  background: var(--md-default-bg-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: var(--md-typeset-color);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.card a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: none !important;
+}
+
+.card a:hover {
+  color: var(--md-accent-fg-color);
+}
+
+.card a::after {
+  content: " →";
+  transition: transform 0.2s ease;
+}
+
+.card a:hover::after {
+  transform: translateX(4px);
+}
+
+/* ========== 时间线样式 ========== */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin: 2rem 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+  border-radius: 3px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  top: 0.3rem;
+  width: 12px;
+  height: 12px;
+  background: var(--md-primary-fg-color);
+  border-radius: 50%;
+  border: 3px solid var(--md-default-bg-color);
+  box-shadow: 0 0 0 3px var(--md-primary-fg-color);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.timeline-content {
+  background: var(--md-default-bg-color);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-left: 3px solid var(--md-primary-fg-color);
+}
+
+.timeline-content p {
+  margin: 0;
+}
+
+/* ========== 公告栏样式 ========== */
+.md-banner {
+  background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+  color: white;
+  padding: 0.5rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.md-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.md-banner__button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.25rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.md-banner__button:hover {
+  opacity: 1;
+}
+
+.md-banner__button svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* ========== 统计卡片 ========== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  background: var(--md-default-bg-color);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.3rem;
+}
+
+/* ========== 暗色模式适配 - 新增样式 ========== */
+[data-md-color-scheme="slate"] .hero-section {
+  background: linear-gradient(135deg, #1a237e 0%, #0d1421 100%);
+}
+
+[data-md-color-scheme="slate"] .card {
+  background: var(--md-default-bg-color);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .timeline-content {
+  background: var(--md-default-bg-color);
+}
+
+[data-md-color-scheme="slate"] .stat-card {
+  background: var(--md-default-bg-color);
+}
+/* ========== ���̶�������������ҳ�� ========== */
+.side-announcement {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-primary-fg-color--dark) 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.side-announcement h4 {
+  margin: 0 0 0.8rem 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.side-announcement p {
+  margin: 0 0 0.8rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.side-announcement ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.8rem;
+}
+
+.side-announcement li {
+  margin-bottom: 0.3rem;
+  opacity: 0.9;
+}
+
+.side-announcement a {
+  color: white;
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.side-announcement a:hover {
+  opacity: 1;
+}
+
+.side-announcement .announcement-icon {
+  font-size: 1.5rem;
+}
+
+/* ��Ӧʽ��С��Ļ������๫���� */
+@media screen and (max-width: 1400px) {
+  .side-announcement {
+    display: none;
+  }
+}
+
+/* ��ɫģʽ���� */
+[data-md-color-scheme="slate"] .side-announcement {
+  background: linear-gradient(135deg, #1a237e 0%, #0d1421 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
