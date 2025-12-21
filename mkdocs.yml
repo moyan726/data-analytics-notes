@@ -97,4 +97,7 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/moyan726
+  analytics:
+    provider: google
+    property: G-NBDDQJ7R97
 
