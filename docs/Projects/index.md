@@ -19,3 +19,19 @@
 - 技能：漏斗分析 / cohort 留存 / Power BI 仪表盘
 - 亮点：将结论落到“产品/运营动作”  
 👉 [进入项目](project2.md)
+
+### ✅ Project3：Git 交互式提交助手（PowerShell）
+
+- **目标**：把多文件改动按编号**分批提交**，降低“一锅端”提交风险
+- **技能**：PowerShell 自动化 / Git porcelain 解析 / 交互式 CLI
+- **亮点**：主分支保护 + 敏感文件/大文件提醒 + **遗漏文件检测** + 安全推送（自动处理 upstream）
+  👉 [进入项目](Git批量提交脚本.md)
+
+### ✅ Project4：PPT 批量转 PDF 工具（ppt_to_pdf.py）
+
+- **目标**：自动扫描指定文件夹，将所有 `.ppt/.pptx` **批量转换为 PDF**，统一输出到目标目录
+- **技能**：Python 自动化 / Windows COM（PowerPoint.Application）/ 批处理与异常容错
+- **亮点**：高保真转换（调用 PowerPoint 原生导出）+ 自动建输出目录 + 进度与成功/失败统计 + 单文件失败不影响全局 + `try/finally` 确保 PowerPoint 正常退出
+- **适用场景**：课程/培训资料一键归档、会议材料批量分发、打印前统一格式、给未装 PowerPoint 的人分享
+  👉 [进入项目](ppt_to_pdf.md)
+

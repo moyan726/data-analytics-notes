@@ -187,6 +187,7 @@ nav:
       - Project 1: Projects/project1.md
       - Project 2: Projects/project2.md
       - Project 3--Git批量提交脚本: Projects/Git批量提交脚本.md
+      - Project 4--ppt_to_pdf: Projects/ppt_to_pdf.md
       - 功能测试页: Projects/TestClaude.md
 
 extra:

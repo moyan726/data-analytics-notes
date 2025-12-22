@@ -37,9 +37,9 @@
 !!! info "Who Am I"
 
     你好！我是 **moyan726**，[CSDN 博客主页](https://blog.csdn.net/2401_85669197) ｜持续输出数据分析实战内容。
-
+    
     **数据科学与大数据技术** 本科在读（2023-2027），职业主线选择 **数据分析 / 商业分析 / BI**，目标是把复杂业务问题拆解成可衡量的指标与清晰的分析结论。
-
+    
     📧 欢迎交流实习/项目合作机会！
 
 ---
@@ -110,7 +110,15 @@
 <a href="./Projects/Git批量提交脚本/">查看详情</a>
 </div>
 
+<div class="card">
+<div class="card-icon">🔧</div>
+<h3>ppt批量转pdf文件</h3>
+<p>一键将所有 .ppt/.pptx 批量转换为 PDF，统一输出到目标目录</p>
+<a href="./Projects/ppt_to_pdf/">查看详情</a>
 </div>
+
+</div>
+
 
 ---
 
@@ -145,6 +153,13 @@
 ## 📅 更新日志
 
 <div class="timeline">
+
+<div class="timeline-item">
+<div class="timeline-date">2025-12-22</div>
+<div class="timeline-content">
+<p><strong>ppt批量转pdf文件</strong> — 自动扫描指定文件夹，将所有 .ppt/.pptx 批量转换为 PDF，统一输出到目标目录</p>
+</div>
+</div>
 
 <div class="timeline-item">
 <div class="timeline-date">2025-12-21</div>
