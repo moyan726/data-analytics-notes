@@ -18,7 +18,7 @@
 
 **最新版** 项目进一步修改3.0版本 源码[项目脚本程序源码2.0版](#banben)
 
-不想复制粘贴，源码一次性下载路径 [我的Github仓库](https://github.com/moyan726/data-analytics-notes/tree/main/Data%20and%20original%20files/%E9%A1%B9%E7%9B%AE%E6%BA%90%E7%A0%81-%20Git%20%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%8F%90%E4%BA%A4%E5%8A%A9%E6%89%8B)
+不想复制粘贴，源码一次性下载路径 [我的Github仓库](https://github.com/moyan726/data-analytics-notes/tree/main/Data_and_original_files/Project_Git_Interactive_Code)
 
 ## 📚 目录
 
