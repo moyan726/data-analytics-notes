@@ -189,6 +189,7 @@ nav:
       - Project 3--Git批量提交脚本: Projects/Git批量提交脚本.md
       - Project 4--ppt_to_pdf: Projects/ppt_to_pdf.md
       - 功能测试页: Projects/TestClaude.md
+      - share_online: Projects/other_files/五节好课.md
 
 extra:
   generator: false  # 隐藏 "Made with Material for MkDocs"
