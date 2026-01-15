@@ -149,15 +149,10 @@ markdown_extensions:
 # 自定义 CSS
 extra_css:
   - stylesheets/custom.css
-  - stylesheets/announcement.css
 
 # JavaScript 配置
 extra_javascript:
-  - javascripts/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
-  - javascripts/mermaid-init.js
+  - javascripts/site.js
 
 nav:
   - Home: index.md
@@ -166,8 +161,8 @@ nav:
     - 一、动手学数据分析:
          - 概览: Python/hands-on-data-analysis/index.md
          - 1.第一章合集整理: Python/hands-on-data-analysis/snippets/第一章合集整理.md
-   # - Basic: Python/basic.md
-   # - Data Analysis: Python/data-analysis.md
+    - Basic: Python/basic.md
+    - Data Analysis: Python/data-analysis.md
     - Libraries: Python/libraries.md
     - 机器学习: Python/Machine-Learning/index.md
     - 数据可视化基础: Python/Data_Visualization/index.md
@@ -189,10 +184,12 @@ nav:
       - Project 3--Git批量提交脚本: Projects/Git批量提交脚本.md
       - Project 4--ppt_to_pdf: Projects/ppt_to_pdf.md
       - 功能测试页: Projects/TestClaude.md
+      - Thoughts On AI: Projects/Thoughts_On_AI.md
       - share_online: Projects/other_files/five.md
 
 extra:
   generator: false  # 隐藏 "Made with Material for MkDocs"
+  keywords: Python, SQL, Power BI, 数据分析, 数据可视化, 机器学习, MkDocs
   # 公告栏
   announce:
     dismiss: true

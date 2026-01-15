@@ -717,7 +717,7 @@ To https://github.com/user/repo.git
 
 ------
 
-## 高级用法
+## 高级用法 {#高级用法}
 
 ### 1. 快捷方式配置
 

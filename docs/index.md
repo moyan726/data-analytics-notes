@@ -1,24 +1,23 @@
 # Data Analytics Knowledge Base
 
-<!-- 左侧固定公告栏 -->
-<div class="side-announcement">
-<div class="side-announcement-header">
-<span class="icon">📢</span>
+<aside class="side-announcement" aria-label="站点公告">
+<div class="side-announcement-header" role="heading" aria-level="2">
+<span class="icon" aria-hidden="true">📢</span>
 <span>公告</span>
 </div>
 <div class="side-announcement-body">
-<div class="side-announcement-status">
-<span class="pulse"></span>
+<div class="side-announcement-status" aria-live="polite">
+<span class="pulse" aria-hidden="true"></span>
 <span>网站建设中</span>
 </div>
 <ul class="side-announcement-list">
-<span class="emoji">✨</span><span>功能测试页上线</span><br>
-<span class="emoji">📝</span><span>笔记持续更新</span><br>
-<span class="emoji">🔧</span><span>新功能开发中</span><br>
-<span class="emoji">🔧</span><span>页面底部联系我</span><br>
+<li><span class="emoji" aria-hidden="true">✨</span><span>功能测试页上线</span></li>
+<li><span class="emoji" aria-hidden="true">📝</span><span>笔记持续更新</span></li>
+<li><span class="emoji" aria-hidden="true">🔧</span><span>新功能开发中</span></li>
+<li><span class="emoji" aria-hidden="true">🔧</span><span>页面底部联系我</span></li>
 </ul>
 </div>
-</div>
+</aside>
 
 <div class="hero-section">
 <h1>🚀 数据分析知识库</h1>
