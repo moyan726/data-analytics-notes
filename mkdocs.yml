@@ -52,7 +52,7 @@ theme:
     # 导航功能
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.sections
+
     - navigation.prune
     - navigation.indexes
     - navigation.top
@@ -186,7 +186,9 @@ nav:
       - 功能测试页: Projects/TestClaude.md
       - Thoughts On AI: Projects/Thoughts_On_AI.md
       - share_online: Projects/other_files/five.md
-
+      - MCM美赛资料: 
+           - 概述: Projects/MCM/index.md
+           - 1.MCM Prep Guide: Projects/MCM/1.MCM_Prep_Guide.md
 extra:
   generator: false  # 隐藏 "Made with Material for MkDocs"
   keywords: Python, SQL, Power BI, 数据分析, 数据可视化, 机器学习, MkDocs
