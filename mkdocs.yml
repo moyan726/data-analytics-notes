@@ -161,31 +161,36 @@ nav:
     - 一、动手学数据分析:
          - 概览: Python/hands-on-data-analysis/index.md
          - 1.第一章合集整理: Python/hands-on-data-analysis/snippets/第一章合集整理.md
-    - Basic: Python/basic.md
-    - Data Analysis: Python/data-analysis.md
-    - Libraries: Python/libraries.md
+    - infrastructure_by_AI:
+         - Basic: Python/infrastructure_by_AI/basic.md
+         - Data Analysis: Python/infrastructure_by_AI/data-analysis.md
+         - Libraries: Python/infrastructure_by_AI/libraries.md
     - 机器学习: Python/Machine-Learning/index.md
     - 数据可视化基础: Python/Data_Visualization/index.md
   - SQL:
       - SQL/index.md
-      - Basic: SQL/basic.md
-      - Advanced: SQL/advanced.md
-      - Best Practices: SQL/best-practices.md
-
+      - AI_infrastructure:
+          - Basic: SQL/AI_infrastructure/basic.md
+          - Advanced: SQL/AI_infrastructure/advanced.md
+          - Best Practices: SQL/AI_infrastructure/best-practices.md
   - Power BI:
-      - PowerBI/index.md
-      - Getting Started: PowerBI/getting-started.md
-      - DAX: PowerBI/dax.md
       - Visualization: PowerBI/visualization.md
+      - AI_infrastructure:
+          - Overview: PowerBI/AI_infrastructure/index.md
+          - Getting Started: PowerBI/AI_infrastructure/getting-started.md
+          - DAX: PowerBI/AI_infrastructure/dax.md
   - Projects:
       - Projects/index.md
-      - Project 1: Projects/project1.md
-      - Project 2: Projects/project2.md
-      - Project 3--Git批量提交脚本: Projects/Git批量提交脚本.md
-      - Project 4--ppt_to_pdf: Projects/ppt_to_pdf.md
-      - 功能测试页: Projects/TestClaude.md
-      - Thoughts On AI: Projects/Thoughts_On_AI.md
-      - share_online: Projects/other_files/five.md
+      - AI_infrastructure:
+          - Project 1: Projects/AI_infrastructure/project1.md
+          - Project 2: Projects/AI_infrastructure/project2.md
+      - myself_tools:
+          - Project 3--Git批量提交脚本: Projects/myself_tools/Git批量提交脚本.md
+          - Project 4--ppt_to_pdf: Projects/myself_tools/ppt_to_pdf.md
+      - AI_use:
+          - 功能测试页: Projects/AI_use/TestClaude.md
+          - Thoughts On AI: Projects/AI_use/Thoughts_On_AI.md
+          - share_online: Projects/AI_use/five.md
       - MCM美赛资料: 
            - 概述: Projects/MCM/index.md
            - 1.MCM Prep Guide: Projects/MCM/1.MCM_Prep_Guide.md
