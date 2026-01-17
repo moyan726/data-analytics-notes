@@ -157,16 +157,16 @@ extra_javascript:
 nav:
   - Home: index.md
   - Python:
-    - Python/index.md
-    - 一、动手学数据分析:
-         - 概览: Python/hands-on-data-analysis/index.md
-         - 1.第一章合集整理: Python/hands-on-data-analysis/snippets/第一章合集整理.md
-    - infrastructure_by_AI:
-         - Basic: Python/infrastructure_by_AI/basic.md
-         - Data Analysis: Python/infrastructure_by_AI/data-analysis.md
-         - Libraries: Python/infrastructure_by_AI/libraries.md
-    - 机器学习: Python/Machine-Learning/index.md
-    - 数据可视化基础: Python/Data_Visualization/index.md
+      - Python/index.md
+      - 一、动手学数据分析:
+          - 概览: Python/hands-on-data-analysis/index.md
+          - 1.第一章合集整理: Python/hands-on-data-analysis/snippets/第一章合集整理.md
+      - infrastructure_by_AI:
+          - Basic: Python/infrastructure_by_AI/basic.md
+          - Data Analysis: Python/infrastructure_by_AI/data-analysis.md
+          - Libraries: Python/infrastructure_by_AI/libraries.md
+      - 机器学习: Python/Machine-Learning/index.md
+      - 数据可视化基础: Python/Data_Visualization/index.md
   - SQL:
       - SQL/index.md
       - AI_infrastructure:
@@ -174,9 +174,9 @@ nav:
           - Advanced: SQL/AI_infrastructure/advanced.md
           - Best Practices: SQL/AI_infrastructure/best-practices.md
   - Power BI:
-      - Visualization: PowerBI/index.md
+      - Overview: PowerBI/index.md
       - AI_infrastructure:
-          - Overview: PowerBI/AI_infrastructure/visualization.md
+          - Visualization: PowerBI/AI_infrastructure/visualization.md
           - Getting Started: PowerBI/AI_infrastructure/getting-started.md
           - DAX: PowerBI/AI_infrastructure/dax.md
   - Projects:
@@ -192,8 +192,8 @@ nav:
           - Thoughts On AI: Projects/AI_use/Thoughts_On_AI.md
           - share_online: Projects/AI_use/five.md
       - MCM美赛资料: 
-           - 概述: Projects/MCM/index.md
-           - 1.MCM Prep Guide: Projects/MCM/1.MCM_Prep_Guide.md
+          - 概述: Projects/MCM/index.md
+          - 1.MCM Prep Guide: Projects/MCM/1.MCM_Prep_Guide.md
 extra:
   generator: false  # 隐藏 "Made with Material for MkDocs"
   keywords: Python, SQL, Power BI, 数据分析, 数据可视化, 机器学习, MkDocs

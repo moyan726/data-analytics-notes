@@ -22,9 +22,9 @@ Power BI 是一套商业分析工具，可以连接数百个数据源，简化�
 
 ## 学习路径
 
-1. **[入门指南](getting-started.md)** - Power BI 基础和界面介绍
-2. **[DAX 公式](dax.md)** - 数据分析表达式学习
-3. **[可视化技巧](visualization.md)** - 创建有效的数据可视化
+1. **[入门指南](AI_infrastructure/getting-started.md)** - Power BI 基础和界面介绍
+2. **[DAX 公式](AI_infrastructure/dax.md)** - 数据分析表达式学习
+3. **[可视化技巧](AI_infrastructure/visualization.md)** - 创建有效的数据可视化
 
 ## 快速开始
 

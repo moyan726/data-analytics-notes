@@ -11,9 +11,9 @@ Python 是数据分析领域最流行的编程语言之一，拥有丰富的库�
 
 ## 学习路径
 
-1. **[Python 基础](basic.md)** - 学习 Python 语法和基本概念
-2. **[数据分析](data-analysis.md)** - 掌握数据处理和分析技巧
-3. **[常用库](libraries.md)** - 深入了解数据分析相关的库
+1. **[Python 基础](infrastructure_by_AI/basic.md)** - 学习 Python 语法和基本概念
+2. **[数据分析](infrastructure_by_AI/data-analysis.md)** - 掌握数据处理和分析技巧
+3. **[常用库](infrastructure_by_AI/libraries.md)** - 深入了解数据分析相关的库
 
 ## 核心库介绍
 

@@ -11,9 +11,9 @@ SQL (Structured Query Language) 是用于管理和查询关系型数据库的标
 
 ## 学习路径
 
-1. **[SQL 基础](basic.md)** - 学习基本的 SQL 语法和查询
-2. **[SQL 高级](advanced.md)** - 掌握高级查询技巧和优化
-3. **[最佳实践](best-practices.md)** - 了解 SQL 编写的最佳实践
+1. **[SQL 基础](AI_infrastructure/basic.md)** - 学习基本的 SQL 语法和查询
+2. **[SQL 高级](AI_infrastructure/advanced.md)** - 掌握高级查询技巧和优化
+3. **[最佳实践](AI_infrastructure/best-practices.md)** - 了解 SQL 编写的最佳实践
 
 ## 快速示例
 
