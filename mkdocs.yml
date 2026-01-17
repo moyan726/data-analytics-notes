@@ -174,9 +174,9 @@ nav:
           - Advanced: SQL/AI_infrastructure/advanced.md
           - Best Practices: SQL/AI_infrastructure/best-practices.md
   - Power BI:
-      - Visualization: PowerBI/visualization.md
+      - Visualization: PowerBI/index.md
       - AI_infrastructure:
-          - Overview: PowerBI/AI_infrastructure/index.md
+          - Overview: PowerBI/AI_infrastructure/visualization.md
           - Getting Started: PowerBI/AI_infrastructure/getting-started.md
           - DAX: PowerBI/AI_infrastructure/dax.md
   - Projects:
