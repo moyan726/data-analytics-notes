@@ -156,14 +156,22 @@
   }
 
   function initTocScrollSync() {
-    // Clean up previous observer
+    // Clean up previous observers
     if (tocState.observer) {
       tocState.observer.disconnect()
       tocState.observer = null
     }
+    if (tocState.mutationObserver) {
+      tocState.mutationObserver.disconnect()
+      tocState.mutationObserver = null
+    }
+    if (tocState.scrollHandler) {
+      window.removeEventListener('scroll', tocState.scrollHandler)
+      tocState.scrollHandler = null
+    }
 
     // Find TOC container
-    var tocNav = document.querySelector('.md-sidebar--secondary .md-nav')
+    var tocNav = document.querySelector('.md-sidebar--secondary .md-nav--secondary')
     if (!tocNav) return
 
     // Find heading elements with IDs
@@ -173,42 +181,178 @@
     var headings = content.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
     if (headings.length === 0) return
 
-    // IntersectionObserver options
-    var observerOptions = {
-      root: null,
-      rootMargin: '-80px 0px -70% 0px',
-      threshold: 0
-    }
+    // Mark items that have children as nested
+    var allItems = tocNav.querySelectorAll('.md-nav__item')
+    allItems.forEach(function (item) {
+      var childNav = item.querySelector(':scope > .md-nav')
+      if (childNav) {
+        item.classList.add('md-nav__item--nested')
+      }
+    })
 
-    tocState.observer = new IntersectionObserver(function (entries) {
-      var visibleHeadings = []
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          visibleHeadings.push({
-            id: entry.target.id,
-            top: entry.boundingClientRect.top
-          })
+    // Click handler for toggling expansion
+    tocNav.addEventListener('click', function (e) {
+      var link = e.target.closest('.md-nav__link')
+      if (!link) return
+
+      var item = link.parentElement
+      if (!item || !item.classList.contains('md-nav__item--nested')) return
+
+      // Toggle expansion on click
+      if (item.classList.contains('toc-expanded')) {
+        collapseItem(item)
+      } else {
+        expandItemExclusive(item, tocNav)
+      }
+    })
+
+    // Watch for Material theme's active link changes via MutationObserver
+    tocState.mutationObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          var target = mutation.target
+          if (target.classList.contains('md-nav__link') && target.classList.contains('md-nav__link--active')) {
+            var item = target.parentElement
+            if (item) {
+              expandToItem(item, tocNav)
+              scrollTocToActiveLink(target, tocNav)
+            }
+          }
         }
       })
+    })
 
-      if (visibleHeadings.length === 0) return
+    tocState.mutationObserver.observe(tocNav, {
+      attributes: true,
+      attributeFilter: ['class'],
+      subtree: true
+    })
 
-      visibleHeadings.sort(function (a, b) { return a.top - b.top })
-      var activeId = visibleHeadings[0].id
+    // Scroll-based fallback: find heading closest to top of viewport
+    var headingsArray = Array.prototype.slice.call(headings)
+    var lastActiveId = null
 
-      var tocLink = tocNav.querySelector('a[href="#' + CSS.escape(activeId) + '"]')
-      if (!tocLink) return
-
-      if (tocState.scrollTimeout) clearTimeout(tocState.scrollTimeout)
+    tocState.scrollHandler = function () {
+      if (tocState.scrollTimeout) return // Throttle
 
       tocState.scrollTimeout = setTimeout(function () {
-        scrollTocToActiveLink(tocLink, tocNav)
-      }, 50)
-    }, observerOptions)
+        tocState.scrollTimeout = null
 
-    headings.forEach(function (heading) {
-      tocState.observer.observe(heading)
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        var headerOffset = 100 // Account for fixed header
+
+        // Find the heading that is closest to (but above) the current scroll position
+        var activeHeading = null
+        for (var i = 0; i < headingsArray.length; i++) {
+          var heading = headingsArray[i]
+          var headingTop = heading.getBoundingClientRect().top + scrollTop
+          if (headingTop <= scrollTop + headerOffset) {
+            activeHeading = heading
+          } else {
+            break
+          }
+        }
+
+        // Fallback to first heading if none found
+        if (!activeHeading && headingsArray.length > 0) {
+          activeHeading = headingsArray[0]
+        }
+
+        if (activeHeading && activeHeading.id !== lastActiveId) {
+          lastActiveId = activeHeading.id
+
+          var tocLink = tocNav.querySelector('a[href="#' + CSS.escape(activeHeading.id) + '"]')
+          if (tocLink) {
+            var item = tocLink.parentElement
+            expandToItem(item, tocNav)
+            scrollTocToActiveLink(tocLink, tocNav)
+          }
+        }
+      }, 100)
+    }
+
+    window.addEventListener('scroll', tocState.scrollHandler, { passive: true })
+
+    // Initial sync
+    tocState.scrollHandler()
+  }
+
+
+  // Expand a single item and collapse siblings (exclusive expansion)
+  function expandItemExclusive(item, tocNav) {
+    if (!item) return
+
+    // Collapse all items at the same level and deeper, except parents of the target
+    var parent = item.parentElement
+    if (parent) {
+      var siblings = parent.querySelectorAll(':scope > .md-nav__item.toc-expanded')
+      siblings.forEach(function (sibling) {
+        if (sibling !== item) {
+          collapseItem(sibling)
+        }
+      })
+    }
+
+    // Expand the target item
+    item.classList.add('toc-expanded')
+
+    // Also ensure all parent items are expanded
+    expandParents(item, tocNav)
+  }
+
+  // Expand all parent items of an element
+  function expandParents(el, tocNav) {
+    var parent = el.parentElement
+    while (parent && parent !== tocNav) {
+      if (parent.classList.contains('md-nav__item') && parent.classList.contains('md-nav__item--nested')) {
+        parent.classList.add('toc-expanded')
+      }
+      parent = parent.parentElement
+    }
+  }
+
+  // Collapse an item and all its children
+  function collapseItem(item) {
+    item.classList.remove('toc-expanded')
+    var children = item.querySelectorAll('.toc-expanded')
+    children.forEach(function (child) {
+      child.classList.remove('toc-expanded')
     })
+  }
+
+  // Expand to a specific item, collapsing all non-ancestors
+  function expandToItem(targetItem, tocNav) {
+    if (!targetItem || !tocNav) return
+
+    // Build the ancestor chain for the target item
+    var ancestors = []
+    var el = targetItem
+    while (el && el !== tocNav) {
+      if (el.classList.contains('md-nav__item')) {
+        ancestors.push(el)
+      }
+      el = el.parentElement
+    }
+
+    // Collapse all expanded items that are NOT in the ancestor chain
+    var allExpanded = tocNav.querySelectorAll('.toc-expanded')
+    allExpanded.forEach(function (expanded) {
+      if (ancestors.indexOf(expanded) === -1) {
+        expanded.classList.remove('toc-expanded')
+      }
+    })
+
+    // Expand all ancestors (from root to target)
+    ancestors.reverse().forEach(function (ancestor) {
+      if (ancestor.classList.contains('md-nav__item--nested')) {
+        ancestor.classList.add('toc-expanded')
+      }
+    })
+
+    // If the target item itself is nested, expand it
+    if (targetItem.classList.contains('md-nav__item--nested')) {
+      targetItem.classList.add('toc-expanded')
+    }
   }
 
   function scrollTocToActiveLink(tocLink, tocNav) {
