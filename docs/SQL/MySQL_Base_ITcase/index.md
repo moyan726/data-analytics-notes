@@ -1,6 +1,6 @@
 # MySQL从基础到入门
 
-![MySQL](./image/MySQL.png)
+![MySQL](./image/mysql.png)
 
 !!! info "信息"
     本篇摘录自黑马程序员的B站教学视频，由本人学习视频内容后总结并提取摘要制作而成的简要笔记。
