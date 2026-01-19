@@ -1,0 +1,58 @@
+{
+    "extensionName": {
+        "message": "AI Navigator",
+        "description": "Extension name"
+    },
+    "extensionDescription": {
+        "message": "快速跳转 Gemini/ChatGPT/Claude 对话",
+        "description": "Extension description"
+    },
+    "searchPlaceholder": {
+        "message": "搜索对话...",
+        "description": "Search input placeholder"
+    },
+    "noConversation": {
+        "message": "暂无对话",
+        "description": "Empty state message"
+    },
+    "restoreHidden": {
+        "message": "↩ 恢复隐藏项",
+        "description": "Restore hidden items button"
+    },
+    "minimize": {
+        "message": "最小化",
+        "description": "Minimize button tooltip"
+    },
+    "adjustFontSize": {
+        "message": "调整字体大小",
+        "description": "Font size button tooltip"
+    },
+    "hide": {
+        "message": "隐藏",
+        "description": "Hide item button tooltip"
+    },
+    "optionsTitle": {
+        "message": "AI Navigator 设置",
+        "description": "Options page title"
+    },
+    "themeAuto": {
+        "message": "自动 (跟随系统)",
+        "description": "Auto theme option"
+    },
+    "themeLight": {
+        "message": "浅色",
+        "description": "Light theme option"
+    },
+    "themeDark": {
+        "message": "深色",
+        "description": "Dark theme option"
+    },
+    "save": {
+        "message": "保存",
+        "description": "Save button"
+    },
+    "saved": {
+        "message": "设置已保存",
+        "description": "Settings saved message"
+    }
+}

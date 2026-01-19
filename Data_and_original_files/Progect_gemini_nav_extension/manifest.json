@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "AI Navigator",
+  "version": "1.3.0",
+  "description": "Quick navigation for Gemini/ChatGPT/Claude conversations",
+  "default_locale": "zh_CN",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "icons": {
+    "48": "src/assets/icon48.svg",
+    "128": "src/assets/icon128.svg"
+  },
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "options_page": "src/options/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gemini.google.com/*",
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*"
+      ],
+      "js": [
+        "src/content/adapters/base.js",
+        "src/content/adapters/gemini.js",
+        "src/content/adapters/chatgpt.js",
+        "src/content/adapters/claude.js",
+        "src/content/utils/draggable.js",
+        "src/content/utils/resizable.js",
+        "src/content/utils/i18n.js",
+        "src/content/components/tooltip.js",
+        "src/content/components/panel.js",
+        "src/content/main.js"
+      ],
+      "css": [
+        "src/styles/main.css"
+      ]
+    }
+  ]
+}

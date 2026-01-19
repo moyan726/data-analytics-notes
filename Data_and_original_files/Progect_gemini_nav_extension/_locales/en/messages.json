@@ -1,0 +1,58 @@
+{
+    "extensionName": {
+        "message": "AI Navigator",
+        "description": "Extension name"
+    },
+    "extensionDescription": {
+        "message": "Quick navigation for Gemini/ChatGPT/Claude conversations",
+        "description": "Extension description"
+    },
+    "searchPlaceholder": {
+        "message": "Search...",
+        "description": "Search input placeholder"
+    },
+    "noConversation": {
+        "message": "No conversations",
+        "description": "Empty state message"
+    },
+    "restoreHidden": {
+        "message": "↩ Restore Hidden",
+        "description": "Restore hidden items button"
+    },
+    "minimize": {
+        "message": "Minimize",
+        "description": "Minimize button tooltip"
+    },
+    "adjustFontSize": {
+        "message": "Adjust font size",
+        "description": "Font size button tooltip"
+    },
+    "hide": {
+        "message": "Hide",
+        "description": "Hide item button tooltip"
+    },
+    "optionsTitle": {
+        "message": "AI Navigator Settings",
+        "description": "Options page title"
+    },
+    "themeAuto": {
+        "message": "Auto (System)",
+        "description": "Auto theme option"
+    },
+    "themeLight": {
+        "message": "Light",
+        "description": "Light theme option"
+    },
+    "themeDark": {
+        "message": "Dark",
+        "description": "Dark theme option"
+    },
+    "save": {
+        "message": "Save",
+        "description": "Save button"
+    },
+    "saved": {
+        "message": "Settings saved",
+        "description": "Settings saved message"
+    }
+}

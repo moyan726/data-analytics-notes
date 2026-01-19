@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>AI Navigator Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 id="page-title">🧭 AI Navigator 设置</h1>
+    </header>
+
+    <div class="main-content">
+      <div class="settings-column">
+        <section>
+          <h2 id="section-appearance">🎨 外观</h2>
+          <div class="option-group">
+            <label for="language" id="label-language">语言 / Language</label>
+            <select id="language">
+              <option value="zh_CN">中文</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="theme" id="label-theme">主题</label>
+            <select id="theme">
+              <option value="auto" id="theme-auto">自动 (跟随系统)</option>
+              <option value="light" id="theme-light">浅色</option>
+              <option value="dark" id="theme-dark">深色</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="numbering" id="label-numbering">编号样式</label>
+            <select id="numbering">
+              <option value="dot">1. 问题</option>
+              <option value="paren">(1) 问题</option>
+              <option value="hash">#1 问题</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="visibleItems" id="label-visible-items">显示条数</label>
+            <select id="visibleItems">
+              <option value="4">4 条</option>
+              <option value="6" selected>6 条 (默认)</option>
+              <option value="8">8 条</option>
+              <option value="10">10 条</option>
+              <option value="15">15 条</option>
+              <option value="20">20 条</option>
+            </select>
+          </div>
+        </section>
+
+        <section>
+          <h2 id="section-behavior">⚡ 行为</h2>
+          <div class="option-group">
+            <label for="autoCollapse" id="label-auto-collapse">悬浮模式</label>
+            <div class="toggle-wrapper">
+              <input type="checkbox" id="autoCollapse">
+              <span class="toggle-desc" id="toggle-desc">鼠标离开 5 秒后收起为小图标</span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 id="section-shortcuts">⌨️ 快捷键</h2>
+          <div class="shortcut-list">
+            <div class="shortcut-item">
+              <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">G</span>
+              <span class="desc" id="shortcut-toggle">显示/隐藏面板</span>
+            </div>
+            <div class="shortcut-item">
+              <span class="key">Alt</span> + <span class="key">↑</span> / <span class="key">↓</span>
+              <span class="desc" id="shortcut-navigate">上/下导航</span>
+            </div>
+            <div class="shortcut-item">
+              <span class="key">Esc</span>
+              <span class="desc" id="shortcut-minimize">最小化面板</span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 id="section-about">ℹ️ 关于</h2>
+          <p class="about-text" id="about-text">AI Navigator 是一款通用的 AI 对话导航助手，支持 Gemini、ChatGPT 和 Claude。</p>
+          <p class="version">版本 1.4.0</p>
+        </section>
+
+        <div class="actions">
+          <button id="save">💾 <span id="btn-save-text">保存设置</span></button>
+          <button id="reset" class="secondary">🔄 <span id="btn-reset-text">重置</span></button>
+          <span id="status"></span>
+        </div>
+      </div>
+
+      <div class="preview-column">
+        <h3 id="preview-title">实时预览</h3>
+        <div id="preview-panel" class="preview-panel">
+          <div class="preview-header">
+            <span class="preview-title">AI Nav</span>
+            <div class="preview-controls">
+              <span class="preview-btn">A</span>
+              <span class="preview-btn">⚙</span>
+              <span class="preview-btn">−</span>
+            </div>
+          </div>
+          <div class="preview-search">
+            <input type="text" id="preview-search-input" placeholder="搜索对话..." disabled>
+          </div>
+          <div class="preview-list">
+            <div class="preview-item active">
+              <span class="preview-number" id="preview-num-1">1.</span>
+              <span class="preview-text" id="preview-text-1">这是第一个问题...</span>
+            </div>
+            <div class="preview-item">
+              <span class="preview-number" id="preview-num-2">2.</span>
+              <span class="preview-text" id="preview-text-2">这是第二个问题...</span>
+            </div>
+            <div class="preview-item">
+              <span class="preview-number" id="preview-num-3">3.</span>
+              <span class="preview-text" id="preview-text-3">这是第三个问题...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+
+</html>
