@@ -4,10 +4,10 @@ site_author: moyan726
 site_url: https://moyan726.github.io/data-analytics-notes/
 
 repo_name: moyan726/data-analytics-notes
-repo_url: https://github.com/moyan726/data-analytics-notes
+# repo_url: https://github.com/moyan726/data-analytics-notes
 
 # 版权信息
-copyright: Copyright &copy; 2024 moyan726
+copyright: Copyright &copy; 2025-2026 moyan726
 
 theme:
   name: material
@@ -175,8 +175,8 @@ nav:
           - Best Practices: SQL/AI_infrastructure/best-practices.md
       - MySQL_ITcase:
           - 概览: SQL/MySQL_Base_ITcase/index.md
-          - 基础篇: SQL/MySQL_Base_ITcase/Base/基础篇.md
-          
+          - 基础篇: SQL/MySQL_Base_ITcase/Base/BasicChapter.md
+          - 进阶篇: SQL/MySQL_Base_ITcase/Base/AdvancedChapter.md
           
   - Power BI:
       - Overview: PowerBI/index.md
@@ -192,6 +192,8 @@ nav:
       - myself_tools:
           - Project 3--Git批量提交脚本: Projects/myself_tools/Git批量提交脚本.md
           - Project 4--ppt_to_pdf: Projects/myself_tools/ppt_to_pdf.md
+          - Project AI-nav-extension: Projects/myself_tools/AI_nav_extension.md
+
       - AI_use:
           - 功能测试页: Projects/AI_use/TestClaude.md
           - Thoughts On AI: Projects/AI_use/Thoughts_On_AI.md
