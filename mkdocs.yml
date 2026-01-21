@@ -177,7 +177,10 @@ nav:
           - 概览: SQL/MySQL_Base_ITcase/index.md
           - 基础篇: SQL/MySQL_Base_ITcase/Base/BasicChapter.md
           - 进阶篇: SQL/MySQL_Base_ITcase/Base/AdvancedChapter.md
-          
+      - 淘宝用户分析项目:
+          - 项目说明: SQL/TaoBao_project/index.md
+          - 数据库设计: SQL/TaoBao_project/taobao.md
+          - 数据迁移: SQL/TaoBao_project/mysqldata.md
   - Power BI:
       - Overview: PowerBI/index.md
       - AI_infrastructure:
