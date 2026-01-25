@@ -180,7 +180,8 @@ nav:
       - 淘宝用户分析项目:
           - 项目说明: SQL/TaoBao_project/index.md
           - 数据库设计: SQL/TaoBao_project/taobao.md
-          - 数据迁移: SQL/TaoBao_project/mysqldata.md
+          - 附：数据迁移: SQL/TaoBao_project/mysqldata.md
+          - 附：实战建议: SQL/TaoBao_project/suggest.md
   - Power BI:
       - Overview: PowerBI/index.md
       - AI_infrastructure:
