@@ -1,16 +1,16 @@
-# 进阶篇相关内容
+﻿# 进阶篇相关内容
 
+## 一、存储引擎
 
-
-## 存储引擎
-
-MySQL体系结构：
+### 1.1 MySQL 体系结构
 
 ![结构图](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png)
 ![层级描述](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%B1%82%E7%BA%A7%E5%90%AB%E4%B9%89.png)
 
-**存储引擎简介：**存储引擎就是存储数据、建立索引、更新/查询数据等技术的实现方式。存储引擎是基于表而不是基于库的，所以存储引擎也可以被称为表引擎。
-默认存储引擎是InnoDB。
+### 1.2 存储引擎简介
+
+存储引擎就是存储数据、建立索引、更新/查询数据等技术的实现方式。存储引擎是基于表而不是基于库的，所以存储引擎也可以被称为表引擎。
+默认存储引擎是 InnoDB。
 
 相关操作：
 
@@ -39,62 +39,63 @@ create table my_memory(
 )engine = Memory;
 ```
 
-### InnoDB
+### 1.3 常见存储引擎
 
-InnoDB 是一种兼顾**高可靠性**和**高性能**的通用存储引擎，在 MySQL 5.5 之后，InnoDB 是默认的 MySQL 引擎
+#### 1.3.1 InnoDB
 
-特点：
+InnoDB 是一种兼顾**高可靠性**和**高性能**的通用存储引擎，在 MySQL 5.5 之后，InnoDB 是默认的 MySQL 引擎。
+
+**特点：**
 
 - DML 操作遵循 ACID 模型，支持**事务**
 - **行级锁**，提高并发访问性能
-- 支持**外键 ** `FOREIGN KEY`约束，保证数据的完整性和正确性
+- 支持**外键** `FOREIGN KEY` 约束，保证数据的完整性和正确性
 
-文件：
+**文件：**
 
-- xxx.ibd: xxx代表表名，InnoDB 引擎的每张表都会对应这样一个**表空间文件**，存储该表的表结构（frm、sdi）、数据和索引。
+- `xxx.ibd`: xxx代表表名，InnoDB 引擎的每张表都会对应这样一个**表空间文件**，存储该表的表结构（frm、sdi）、数据和索引。
 
-参数：innodb_file_per_table(MySQL8.0以后默认打开)，决定多张表共享一个表空间还是每张表对应一个表空间
-
+**参数：** `innodb_file_per_table` (MySQL 8.0 以后默认打开)，决定多张表共享一个表空间还是每张表对应一个表空间。
 
 查看 MySQL 中 InnoDB 存储引擎是否为每张表开启了独立的表空间文件：
 `show variables like 'innodb_file_per_table';`
 
 查询 MySQL 数据库的数据文件存放目录：`show variables like 'datadir';`
-从idb文件提取表结构数据：（在cmd运行）`ibd2sdi xxx.ibd`
+从 ibd 文件提取表结构数据：（在 cmd 运行）`ibd2sdi xxx.ibd`
 
-InnoDB 逻辑存储结构：
+**InnoDB 逻辑存储结构：**
 ![InnoDB逻辑存储结构](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.png)
 
-### MyISAM
+#### 1.3.2 MyISAM
 
 MyISAM 是 MySQL 早期的默认存储引擎。
 
-特点：
+**特点：**
 
 - 不支持事务，不支持外键
 - 支持表锁，不支持行锁
 - 访问速度快
 
-文件：
+**文件：**
 
-- xxx.sdi: 存储表结构信息
-- xxx.MYD: 存储数据
-- xxx.MYI: 存储索引
+- `xxx.sdi`: 存储表结构信息
+- `xxx.MYD`: 存储数据
+- `xxx.MYI`: 存储索引
 
-### Memory
+#### 1.3.3 Memory
 
 Memory 引擎的表数据是存储在内存中的，受硬件问题、断电问题的影响，可能会丢失数据，所以只能将这些表作为临时表或缓存使用。
 
-特点：
+**特点：**
 
 - 存放在内存中，速度快
-- hash索引（默认）支持哈希索引
+- Hash 索引（默认）支持哈希索引
 
-文件：
+**文件：**
 
-- xxx.sdi: 存储表结构信息
+- `xxx.sdi`: 存储表结构信息
 
-### 存储引擎特点
+### 1.4 存储引擎特点对比
 
 | 特点         | InnoDB              | MyISAM | Memory |
 | ------------ | ------------------- | ------ | ------ |
@@ -109,92 +110,40 @@ Memory 引擎的表数据是存储在内存中的，受硬件问题、断电问�
 | 批量插入速度 | 低                  | 高     | 高     |
 | 支持外键     | 支持                | -      | -      |
 
-==【面试】重点掌握InnoDB和MyISAM的区别：事务，外键，行级锁==
+==【面试】重点掌握 InnoDB 和 MyISAM 的区别：事务，外键，行级锁==
 
-### 存储引擎的选择
+### 1.5 存储引擎的选择
 
 在选择存储引擎时，应该根据应用系统的特点选择合适的存储引擎。对于复杂的应用系统，还可以根据实际情况选择多种存储引擎进行组合。
 
-- InnoDB: 如果应用对事物的完整性有比较高的要求，在并发条件下要求数据的一致性，数据操作除了插入和查询之外，还包含很多的更新、删除操作，则 InnoDB 是比较合适的选择
-- MyISAM: 如果应用是以读操作和插入操作为主，只有很少的更新和删除操作，并且对事务的完整性、并发性要求不高，那这个存储引擎是非常合适的。
-- Memory: 将所有数据保存在内存中，访问速度快，通常用于临时表及缓存。Memory 的缺陷是对表的大小有限制，太大的表无法缓存在内存中，而且无法保障数据的安全性
+- **InnoDB**: 如果应用对事物的完整性有比较高的要求，在并发条件下要求数据的一致性，数据操作除了插入和查询之外，还包含很多的更新、删除操作，则 InnoDB 是比较合适的选择。
+- **MyISAM**: 如果应用是以读操作和插入操作为主，只有很少的更新和删除操作，并且对事务的完整性、并发性要求不高，那这个存储引擎是非常合适的。
+- **Memory**: 将所有数据保存在内存中，访问速度快，通常用于临时表及缓存。Memory 的缺陷是对表的大小有限制，太大的表无法缓存在内存中，而且无法保障数据的安全性。
 
-日志数据，电商中的足迹和评论适合使用 MyISAM 引擎，缓存适合使用 Memory 引擎。
+**总结：** 日志数据，电商中的足迹和评论适合使用 MyISAM 引擎，缓存适合使用 Memory 引擎。
 
-## 性能分析
+## 二、索引
 
-### 查看执行频次
-
-查看当前数据库的 INSERT, UPDATE, DELETE, SELECT 访问频次：
-`SHOW GLOBAL STATUS LIKE 'Com_______';` 或者 `SHOW SESSION STATUS LIKE 'Com_______';`
-例：`show global status like 'Com_______'`
-
-### 慢查询日志
-
-慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认10秒）的所有SQL语句的日志。
-MySQL的慢查询日志默认没有开启，需要在MySQL的配置文件（/etc/my.cnf）中配置如下信息：
-\# 开启慢查询日志开关
-slow_query_log=1
-\# 设置慢查询日志的时间为2秒，SQL语句执行时间超过2秒，就会视为慢查询，记录慢查询日志
-long_query_time=2
-更改后记得重启MySQL服务，日志文件位置：/var/lib/mysql/localhost-slow.log
-
-查看慢查询日志开关状态：
-`show variables like 'slow_query_log';`
-
-### profile
-
-show profile 能在做SQL优化时帮我们了解时间都耗费在哪里。通过 have_profiling 参数，能看到当前 MySQL 是否支持 profile 操作：
-`SELECT @@have_profiling;`
-profiling 默认关闭，可以通过set语句在session/global级别开启 profiling：
-`SET profiling = 1;`
-查看所有语句的耗时：
-`show profiles;`
-查看指定query_id的SQL语句各个阶段的耗时：
-`show profile for query query_id;`
-查看指定query_id的SQL语句CPU的使用情况
-`show profile cpu for query query_id;`
-
-### explain
-
-EXPLAIN 或者 DESC 命令获取 MySQL 如何执行 SELECT 语句的信息，包括在 SELECT 语句执行过程中表如何连接和连接的顺序。
-语法：
-\# 直接在select语句之前加上关键字 explain / desc
-EXPLAIN SELECT 字段列表 FROM 表名 HWERE 条件;
-
-EXPLAIN 各字段含义：
-
-- id：select 查询的序列号，表示查询中执行 select 子句或者操作表的顺序（id相同，执行顺序从上到下；id不同，值越大越先执行）
-- select_type：表示 SELECT 的类型，常见取值有 SIMPLE（简单表，即不适用表连接或者子查询）、PRIMARY（主查询，即外层的查询）、UNION（UNION中的第二个或者后面的查询语句）、SUBQUERY（SELECT/WHERE之后包含了子查询）等
-- type：表示连接类型，性能由好到差的连接类型为 NULL、system、const、eq_ref、ref、range、index、all
-- possible_key：可能应用在这张表上的索引，一个或多个
-- Key：实际使用的索引，如果为 NULL，则没有使用索引
-- Key_len：表示索引中使用的字节数，该值为索引字段最大可能长度，并非实际使用长度，在不损失精确性的前提下，长度越短越好
-- rows：MySQL认为必须要执行的行数，在InnoDB引擎的表中，是一个估计值，可能并不总是准确的
-- filtered：表示返回结果的行数占需读取行数的百分比，filtered的值越大越好
-
-## 索引
+### 2.1 索引概述
 
 索引是帮助 MySQL **高效获取数据**的**数据结构（有序）**。在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查询算法，这种数据结构就是索引。
 
-优缺点：
+**优缺点：**
 
-优点：
+*   **优点：**
+    - 提高数据检索效率，降低数据库的 IO 成本
+    - 通过索引列对数据进行排序，降低数据排序的成本，降低 CPU 的消耗
+*   **缺点：**
+    - 索引列也是要占用空间的
+    - 索引大大提高了查询效率，但降低了更新的速度，比如 INSERT、UPDATE、DELETE
 
-- 提高数据检索效率，降低数据库的IO成本
-- 通过索引列对数据进行排序，降低数据排序的成本，降低CPU的消耗
+### 2.2 索引结构
 
-缺点：
-
-- 索引列也是要占用空间的
-- 索引大大提高了查询效率，但降低了更新的速度，比如 INSERT、UPDATE、DELETE
-
-### 索引结构
-MySQL的索引是在存储引擎中实现的，具体实现可能因存储引擎而异。
+MySQL 的索引是在存储引擎中实现的，具体实现可能因存储引擎而异。
 
 | 索引结构            | 描述                                                         |
 | ------------------- | ------------------------------------------------------------ |
-| B+Tree（默认）              | 最常见的索引类型，大部分引擎都支持B+树索引                   |
+| B+Tree（默认）      | 最常见的索引类型，大部分引擎都支持 B+ 树索引                   |
 | Hash                | 底层数据结构是用哈希表实现，只有精确匹配索引列的查询才有效，不支持范围查询 |
 | R-Tree(空间索引)    | 空间索引是 MyISAM 引擎的一个特殊索引类型，主要用于地理空间数据类型，通常使用较少 |
 | Full-Text(全文索引) | 是一种通过建立倒排索引，快速匹配文档的方式，类似于 Lucene, Solr, ES |
@@ -206,7 +155,7 @@ MySQL的索引是在存储引擎中实现的，具体实现可能因存储引擎
 | R-Tree索引 | 不支持        | 支持   | 不支持 |
 | Full-text  | 5.6版本后支持 | 支持   | 不支持 |
 
-#### B-Tree
+#### 2.2.1 B-Tree
 
 ![二叉树](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E4%BA%8C%E5%8F%89%E6%A0%91.png)
 
@@ -215,14 +164,14 @@ MySQL的索引是在存储引擎中实现的，具体实现可能因存储引擎
 红黑树也存在大数据量情况下，层级较深，检索速度慢的问题。
 
 为了解决上述问题，可以使用 B-Tree 结构。
-B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节点的子节点个数）为5（5阶）的 b-tree 为例（每个节点最多存储4个key，5个指针）
+B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节点的子节点个数）为 5（5 阶）的 B-Tree 为例（每个节点最多存储 4 个 key，5 个指针）
 
 ![B-Tree结构](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/B-Tree%E7%BB%93%E6%9E%84.png)
 
 > B-Tree 的数据插入过程动画参照：https://www.bilibili.com/video/BV1Kr4y1i7ru?p=68
 > 演示地址：https://www.cs.usfca.edu/~galles/visualization/BTree.html
 
-#### B+Tree
+#### 2.2.2 B+Tree
 
 结构图：
 
@@ -230,7 +179,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 
 > 演示地址：https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
 
-与 B-Tree 的区别：
+**与 B-Tree 的区别：**
 
 - 所有的数据都会出现在叶子节点
 - 叶子节点形成一个单向链表
@@ -239,33 +188,33 @@ MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的�
 
 ![MySQL B+Tree 结构图](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%93%E6%9E%84%E5%9B%BE.png)
 
-#### Hash
+#### 2.2.3 Hash
 
-哈希索引就是采用一定的hash算法，将键值换算成新的hash值，映射到对应的槽位上，然后存储在hash表中。
-如果两个（或多个）键值，映射到一个相同的槽位上，他们就产生了hash冲突（也称为hash碰撞），可以通过链表来解决。
+哈希索引就是采用一定的 hash 算法，将键值换算成新的 hash 值，映射到对应的槽位上，然后存储在 hash 表中。
+如果两个（或多个）键值，映射到一个相同的槽位上，他们就产生了 hash 冲突（也称为 hash 碰撞），可以通过链表来解决。
 
 ![Hash索引原理图](https://jimhackking.github.io/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE)
 
-特点：
+**特点：**
 
-- Hash索引只能用于对等比较（=、in），不支持范围查询（betwwn、>、<、…）
+- Hash 索引只能用于对等比较（=、in），不支持范围查询（between、>、<、…）
 - 无法利用索引完成排序操作
 - 查询效率高，通常只需要一次检索就可以了，效率通常要高于 B+Tree 索引
 
-存储引擎支持：
+**存储引擎支持：**
 
 - Memory
-- InnoDB: 具有自适应hash功能，hash索引是存储引擎根据 B+Tree 索引在指定条件下自动构建的
+- InnoDB: 具有自适应 hash 功能，hash 索引是存储引擎根据 B+Tree 索引在指定条件下自动构建的
 
-#### 面试题
+#### 2.2.4 面试题
 
-1. 为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构？
+> **1. 为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构？**
 
 - 相对于二叉树，层级更少，搜索效率高
 - 对于 B-Tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针也跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低
 - 相对于 Hash 索引，B+Tree 支持范围匹配及排序操作
 
-### 索引分类
+### 2.3 索引分类
 
 | 分类     | 含义                                                 | 特点                     | 关键字   |
 | -------- | ---------------------------------------------------- | ------------------------ | -------- |
@@ -284,57 +233,172 @@ MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的�
 演示图：
 
 ![大致原理](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8E%9F%E7%90%86%E5%9B%BE.png)
+
+#### 2.3.1 索引结构深入解析：聚集索引与二级索引
+
+**1. 两种索引的存储结构对比**
+
+在 MySQL (InnoDB 引擎) 中，索引主要分为两类：**聚集索引 (Clustered Index)** 和 **二级索引 (Secondary Index)**。这两种索引在 B+ 树的存储结构上有本质的区别。
+
+**(1) 聚集索引 (Clustered Index)**
+
+*   **定义**：基于表的主键 (Primary Key) 构建的索引。
+*   **特性**：
+    *   每张表**有且仅有一个**聚集索引。
+    *   如果表定义了主键，主键索引就是聚集索引。
+*   **存储结构**：
+    *   采用 **B+ 树** 结构。
+    *   **核心特点**：**叶子节点 (Leaf Nodes) 直接存储整行数据 (Row Data)**。
+    *   如上图所示，主键 ID 为 `5` 的叶子节点下，挂载的就是 ID=5 这整一行的数据（包含 id, name, gender 等所有列）。ID 为 `8` 的节点下挂载的就是 ID=8 的整行数据。
+    *   因为数据和索引是“聚集”在一起存储的，所以称为聚集索引。
+
+**(2) 二级索引 (Secondary Index)**
+
+*   **定义**：基于非主键字段（如 `name`、`gender`）建立的索引，也称为辅助索引或非聚集索引。
+*   **特性**：
+    *   一张表可以有多个二级索引。
+*   **存储结构**：
+    *   同样采用 **B+ 树** 结构。
+    *   **核心特点**：**叶子节点存储的是对应的主键值 (Primary Key Value)**，而不是整行数据。
+    *   **为什么不存整行数据？** 如果每个索引都存储整行数据，会导致数据严重冗余，占用大量磁盘空间，且维护成本极高。
+    *   如上图所示，针对 `name` 字段建立的二级索引中，叶子节点 `Arm` 下面存储的是它对应的主键 ID `10`；`Dawn` 下面存储的是对应的主键 ID `15`。
+
+---
+
+**2. 索引查询原理与回表机制**
+
+理解了两种索引的结构差异后，我们通过一条 SQL 语句来模拟真实的查询过程。
+
+**SQL 语句：**
+
+```sql
+SELECT * FROM user WHERE name = 'Arm';
+```
+
+**(1) SQL执行流程详解**
+
+1.  **第一步：走二级索引 (Secondary Index)**
+    *   查询条件是 `where name = 'Arm'`，数据库优化器会选择走 `name` 字段的二级索引。
+    *   在 `name` 索引树中查找 `Arm`：
+        *   与根节点比较，`Arm` < `Lee`，走左侧指针。
+        *   与中间节点比较，定位到叶子节点。
+    *   **获取主键**：在叶子节点找到 `Arm`，并提取出其对应的主键值 **ID = 10**。
+
+2.  **第二步：回表查询 (Table Lookup)**
+    *   由于查询语句是 `SELECT *`，需要返回整行数据，而二级索引中只有 `name` 和 `id`，缺少 `gender` 等其他字段。
+    *   数据库会拿着刚才找到的主键 **ID = 10**，去 **聚集索引** 中再次进行查找。
+    *   在聚集索引树中查找 `10`：
+        *   与根节点比较，`10` < `15`，走左侧指针。
+        *   与中间节点比较，定位到叶子节点 `10`。
+    *   **获取数据**：在聚集索引的叶子节点下，直接读取到 ID=10 的**完整行数据**。
+
+3.  **总结：什么是回表查询？**
+    *   **回表查询**指的是：先通过 **二级索引** 定位到对应的主键值，再拿着这个主键值回到 **聚集索引** 中定位整行数据的过程。
+    *   这是一个“跳跃”两次索引树的过程，比直接查聚集索引多了一步路。
+
 ![演示图](https://jimhackking.github.io/%E8%BF%90%E7%BB%B4/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%BC%94%E7%A4%BA%E5%9B%BE.png)
 
-聚集索引选取规则：
+**聚集索引选取规则：**
 
 - 如果存在主键，主键索引就是聚集索引
 - 如果不存在主键，将使用第一个唯一(UNIQUE)索引作为聚集索引
 - 如果表没有主键或没有合适的唯一索引，则 InnoDB 会自动生成一个 rowid 作为隐藏的聚集索引
 
-#### 思考题
+#### 2.3.2 思考题
 
-1. 以下 SQL 语句，哪个执行效率高？为什么？
+> **1. 以下 SQL 语句，哪个执行效率高？为什么？**
 
-```
+```sql
 select * from user where id = 10;
 select * from user where name = 'Arm';
 -- 备注：id为主键，name字段创建的有索引
 ```
 
-答：第一条语句，因为第二条需要回表查询，相当于两个步骤。
+**答**：第一条语句效率更高。因为第二条语句需要回表查询，相当于走了两遍索引树。
 
-2. InnoDB 主键索引的 B+Tree 高度为多少？
+> **2. InnoDB 主键索引的 B+Tree 高度为多少？**
 
-答：假设一行数据大小为1k，一页中可以存储16行这样的数据。InnoDB 的指针占用6个字节的空间，主键假设为bigint，占用字节数为8.
-可得公式：`n * 8 + (n + 1) * 6 = 16 * 1024`，其中 8 表示 bigint 占用的字节数，n 表示当前节点存储的key的数量，(n + 1) 表示指针数量（比key多一个）。算出n约为1170。
+**答**：假设一行数据大小为 1k，一页中可以存储 16 行这样的数据。InnoDB 的指针占用 6 个字节的空间，主键假设为 bigint，占用字节数为 8。
+可得公式：`n * 8 + (n + 1) * 6 = 16 * 1024`，其中 8 表示 bigint 占用的字节数，n 表示当前节点存储的 key 的数量，(n + 1) 表示指针数量（比 key 多一个）。算出 n 约为 1170。
 
-如果树的高度为2，那么他能存储的数据量大概为：`1171 * 16 = 18736`；
-如果树的高度为3，那么他能存储的数据量大概为：`1171 * 1171 * 16 = 21939856`。
+- 如果树的高度为 2，那么它能存储的数据量大概为：`1171 * 16 = 18736`；
+- 如果树的高度为 3，那么它能存储的数据量大概为：`1171 * 1171 * 16 = 21939856`。
 
 另外，如果有成千上万的数据，那么就要考虑分表，涉及运维篇知识。
 
-### 语法
+### 2.4 语法
 
-创建索引：
+**创建索引：**
 `CREATE [ UNIQUE | FULLTEXT ] INDEX index_name ON table_name (index_col_name, ...);`
 如果不加 CREATE 后面不加索引类型参数，则创建的是常规索引
 
-查看索引：
+- 单列索引：一个索引关联一个字段
+- 联合索引/组合索引：一个索引关联了多个字段
+
+**查看索引：**
 `SHOW INDEX FROM table_name;`
 
-删除索引：
+**删除索引：**
 `DROP INDEX index_name ON table_name;`
 
-案例：
+**案例：**
 
+```mysql
+create database itcast;
+
+use itcast;
+
+CREATE TABLE `tb_user` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `name` VARCHAR(50) NOT NULL COMMENT '姓名',
+  `phone` VARCHAR(20) NOT NULL COMMENT '手机号',
+  `email` VARCHAR(50) DEFAULT NULL COMMENT '邮箱',
+  `profession` VARCHAR(50) DEFAULT NULL COMMENT '专业',
+  `age` TINYINT UNSIGNED DEFAULT NULL COMMENT '年龄',
+  `gender` TINYINT UNSIGNED DEFAULT NULL COMMENT '性别（1:男，2:女）',
+  `status` TINYINT UNSIGNED DEFAULT NULL COMMENT '状态',
+  `createtime` DATETIME DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+
+
+INSERT INTO `tb_user` (`name`, `phone`, `email`, `profession`, `age`, `gender`, `status`, `createtime`)
+VALUES ('吕布', '17799990000', 'lvbu666@163.com', '软件工程', 23, 1, 6, '2001-02-02 00:00:00'),
+       ('曹操', '17799990001', 'caocao666@qq.com', '通讯工程', 34, 1, 0, '2001-03-05 00:00:00'),
+       ('赵云', '17799990002', '177999008@139.com', '英语', 35, 1, 2, '2002-03-02 00:00:00'),
+       ('孙悟空', '17799990003', '177999008@sina.com', '工程造价', 34, 1, 0, '2001-09-08 00:00:00'),
+       ('花木兰', '17799990004', '199097929@sina.com', '软件工程', 22, 2, 1, '2001-04-22 00:00:00'),
+       ('大乔', '17799990005', 'daqiao666@163.com', '舞蹈', 22, 2, 0, '2001-02-07 00:00:00'),
+       ('露娜', '17799990006', 'luna_love@163.com', '应用数学', 24, 2, 0, '2001-02-08 00:00:00'),
+       ('程咬金', '17799990007', 'chengyaojin@163.com', '化工', 38, 1, 5, '2001-05-23 00:00:00'),
+       ('项羽', '17799990008', 'xiangyu666@qq.com', '金属材料', 43, 1, 0, '2001-09-28 00:00:00'),
+       ('白起', '17799990009', 'baiqi666@sina.com', '机械工程及自动化', 27, 1, 2, '2001-08-16 00:00:00'),
+       ('韩信', '17799990010', 'hanxin666@163.com', '无机非金属材料工程', 27, 1, 0, '2001-06-12 00:00:00'),
+       ('荆轲', '17799990011', 'jingke666@qq.com', '会计', 22, 1, 0, '2001-05-11 00:00:00'),
+       ('兰陵王', '17799990012', 'lanlingwang666@126.com', '工程造价', 44, 1, 1, '2001-04-09 00:00:00'),
+       ('狂铁', '17799990013', 'kuangtie@sina.com', '应用数学', 43, 1, 2, '2001-04-13 00:00:00'),
+       ('貂蝉', '17799990014', '849989473@qq.com', '软件工程', 40, 2, 3, '2001-09-20 00:00:00'),
+       ('妲己', '17799990015', '178323829@qq.com', '软件工程', 35, 2, 0, '2001-03-02 00:00:00'),
+       ('芈月', '17799990016', 'xiaomin6001@sina.com', '工业经济', 33, 2, 0, '2000-05-03 00:00:00'),
+       ('嬴政', '17799990017', '893943448@qq.com', '化工', 38, 1, 1, '2001-03-08 00:00:00'),
+       ('狄仁杰', '17799990018', 'jiedaren816@163.com', '国际贸易', 30, 1, 0, '2007-03-12 00:00:00'),
+       ('安琪拉', '17799990019', 'jdadm@126.com', '城市规划', 51, 2, 1, '2001-08-15 00:00:00'),
+       ('典韦', '17799990020', 'yaanp@163.com', '城市规划', 52, 1, 2, '2000-04-12 00:00:00'),
+       ('廉颇', '17799990021', 'lianpo321@126.com', '土木工程', 19, 1, 3, '2002-07-18 00:00:00'),
+       ('后羿', '17799990022', 'altycg2008@139.com', '城市园林', 20, 1, 0, '2002-03-10 00:00:00'),
+       ('姜子牙', '17799990023', '374838448@qq.com', '工程造价', 29, 1, 4, '2003-05-26 00:00:00');
 ```
+
+```mysql
 -- name字段为姓名字段，该字段的值可能会重复，为该字段创建索引
 create index idx_user_name on tb_user(name);
+
 -- phone手机号字段的值非空，且唯一，为该字段创建唯一索引
 create unique index idx_user_phone on tb_user (phone);
+
 -- 为profession, age, status创建联合索引
 create index idx_user_pro_age_stat on tb_user(profession, age, status);
+
 -- 为email建立合适的索引来提升查询效率
 create index idx_user_email on tb_user(email);
 
@@ -342,69 +406,480 @@ create index idx_user_email on tb_user(email);
 drop index idx_user_email on tb_user;
 ```
 
-### 使用规则
+### 2.5 性能分析
 
-#### 最左前缀法则
+#### 2.5.1 查看执行频次
+
+查看当前数据库的 INSERT, UPDATE, DELETE, SELECT 访问频次：
+`SHOW GLOBAL STATUS LIKE 'Com_______';` 或者 `SHOW SESSION STATUS LIKE 'Com_______';`
+例：`show global status like 'Com_______'`
+
+```mysql
+-- 用于统计服务器执行的各种 SQL 操作的次数，例如 Com_select 表示执行 SELECT 语句的次数。
+show global status like 'Com_______';
+```
+
+分析当前数据库是以（插入，删除，查询）为主
+
+#### 2.5.2 慢查询日志
+
+慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认 10 秒）的所有 SQL 语句的日志。
+MySQL 的慢查询日志默认没有开启，需要在 MySQL 的配置文件（/etc/my.cnf）中配置如下信息：
+
+```mysql
+# 查询 MySQL 慢查询日志（Slow Query Log）的相关配置状态。
+show variables like 'slow_query_log%';
+
+# 如果不显式指定慢查询日志的文件路径，默认的存储规则如下：
+# 默认位置通常在 /var/lib/mysql/ 目录下。
+# 文件名默认为 主机名-slow.log。既然你提到的是 localhost-slow.log，那么：
+# 完整路径： 通常是 /var/lib/mysql/localhost-slow.log
+# 如何确认： 你可以登录 MySQL 后执行以下 SQL 语句，直接查询系统当前认定的具体路径
+show variables like 'slow_query_log_file';
+```
+
+- 查看慢查询日志，寻找哪些查询的查询时间较长，经行优化
+
+```bash
+# 开启慢查询日志开关
+slow_query_log=1
+# 设置慢查询日志的时间为2秒，SQL语句执行时间超过2秒，就会视为慢查询，记录慢查询日志
+long_query_time=2
+```
+
+更改后记得重启 MySQL 服务，`systemctl restart mysqld`
+
+日志文件位置：`/var/lib/mysql/localhost-slow.log` (一般情况下)
+
+#### 2.5.3 profile
+
+show profile 能在做 SQL 优化时帮我们了解时间都耗费在哪里。
+
+```mysql
+# 通过 have_profiling 参数，能看到当前 MySQL 是否支持 profile 操作：
+-- 查看当前MySQL是否支持profile操作
+SELECT @@have_profiling;
+
+# profiling 默认关闭，可以通过set语句在session/global级别开启 profiling：
+-- 查看当前profile是否开启
+select @@profiling;
+
+-- 开启profile操作
+set profiling = 1;
+
+# 查看所有语句的耗时：
+show profiles;
+
+# 查看指定query_id的SQL语句各个阶段的耗时：
+-- 注意：这里的 query_id 是一个占位符，直接运行会报错。
+-- 你需要先运行 show profiles 查看 Query_ID，然后将其替换为具体的数字（例如 1）。
+-- show profile for query query_id;
+show profile for query 40;
+
+# 查看指定query_id的SQL语句CPU的使用情况
+show profile cpu for query 40;
+```
+
+**Tips**: 在这里你可以执行**聚集索引与二级索引**的查询语句，直观的感受他们查询的耗时情况。
+
+#### 2.5.4 explain
+
+EXPLAIN 或者 DESC 命令获取 MySQL 如何执行 SELECT 语句的信息，包括在 SELECT 语句执行过程中表如何连接和连接的顺序。
+语法：
+`# 直接在select语句之前加上关键字 explain / desc`
+`EXPLAIN SELECT 字段列表 FROM 表名 WHERE 条件;`
+
+```mysql
+-- 查询表 tb_user 中 id 为 1 的记录。
+select * from tb_user where id = 1;
+
+-- 使用 EXPLAIN 分析 SQL 查询的执行计划，查看索引使用情况和查询效率。
+explain select * from tb_user where id = 1;
+
+-- 使用 DESC 查看表 tb_user 的结构信息。
+desc select * from tb_user where id = 1;
+```
+
+| 字段名           | 含义       | 详细说明                                                     |
+| :--------------- | :--------- | :----------------------------------------------------------- |
+| **id**           | 查询序列号 | 表示查询中执行 select 子句或者操作表的顺序。<br>• **id 相同**：执行顺序从上到下<br>• **id 不同**：值越大越先执行 |
+| **select_type**  | 查询类型   | • **SIMPLE**：简单表（不使用表连接或子查询）<br>• **PRIMARY**：主查询（外层的查询）<br>• **UNION**：UNION 中的第二个或后面的查询语句<br>• **SUBQUERY**：SELECT/WHERE 之后包含了子查询 |
+| **type**         | 连接类型   | 性能由好到差依次为：<br>`NULL` > `system` > `const` > `eq_ref` > `ref` > `range` > `index` > `all` |
+| **possible_key** | 可能的索引 | 可能应用在这张表上的索引，一个或多个。                       |
+| **Key**          | 实际索引   | 实际使用的索引。如果为 `NULL`，则没有使用索引。              |
+| **Key_len**      | 索引长度   | 表示索引中使用的字节数。该值为索引字段最大可能长度，并非实际使用长度。在不损失精确性的前提下，长度越短越好。 |
+| **rows**         | 扫描行数   | MySQL 认为必须要执行查询的行数。在 InnoDB 引擎中，这是一个估计值，可能并不总是准确的。 |
+| **filtered**     | 过滤比例   | 表示返回结果的行数占需读取行数的百分比。`filtered` 的值越大越好。 |
+
+**id 字段详细展示**
+
+[student course相关建表语句](https://moyan726.github.io/data-analytics-notes/SQL/MySQL_Base_ITcase/Base/BasicChapter/#_34)
+
+```mysql
+select s.*, c.*
+from student s,
+     course c,
+     student_course sc
+where s.id = sc.studentid
+  and c.id = sc.courseid
+  and c.id = sc.courseid;
+
+# explain id 值相同，从上到下执行
+explain select s.*, c.*
+from student s,
+     course c,
+     student_course sc
+where s.id = sc.studentid
+  and c.id = sc.courseid
+  and c.id = sc.courseid;
+```
+
+ `EXPLAIN` 关键字告诉 MySQL 不要真正执行这条查询并返回数据，而是返回该查询的**执行计划**。这用于分析 SQL 性能，比如是否用到了索引、表的读取顺序等。
+
+*   查询涉及 `student` (s), `course` (c), `student_course` (sc) 三张表。
+*   结果中三行的 `id` 均为 **1**。
+*   这意味着这三张表的加载优先级是一样的。
+*   MySQL 优化器决定按照结果列表中的顺序来执行：先加载 `s` 表，再与 `sc` 表关联，最后与 `c` 表关联。
+
+当没有子查询嵌套时，MySQL 会将所有表的执行 `id` 设为相同，并按照优化器认为最高效的顺序，从上往下依次读取并关联这些表。
+
+```mysql
+# explain id 值不相同，从大到小执行
+-- 操作示例：查询选修了MySQL的学生信息
+select id from course c where c.name = 'MySQL';
+select studentid from student_course sc where sc.courseid = 3;
+select  * from student s where s.id in (1,2);
+
+select  * from student s where s.id in (select studentid from student_course sc where sc.courseid = (select id from course c where c.name = 'MySQL'));
+
+explain select  * from student s where s.id in (select studentid from student_course sc where sc.courseid = (select id from course c where c.name = 'MySQL'));
+```
+
+ `EXPLAIN` 在**包含子查询（Subquery）**情况下的执行计划规则，重点在于 **`id` 值不同时的执行顺序**。
+
+**`EXPLAIN` 结果预期**：执行最后一句 `EXPLAIN` 时，你会在结果中看到三行记录，`id` 分别为 3、2、1：
+
+*   **id = 3**：对应 `course` 表（最内层），**最先执行**。
+*   **id = 2**：对应 `student_course` 表（中间层），利用内层结果执行。
+*   `subquery2`表示第二个子查询
+*   **id = 1**：对应 `student` 表（最外层），**最后执行**。
+
+**子查询**是从里向外执行的，`id` 越大越先执行。
+
+---
+
+**EXPLAIN `type` 字段详解**
+
+```mysql
+# NULL: 查询执行不需要访问任何表。直接返回结果
+explain select 'A';
+# 备注: 业务系统中的 SQL 很难优化到此级别。
+
+# system:访问系统表时通常会出现此类型，属于 const 的特例。
+
+-- type类型 const:  通过主键或唯一索引进行等值查询时出现，因为只匹配一行数据，所以速度很快。
+explain select * from tb_user where id = 1;
+
+# ref: 使用非唯一性索引进行等值查询时出现。
+explain select * from tb_user where name = '白起';
+```
+
+**1. 性能排序（由高到低）**
+`NULL` > `system` > `const` > `eq_ref` > `ref` > `range` > `index` > `ALL`
+
+**2. 常见类型说明**
+
+*   **NULL**:
+    *   **含义**: 查询执行不需要访问任何表。
+    *   **示例**: `explain select 'a';` —— 直接返回结果，不涉及表查询，性能最高。
+    *   **备注**: 业务系统中的 SQL 很难优化到此级别。
+
+*   **system**:
+    *   **含义**: 访问系统表时通常会出现此类型，属于 `const` 的特例。
+
+*   **const**:
+    *   **含义**: 通过**主键**或**唯一索引**进行等值查询时出现，因为只匹配一行数据，所以速度很快。
+    *   **示例**: `explain select * from tb_user where phone = '17799990000';` （假设 phone 字段有唯一索引）。
+
+*   **ref**:
+    *   **含义**: 使用**非唯一性索引**进行等值查询时出现。
+    *   **示例**: `explain select * from tb_user where name = '白起';` （假设 name 字段有普通索引，不唯一）。
+
+*   **index**:
+    *   **含义**: 使用了索引，但需要扫描遍历整个索引树。
+    *   **性能**: 比 `ALL` 快，但效率依然不算高。
+
+*   **ALL**:
+    *   **含义**: 全表扫描（Full Table Scan），不使用索引。
+    *   **性能**: 效率最低。
+
+**3. 优化建议**
+
+*   在优化 SQL 语句时，应尽量让 `type` 的指标向前靠拢。
+*   尽量避免出现 `ALL`（全表扫描）。
+*   尽量避免出现 `index`（全索引扫描），虽然比全表扫描稍好，但性能仍不理想。
+
+---
+
+**索引对于查询效率的提示**
+
+```mysql
+# 查看导入的1999609条数据
+select count(*) from tb_sku;
+
+select * from tb_sku where id = 1;
+-- 通过主键id查询 存在索引 查询速度快
+
+select * from tb_sku where sn = 100000003145001;
+-- 没有 index 查询速度慢
+
+-- 查看 tb_sku 表的索引信息。
+show index from tb_sku;
+
+-- 为 sn 字段创建索引来提升查询性能:
+CREATE INDEX idx_sku_sn ON tb_sku(sn);
+-- 耗时原因：扫描全表读取 sn 列的所有值，对这些值进行排序，构建 B+Tree 索引结构
+
+-- 查看 tb_sku 表的索引信息，确保索引已创建:
+-- 再次执行查询语句，观察查询性能的提升:
+select * from tb_sku where sn = 100000003145001;
+
+-- 使用 EXPLAIN 分析 SQL 查询的执行计划，查看索引使用情况和查询效率。
+explain select * from tb_sku where sn = 1000000031450014;
+```
+
+### 2.6 使用规则
+
+#### 2.6.1 最左前缀法则
 
 如果索引关联了多列（联合索引），要遵守最左前缀法则，最左前缀法则指的是查询从索引的最左列开始，并且不跳过索引中的列。
-如果跳跃某一列，索引将部分失效（后面的字段索引失效）。
+**如果跳跃某一列，索引将部分失效（后面的字段索引失效）。**
 
-联合索引中，出现范围查询（<, >），范围查询右侧的列索引失效。可以用>=或者<=来规避索引失效问题。
+```mysql
+-- 23进阶-索引-
+-- 查询 tb_user 表的索引信息,
+show index from tb_user;
 
-#### 索引失效情况
+-- 查询 profession = '软件工程' and age = 35 and status = '0' 的记录
+select * from tb_user where profession = '软件工程' and age = 35 and status = '0';
 
-1. 在索引列上进行运算操作，索引将失效。如：`explain select * from tb_user where substring(phone, 10, 2) = '15';`
-2. 字符串类型字段使用时，不加引号，索引将失效。如：`explain select * from tb_user where phone = 17799990015;`，此处phone的值没有加引号
-3. 模糊查询中，如果仅仅是尾部模糊匹配，索引不会是失效；如果是头部模糊匹配，索引失效。如：`explain select * from tb_user where profession like '%工程';`，前后都有 % 也会失效。
-4. 用 or 分割开的条件，如果 or 其中一个条件的列没有索引，那么涉及的索引都不会被用到。
-5. 如果 MySQL 评估使用索引比全表更慢，则不使用索引。
+-- 使用 EXPLAIN 分析 SQL 查询的执行计划，查看索引使用情况和查询效率。
+explain select * from tb_user where profession = '软件工程' and age = 35 and status = '0';
 
-#### SQL 提示
+-- 生效规则(最左前缀原则)
+-- 删除 status 条件后查询
+explain select * from tb_user where profession = '软件工程' and age = 35 ;
 
-是优化数据库的一个重要手段，简单来说，就是在SQL语句中加入一些人为的提示来达到优化操作的目的。
+-- 此时不满足最左前缀原则，联合索引无法生效，全表扫描
+explain select * from tb_user where  age = 35 and status = '0';
+-- 最左边的列不存在 索引失效
 
-例如，使用索引：
-`explain select * from tb_user use index(idx_user_pro) where profession="软件工程";`
-不使用哪个索引：
-`explain select * from tb_user ignore index(idx_user_pro) where profession="软件工程";`
-必须使用哪个索引：
-`explain select * from tb_user force index(idx_user_pro) where profession="软件工程";`
+-- 删除 age 条件后查询，仍然走索引，
+explain select * from tb_user where profession = '软件工程'and status = '0';
+-- 也就是说：如果跳跃某一列，索引将部分失效（后面的字段索引失效）
+```
 
-use 是建议，实际使用哪个索引 MySQL 还会自己权衡运行速度去更改，force就是无论如何都强制使用该索引。
+```mysql
+-- 条件的书写顺序会影响索引的使用吗？
+explain select * from tb_user where age = 35 and status = '0' and  profession = '软件工程' ;
+-- MySQL 优化器会重排条件顺序，条件的书写顺序不重要,只要包含了索引的最左字段(profession)即可
+```
 
-#### 覆盖索引&回表查询
+联合索引中，出现范围查询（<, >），范围查询右侧的列索引失效(**这是 B+Tree 索引结构的特性决定的**)。可以用>=或者<=来规避索引失效问题。
 
-尽量使用覆盖索引（查询使用了索引，并且需要返回的列，在该索引中已经全部能找到），减少 select *。
+```mysql
+-- 联合索引中，出现范围查询（<, >），范围查询右侧的列索引失效
+explain select * from tb_user where profession = '软件工程' and age > 25 and status = '0';
+
+-- 如果业务允许,改为:
+explain select * from tb_user WHERE profession = '软件工程' AND age >= 26 AND status = '0'
+```
+
+#### 2.6.2 索引失效情况
+
+1.  在索引列上进行运算操作，索引将失效
+2.  字符串类型字段使用时，不加引号，索引将失效。此处 phone 的值没有加引号
+3.  模糊查询中，如果仅仅是尾部模糊匹配，索引不会是失效；如果是头部模糊匹配，索引失效。前后都有 % 也会失效。
+4.  用 or 分割开的条件，如果 or 其中一个条件的列没有索引，那么涉及的索引都不会被用到。
+5.  如果 MySQL 评估使用索引比全表更慢，则不使用索引。
+
+```mysql
+-- 24.进阶-索引-使用规则-索引失效的情况
+# 1. 在索引列上进行运算操作，索引将失效。
+explain select * from tb_user where substring(phone, 10, 2) = '15';
+-- 全表扫描 索引没有被使用
+
+# 2. 字符串类型字段使用时，不加引号，索引将失效。
+explain select * from tb_user where phone = 17799990015;
+-- 字符串不加单引号，存在隐式类型转化 索引失效 全表扫描
+
+# 3. 模糊查询中，如果仅仅是尾部模糊匹配，索引不会是失效；如果是头部模糊匹配，索引失效。
+explain select * from tb_user where profession like '软件%'; -- 尾部模糊匹配
+explain select * from tb_user where profession like '%工程'; -- 头部模糊匹配
+-- 在大数据查询时，应规避头部模糊匹配，避免全表扫描，影响查询效率。
+
+# 4. 用 or 分割开的条件，如果 or 其中一个条件的列没有索引，那么涉及的索引都不会被用到。
+-- id有索引 age没有索引, 所以整个语句不会使用索引
+explain select * from tb_user where id =10 or age =23;
+-- phone有索引 age没有索引, 所以整个语句不会使用索引
+explain select * from tb_user where phone  ='17799990001' or age =34;
+-- 为age创建索引后
+create index idx_user_age on tb_user(age);
+
+# 5. 如果 MySQL 评估使用索引比全表更慢，则不使用索引。
+-- 走 phone 的索引
+explain select * from tb_user where phone >= '17799990020';
+-- 全表扫描
+explain select * from tb_user where phone >= '17799990000';
+# MySQL 优化器的智能选择
+# 使用索引的成本：1.读取索引树 2.回表查询获取完整数据 3.当匹配行数过多时,回表次数过多,成本高
+# 全表扫描的成本：1.顺序读取数据页 2.当匹配大部分数据时,全表扫描更高效
+
+```
+
+#### 2.6.3 SQL 提示
+
+是优化数据库的一个重要手段，简单来说，就是在 SQL 语句中加入一些人为的提示来达到优化操作的目的。
+
+`use` 是建议，实际使用哪个索引 MySQL 还会自己权衡运行速度去更改，`force` 就是无论如何都强制使用该索引。
+
+```mysql
+-- 26.进阶-索引-使用规则-SQL提示
+-- 符合最左前缀原则的联合索引
+explain select * from tb_user where profession = '软件工程';
+
+-- 对于profession字段创建单列索引
+create index idx_user_pro on tb_user(profession);
+
+-- 此时表中有两个profession的索引，联合索引和单列索引
+explain select * from tb_user where profession = '软件工程';
+-- MySQL 优化器会选择最优的索引进行查询 即联合索引
+
+-- 使用索引：  use index(索引名)
+explain select * from tb_user use index(idx_user_pro) where profession='软件工程';
+-- 不使用哪个索引：ignore index(索引名)
+explain select * from tb_user ignore index(idx_user_pro) where profession='软件工程';
+-- 必须使用哪个索引：force index(索引名)
+explain select * from tb_user force index(idx_user_pro) where profession='软件工程';
+```
+
+#### 2.6.4 覆盖索引&回表查询
+
+尽量使用覆盖索引（查询使用了索引，并且需要返回的列，在该索引中已经全部能找到），减少 `select *`。
 
 explain 中 extra 字段含义：
 `using index condition`：查找使用了索引，但是需要回表查询数据
 `using where; using index;`：查找使用了索引，但是需要的数据都在索引列中能找到，所以不需要回表查询
 
-如果在聚集索引中直接能找到对应的行，则直接返回行数据，只需要一次查询，哪怕是select *；如果在辅助索引中找聚集索引，如`select id, name from xxx where name='xxx';`，也只需要通过辅助索引(name)查找到对应的id，返回name和name索引对应的id即可，只需要一次查询；如果是通过辅助索引查找其他字段，则需要回表查询，如`select id, name, gender from xxx where name='xxx';`
+```mysql
+-- 27.进阶-索引-使用规则-覆盖索引&回表查询
+-- 查询 tb_user 表中的所有索引
+show index from tb_user;
 
-所以尽量不要用`select *`，容易出现回表查询，降低效率，除非有联合索引包含了所有字段
+-- 删除冗余的索引
+drop index idx_user_age on tb_user;
+drop index idx_user_pro on tb_user;
 
-面试题：一张表，有四个字段（id, username, password, status），由于数据量大，需要对以下SQL语句进行优化，该如何进行才是最优方案：
+-- 符合最左前缀原则的联合索引
+explain select * from tb_user where profession = '软件工程' and age = 35 and status = '0';
+
+
+explain select id,profession,age from tb_user where profession = '软件工程' and age = 35 and status = '0';
+explain select id,profession,age,status from tb_user where profession = '软件工程' and age = 35 and status = '0';
+explain select id,profession,age,status,name from tb_user where profession = '软件工程' and age = 35 and status = '0';
+-- Extra列显示 Using index，表示使用了覆盖索引，避免了回表查询，提高了查询效率。
+-- id,profession,age,status 二级索引的叶子节点下包含id值，不需要回表查询即可获取id值(覆盖索引)
+-- id,profession,age,status,name。name字段不在联合索引中，必须回表查询获取name值
+```
+
+如果在聚集索引中直接能找到对应的行，则直接返回行数据，只需要一次查询，哪怕是 `select *`；如果在辅助索引中找聚集索引，如 `select id, name from xxx where name='xxx';`，也只需要通过辅助索引(name)查找到对应的 id，返回 name 和 name 索引对应的 id 即可，只需要一次查询；如果是通过辅助索引查找其他字段，则需要回表查询，如 `select id, name, gender from xxx where name='xxx';`
+
+所以尽量不要用 `select *`，容易出现回表查询，降低效率，除非有联合索引包含了所有字段
+
+==【面试题】==：**一张表，有四个字段（id, username, password, status），由于数据量大，需要对以下 SQL 语句进行优化，该如何进行才是最优方案**：
 `select id, username, password from tb_user where username='itcast';`
 
-解：给username和password字段建立联合索引，则不需要回表查询，直接覆盖索引
+**解**：给 username 和 password 字段建立联合索引，则不需要回表查询，直接覆盖索引
 
-#### 前缀索引
+利用 **覆盖索引 (Covering Index)** 来消除 **回表 (Back-table Lookup)** 操作，从而减少 I/O 次数。
 
-当字段类型为字符串（varchar, text等）时，有时候需要索引很长的字符串，这会让索引变得很大，查询时，浪费大量的磁盘IO，影响查询效率，此时可以只降字符串的一部分前缀，建立索引，这样可以大大节约索引空间，从而提高索引效率。
+#### 2.6.5 前缀索引
+
+当字段类型为字符串（varchar, text 等）时，有时候需要索引很长的字符串，这会让索引变得很大，查询时，浪费大量的磁盘 IO，影响查询效率，此时可以只降字符串的一部分前缀，建立索引，这样可以大大节约索引空间，从而提高索引效率。
 
 语法：`create index idx_xxxx on table_name(columnn(n));`
-前缀长度：可以根据索引的选择性来决定，而选择性是指不重复的索引值（基数）和数据表的记录总数的比值，索引选择性越高则查询效率越高，唯一索引的选择性是1，这是最好的索引选择性，性能也是最好的。
+前缀长度：可以根据索引的选择性来决定，而选择性是指不重复的索引值（基数）和数据表的记录总数的比值，索引选择性越高则查询效率越高，唯一索引的选择性是 1，这是最好的索引选择性，性能也是最好的。
 求选择性公式：
 
-```
-select count(distinct email) / count(*) from tb_user;
-select count(distinct substring(email, 1, 5)) / count(*) from tb_user;
+```mysql
+-- 28.进阶-索引-使用规则- 前缀索引
+    -- 建立前缀索引 (Prefix Index) 的评估阶段。
+-- 查询 tb_user 表中的所有数据个数
+select count(*) from tb_user ;
+
+-- 统计 email 字段不为 NULL 的记录数
+select count(email) from tb_user;
+-- 统计 email 字段中不重复（去重后）的值的数量。
+select count(distinct  email) from tb_user;
+-- 计算 索引选择性 (Index Selectivity)。公式：不重复的索引值数量 / 表的总记录数
+select count(distinct  email)/count(*) from tb_user;
+-- 算出截取不同长度的选择性
+select count(distinct  substring(email,1,5)) /count(*) from tb_user;
+
+--  前缀索引的命名规则 推荐格式：idx_表名_列名_长度
+-- 为 email 字段创建前缀索引，索引长度为前 5 个字符
+create index idx_user_email_5 on tb_user (email(5));
+
+show index from tb_user;
+-- Sub_part为5 截取前五个字符建立索引
+
+-- 此时explain可以看到使用了前缀索引
+explain select * from tb_user where email = 'daqiao666@163.com';
+
 ```
 
-show index 里面的sub_part可以看到接取的长度
+show index 里面的 sub_part 可以看到接取的长度
 
-#### 单列索引&联合索引
+**使用前缀索引进行精确匹配查询（如 `=` 操作）时，极大概率（基本上）会发生回表查询。**
+
+即使你查询的 SELECT 字段只有 id（例如 `select id from ...`），为了验证 `where` 条件中的剩余字符是否匹配，MySQL 也不得不回表读取完整的列数据。因为前缀索引丢失了后缀信息，无法确信索引中的记录就是你真正要找的那条。
+
+ **前缀索引查询的逻辑流程**
+
+假设你有索引 `idx_user_email_5(email(5))`，并且执行 SQL：
+`select * from tb_user where email = 'daqiao666@163.com';`
+
+执行步骤如下：
+
+1.  **提取搜索前缀**
+    MySQL 截取搜索条件 `'daqiao666@163.com'` 的前 5 个字符，即 `'daqia'`。
+
+2.  **搜索二级索引（前缀索引树）**
+    MySQL 到 `idx_user_email_5` 的 B+ 树中查找 `'daqia'`。
+
+3.  **获取主键 ID**
+    假设在索引树中找到了一个节点，其值为 `'daqia'`，对应的主键 ID 为 `1`。
+    *   *此时 MySQL 并不确定这行数据的完整 email 是什么，它只知道前 5 位匹配。*
+
+4.  **回表（Back-table Lookup）**
+    拿着 ID `1`，去 **主键索引（聚簇索引）** 中查找完整的行记录。
+
+5.  **真值验证（对比）**
+    取出完整行记录中的 `email` 字段完整值（例如 `'daqiao666@163.com'`），与 SQL 语句中的原始条件（`'daqiao666@163.com'`）进行完全比对。
+    *   **匹配成功**：将该行放入结果集。
+    *   **匹配失败**：例如取出的行是 `'daqia_other@163.com'`（前缀也是 'daqia'），则丢弃该行。
+
+6.  **循环查找**
+    返回二级索引树，寻找**下一个** `'daqia'` 节点，重复 3~5 步，直到二级索引中不再是 `'daqia'` 为止。
+
+**总结**
+
+这就是为什么前缀索引无法实现 **覆盖索引 (Covering Index)** 的原因。
+
+*   **普通联合索引**：树里存了完整的字段值，所以可以直接确认“这就是你要找的人”，并直接返回。
+*   **前缀索引**：树里只存了残缺的字段值，它只能告诉你“这个人**可能**是你要找的人”，必须回表看一眼“真身”才能确认。
+
+#### 2.6.6 单列索引&联合索引
 
 单列索引：即一个索引只包含单个列
 联合索引：即一个索引包含了多个列
@@ -412,13 +887,35 @@ show index 里面的sub_part可以看到接取的长度
 
 单列索引情况：
 `explain select id, phone, name from tb_user where phone = '17799990010' and name = '韩信';`
-这句只会用到phone索引字段
+这句只会用到 phone 索引字段
 
-##### 注意事项
+**注意事项:**
 
-- 多条件联合查询时，MySQL优化器会评估哪个字段的索引效率更高，会选择该索引完成本次查询
+- 多条件联合查询时，MySQL 优化器会评估哪个字段的索引效率更高，会选择该索引完成本次查询
+- 创建联合索引时务必考虑顺序
 
-### 设计原则
+```mysql
+-- 29.进阶-索引-使用规则-单列索引&联合索引
+-- 查询 tb_user 表中的所有索引
+show index from tb_user;
+
+-- 涉及到两个索引idx_user_phone,idx_user_name，但是最后只使用了idx_user_phone索引
+explain select id,phone,name from tb_user where phone = '17799990001' and name = '曹操';
+-- 所以会发生回表查询
+
+-- 创建联合索引idx_user_phone_name
+create unique index  idx_user_phone_name on tb_user(phone, name);
+
+-- 可能使用的所以有3个，但是MySQL只走了idx_user_phone
+explain select id,phone,name from tb_user where phone = '17799990001' and name = '曹操';
+-- 此时Extra列显示 null，表示使用回表查询
+
+-- 使用联合索引idx_user_phone_name
+explain select id,phone,name from tb_user use index(idx_user_phone_name)where phone = '17799990001' and name = '曹操';
+-- 此时Extra列显示 Using index，表示使用了覆盖索引，避免了回表查询
+```
+
+### 2.7 设计原则
 
 1. 针对于数据量较大，且查询比较频繁的表建立索引
 2. 针对于常作为查询条件（where）、排序（order by）、分组（group by）操作的字段建立索引
@@ -426,7 +923,23 @@ show index 里面的sub_part可以看到接取的长度
 4. 如果是字符串类型的字段，字段长度较长，可以针对于字段的特点，建立前缀索引
 5. 尽量使用联合索引，减少单列索引，查询时，联合索引很多时候可以覆盖索引，节省存储空间，避免回表，提高查询效率
 6. 要控制索引的数量，索引并不是多多益善，索引越多，维护索引结构的代价就越大，会影响增删改的效率
-7. 如果索引列不能存储NULL值，请在创建表时使用NOT NULL约束它。当优化器知道每列是否包含NULL值时，它可以更好地确定哪个索引最有效地用于查询
+7. 如果索引列不能存储 NULL 值，请在创建表时使用 NOT NULL 约束它。当优化器知道每列是否包含 NULL 值时，它可以更好地确定哪个索引最有效地用于查询
+
+---
+
+## 修改清单
+
+| 修改位置 | 原内容 | 修改后内容 | 修改理由 |
+| :--- | :--- | :--- | :--- |
+| **全文** | (无统一编号) | 增加 1.1, 1.2, 2.1 等层级编号 | 优化文档结构，提升可读性 |
+| **1.3.1 InnoDB** | `innodb_file_per_table(MySQL8.0以后默认打开)` | `innodb_file_per_table` (MySQL 8.0 以后默认打开) | 增加空格，优化排版 |
+| **2.2.3 Hash** | `betwwn` | `between` | 修正拼写错误 |
+| **2.5.4 explain** | `HWERE` | `WHERE` | 修正拼写错误 |
+| **2.6.2 索引失效** | `betwwn` (隐含) | `between` | 修正拼写错误 |
+| **2.6.3 SQL提示** | `use` / `force` | `use` / `force` (增加代码格式) | 优化排版 |
+| **2.6.6 单列索引** | `注意事项` (无标题) | `**注意事项:**` | 增加标题强调 |
+
+
 
 ## SQL 优化
 
