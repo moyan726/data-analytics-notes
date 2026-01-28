@@ -698,6 +698,201 @@ body::after {
   transition: transform 0.2s ease;
 }
 
+
+
+.stat-label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.3rem;
+}
+
+/* ========== 暗色模式适配 - 新增样式 ========== */
+[data-md-color-scheme="slate"] .hero-section {
+  background: linear-gradient(135deg, #1a237e 0%, #0d1421 100%);
+}
+
+[data-md-color-scheme="slate"] .card {
+  background: var(--md-default-bg-color);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .timeline-content {
+  background: var(--md-default-bg-color);
+}
+
+[data-md-color-scheme="slate"] .stat-card {
+  background: var(--md-default-bg-color);
+}
+
+/* 暗色模式下的背景渐变遮罩 */
+[data-md-color-scheme="slate"] body::after {
+  background: linear-gradient(to right,
+      rgba(30, 30, 30, 0) 0%,
+      rgba(30, 30, 30, 0.85) 15%,
+      rgba(30, 30, 30, 0.95) 30%,
+      rgba(30, 30, 30, 0.95) 70%,
+      rgba(30, 30, 30, 0.85) 85%,
+      rgba(30, 30, 30, 0) 100%);
+}
+
+.side-announcement {
+  position: fixed;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+  background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+  z-index: 100;
+  animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.side-announcement::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.side-announcement-header {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.side-announcement-header .icon {
+  font-size: 1.2rem;
+}
+
+.side-announcement-body {
+  padding: 16px;
+}
+
+.side-announcement-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.side-announcement-status .pulse {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+.side-announcement-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.side-announcement-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  opacity: 0.95;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.side-announcement-list li:last-child {
+  border-bottom: none;
+}
+
+.side-announcement-list .emoji {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 1400px) {
+  .side-announcement {
+    display: none;
+  }
+}
+
+[data-md-color-scheme="slate"] .side-announcement {
+  background: linear-gradient(145deg, #1e3a5f 0%, #2d1b4e 100%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== Collapsible TOC Styles ========== */
+/* Hide all sub-level TOC lists by default */
+.md-sidebar--secondary .md-nav--secondary .md-nav {
+  display: none;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+
+/* Show sub-lists when parent is expanded */
+.md-sidebar--secondary .md-nav--secondary .toc-expanded>.md-nav {
+  display: block;
+  max-height: 1000px;
+  opacity: 1;
+}
+
+/* Add visual indicator for expandable items */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested>.md-nav__link::after {
+  content: "▸";
+  margin-left: auto;
+  padding-left: 0.5rem;
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
 /* Rotate indicator when expanded */
 .md-sidebar--secondary .md-nav--secondary .md-nav__item--nested.toc-expanded>.md-nav__link::after {
   transform: rotate(90deg);
@@ -707,4 +902,718 @@ body::after {
 .md-sidebar--secondary .md-nav--secondary .md-nav__item--nested>.md-nav__link {
   display: flex;
   align-items: center;
+}
+
+/* ========== 关于我 (Profile) 区域优化 ========== */
+.profile-container {
+  background: var(--md-default-bg-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 顶部装饰条 */
+.profile-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid var(--md-primary-fg-color);
+  padding: 3px;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--md-typeset-color);
+}
+
+.profile-role {
+  font-size: 0.95rem;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  background: rgba(92, 107, 192, 0.1);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.profile-bio {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--md-typeset-color);
+  opacity: 0.9;
+}
+
+/* 技能可视化 (Skill Badges) */
+.skills-section {
+  margin-top: 1rem;
+}
+
+.skills-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-typeset-color);
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--md-default-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.skill-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border-color: var(--md-primary-fg-color);
+  color: var(--md-primary-fg-color);
+}
+
+.skill-badge i {
+  font-size: 1.1em;
+}
+
+/* 暗色模式适配 */
+.side-announcement-list .emoji {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 1400px) {
+  .side-announcement {
+    display: none;
+  }
+}
+
+[data-md-color-scheme="slate"] .side-announcement {
+  background: linear-gradient(145deg, #1e3a5f 0%, #2d1b4e 100%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== Collapsible TOC Styles ========== */
+/* Hide all sub-level TOC lists by default */
+.md-sidebar--secondary .md-nav--secondary .md-nav {
+  display: none;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+
+/* Show sub-lists when parent is expanded */
+.md-sidebar--secondary .md-nav--secondary .toc-expanded>.md-nav {
+  display: block;
+  max-height: 1000px;
+  opacity: 1;
+}
+
+/* Add visual indicator for expandable items */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested>.md-nav__link::after {
+  content: "▸";
+  margin-left: auto;
+  padding-left: 0.5rem;
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate indicator when expanded */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested.toc-expanded>.md-nav__link::after {
+  transform: rotate(90deg);
+}
+
+/* Ensure the link takes full width for the indicator to align */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested>.md-nav__link {
+  display: flex;
+  align-items: center;
+}
+
+/* ========== 关于我 (Profile) 区域优化 ========== */
+.profile-container {
+  background: var(--md-default-bg-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 顶部装饰条 */
+.profile-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--md-primary-fg-color);
+  padding: 3px;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--md-typeset-color);
+}
+
+.profile-role {
+  font-size: 0.95rem;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  background: rgba(92, 107, 192, 0.1);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.profile-bio {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--md-typeset-color);
+  opacity: 0.9;
+}
+
+/* 技能可视化 (Skill Badges) */
+.skills-section {
+  margin-top: 1rem;
+}
+
+.skills-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-typeset-color);
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--md-default-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.skill-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border-color: var(--md-primary-fg-color);
+  color: var(--md-primary-fg-color);
+}
+
+.skill-badge i {
+  font-size: 1.1em;
+}
+
+/* 暗色模式适配 */
+[data-md-color-scheme="slate"] .profile-container {
+  background: var(--md-default-bg-color);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .skill-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .skill-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== 翻转卡片效果 (Flip Card) ========== */
+.profile-flip-scene {
+  perspective: 1000px;
+  margin: 2rem 0;
+}
+
+.profile-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.profile-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* 调整 profile-container 在翻转场景下的表现 */
+.profile-flip-scene .profile-container {
+  margin: 0;
+  /* 由 scene 控制 margin */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.profile-front {
+  /* 默认正面 */
+  z-index: 2;
+}
+
+.profile-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* 背面内容样式 */
+.contact-card-content {
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.contact-card-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--md-primary-fg-color);
+}
+
+.contact-card-content p {
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.email-box {
+  background: rgba(92, 107, 192, 0.1);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px dashed var(--md-primary-fg-color);
+  max-width: 100%;
+}
+
+.email-box span {
+  font-family: var(--md-code-font-family);
+  font-weight: 600;
+  color: var(--md-typeset-color);
+  word-break: break-all;
+}
+
+.copy-btn {
+  background: var(--md-default-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--md-typeset-color);
+}
+
+.copy-btn:hover {
+  background: var(--md-primary-fg-color);
+  color: white;
+  border-color: transparent;
+  transform: scale(1.1);
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+/* 暗色模式适配 */
+[data-md-color-scheme="slate"] .email-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.profile-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--md-typeset-color);
+}
+
+.profile-role {
+  font-size: 0.95rem;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  background: rgba(92, 107, 192, 0.1);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.profile-bio {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--md-typeset-color);
+  opacity: 0.9;
+}
+
+/* 技能可视化 (Skill Badges) */
+.skills-section {
+  margin-top: 1rem;
+}
+
+.skills-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-typeset-color);
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--md-default-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.skill-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border-color: var(--md-primary-fg-color);
+  color: var(--md-primary-fg-color);
+}
+
+.skill-badge i {
+  font-size: 1.1em;
+}
+
+/* 暗色模式适配 */
+[data-md-color-scheme="slate"] .profile-container {
+  background: var(--md-default-bg-color);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .skill-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .skill-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== 翻转卡片效果 (Flip Card) ========== */
+.profile-flip-scene {
+  perspective: 1000px;
+  margin: 2rem 0;
+}
+
+.profile-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.profile-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* 调整 profile-container 在翻转场景下的表现 */
+.profile-flip-scene .profile-container {
+  margin: 0;
+  /* 由 scene 控制 margin */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.profile-front {
+  /* 默认正面 */
+  z-index: 2;
+}
+
+.profile-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* 背面内容样式 */
+.contact-card-content {
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.contact-card-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--md-primary-fg-color);
+}
+
+.contact-card-content p {
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.email-box {
+  background: rgba(92, 107, 192, 0.1);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px dashed var(--md-primary-fg-color);
+  max-width: 100%;
+}
+
+.email-box span {
+  font-family: var(--md-code-font-family);
+  font-weight: 600;
+  color: var(--md-typeset-color);
+  word-break: break-all;
+}
+
+.copy-btn {
+  background: var(--md-default-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--md-typeset-color);
+}
+
+.copy-btn:hover {
+  background: var(--md-primary-fg-color);
+  color: white;
+  border-color: transparent;
+  transform: scale(1.1);
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+/* 暗色模式适配 */
+[data-md-color-scheme="slate"] .email-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-md-color-scheme="slate"] .copy-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .copy-btn:hover {
+  background: var(--md-primary-fg-color);
+}
+
+/* ========== 左右分区布局 ========== */
+.profile-main-row {
+  display: flex;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+/* 左侧：IP 形象区 */
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  min-width: 160px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.profile-identity {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.profile-name {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--md-typeset-color);
+  white-space: nowrap;
+}
+
+/* 右侧：Bio 内容区 */
+.profile-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.profile-right .profile-bio {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.profile-bio p {
+  margin: 0 0 0.5rem 0;
+}
+
+.profile-bio p:last-child {
+  margin-bottom: 0;
+}
+
+/* 响应式：移动端堆叠布局 */
+@media screen and (max-width: 600px) {
+  .profile-main-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .profile-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: 1.5rem;
+  }
+
+  .profile-right {
+    padding: 0;
+  }
+}
+
+/* 暗色模式适配 - 分区布局 */
+[data-md-color-scheme="slate"] .profile-left {
+  border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+@media screen and (max-width: 600px) {
+  [data-md-color-scheme="slate"] .profile-left {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
 }

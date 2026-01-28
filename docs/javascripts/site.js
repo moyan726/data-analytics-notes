@@ -399,3 +399,42 @@
     document.addEventListener('DOMContentLoaded', onRouteUpdate)
   }
 })()
+
+// ========== Profile Flip Card Logic ==========
+window.toggleProfileFlip = function () {
+  var inner = document.querySelector('.profile-inner');
+  if (inner) {
+    inner.classList.toggle('flipped');
+  }
+};
+
+window.copyEmail = function () {
+  var email = document.getElementById('my-email').innerText;
+  navigator.clipboard.writeText(email).then(function () {
+    var btn = document.querySelector('.copy-btn');
+    var originalText = btn.innerHTML;
+    btn.innerHTML = '✅';
+    setTimeout(function () {
+      btn.innerHTML = originalText;
+    }, 2000);
+  }, function (err) {
+    console.error('Async: Could not copy text: ', err);
+    // Fallback for older browsers
+    var textArea = document.createElement("textarea");
+    textArea.value = email;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      var btn = document.querySelector('.copy-btn');
+      var originalText = btn.innerHTML;
+      btn.innerHTML = '✅';
+      setTimeout(function () {
+        btn.innerHTML = originalText;
+      }, 2000);
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
+    }
+    document.body.removeChild(textArea);
+  });
+};

@@ -33,13 +33,71 @@
 
 ## 👋 关于我
 
-!!! info "Who Am I"
+<div class="profile-flip-scene">
+  <div class="profile-inner">
+    <!-- 正面：个人简介 -->
+    <div class="profile-front profile-container">
+      <div class="profile-main-row">
+        <!-- 左侧：IP 形象区 -->
+        <div class="profile-left">
+          <div class="profile-avatar">
+            <img src="assets/images/touxiang.png" alt="jiaXing Yan">
+          </div>
+          <div class="profile-identity">
+            <h3 class="profile-name">JiaXing Yan</h3>
+           
+          </div>
+        </div>
+        <!-- 右侧：Bio 内容区 -->
+        <div class="profile-right">
+          <div class="profile-bio">
+           <span class="profile-role">Data Analyst</span>
+            <p>数据科学与大数据技术本科在读 (2023-2027)。</p>
+            <p>专注 <strong>数据分析 / 商业分析 / BI</strong>，致力于将复杂业务问题转化为清晰的洞察。</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skills-section">
+        <span class="skills-title">技术栈 Tech Stack</span>
+        <div class="skills-container">
+          <span class="skill-badge">🐍 Python (Pandas/NumPy)</span>
+          <span class="skill-badge">💾 SQL (MySQL)</span>
+          <span class="skill-badge">📊 Power BI (DAX)</span>
+          <span class="skill-badge">🤖 Machine Learning</span>
+          <span class="skill-badge">🕸️ MkDocs</span>
+          <span class="skill-badge">🐙 Git</span>
+        </div>
+      </div>
 
-    你好！我是 **moyan726**，[CSDN 博客主页](https://blog.csdn.net/2401_85669197) ｜持续输出数据分析实战内容。
-    
-    **数据科学与大数据技术** 本科在读（2023-2027），职业主线选择 **数据分析 / 商业分析 / BI**，目标是把复杂业务问题拆解成可衡量的指标与清晰的分析结论。
-    
-    📧 欢迎交流实习/项目合作机会！
+      <div class="profile-links" style="margin-top: 1rem; display: flex; gap: 1rem;">
+        <a href="https://blog.csdn.net/2401_85669197" class="md-button md-button--primary" style="border-radius: 20px; font-size: 0.85rem;">
+          CSDN 博客
+        </a>
+        <button onclick="toggleProfileFlip()" class="md-button" style="border-radius: 20px; font-size: 0.85rem; background: rgba(0,0,0,0.05); border: none; cursor: pointer;">
+          📧 联系我
+        </button>
+      </div>
+    </div>
+
+    <!-- 背面：联系方式 -->
+    <div class="profile-back profile-container">
+      <div class="contact-card-content">
+        <h3>📧 联系我</h3>
+        <p>欢迎交流技术与合作机会</p>
+        <div class="email-box">
+          <span id="my-email">jiaxingyan05@163.com</span>
+          <button onclick="copyEmail()" class="copy-btn" title="复制邮箱">
+            📋
+          </button>
+        </div>
+        <button onclick="toggleProfileFlip()" class="md-button" style="margin-top: 1.5rem; border-radius: 20px; font-size: 0.85rem; background: rgba(0,0,0,0.05); border: none; cursor: pointer;">
+          ↩ 返回主页
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 ---
 
