@@ -382,9 +382,55 @@
     }
   }
 
+  function initSideAnnouncement() {
+    var toggle = document.getElementById('side-announcement-toggle') || document.querySelector('.side-announcement-toggle')
+    if (!toggle) return
+
+    var storageKey = 'side_announcement_open'
+
+    function setOpen(open) {
+      toggle.checked = open
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
+      try {
+        localStorage.setItem(storageKey, open ? '1' : '0')
+      } catch (_) { }
+    }
+
+    if (!toggle.dataset.sideAnnouncementBound) {
+      toggle.dataset.sideAnnouncementBound = 'true'
+      toggle.addEventListener('change', function () {
+        setOpen(Boolean(toggle.checked))
+      })
+    }
+
+    var saved = null
+    try {
+      saved = localStorage.getItem(storageKey)
+    } catch (_) { }
+    if (saved === '1' || saved === '0') {
+      toggle.checked = saved === '1'
+    }
+    toggle.setAttribute('aria-expanded', toggle.checked ? 'true' : 'false')
+
+    if (!window.__sideAnnouncementEscBound) {
+      window.__sideAnnouncementEscBound = true
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' && e.key !== 'Esc') return
+        var t = document.getElementById('side-announcement-toggle') || document.querySelector('.side-announcement-toggle')
+        if (!t || !t.checked) return
+        t.checked = false
+        t.setAttribute('aria-expanded', 'false')
+        try {
+          localStorage.setItem(storageKey, '0')
+        } catch (_) { }
+      })
+    }
+  }
+
   function onRouteUpdate() {
     enhanceImages()
     initTocScrollSync()
+    initSideAnnouncement()
     Promise.all([loadMermaidIfNeeded(), loadMathJaxIfNeeded()])
       .then(function () {
         renderMermaid()

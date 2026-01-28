@@ -1,6 +1,8 @@
 # Data Analytics Knowledge Base
 
-<aside class="side-announcement" aria-label="站点公告">
+<div class="side-announcement-container">
+<input id="side-announcement-toggle" class="side-announcement-toggle" type="checkbox" aria-label="展开或收起站点公告" aria-controls="side-announcement-panel" aria-expanded="false">
+<aside id="side-announcement-panel" class="side-announcement" aria-label="站点公告">
 <div class="side-announcement-header" role="heading" aria-level="2">
 <span class="icon" aria-hidden="true">📢</span>
 <span>公告</span>
@@ -18,6 +20,7 @@
 </ul>
 </div>
 </aside>
+</div>
 
 <div class="hero-section">
 <h1>🚀 数据分析知识库</h1>
