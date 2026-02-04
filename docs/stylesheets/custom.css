@@ -594,15 +594,16 @@ body::after {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
 }
 
-.side-announcement-toggle:checked ~ .side-announcement {
+.side-announcement-toggle:checked~.side-announcement {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .side-announcement,
-  .side-announcement-toggle:checked ~ .side-announcement {
+  .side-announcement-toggle:checked~.side-announcement {
     transition: none;
   }
 
@@ -665,7 +666,7 @@ body::after {
   animation: none;
 }
 
-.side-announcement-toggle:checked ~ .side-announcement .side-announcement-status .pulse {
+.side-announcement-toggle:checked~.side-announcement .side-announcement-status .pulse {
   animation: pulse 2s ease-in-out 3;
 }
 
@@ -732,7 +733,7 @@ body::after {
 
 /* ========== Collapsible TOC Styles ========== */
 /* Hide all sub-level TOC lists by default */
-.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested > .md-nav {
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested>.md-nav {
   display: none;
   overflow: hidden;
   max-height: 0;
@@ -741,7 +742,7 @@ body::after {
 }
 
 /* Show sub-lists when parent is expanded */
-.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested.toc-expanded > .md-nav {
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--nested.toc-expanded>.md-nav {
   display: block;
   max-height: 1000px;
   opacity: 1;

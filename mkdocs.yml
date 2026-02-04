@@ -175,8 +175,13 @@ nav:
           - Best Practices: SQL/AI_infrastructure/best-practices.md
       - MySQL_ITcase:
           - 概览: SQL/MySQL_Base_ITcase/index.md
+          - 课程说明: SQL/MySQL_Base_ITcase/course_intro.md
           - 基础篇: SQL/MySQL_Base_ITcase/Base/BasicChapter.md
           - 进阶篇: SQL/MySQL_Base_ITcase/Base/AdvancedChapter.md
+      - 窗口函数:
+          - 概览: SQL/windows_function/index.md
+          - 窗口函数基础: SQL/windows_function/notes1.md
+          - 窗口函数进阶: SQL/windows_function/notes2.md
       - 淘宝用户分析项目:
           - 项目说明: SQL/TaoBao_project/index.md
           - 数据库设计: SQL/TaoBao_project/taobao.md
