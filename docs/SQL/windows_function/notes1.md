@@ -18,6 +18,16 @@ description: SQL 窗口函数入门教程，系统讲解 OVER、PARTITION BY、O
     
     **进阶内容**：帧子句（Frame Clause）、`FIRST_VALUE`/`LAST_VALUE`/`NTH_VALUE`/`NTILE`/`CUME_DIST`/`PERCENT_RANK` 等高级函数详见 [第二篇进阶笔记](notes2.md)
 
+!!! info "学习目标"
+    完成本章学习后，您将能够：
+    
+    - ✅ 独立编写**分组 Top N**、**排名**、**同比/环比分析**的 SQL 语句
+    - ✅ 理解窗口函数与 `GROUP BY` 的本质区别
+    - ✅ 根据业务需求选择 `ROW_NUMBER`、`RANK`、`DENSE_RANK` 中最合适的函数
+    - ✅ 使用 `LEAD`/`LAG` 进行前后行数据比较
+    
+    **预计学习时长**：40-60 分钟
+
 ---
 
 # SQL 窗口函数完整教程
@@ -29,25 +39,8 @@ description: SQL 窗口函数入门教程，系统讲解 OVER、PARTITION BY、O
 
 ## 目录
 
-1. [窗口函数概述](#1-窗口函数概述)
-2. [环境准备：测试数据](#2-环境准备测试数据)
-3. [核心语法详解](#3-核心语法详解)
-4. [聚合函数作为窗口函数](#4-聚合函数作为窗口函数)
-5. [排名函数](#5-排名函数)
-   - [ROW_NUMBER()](#51-row_number)
-   - [RANK()](#52-rank)
-   - [DENSE_RANK()](#53-dense_rank)
-   - [三者对比](#54-三者对比)
-6. [位移函数：LEAD() 与 LAG()](#6-位移函数lead-与-lag)
-7. [其他窗口函数（补充）](#7-其他窗口函数补充)
-   - [FIRST_VALUE() / LAST_VALUE()](#71-first_value--last_value)
-   - [NTH_VALUE()](#72-nth_value)
-   - [NTILE()](#73-ntile)
-   - [PERCENT_RANK() / CUME_DIST()](#74-percent_rank--cume_dist)
-8. [实战案例汇总](#8-实战案例汇总)
-9. [性能优化与注意事项](#9-性能优化与注意事项)
-10. [常见错误排查](#10-常见错误排查)
-11. [数据库版本差异说明](#11-数据库版本差异说明)
+???- tip "目录-点击下拉"
+    [TOC]
 
 ---
 
@@ -57,8 +50,8 @@ description: SQL 窗口函数入门教程，系统讲解 OVER、PARTITION BY、O
 
 **窗口函数**（Window Function），又称**分析函数**（Analytic Function），允许在不减少结果集行数的情况下，对**一组相关行**（称为"窗口"）执行计算。
 
-> [!IMPORTANT]
-> **核心区别**：`GROUP BY` 会将多行折叠为一行，而窗口函数保留所有行，只是为每行附加一个计算值。
+!!! important "重要"
+    **核心区别**：`GROUP BY` 会将多行折叠为一行，而窗口函数保留所有行，只是为每行附加一个计算值。
 
 ### 1.2 为什么需要窗口函数
 
@@ -75,8 +68,8 @@ description: SQL 窗口函数入门教程，系统讲解 OVER、PARTITION BY、O
 
 ### 1.3 面试重点提示
 
-> [!TIP]
-> 如果您计划参加 SQL 面试，几乎可以肯定会遇到至少一个与窗口函数相关的问题。掌握 `ROW_NUMBER()`、`RANK()`、`DENSE_RANK()`、`LEAD()`、`LAG()` 是必备技能。
+!!! tip "面试重点提示"
+    如果您计划参加 SQL 面试，几乎可以肯定会遇到至少一个与窗口函数相关的问题。掌握 `ROW_NUMBER()`、`RANK()`、`DENSE_RANK()`、`LEAD()`、`LAG()` 是必备技能。
 
 ---
 
@@ -164,13 +157,8 @@ SELECT * FROM employee;
 ```
 
 **或者使用命名窗口（Named Window）简化复用**：
-```sql
-SELECT ...,
-       RANK() OVER w,
-       SUM(salary) OVER w
-FROM employee
-WINDOW w AS (PARTITION BY dept_name ORDER BY salary);
-```
+
+> 命名窗口（`WINDOW w AS ...`）可以避免重复书写相同的 `OVER` 子句。这部分属于进阶语法，详见 **[进阶篇笔记-第5章](notes2.md#5-window-子句简化写法)**。
 
 ### 3.2 关键子句解析
 
@@ -181,35 +169,32 @@ WINDOW w AS (PARTITION BY dept_name ORDER BY salary);
 | **ORDER BY** | 可选 | 决定分区内数据的排列顺序，对排名函数和位移函数至关重要 |
 | **ROWS/RANGE BETWEEN** | 可选 | 定义移动窗口的具体范围（如"前 2 行到当前行"） |
 
-> [!NOTE]
-> `OVER()` 是窗口函数的**标志**。它告诉数据库："不要把结果合并成一行，而是为每一行都去'看一看'根据规则定义的数据窗口，并且把计算结果填回来。"
+!!! note "笔记"
+    `OVER()` 是窗口函数的**标志**。它告诉数据库："不要把结果合并成一行，而是为每一行都去'看一看'根据规则定义的数据窗口，并且把计算结果填回来。"
 
-### 3.3 窗口帧（Window Frame）进阶详解
+### 3.3 窗口帧（Window Frame）简介
 
-窗口帧用于在分区（Partition）内部进一步细分窗口范围，这对于计算移动平均、累计求和至关重要。
+窗口帧用于在分区（Partition）内部进一步细分窗口范围，这对于计算**移动平均**、**累计求和**至关重要。
 
-#### 3.3.1 语法结构
+!!! tip "基础篇提示"
+    帧子句是窗口函数的**进阶内容**。在基础篇中，您只需要了解以下两点：
+    
+    1. 帧子句可以精确控制窗口函数"看到"的数据范围
+    2. 某些函数（如 `LAST_VALUE`）需要显式指定帧子句才能正常工作
+    
+    **详细语法与实战案例**请参阅 [进阶篇 - 第 4 章：帧子句详解](notes2.md#4-帧子句详解frame-clause)
+
+**常见帧子句示例**：
 ```sql
-ROWS|RANGE BETWEEN <start_bound> AND <end_bound>
-```
-
-#### 3.3.2 边界选项 (Bound Options)
-- `CURRENT ROW`：当前行
-- `UNBOUNDED PRECEDING`：分区内的第一行
-- `UNBOUNDED FOLLOWING`：分区内的最后一行
-- `N PRECEDING`：当前行之前的 N 行
-- `N FOLLOWING`：当前行之后的 N 行
-
-#### 3.3.3 ROWS 与 RANGE 的区别
-- **ROWS**：按**物理行**计算（如"前 1 行"）。
-- **RANGE**：按**排序列的数值**计算（如"日期减 1 天"）。如果排序列有重复值，`RANGE` 会将它们视为同一组同时处理。
-
-#### 3.3.4 默认帧规则
-如果指定了 `ORDER BY` 但未指定帧子句，默认帧为：
-```sql
+-- 从分区开始到当前行（默认行为）
 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+
+-- 从分区开始到分区结束（覆盖整个分区）
+ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+
+-- 当前行前后各 2 行（滑动窗口）
+ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING
 ```
-> 这就是为什么 `LAST_VALUE()` 在默认情况下只看到"截止到当前行的最后一行"，而不是"整个分区的最后一行"。
 
 ---
 
@@ -395,8 +380,8 @@ WHERE x.rn < 3;
 | 103 | Akbar | IT | 4000 | 1 |
 | 109 | Sanjay | IT | 6500 | 2 |
 
-> [!NOTE]
-> **为什么需要子查询？** 窗口函数不能直接在 `WHERE` 子句中使用，因为 `WHERE` 的执行顺序先于 `SELECT`（窗口函数在 `SELECT` 阶段执行）。必须先用子查询计算出行号，再在外层筛选。
+!!! note "笔记"
+    **为什么需要子查询？** 窗口函数不能直接在 `WHERE` 子句中使用，因为 `WHERE` 的执行顺序先于 `SELECT`（窗口函数在 `SELECT` 阶段执行）。必须先用子查询计算出行号，再在外层筛选。
 
 ---
 
@@ -432,8 +417,8 @@ WHERE x.rnk < 4;
 | 118 | Tejaswi | Finance | 5500 | 3 |
 | ... | ... | ... | ... | ... |
 
-> [!IMPORTANT]
-> 注意 Admin 部门的排名：Mohan 和 Maryam 薪水相同（4000），都是第 2 名。下一个 Gautham（2000）直接是第 4 名，跳过了第 3 名。这就是 `RANK()` 的**跳号特性**。
+!!! important "重要"
+    注意 Admin 部门的排名：Mohan 和 Maryam 薪水相同（4000），都是第 2 名。下一个 Gautham（2000）直接是第 4 名，跳过了第 3 名。这就是 `RANK()` 的**跳号特性**。
 
 ---
 
@@ -493,11 +478,11 @@ FROM employee e;
 | `RANK()` | 相同值相同排名 | **是** | 1, 2, 2, 4 |
 | `DENSE_RANK()` | 相同值相同排名 | **否** | 1, 2, 2, 3 |
 
-> [!TIP]
-> **如何选择？**
-> - 需要唯一序号 → `ROW_NUMBER()`
-> - 需要排名且关注"第几名"（如奖牌榜） → `RANK()`
-> - 需要排名且关注"多少个不同等级"（如工资层级） → `DENSE_RANK()`
+!!! tip "技巧"
+    **如何选择？**
+    - 需要唯一序号 → `ROW_NUMBER()`
+    - 需要排名且关注"第几名"（如奖牌榜） → `RANK()`
+    - 需要排名且关注"多少个不同等级"（如工资层级） → `DENSE_RANK()`
 
 ---
 
@@ -619,128 +604,32 @@ FROM employee e;
 | 113 | Gautham | Admin | 2000 | 4000 | Lower than previous employee |
 | 120 | Monica | Admin | 5000 | 2000 | Higher than previous employee |
 
-> [!TIP]
-> **业务应用场景**：
-> - 销售业绩环比分析
-> - 库存变化趋势
-> - 用户行为前后对比
+!!! tip "技巧"
+    **业务应用场景**：
+    - 销售业绩环比分析
+    - 库存变化趋势
+    - 用户行为前后对比
 
 ---
 
-## 7. 其他窗口函数（补充）
+## 7. 进阶函数预告
 
-视频教程主要讲解了 `ROW_NUMBER()`、`RANK()`、`DENSE_RANK()`、`LEAD()`、`LAG()` 五个核心函数。以下补充其他常用窗口函数，确保文档完整性。
+基础篇已涵盖 `ROW_NUMBER()`、`RANK()`、`DENSE_RANK()`、`LEAD()`、`LAG()` 五个核心函数，足以应对**80% 的日常场景**。
 
-### 7.1 FIRST_VALUE() / LAST_VALUE()
+以下函数属于**进阶内容**，详细讲解请参阅 [进阶篇笔记](notes2.md)：
 
-#### 功能说明
-- `FIRST_VALUE(col)`：返回窗口内第一行的值
-- `LAST_VALUE(col)`：返回窗口内最后一行的值
+| 函数 | 功能简述 | 典型场景 | 进阶篇章节 |
+|:-----|:--------|:--------|:----------|
+| `FIRST_VALUE(col)` | 取窗口**第一行**的值 | 每组最高/最低记录 | [第 2 章](notes2.md#2-first_value-函数) |
+| `LAST_VALUE(col)` | 取窗口**最后一行**的值 | 需配合帧子句使用 | [第 3 章](notes2.md#3-last_value-函数与帧子句) |
+| `NTH_VALUE(col, n)` | 取窗口**第 N 行**的值 | 获取第二名、第三名 | [第 6 章](notes2.md#6-nth_value-函数) |
+| `NTILE(n)` | 均匀分成 **N 个桶** | 用户分层、等级划分 | [第 7 章](notes2.md#7-ntile-函数分桶) |
+| `CUME_DIST()` | 累积分布百分比 | 筛选前 30% 的数据 | [第 8 章](notes2.md#8-cume_dist-函数累积分布) |
+| `PERCENT_RANK()` | 百分比排名 | 查看排名百分位 | [第 9 章](notes2.md#9-percent_rank-函数百分比排名) |
 
-#### 语法示例
-
-```sql
--- 获取每个部门薪资最高和最低的员工姓名
-SELECT e.*,
-       FIRST_VALUE(emp_name) OVER(
-           PARTITION BY dept_name 
-           ORDER BY salary DESC
-       ) AS highest_paid_emp,
-       LAST_VALUE(emp_name) OVER(
-           PARTITION BY dept_name 
-           ORDER BY salary DESC
-           ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
-       ) AS lowest_paid_emp
-FROM employee e;
-```
-
-> [!CAUTION]
-> **`LAST_VALUE()` 陷阱**：默认窗口帧是 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`，意味着"最后一行"只是当前行为止的最后一行。要获取真正的最后一行，必须显式指定 `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`。
-
----
-
-### 7.2 NTH_VALUE()
-
-#### 功能说明
-返回窗口内第 N 行的值。
-
-#### 语法示例
-
-```sql
--- 获取每个部门薪资第二高的员工薪资
-SELECT e.*,
-       NTH_VALUE(salary, 2) OVER(
-           PARTITION BY dept_name 
-           ORDER BY salary DESC
-           ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
-       ) AS second_highest_salary
-FROM employee e;
-```
-
----
-
-### 7.3 NTILE()
-
-#### 功能说明
-将窗口内的行**均匀分成 N 个桶**，返回每行所在的桶编号（1 到 N）。
-
-#### 语法示例
-
-```sql
--- 将每个部门的员工按薪资分成 4 个等级
-SELECT e.*,
-       NTILE(4) OVER(PARTITION BY dept_name ORDER BY salary DESC) AS salary_quartile
-FROM employee e;
-```
-
-**执行结果示例**（IT 部门，10 名员工）：
-
-| emp_NAME | SALARY | salary_quartile |
-|:---------|:-------|:----------------|
-| Dheeraj | 11000 | 1 |
-| Komal | 10000 | 1 |
-| Vikram | 8000 | 1 |
-| Ibrahim | 8000 | 2 |
-| Melinda | 8000 | 2 |
-| Vasudha | 7000 | 2 |
-| Sanjay | 6500 | 3 |
-| Rosalin | 6000 | 3 |
-| Chandni | 4500 | 4 |
-| Akbar | 4000 | 4 |
-
-> **说明**：10 名员工分成 4 组，每组 2-3 人。
-
----
-
-### 7.4 PERCENT_RANK() / CUME_DIST()
-
-#### 功能说明
-- `PERCENT_RANK()`：计算当前行的**百分比排名** = (rank - 1) / (total_rows - 1)
-- `CUME_DIST()`：计算当前行的**累积分布** = 当前排名及之前的行数 / 总行数
-
-#### 语法示例
-
-```sql
--- 计算每个员工在部门内的薪资百分位排名
-SELECT e.*,
-       PERCENT_RANK() OVER(PARTITION BY dept_name ORDER BY salary) AS pct_rank,
-       CUME_DIST() OVER(PARTITION BY dept_name ORDER BY salary) AS cum_dist
-FROM employee e;
-```
-
-**执行结果示例**（Admin 部门）：
-
-| emp_NAME | SALARY | pct_rank | cum_dist |
-|:---------|:-------|:---------|:---------|
-| Gautham | 2000 | 0.000 | 0.25 |
-| Mohan | 4000 | 0.333 | 0.75 |
-| Maryam | 4000 | 0.333 | 0.75 |
-| Monica | 5000 | 1.000 | 1.00 |
-
-> **说明**：
-> - Gautham 薪资最低，`PERCENT_RANK` = 0
-> - Monica 薪资最高，`PERCENT_RANK` = 1
-> - `CUME_DIST` 表示"有多少比例的员工薪资小于等于当前员工"
+!!! tip "学习建议"
+    - **帧子句（Frame Clause）** 是进阶篇的核心难点，理解它才能正确使用 `LAST_VALUE`、`NTH_VALUE`
+    - 进阶篇还介绍了 `WINDOW` 命名子句，可简化重复的窗口定义
 
 ---
 
@@ -847,35 +736,11 @@ HAVING COUNT(*) >= 3;
 
 ---
 
-## 9. 性能优化与注意事项
+## 9. 常见问题与性能优化
 
-### 9.1 索引优化
+### 9.1 常见错误排查
 
-> [!IMPORTANT]
-> `PARTITION BY` 和 `ORDER BY` 的列应该建立索引。如果数据库能利用索引直接获得预排序的数据，可以避免昂贵的排序操作。
-
-**建议**：
-- 对于 `OVER(PARTITION BY dept_id ORDER BY salary)`，建议建立 `(dept_id, salary)` 的**联合索引**
-- 复合索引的列顺序应与 `PARTITION BY` + `ORDER BY` 一致
-
-### 9.2 减少列的选择
-
-在子查询中尽量只选择需要的列，而不是 `SELECT *`，减少内存消耗，特别是在处理大数据量排序时。
-
-### 9.3 注意分区大小
-
-- 如果 `PARTITION BY` 产生的基数极高（每个分区只有 1-2 行），可能不适合使用窗口函数
-- 全局窗口（无 `PARTITION BY`）会导致数据无法并行处理，只能单线程排序
-
-### 9.4 替代方案评估
-
-对于极简单的需求（如仅需要每组的最大值，不需要其他明细），标准的 `GROUP BY` 可能比窗口函数更高效。
-
----
-
-## 10. 常见错误排查
-
-### 10.1 窗口函数不能在 WHERE 中使用
+#### 窗口函数不能在 WHERE 中使用
 
 **错误写法**：
 ```sql
@@ -895,7 +760,7 @@ SELECT * FROM (
 WHERE x.rn < 3;
 ```
 
-### 10.2 LAST_VALUE() 返回意外结果
+#### LAST_VALUE() 返回意外结果
 
 **问题**：`LAST_VALUE()` 返回当前行的值，而不是窗口的最后一行。
 
@@ -909,13 +774,13 @@ LAST_VALUE(col) OVER(
 )
 ```
 
-### 10.3 排名函数不传参数的疑惑
+#### 排名函数不传参数的疑惑
 
 **问题**：`RANK()`、`DENSE_RANK()`、`ROW_NUMBER()` 后面为什么不传参数？
 
-**解答**：这些函数本身不需要列参数，它们的计算依据完全由 `OVER()` 子句中的 `PARTITION BY` 和 `ORDER BY` 决定。它们只是根据排序顺序为每行分配一个值。
+**解答**：这些函数本身不需要列参数，它们的计算依据完全由 `OVER()` 子句中的 `PARTITION BY` 和 `ORDER BY` 决定。
 
-### 10.4 ORDER BY 遗漏导致结果不确定
+#### ORDER BY 遗漏导致结果不确定
 
 **问题**：`ROW_NUMBER() OVER(PARTITION BY dept_name)` 每次执行结果可能不同。
 
@@ -925,7 +790,35 @@ LAST_VALUE(col) OVER(
 
 ---
 
-## 11. 数据库版本差异说明
+### 9.2 易错点汇总
+
+| 陷阱 | 现象 | 原因 | 解决方案 |
+|:----|:----|:----|:--------|
+| WHERE 中使用窗口函数 | 语法错误 | 执行顺序：WHERE 先于 SELECT | 用子查询/CTE 包装 |
+| `LAST_VALUE` 返回当前行 | 结果不符预期 | 默认帧是 `CURRENT ROW` | 显式指定帧为 `UNBOUNDED FOLLOWING` |
+| `ROW_NUMBER` 结果不稳定 | 每次执行结果不同 | 未指定 `ORDER BY` | 始终添加 `ORDER BY` |
+| `RANK` 跳号问题 | 排名出现间隔 | 同值同排名后跳号 | 按需使用 `DENSE_RANK` |
+| 分区过细 | 性能下降 | 每个分区只有 1-2 行 | 考虑是否适合用窗口函数 |
+
+---
+
+### 9.3 性能优化建议
+
+!!! important "索引优化"
+    `PARTITION BY` 和 `ORDER BY` 的列应该建立索引。如果数据库能利用索引直接获得预排序的数据，可以避免昂贵的排序操作。
+
+**具体建议**：
+
+1. **建立联合索引**：对于 `OVER(PARTITION BY dept_id ORDER BY salary)`，建议建立 `(dept_id, salary)` 的联合索引
+2. **减少列的选择**：子查询中尽量只选择需要的列，避免 `SELECT *`
+3. **注意分区大小**：
+   - 分区基数极高（每个分区 1-2 行）→ 可能不适合窗口函数
+   - 全局窗口（无 `PARTITION BY`）→ 无法并行处理
+4. **替代方案评估**：极简单需求（仅需每组最大值）→ 标准 `GROUP BY` 可能更高效
+
+---
+
+## 10. 数据库版本差异说明
 
 | 特性 | MySQL | PostgreSQL | Oracle | SQL Server |
 |:-----|:------|:-----------|:-------|:-----------|
@@ -935,30 +828,75 @@ LAST_VALUE(col) OVER(
 | `NTH_VALUE` | 8.0+ | 9.0+ | 11g+ | 2012+ |
 | `NTILE` | 8.0+ | 全支持 | 全支持 | 2005+ |
 
-> [!WARNING]
-> **MySQL 5.7 及更早版本不支持窗口函数！** 如需使用，请升级到 MySQL 8.0 或使用其他变通方案（如变量模拟）。
+!!! warning "警告"
+    **MySQL 5.7 及更早版本不支持窗口函数！** 如需使用，请升级到 MySQL 8.0 或使用其他变通方案（如变量模拟）。
+
+---
+
+## 📝 自测练习
+
+完成以下练习以检验您对窗口函数的掌握程度。建议在数据库中实际运行验证。
+
+??? question "练习 1：部门薪资排名"
+    **题目**：使用 `DENSE_RANK()` 查询每个部门薪资排名**第 2** 的员工姓名和薪资。
+    
+    ??? success "参考答案"
+        ```sql
+        SELECT emp_name, dept_name, salary
+        FROM (
+            SELECT *,
+                   DENSE_RANK() OVER(PARTITION BY dept_name ORDER BY salary DESC) AS rnk
+            FROM employee
+        ) ranked
+        WHERE rnk = 2;
+        ```
+
+??? question "练习 2：薪资环比变化"
+    **题目**：查询每个员工的薪资与同部门**上一位入职员工**（按 `emp_id` 排序）薪资的差值。
+    
+    ??? success "参考答案"
+        ```sql
+        SELECT emp_name, dept_name, salary,
+               salary - LAG(salary) OVER(PARTITION BY dept_name ORDER BY emp_id) AS salary_diff
+        FROM employee;
+        ```
+
+??? question "练习 3：累计薪资占比"
+    **题目**：计算每个部门内，按薪资从高到低排序的**累计薪资百分比**（当前行及之前所有行薪资之和 / 部门总薪资）。
+    
+    ??? success "参考答案"
+        ```sql
+        SELECT emp_name, dept_name, salary,
+               ROUND(
+                   SUM(salary) OVER(PARTITION BY dept_name ORDER BY salary DESC 
+                                    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) * 100.0 /
+                   SUM(salary) OVER(PARTITION BY dept_name),
+                   2
+               ) AS cumulative_pct
+        FROM employee;
+        ```
 
 ---
 
 ## 附录：函数速查表
 
-| 函数 | 类别 | 作用 | 是否需要 ORDER BY |
-|:-----|:-----|:-----|:-----------------|
-| `ROW_NUMBER()` | 排名 | 唯一连续序号 | 推荐 |
-| `RANK()` | 排名 | 并列排名，跳号 | 必须 |
-| `DENSE_RANK()` | 排名 | 并列排名，不跳号 | 必须 |
-| `NTILE(n)` | 排名 | 分成 n 个桶 | 推荐 |
-| `LEAD(col, n, default)` | 位移 | 向后第 n 行 | 必须 |
-| `LAG(col, n, default)` | 位移 | 向前第 n 行 | 必须 |
-| `FIRST_VALUE(col)` | 取值 | 窗口第一行 | 推荐 |
-| `LAST_VALUE(col)` | 取值 | 窗口最后一行 | 推荐 |
-| `NTH_VALUE(col, n)` | 取值 | 窗口第 n 行 | 推荐 |
-| `PERCENT_RANK()` | 统计 | 百分比排名 | 必须 |
-| `CUME_DIST()` | 统计 | 累积分布 | 必须 |
-| `SUM/AVG/MAX/MIN/COUNT` | 聚合 | 窗口内聚合 | 可选 |
+| 函数 | 类别 | 作用 | 是否需要 ORDER BY | 详情 |
+|:-----|:-----|:-----|:-----------------|:-----|
+| `ROW_NUMBER()` | 排名 | 唯一连续序号 | 推荐 | 本文 |
+| `RANK()` | 排名 | 并列排名，跳号 | 必须 | 本文 |
+| `DENSE_RANK()` | 排名 | 并列排名，不跳号 | 必须 | 本文 |
+| `NTILE(n)` | 排名 | 分成 n 个桶 | 推荐 | [进阶篇](notes2.md) |
+| `LEAD(col, n, default)` | 位移 | 向后第 n 行 | 必须 | 本文 |
+| `LAG(col, n, default)` | 位移 | 向前第 n 行 | 必须 | 本文 |
+| `FIRST_VALUE(col)` | 取值 | 窗口第一行 | 推荐 | [进阶篇](notes2.md) |
+| `LAST_VALUE(col)` | 取值 | 窗口最后一行 | 推荐 | [进阶篇](notes2.md) |
+| `NTH_VALUE(col, n)` | 取值 | 窗口第 n 行 | 推荐 | [进阶篇](notes2.md) |
+| `PERCENT_RANK()` | 统计 | 百分比排名 | 必须 | [进阶篇](notes2.md) |
+| `CUME_DIST()` | 统计 | 累积分布 | 必须 | [进阶篇](notes2.md) |
+| `SUM/AVG/MAX/MIN/COUNT` | 聚合 | 窗口内聚合 | 可选 | 本文 |
 
 ---
 
-> **文档版本**：v2.0  
-> **最后更新**：2026-02-02  
+> **文档版本**：v2.1  
+> **最后更新**：2026-02-05  
 > **适用范围**：MySQL 8.0+、PostgreSQL、Oracle、SQL Server

@@ -30,21 +30,28 @@ description: SQL 窗口函数进阶教程，深入讲解帧子句（Frame Clause
 
 ## 目录
 
-1. [示例数据表结构](#1-示例数据表结构)
-2. [FIRST_VALUE 函数](#2-first_value-函数)
-3. [LAST_VALUE 函数与帧子句](#3-last_value-函数与帧子句)
-4. [帧子句详解（Frame Clause）](#4-帧子句详解frame-clause)
-5. [WINDOW 子句简化写法](#5-window-子句简化写法)
-6. [NTH_VALUE 函数](#6-nth_value-函数)
-7. [NTILE 函数（分桶）](#7-ntile-函数分桶)
-8. [CUME_DIST 函数（累积分布）](#8-cume_dist-函数累积分布)
-9. [PERCENT_RANK 函数（百分比排名）](#9-percent_rank-函数百分比排名)
-10. [MySQL 与 PostgreSQL 语法差异](#10-mysql-与-postgresql-语法差异)
-11. [完整 SQL 语句汇总](#11-完整-sql-语句汇总)
+
+???+ tip "目录-点击下拉查看"
+    [TOC]
+
+---
+
+## 0. 前置知识回顾
+
+!!! tip "进入本章前，请确保已掌握"
+    - `OVER(PARTITION BY ... ORDER BY ...)` 语法结构
+    - `ROW_NUMBER()`、`RANK()`、`DENSE_RANK()` 的区别
+    - `LEAD()` / `LAG()` 的基本用法
+    
+    如有遗忘，请回顾 [基础篇笔记](notes1.md)。
 
 ---
 
 ## 1. 示例数据表结构
+
+> **场景说明**：
+> 在进阶篇中，为了更好地演示价格排名（Ranking）、同分异构（Ties）以及多维度的分布统计（Distribution），我们使用一份数据分布更丰富的**电子产品表 (Product)**。
+> 相比基础篇的员工表，这份数据包含了品牌、分类和更多样的价格分布，适合练习复杂的窗口分析。
 
 ### 建表与数据
 
@@ -125,7 +132,8 @@ FROM product;
 2. `ORDER BY price DESC`：每组内按价格降序排列
 3. `FIRST_VALUE(product_name)`：取排序后**第一行**的 `product_name`
 
-> **结果**：每行都会显示该类别中最贵产品的名称。
+!!! note "结果"
+    每行都会显示该类别中最贵产品的名称。
 
 ---
 
@@ -185,7 +193,8 @@ RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
 - `UNBOUNDED PRECEDING`：从分区的**第一行**开始
 - `CURRENT ROW`：到**当前行**结束
 
-> **后果**：`LAST_VALUE` 只能取到"当前行"，而非分区末尾。
+!!! warning "后果"
+    `LAST_VALUE` 只能取到"当前行"，而非分区末尾。
 
 ### 修正帧子句
 
@@ -248,9 +257,9 @@ WINDOW w AS (
 WINDOW 别名 AS (窗口定义)
 ```
 
-> **优点**：
-> - 代码简洁，避免重复
-> - 提高可读性和维护性
+!!! tip "优点"
+    - 代码简洁，避免重复
+    - 提高可读性和维护性
 
 ---
 
@@ -393,7 +402,8 @@ WHERE x.cume_distribution <= 0.3;
 | 2    | XPS 15       | 2300 | 2/27 ≈ 0.074 (7.4%) |
 | 4~5  | (price=2000) | 2000 | 5/27 ≈ 0.185 (18.5%) |
 
-> **注意**：相同价格（如 2000）的两条记录，均返回 5/27。
+!!! warning "注意"
+    相同价格（如 2000）的两条记录，均返回 5/27。
 
 ---
 
@@ -568,6 +578,18 @@ WHERE x.product_name = 'Galaxy Z Fold 3';
 
 ---
 
+## ⚠️ 易错点汇总
+
+| 陷阱 | 现象 | 原因 | 解决方案 |
+|:----|:----|:----|:--------|
+| `LAST_VALUE` 返回当前行 | 每行返回自己的值 | 默认帧是 `CURRENT ROW` | 显式指定 `UNBOUNDED FOLLOWING` |
+| `NTH_VALUE` 返回 NULL | 部分行结果为空 | 帧范围未覆盖第 N 行 | 显式指定完整帧范围 |
+| `NTILE` 相同值分到不同桶 | 同价商品被拆分 | NTILE 只关心行数均匀 | 改用 `CUME_DIST` 按百分比分组 |
+| `RANGE` 与 `ROWS` 混淆 | 结果与预期不符 | 重复值处理方式不同 | 明确需求后选择正确的关键字 |
+| PostgreSQL 语法不兼容 | MySQL 报错 | 类型转换/字符串拼接语法差异 | 使用 `CAST()` 和 `CONCAT()` |
+
+---
+
 ## 总结：窗口函数速查表
 
 | 函数           | 功能                           | 需要帧子句？ |
@@ -581,4 +603,19 @@ WHERE x.product_name = 'Galaxy Z Fold 3';
 
 ---
 
-> 📌 **学习建议**：理解帧子句是掌握窗口函数的关键。`LAST_VALUE` 和 `NTH_VALUE` 的正确使用必须配合适当的帧子句！
+!!! tip "学习建议"
+    理解帧子句是掌握窗口函数的关键。`LAST_VALUE` 和 `NTH_VALUE` 的正确使用必须配合适当的帧子句！
+
+---
+
+!!! quote "综合性能优化总结"
+    SQL 窗口函数的高效运行依赖于 **"索引"** 与 **"写法"** 的双重优化：
+    
+    1.  **索引优化（基础篇）**：为 `PARTITION BY` 和 `ORDER BY` 的列建立联合索引，避免全表排序。
+    2.  **写法优化（进阶篇）**：使用 `WINDOW` 子句复用定义，减少代码冗余并帮助优化器识别执行计划。
+
+---
+
+> **文档版本**：v1.1  
+> **最后更新**：2026-02-05  
+> **适用范围**：MySQL 8.0+、PostgreSQL、Oracle、SQL Server
