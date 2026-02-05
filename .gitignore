@@ -209,3 +209,6 @@ __marimo__/
 # Trea (AI-powered IDE)
 *.trea
 .trea/
+# Trae (AI-powered IDE)
+*.trae
+.trae/
