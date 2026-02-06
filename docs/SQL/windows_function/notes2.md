@@ -31,7 +31,7 @@ description: SQL 窗口函数进阶教程，深入讲解帧子句（Frame Clause
 ## 目录
 
 
-???+ tip "目录-点击下拉查看"
+???- tip "目录-点击下拉查看"
     [TOC]
 
 ---
