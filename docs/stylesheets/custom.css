@@ -1,34 +1,34 @@
-/* 自定义样式 - MkDocs Material 主题增强 */
+﻿/* 鑷畾涔夋牱寮?- MkDocs Material 涓婚澧炲己 */
 
-/* ========== 全局样式优化 ========== */
+/* ========== 鍏ㄥ眬鏍峰紡浼樺寲 ========== */
 :root {
-  /* 自定义颜色变量 */
-  /* 全局配色调整 - 复古纸质风格 */
+  /* 鑷畾涔夐鑹插彉閲?*/
+  /* 鍏ㄥ眬閰嶈壊璋冩暣 - 澶嶅彜绾歌川椋庢牸 */
   --md-primary-fg-color: #5D4037;
-  /* 深棕色 */
+  /* 娣辨鑹?*/
   --md-primary-fg-color--light: #8D6E63;
   --md-primary-fg-color--dark: #3E2723;
   --md-accent-fg-color: #D84315;
-  /* 砖红色 */
+  /* 鐮栫孩鑹?*/
 
-  /* 背景透明度调整，透出纸纹 */
+  /* 鑳屾櫙閫忔槑搴﹁皟鏁达紝閫忓嚭绾哥汗 */
   --md-default-bg-color: rgba(255, 255, 255, 0.65);
-  /* 卡片半透明白 */
+  /* 鍗＄墖鍗婇€忔槑鐧?*/
   --md-code-bg-color: rgba(0, 0, 0, 0.03);
-  /* 代码块微透 */
+  /* 浠ｇ爜鍧楀井閫?*/
 
-  /* 文字颜色柔和化 */
+  /* 鏂囧瓧棰滆壊鏌斿拰鍖?*/
   --md-typeset-color: #3e2723;
-  /* 深褐灰色 */
+  /* 娣辫鐏拌壊 */
   --md-typeset-a-color: #5D4037;
 
-  /* 阴影调整 */
+  /* 闃村奖璋冩暣 */
   --md-shadow-z1: 0 4px 6px rgba(93, 64, 55, 0.1);
   --md-shadow-z2: 0 4px 10px rgba(93, 64, 55, 0.15);
 }
 
-/* ========== 全局固定背景图片 ========== */
-/* 层1: 背景图片 */
+/* ========== 鍏ㄥ眬鍥哄畾鑳屾櫙鍥剧墖 ========== */
+/* 灞?: 鑳屾櫙鍥剧墖 */
 body::before {
   content: "";
   position: fixed;
@@ -43,7 +43,7 @@ body::before {
   background-repeat: repeat;
 }
 
-/* 层2: 渐变遮罩 - 中间白色淡化，两边渐变透明 */
+/* 灞?: 娓愬彉閬僵 - 涓棿鐧借壊娣″寲锛屼袱杈规笎鍙橀€忔槑 */
 body::after {
   content: "";
   position: fixed;
@@ -52,7 +52,7 @@ body::after {
   width: 100%;
   height: 100%;
   z-index: -1;
-  /* 水平渐变：两边透明 -> 中间白色 */
+  /* 姘村钩娓愬彉锛氫袱杈归€忔槑 -> 涓棿鐧借壊 */
   background: linear-gradient(to right,
       rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 0.85) 15%,
@@ -63,18 +63,18 @@ body::after {
   pointer-events: none;
 }
 
-/* ========== 代码块美化 ========== */
+/* ========== 浠ｇ爜鍧楃編鍖?========== */
 .highlight code {
   border-radius: 8px;
 }
 
-/* 代码块阴影效果 */
+/* 浠ｇ爜鍧楅槾褰辨晥鏋?*/
 .md-typeset pre {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 行内代码样式 */
+/* 琛屽唴浠ｇ爜鏍峰紡 */
 .md-typeset code:not(pre code) {
   background-color: rgba(92, 107, 192, 0.1);
   border-radius: 4px;
@@ -82,7 +82,7 @@ body::after {
   font-size: 0.9em;
 }
 
-/* ========== 卡片效果 ========== */
+/* ========== 鍗＄墖鏁堟灉 ========== */
 .md-typeset .admonition,
 .md-typeset details {
   border-radius: 8px;
@@ -90,7 +90,7 @@ body::after {
   overflow: hidden;
 }
 
-/* ========== 表格美化 ========== */
+/* ========== 琛ㄦ牸缇庡寲 ========== */
 .md-typeset table:not([class]) {
   border-radius: 8px;
   overflow: hidden;
@@ -103,7 +103,7 @@ body::after {
   font-weight: 600;
 }
 
-/* ========== 侧边栏优化 ========== */
+/* ========== 渚ц竟鏍忎紭鍖?========== */
 .md-nav__link {
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -114,23 +114,23 @@ body::after {
   transform: translateX(4px);
 }
 
-/* 当前活跃链接 */
+/* 褰撳墠娲昏穬閾炬帴 */
 .md-nav__link--active {
   font-weight: 600;
 }
 
-/* ========== 顶部导航栏 ========== */
+/* ========== 椤堕儴瀵艰埅鏍?========== */
 .md-header {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* ========== 搜索框美化 ========== */
+/* ========== 鎼滅储妗嗙編鍖?========== */
 .md-search__input {
   border-radius: 20px;
 }
 
-/* ========== 内容区域优化 ========== */
+/* ========== 鍐呭鍖哄煙浼樺寲 ========== */
 .md-content {
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -147,7 +147,7 @@ body::after {
   }
 }
 
-/* ========== 链接样式 ========== */
+/* ========== 閾炬帴鏍峰紡 ========== */
 .md-typeset a:not(.md-button) {
   text-decoration: none;
   border-bottom: 1px dashed var(--md-accent-fg-color);
@@ -159,7 +159,7 @@ body::after {
   color: var(--md-accent-fg-color);
 }
 
-/* ========== 标题样式 ========== */
+/* ========== 鏍囬鏍峰紡 ========== */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3 {
@@ -171,7 +171,7 @@ body::after {
   padding-bottom: 0.3em;
 }
 
-/* ========== 滚动条美化 ========== */
+/* ========== 婊氬姩鏉＄編鍖?========== */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -190,7 +190,7 @@ body::after {
   background: rgba(92, 107, 192, 0.5);
 }
 
-/* ========== 暗色模式适配 ========== */
+/* ========== 鏆楄壊妯″紡閫傞厤 ========== */
 [data-md-color-scheme="slate"] {
   --md-typeset-a-color: #90caf9;
 }
@@ -203,7 +203,7 @@ body::after {
   background-color: #37474f;
 }
 
-/* ========== 图片样式 ========== */
+/* ========== 鍥剧墖鏍峰紡 ========== */
 .md-typeset img {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -215,30 +215,30 @@ body::after {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* ========== 页脚优化 ========== */
+/* ========== 椤佃剼浼樺寲 ========== */
 .md-footer {
   margin-top: 2rem;
 }
 
-/* ========== 任务列表美化 ========== */
+/* ========== 浠诲姟鍒楄〃缇庡寲 ========== */
 .md-typeset .task-list-item input[type="checkbox"] {
   accent-color: var(--md-primary-fg-color);
 }
 
-/* ========== 标签页样式 ========== */
+/* ========== 鏍囩椤垫牱寮?========== */
 .md-typeset .tabbed-labels>label {
   border-radius: 8px 8px 0 0;
   transition: all 0.2s ease;
 }
 
-/* ========== 响应式优化 ========== */
+/* ========== 鍝嶅簲寮忎紭鍖?========== */
 @media screen and (max-width: 76.1875em) {
   .md-nav__link:hover {
     transform: none;
   }
 }
 
-/* ========== Hero 区域样式 ========== */
+/* ========== Hero 鍖哄煙鏍峰紡 ========== */
 .hero-section {
   background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-primary-fg-color--dark) 100%);
   color: white;
@@ -325,7 +325,7 @@ body::after {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* ========== 卡片网格布局 ========== */
+/* ========== 鍗＄墖缃戞牸甯冨眬 ========== */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -391,7 +391,7 @@ body::after {
 }
 
 .card a::after {
-  content: " →";
+  content: " 鈫?;
   transition: transform 0.2s ease;
 }
 
@@ -399,7 +399,7 @@ body::after {
   transform: translateX(4px);
 }
 
-/* ========== 时间线样式 ========== */
+/* ========== 鏃堕棿绾挎牱寮?========== */
 .timeline {
   position: relative;
   padding-left: 2rem;
@@ -459,7 +459,7 @@ body::after {
   margin: 0;
 }
 
-/* ========== 公告栏样式 ========== */
+/* ========== 鍏憡鏍忔牱寮?========== */
 .md-banner {
   background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
   color: white;
@@ -495,7 +495,7 @@ body::after {
   fill: currentColor;
 }
 
-/* ========== 统计卡片 ========== */
+/* ========== 缁熻鍗＄墖 ========== */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -529,7 +529,7 @@ body::after {
   margin-top: 0.3rem;
 }
 
-/* ========== 暗色模式适配 - 新增样式 ========== */
+/* ========== 鏆楄壊妯″紡閫傞厤 - 鏂板鏍峰紡 ========== */
 [data-md-color-scheme="slate"] .hero-section {
   background: linear-gradient(135deg, #1a237e 0%, #0d1421 100%);
 }
@@ -547,7 +547,7 @@ body::after {
   background: var(--md-default-bg-color);
 }
 
-/* 暗色模式下的背景渐变遮罩 */
+/* 鏆楄壊妯″紡涓嬬殑鑳屾櫙娓愬彉閬僵 */
 [data-md-color-scheme="slate"] body::after {
   background: linear-gradient(to right,
       rgba(30, 30, 30, 0) 0%,
@@ -558,196 +558,6 @@ body::after {
       rgba(30, 30, 30, 0) 100%);
 }
 
-/* ========== 侧边公告栏（右侧隐藏弹出） ========== */
-.side-announcement-container {
-  position: fixed;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 8px;
-}
-
-.side-announcement-toggle {
-  appearance: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(102, 126, 234, 0.9);
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.25);
-  cursor: pointer;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.side-announcement-toggle::before {
-  content: "📢";
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 1.1rem;
-}
-
-.side-announcement-toggle:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.75);
-  outline-offset: 2px;
-}
-
-.side-announcement {
-  width: clamp(200px, 16vw, 240px);
-  background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 0;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-110%);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
-}
-
-.side-announcement-toggle:checked~.side-announcement {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  .side-announcement,
-  .side-announcement-toggle:checked~.side-announcement {
-    transition: none;
-  }
-
-  .side-announcement-status .pulse {
-    animation: none;
-  }
-}
-
-.side-announcement::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.side-announcement-header {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  white-space: normal;
-  word-break: break-word;
-}
-
-.side-announcement-header .icon {
-  font-size: 1.2rem;
-}
-
-.side-announcement-body {
-  padding: 16px;
-}
-
-.side-announcement-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  white-space: normal;
-  word-break: break-word;
-}
-
-.side-announcement-status .pulse {
-  width: 8px;
-  height: 8px;
-  background: #4ade80;
-  border-radius: 50%;
-  flex-shrink: 0;
-  animation: none;
-}
-
-.side-announcement-toggle:checked~.side-announcement .side-announcement-status .pulse {
-  animation: pulse 2s ease-in-out 3;
-}
-
-.side-announcement-status span:last-child {
-  min-width: 0;
-}
-
-@keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.6;
-    transform: scale(1.2);
-  }
-}
-
-.side-announcement-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.side-announcement-list li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 0;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  opacity: 0.95;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  white-space: normal;
-  word-break: break-word;
-}
-
-.side-announcement-list li:last-child {
-  border-bottom: none;
-}
-
-.side-announcement-list .emoji {
-  flex-shrink: 0;
-  font-size: 1rem;
-}
-
-.side-announcement-list li span:last-child {
-  min-width: 0;
-}
-
-[data-md-color-scheme="slate"] .side-announcement {
-  background: linear-gradient(145deg, #1e3a5f 0%, #2d1b4e 100%);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-[data-md-color-scheme="slate"] .side-announcement-toggle {
-  background: rgba(30, 58, 95, 0.95);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
 
 /* ========== Collapsible TOC Styles ========== */
 /* Hide all sub-level TOC lists by default */
@@ -768,7 +578,7 @@ body::after {
 
 /* Add visual indicator for expandable items */
 .md-sidebar--secondary .md-nav--secondary .md-nav__item--nested>.md-nav__link::after {
-  content: "▸";
+  content: "鈻?;
   margin-left: auto;
   padding-left: 0.5rem;
   font-size: 0.7rem;
@@ -786,7 +596,7 @@ body::after {
   align-items: center;
 }
 
-/* ========== 关于我 (Profile) 区域优化 ========== */
+/* ========== 鍏充簬鎴?(Profile) 鍖哄煙浼樺寲 ========== */
 .profile-container {
   background: var(--md-default-bg-color);
   border-radius: 16px;
@@ -801,7 +611,7 @@ body::after {
   overflow: hidden;
 }
 
-/* 顶部装饰条 */
+/* 椤堕儴瑁呴グ鏉?*/
 .profile-container::before {
   content: "";
   position: absolute;
@@ -851,7 +661,7 @@ body::after {
   opacity: 0.9;
 }
 
-/* 技能可视化 (Skill Badges) */
+/* 鎶€鑳藉彲瑙嗗寲 (Skill Badges) */
 .skills-section {
   margin-top: 1rem;
 }
@@ -898,7 +708,7 @@ body::after {
   font-size: 1.1em;
 }
 
-/* 暗色模式适配 */
+/* 鏆楄壊妯″紡閫傞厤 */
 [data-md-color-scheme="slate"] .profile-container {
   background: var(--md-default-bg-color);
   border-color: rgba(255, 255, 255, 0.1);
@@ -913,7 +723,7 @@ body::after {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* ========== 翻转卡片效果 (Flip Card) ========== */
+/* ========== 缈昏浆鍗＄墖鏁堟灉 (Flip Card) ========== */
 .profile-flip-scene {
   perspective: 1000px;
   margin: 2rem 0;
@@ -930,16 +740,16 @@ body::after {
   transform: rotateY(180deg);
 }
 
-/* 调整 profile-container 在翻转场景下的表现 */
+/* 璋冩暣 profile-container 鍦ㄧ炕杞満鏅笅鐨勮〃鐜?*/
 .profile-flip-scene .profile-container {
   margin: 0;
-  /* 由 scene 控制 margin */
+  /* 鐢?scene 鎺у埗 margin */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
 .profile-front {
-  /* 默认正面 */
+  /* 榛樿姝ｉ潰 */
   z-index: 2;
 }
 
@@ -956,7 +766,7 @@ body::after {
   z-index: 1;
 }
 
-/* 背面内容样式 */
+/* 鑳岄潰鍐呭鏍峰紡 */
 .contact-card-content {
   text-align: center;
   width: 100%;
@@ -1017,7 +827,7 @@ body::after {
   transform: scale(0.95);
 }
 
-/* 暗色模式适配 */
+/* 鏆楄壊妯″紡閫傞厤 */
 [data-md-color-scheme="slate"] .email-box {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.2);
@@ -1032,14 +842,14 @@ body::after {
   background: var(--md-primary-fg-color);
 }
 
-/* ========== 左右分区布局 ========== */
+/* ========== 宸﹀彸鍒嗗尯甯冨眬 ========== */
 .profile-main-row {
   display: flex;
   gap: 2.5rem;
   align-items: stretch;
 }
 
-/* 左侧：IP 形象区 */
+/* 宸︿晶锛欼P 褰㈣薄鍖?*/
 .profile-left {
   display: flex;
   flex-direction: column;
@@ -1063,7 +873,7 @@ body::after {
   white-space: nowrap;
 }
 
-/* 右侧：Bio 内容区 */
+/* 鍙充晶锛欱io 鍐呭鍖?*/
 .profile-right {
   flex: 1;
   display: flex;
@@ -1084,7 +894,7 @@ body::after {
   margin-bottom: 0;
 }
 
-/* 响应式：移动端堆叠布局 */
+/* 鍝嶅簲寮忥細绉诲姩绔爢鍙犲竷灞€ */
 @media screen and (max-width: 600px) {
   .profile-main-row {
     flex-direction: column;
@@ -1102,7 +912,7 @@ body::after {
   }
 }
 
-/* 暗色模式适配 - 分区布局 */
+/* 鏆楄壊妯″紡閫傞厤 - 鍒嗗尯甯冨眬 */
 [data-md-color-scheme="slate"] .profile-left {
   border-right-color: rgba(255, 255, 255, 0.1);
 }
@@ -1113,31 +923,31 @@ body::after {
   }
 }
 
-/* ========== 2026-02-15 22:30 配色优化 V2 (复古轻量化) ========== */
+/* ========== 2026-02-15 22:30 閰嶈壊浼樺寲 V2 (澶嶅彜杞婚噺鍖? ========== */
 
-/* 1. 顶栏 (Header) 透明化 */
+/* 1. 椤舵爮 (Header) 閫忔槑鍖?*/
 .md-header {
   background-color: rgba(255, 255, 255, 0.4) !important;
-  /* 半透明浅色 */
+  /* 鍗婇€忔槑娴呰壊 */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: none !important;
   border-bottom: 1px solid rgba(93, 64, 55, 0.1);
-  /* 极细分隔线 */
+  /* 鏋佺粏鍒嗛殧绾?*/
   transition: background-color 0.3s ease;
 }
 
-/* 顶栏文字与图标颜色适配 */
+/* 椤舵爮鏂囧瓧涓庡浘鏍囬鑹查€傞厤 */
 .md-header .md-header__title,
 .md-header .md-header__button,
 .md-header .md-icon,
 .md-tabs__link {
   color: var(--md-primary-fg-color) !important;
-  /* 深棕色 */
+  /* 娣辨鑹?*/
   text-shadow: none !important;
 }
 
-/* 搜索框适配 - 半透明复古风 */
+/* 鎼滅储妗嗛€傞厤 - 鍗婇€忔槑澶嶅彜椋?*/
 .md-search__input {
   background-color: rgba(255, 255, 255, 0.6) !important;
   border: 1px solid rgba(93, 64, 55, 0.2);
@@ -1148,10 +958,10 @@ body::after {
   color: rgba(62, 39, 35, 0.6);
 }
 
-/* 2. Hero 区域 (首页) 去色块 */
+/* 2. Hero 鍖哄煙 (棣栭〉) 鍘昏壊鍧?*/
 .hero-section {
   background: transparent !important;
-  /* 去除深色背景 */
+  /* 鍘婚櫎娣辫壊鑳屾櫙 */
   box-shadow: none !important;
   border: none !important;
   padding: 4rem 1rem !important;
@@ -1162,7 +972,7 @@ body::after {
   color: var(--md-primary-fg-color);
   text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8),
     4px 4px 0px rgba(93, 64, 55, 0.15);
-  /* 复古印章文字效果 */
+  /* 澶嶅彜鍗扮珷鏂囧瓧鏁堟灉 */
   font-weight: 800;
   letter-spacing: 0.05em;
   border-bottom: none !important;
@@ -1174,7 +984,7 @@ body::after {
   font-weight: 500;
 }
 
-/* Hero 按钮 - 线框幽灵按钮 */
+/* Hero 鎸夐挳 - 绾挎骞界伒鎸夐挳 */
 .hero-section .md-button {
   background: transparent !important;
   border: 2px solid var(--md-primary-fg-color) !important;
@@ -1191,15 +1001,15 @@ body::after {
   box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2) !important;
 }
 
-/* 3. 侧边栏/目录 (Sidebar & TOC) 轻量化 */
+/* 3. 渚ц竟鏍?鐩綍 (Sidebar & TOC) 杞婚噺鍖?*/
 .md-sidebar__scrollwrap,
 .md-sidebar__inner {
   background: transparent !important;
-  /* 去除可能存在的背景色 */
+  /* 鍘婚櫎鍙兘瀛樺湪鐨勮儗鏅壊 */
   box-shadow: none !important;
 }
 
-/* 右侧目录 (TOC) - 书签式风格 */
+/* 鍙充晶鐩綍 (TOC) - 涔︾寮忛鏍?*/
 .md-nav--secondary .md-nav__title {
   background: transparent !important;
   box-shadow: none !important;
@@ -1220,7 +1030,7 @@ body::after {
   color: var(--md-typeset-color);
   padding-left: 0.8rem;
   border-left: 2px solid transparent;
-  /* 默认透明边框 */
+  /* 榛樿閫忔槑杈规 */
   transition: all 0.2s;
 }
 
@@ -1233,11 +1043,11 @@ body::after {
   color: var(--md-accent-fg-color);
   font-weight: 700;
   border-left-color: var(--md-accent-fg-color);
-  /* 激活时显示左边框 */
+  /* 婵€娲绘椂鏄剧ず宸﹁竟妗?*/
   background: linear-gradient(to right, rgba(216, 67, 21, 0.05), transparent);
 }
 
-/* ========== 左侧导航栏 (Primary Sidebar) 深度优化 ========== */
+/* ========== 宸︿晶瀵艰埅鏍?(Primary Sidebar) 娣卞害浼樺寲 ========== */
 .md-nav--primary .md-nav__title {
   background: transparent !important;
   color: var(--md-primary-fg-color) !important;
@@ -1252,10 +1062,10 @@ body::after {
   background: transparent !important;
 }
 
-/* 一级菜单项 (Home, Python, SQL...) */
+/* 涓€绾ц彍鍗曢」 (Home, Python, SQL...) */
 .md-nav--primary>.md-nav__list>.md-nav__item {
   border-bottom: 1px dashed rgba(93, 64, 55, 0.1);
-  /* 虚线分隔 */
+  /* 铏氱嚎鍒嗛殧 */
   margin-bottom: 0.2rem;
 }
 
@@ -1266,16 +1076,16 @@ body::after {
   padding: 0.6rem 0.2rem;
 }
 
-/* 活跃的一级菜单 */
+/* 娲昏穬鐨勪竴绾ц彍鍗?*/
 .md-nav--primary>.md-nav__list>.md-nav__item--active>.md-nav__link {
   color: var(--md-accent-fg-color);
 }
 
-/* 二级及以下菜单 - 书签风格 */
+/* 浜岀骇鍙婁互涓嬭彍鍗?- 涔︾椋庢牸 */
 .md-nav--primary .md-nav__item .md-nav__list {
   margin-left: 0.5rem;
   border-left: 2px solid rgba(93, 64, 55, 0.1);
-  /* 贯穿线 */
+  /* 璐┛绾?*/
 }
 
 .md-nav--primary .md-nav__item .md-nav__item {
@@ -1303,42 +1113,42 @@ body::after {
   border-radius: 4px;
 }
 
-/* ========== 2026-02-15 23:00 视觉微调 (字体 & 底部) ========== */
+/* ========== 2026-02-15 23:00 瑙嗚寰皟 (瀛椾綋 & 搴曢儴) ========== */
 
-/* 1. 字体清晰度优化 */
+/* 1. 瀛椾綋娓呮櫚搴︿紭鍖?*/
 .hero-section h1 {
   text-shadow: none !important;
-  /* 去除模糊的复古阴影 */
+  /* 鍘婚櫎妯＄硦鐨勫鍙ら槾褰?*/
   color: #3E2723 !important;
-  /* 极深棕色，确保高对比度 */
+  /* 鏋佹繁妫曡壊锛岀‘淇濋珮瀵规瘮搴?*/
   -webkit-font-smoothing: antialiased;
-  /* 抗锯齿 */
+  /* 鎶楅敮榻?*/
   -moz-osx-font-smoothing: grayscale;
 }
 
 body,
 .md-typeset {
-  /* 使用系统默认无衬线字体，通常在屏幕上最清晰 */
+  /* 浣跨敤绯荤粺榛樿鏃犺‖绾垮瓧浣擄紝閫氬父鍦ㄥ睆骞曚笂鏈€娓呮櫚 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   text-shadow: none !important;
 }
 
-/* 2. 底部导航栏精简 */
+/* 2. 搴曢儴瀵艰埅鏍忕簿绠€ */
 .md-footer__nav {
   display: none !important;
-  /* 隐藏“上一页/下一页”大黑条 */
+  /* 闅愯棌鈥滀笂涓€椤?涓嬩竴椤碘€濆ぇ榛戞潯 */
 }
 
-/* 3. 页脚版权栏美化 */
+/* 3. 椤佃剼鐗堟潈鏍忕編鍖?*/
 .md-footer {
   background: transparent !important;
   margin-top: 4rem;
-  /* 增加底部留白 */
+  /* 澧炲姞搴曢儴鐣欑櫧 */
 }
 
 .md-footer__meta {
   background-color: transparent !important;
-  /* 或者半透明浅色 background-color: rgba(255, 255, 255, 0.3) !important; */
+  /* 鎴栬€呭崐閫忔槑娴呰壊 background-color: rgba(255, 255, 255, 0.3) !important; */
   border-top: 1px solid rgba(93, 64, 55, 0.1);
 }
 
@@ -1352,9 +1162,9 @@ body,
   font-size: 0.85rem;
 }
 
-/* ========== 2026-02-15 23:25 细节打磨 (滚动条/链接/搜索框) ========== */
+/* ========== 2026-02-15 23:25 缁嗚妭鎵撶（ (婊氬姩鏉?閾炬帴/鎼滅储妗? ========== */
 
-/* 1. 滚动条配色修正 (深棕色) */
+/* 1. 婊氬姩鏉￠厤鑹蹭慨姝?(娣辨鑹? */
 ::-webkit-scrollbar-thumb {
   background: rgba(93, 64, 55, 0.3) !important;
   border-radius: 4px;
@@ -1364,7 +1174,7 @@ body,
   background: rgba(93, 64, 55, 0.6) !important;
 }
 
-/* 2. 链接“高光笔”特效 */
+/* 2. 閾炬帴鈥滈珮鍏夌瑪鈥濈壒鏁?*/
 .md-typeset a:not(.md-button):hover {
   background: linear-gradient(to top, rgba(255, 235, 59, 0.4) 0%, rgba(255, 235, 59, 0.4) 40%, transparent 40%);
   color: inherit !important;
@@ -1372,32 +1182,32 @@ body,
   text-decoration: none;
 }
 
-/* 3. 搜索框复古化 (底部边框风格) */
+/* 3. 鎼滅储妗嗗鍙ゅ寲 (搴曢儴杈规椋庢牸) */
 .md-search__input {
   background-color: transparent !important;
   border: none !important;
   border-bottom: 2px solid rgba(93, 64, 55, 0.3) !important;
   border-radius: 0 !important;
   padding-left: 2rem !important;
-  /* 让出图标位置 */
+  /* 璁╁嚭鍥炬爣浣嶇疆 */
 }
 
 
-/* ========== 2026-02-15 23:40 布局紧凑化 & 艺术字体 ========== */
+/* ========== 2026-02-15 23:40 甯冨眬绱у噾鍖?& 鑹烘湳瀛椾綋 ========== */
 
-/* 1. 宽屏布局 (Compact Layout) */
+/* 1. 瀹藉睆甯冨眬 (Compact Layout) */
 .md-grid {
   max-width: 1600px !important;
-  /* 原为 1220px，增大以利用宽屏空间 */
+  /* 鍘熶负 1220px锛屽澶т互鍒╃敤瀹藉睆绌洪棿 */
   padding-left: 1rem !important;
   padding-right: 1rem !important;
 }
 
-/* 2. 左侧导航 (Primary Sidebar) 艺术字体 */
+/* 2. 宸︿晶瀵艰埅 (Primary Sidebar) 鑹烘湳瀛椾綋 */
 .md-nav--primary {
-  /* 中文：华文行楷/楷体，英文：手写体/衬线体 */
-  /* 华文行楷 (STXingkai) 更具连笔手写感，与英文 Script 更搭 */
-  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "华文行楷", "KaiTi", "楷体", "FangSong", "仿宋", "Georgia", serif !important;
+  /* 涓枃锛氬崕鏂囪妤?妤蜂綋锛岃嫳鏂囷細鎵嬪啓浣?琛嚎浣?*/
+  /* 鍗庢枃琛屾シ (STXingkai) 鏇村叿杩炵瑪鎵嬪啓鎰燂紝涓庤嫳鏂?Script 鏇存惌 */
+  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "鍗庢枃琛屾シ", "KaiTi", "妤蜂綋", "FangSong", "浠垮畫", "Georgia", serif !important;
 }
 
 .md-nav--primary .md-nav__title {
@@ -1406,20 +1216,43 @@ body,
 }
 
 .md-nav--primary>.md-nav__list>.md-nav__item>.md-nav__link {
-  font-size: 1.4rem !important;
-  /* 加大一级菜单字号，突出书写感 */
-  line-height: 1.6 !important;
+  font-size: 1.25rem !important;
+  /* 鍥炶皟鑷?1.25rem锛屾秷闄ゅ枾瀹惧ず涓绘劅 */
+  line-height: 1.5 !important;
+  font-weight: 600 !important;
+  /* 淇濇寔瀛楅噸 */
+  text-shadow: 1px 1px 2px rgba(93, 64, 55, 0.1);
+  /* 淇濇寔寰槾褰?*/
 }
 
-/* 3. 顶部标题 (Header Title) 艺术化同步 */
+/* 3. 椤堕儴鏍囬 (Header Title) 鑹烘湳鍖栧悓姝?*/
 .md-header__title {
-  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "华文行楷", "KaiTi", "楷体", serif !important;
+  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "鍗庢枃琛屾シ", "KaiTi", "妤蜂綋", serif !important;
   font-size: 1.5rem !important;
   font-weight: bold !important;
   letter-spacing: 0.05em;
 }
 
-/* 右侧 TOC 也可以稍微艺术化，但保持可读性 */
+/* ========== 2026-02-16 00:00 瑙嗚寰皟 (鍘婚噸 & 闅朵功) ========== */
+
+/* 1. 闅愯棌宸︿晶瀵艰埅鏍忛《閮ㄧ殑 Site Name (闃叉涓?Top Header 閲嶅) */
+.md-nav--primary .md-nav__title {
+  display: none !important;
+}
+
+/* 2. Hero 鏍囬 (棣栭〉澶у瓧) 鏀逛负闅朵功 */
+.hero-section h1 {
+  font-family: "LiSu", "闅朵功", "KaiTi", "妤蜂綋", serif !important;
+  font-weight: normal !important;
+  /* 闅朵功鑷甫鍘氬害锛屾棤闇€鍔犵矖 */
+  font-size: 3rem !important;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+/* 3. 鎭㈠鍙充晶 TOC 鐩綍瀛椾綋 (妤蜂綋) */
 .md-nav--secondary {
-  font-family: "KaiTi", "楷体", "FangSong", "仿宋", serif !important;
+  font-family: "KaiTi", "妤蜂綋", "FangSong", "浠垮畫", serif !important;
+  font-size: 0.95rem !important;
+  /* 淇濇寔閫備腑澶у皬 */
 }

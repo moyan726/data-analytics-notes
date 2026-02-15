@@ -1,29 +1,6 @@
-# Data Analytics Knowledge Base
-
-<div class="side-announcement-container">
-<input id="side-announcement-toggle" class="side-announcement-toggle" type="checkbox" aria-label="展开或收起站点公告" aria-controls="side-announcement-panel" aria-expanded="false">
-<aside id="side-announcement-panel" class="side-announcement" aria-label="站点公告">
-<div class="side-announcement-header" role="heading" aria-level="2">
-<span class="icon" aria-hidden="true">📢</span>
-<span>公告</span>
-</div>
-<div class="side-announcement-body">
-<div class="side-announcement-status" aria-live="polite">
-<span class="pulse" aria-hidden="true"></span>
-<span>网站建设中</span>
-</div>
-<ul class="side-announcement-list">
-<li><span class="emoji" aria-hidden="true">✨</span><span>功能测试页上线</span></li>
-<li><span class="emoji" aria-hidden="true">📝</span><span>笔记持续更新</span></li>
-<li><span class="emoji" aria-hidden="true">🔧</span><span>新功能开发中</span></li>
-<li><span class="emoji" aria-hidden="true">🔧</span><span>页面底部联系我</span></li>
-</ul>
-</div>
-</aside>
-</div>
 
 <div class="hero-section">
-<h1>🚀 数据分析知识库</h1>
+<h1>数据分析知识库</h1>
 <p class="hero-subtitle">Python / SQL / Power BI 学习笔记与项目实战</p>
 <div class="hero-buttons">
 <a href="./Python/" class="md-button md-button--primary">开始学习 →</a>
