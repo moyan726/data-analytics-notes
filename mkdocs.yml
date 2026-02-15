@@ -156,6 +156,7 @@ extra_javascript:
 
 nav:
   - Home: index.md
+  - 样式参考: design/Style_Guide.md
   - Python:
       - Python/index.md
       - 实战：动手学数据分析:
@@ -184,12 +185,10 @@ nav:
   - Projects:
       - Projects/index.md
       - 个人工具与自动化脚本:
-          - Project 3--Git批量提交脚本: Projects/myself_tools/Git批量提交脚本.md
-          - Project 4--ppt_to_pdf: Projects/myself_tools/ppt_to_pdf.md
-          - Project AI-nav-extension: Projects/myself_tools/AI_nav_extension.md
-      - 美赛 (MCM) 竞赛笔记: 
-          - 概述: Projects/MCM/index.md
-          - 1.MCM Prep Guide: Projects/MCM/1.MCM_Prep_Guide.md
+          - Git 交互式提交助手: Projects/myself_tools/Git_Interactive_Commit_Tool.md
+          - PPT 批量转 PDF 工具: Projects/myself_tools/PPT_to_PDF_Automation_Tool.md
+          - AI 对话导航插件: Projects/myself_tools/AI_Chat_Navigation_Plugin.md
+
 extra:
   generator: false  # 隐藏 "Made with Material for MkDocs"
   keywords: Python, SQL, Power BI, 数据分析, 数据可视化, 机器学习, MkDocs

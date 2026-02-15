@@ -1,75 +1,146 @@
-# SQL 数据查询
+---
+description: SQL 数据查询学习专区：涵盖 MySQL 基础与进阶、窗口函数专题、淘宝亿级数据实战项目，专为数据分析师打造的系统化学习路径。
+---
 
-SQL (Structured Query Language) 是用于管理和查询关系型数据库的标准语言。
+# :material-database-search: SQL 数据查询
 
-## 为什么学习 SQL？
+!!! quote "为什么 SQL 是数据分析师的第一语言"
+    SQL 是与数据库对话的通用语言——**超过 90% 的数据分析岗位**将其列为必备技能。无论是日常取数、报表统计，还是用户行为分析和漏斗建模，SQL 都是你最直接、最高效的工具。
 
-- **通用性强**：几乎所有关系型数据库都支持
-- **需求广泛**：数据分析、后端开发、数据工程等领域必备
-- **易于学习**：语法接近自然语言
-- **功能强大**：可以处理复杂的数据查询和分析
+---
 
-## 实战内容
+## 📚 学习模块导航
 
-- **[MySQL 核心教程](MySQL_Base_ITcase/index.md)** - 涵盖基础、进阶及实战案例
-- **[SQL 进阶：窗口函数](windows_function/index.md)** - 专项攻克窗口函数难点
-- **[项目：淘宝用户分析](TaoBao_project/index.md)** - 完整的数据清洗与分析实战项目
+本专区按照 **"基础语法 → 高级技巧 → 实战项目"** 的路径组织内容，建议按顺序推进。
 
-## 快速示例
+<div class="grid cards" markdown>
 
-### 简单查询
+-   :material-school:{ .lg .middle } __MySQL 核心教程__
 
-```sql
--- 查询所有数据
-SELECT * FROM employees;
+    ---
 
--- 查询特定列
-SELECT first_name, last_name, salary
-FROM employees;
+    从零开始系统学习 MySQL，涵盖 **基础篇** 与 **进阶篇**，全程配有代码实操、图表与思维导图。
 
--- 条件查询
-SELECT *
-FROM employees
-WHERE salary > 50000;
+    *   ✨ **基础篇**：DDL/DML/DQL、多表查询、事务控制
+    *   🔎 **进阶篇**：索引优化、SQL 调优、视图与锁机制
+    *   🎯 附数据分析师**章节筛选建议**，避免无效学习
+
+    [:octicons-arrow-right-24: 进入 MySQL 核心教程](MySQL_Base_ITcase/index.md){ .md-button .md-button--primary }
+
+-   :material-chart-timeline-variant:{ .lg .middle } __SQL 窗口函数专题__
+
+    ---
+
+    窗口函数是数据分析师与 SQL 工程师的**分水岭技能**，专项攻克排名、同比环比、滑动平均等难点。
+
+    *   📊 **基础篇**：`ROW_NUMBER` / `RANK` / `LEAD` / `LAG`
+    *   🖼️ **进阶篇**：帧子句 `ROWS` vs `RANGE`、`NTILE`、`CUME_DIST`
+    *   ⚡ 配有完整测试数据与**易错点汇总**
+
+    [:octicons-arrow-right-24: 进入窗口函数专题](windows_function/index.md){ .md-button .md-button--primary }
+
+-   :material-cart-outline:{ .lg .middle } __实战：淘宝用户行为分析__
+
+    ---
+
+    基于 **1 亿行** 阿里云天池 UserBehavior 数据集，完整走通数据导入、清洗、分析与可视化全链路。
+
+    *   🗄️ 亿级数据导入方案（Kettle / `LOAD DATA INFILE`）
+    *   📈 转化漏斗、RFM 用户分层、热门品类分析
+    *   💡 附**小样本验证**策略与新手上路建议
+
+    [:octicons-arrow-right-24: 进入淘宝实战项目](TaoBao_project/index.md){ .md-button }
+
+</div>
+
+---
+
+## 🧠 知识图谱
+
+```mermaid
+graph LR
+    Root["SQL 学习体系"] --> MySQL["MySQL 核心教程"]
+    Root --> WinFunc["窗口函数专题"]
+    Root --> Project["淘宝实战项目"]
+
+    MySQL --> Basic["基础篇"]
+    MySQL --> Adv["进阶篇"]
+
+    Basic --> CRUD["DDL / DML / DQL"]
+    Basic --> MultiJoin["多表查询"]
+    Basic --> Txn["事务控制"]
+
+    Adv --> Idx["索引优化"]
+    Adv --> Perf["SQL 调优"]
+    Adv --> View["视图 & 存储过程"]
+    Adv --> Lock["锁机制"]
+
+    WinFunc --> Rank["排名函数"]
+    WinFunc --> Offset["位移函数"]
+    WinFunc --> Frame["帧子句"]
+    WinFunc --> Dist["分布函数"]
+
+    Project --> Import["亿级数据导入"]
+    Project --> Clean["数据清洗"]
+    Project --> Analysis["行为分析 & 漏斗"]
+    Project --> RFM["RFM 用户分层"]
+
+    style Root fill:#7c4dff,stroke:#fff,stroke-width:2px,color:#fff
+    style MySQL fill:#00bcd4,stroke:#fff,color:#fff
+    style WinFunc fill:#e91e63,stroke:#fff,color:#fff
+    style Project fill:#ff9800,stroke:#fff,color:#fff
 ```
 
-### 聚合统计
+---
 
-```sql
--- 计算平均工资
-SELECT AVG(salary) as avg_salary
-FROM employees;
+## 🎯 数据分析师学习优先级
 
--- 按部门分组统计
-SELECT department, COUNT(*) as employee_count
-FROM employees
-GROUP BY department;
-```
+!!! tip "聚焦原则"
+    MySQL 体系庞大（含 DBA 运维内容），数据分析师应遵循 **"去肥增瘦"** 原则，把时间花在**取数效率**和**分析能力**上。
 
-### 表连接
+| 模块 | 优先级 | 核心理由 |
+| :--- | :--- | :--- |
+| **DQL 查询 & 多表连接** | ⭐⭐⭐ 必学 | 日常取数的基石，面试必考 |
+| **索引 & SQL 优化** | ⭐⭐⭐ 必学 | 千万级数据不懂索引 = 查询超时，掌握 `EXPLAIN` 是分水岭 |
+| **窗口函数** | ⭐⭐⭐ 必学 | 排名、同比环比、留存分析的利器，面试高频考点 |
+| **实战项目** | ⭐⭐⭐ 必做 | 打通"导入 → 清洗 → 分析 → 可视化"全链路，简历加分项 |
+| **视图** | ⭐⭐ 推荐 | 封装复杂分析逻辑（如留存率计算），方便复用 |
+| **存储过程 & 触发器** | ⭐ 选学 | 现代架构多用 Python/Airflow 做 ETL，读懂即可 |
+| **运维篇** | ❌ 跳过 | 主从复制、分库分表由 DBA 负责 |
 
-```sql
--- 内连接
-SELECT e.first_name, e.last_name, d.department_name
-FROM employees e
-INNER JOIN departments d ON e.department_id = d.id;
-```
+---
 
-## 常用数据库
+## 📊 内容规模一览
 
-| 数据库 | 类型 | 特点 |
-|--------|------|------|
-| MySQL | 开源 | 最流行的开源数据库 |
-| PostgreSQL | 开源 | 功能强大，支持高级特性 |
-| SQL Server | 商业 | 微软产品，与 .NET 集成好 |
-| Oracle | 商业 | 企业级，功能最全 |
-| SQLite | 嵌入式 | 轻量级，无需服务器 |
+| 模块 | 文档数 | 核心知识点 |
+| :--- | :---: | :--- |
+| MySQL 核心教程 | 4 篇 | DDL/DML/DQL、多表查询、事务、索引、SQL 优化、视图、锁 |
+| 窗口函数专题 | 2 篇 | 排名/位移/聚合窗口、帧子句、分布函数、WINDOW 子句复用 |
+| 淘宝实战项目 | 3 篇 | 亿级导入、数据清洗、漏斗分析、RFM 分层、热门商品分析 |
 
-!!! note "开始学习"
-    点击左侧导航栏开始学习 SQL！
+---
 
-## 在线练习资源
+## 🔗 延伸资源
 
-- [SQLZoo](https://sqlzoo.net/)
-- [LeetCode Database](https://leetcode.com/problemset/database/)
-- [HackerRank SQL](https://www.hackerrank.com/domains/sql)
+<div class="grid cards" markdown>
+
+-   :material-web:{ .lg .middle } __在线练习平台__
+
+    ---
+
+    *   [SQLZoo](https://sqlzoo.net/) — 交互式 SQL 教程
+    *   [LeetCode Database](https://leetcode.com/problemset/database/) — SQL 面试题库
+    *   [HackerRank SQL](https://www.hackerrank.com/domains/sql) — 分难度刷题
+
+-   :material-book-open-variant:{ .lg .middle } __推荐学习资料__
+
+    ---
+
+    *   [MySQL 8.0 官方文档](https://dev.mysql.com/doc/refman/8.0/en/) — 权威参考
+    *   [SQL Style Guide](https://www.sqlstyle.guide/) — SQL 编码规范
+    *   [Use The Index, Luke](https://use-the-index-luke.com/) — 索引优化圣经
+
+</div>
+
+!!! note "学习建议"
+    **实践优先**：每学完一个章节，务必在本地 MySQL 环境中亲自执行 SQL。对于 `EXPLAIN` 执行计划，尝试对比加索引前后的查询行数差异，会有醍醐灌顶的体验。

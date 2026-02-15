@@ -322,3 +322,70 @@
         -   `Overview` -> `Power BI 系统指南`
 - **影响面**：全站导航菜单。
 - **验证**：`mkdocs build` 无死链，导航名称更具描述性且分类清晰。
+
+## 2026-02-16 重写 SQL 模块首页
+
+- **时间**：2026-02-16 00:00 (UTC+8)
+- **变更摘要**：重写 `docs/SQL/index.md`，使其与子模块 index 页面风格统一，内容更专业美观。
+- **问题说明**：原 SQL 首页过于模板化（通用 SQL 示例、常用数据库表格），与子页面已有的 grid cards / mermaid / admonition 风格不匹配，缺乏对实际笔记内容的准确描述。
+- **策略方向**：
+    1.  **组件对齐**：采用 Material for MkDocs 高级组件（grid cards、mermaid 知识图谱、admonition），与子模块 index 风格保持一致。
+    2.  **内容贴合**：移除通用 SQL 示例代码和数据库对比表，替换为对三大子模块（MySQL 核心教程、窗口函数专题、淘宝实战项目）的精准描述和知识点概览。
+    3.  **实用增强**：新增数据分析师学习优先级表、内容规模一览表、延伸资源卡片。
+- **具体改动**：
+    - `docs/SQL/index.md`: 完全重写。包含模块导航卡片、Mermaid 知识图谱、学习优先级建议、内容规模统计、延伸资源。
+- **影响面**：SQL 模块首页展示效果，不影响子页面和导航结构。
+- **风险与回滚**：无风险。可通过 Git 回退。
+- **验证**：`mkdocs serve` 预览确认排版、卡片、Mermaid 图谱正常渲染，链接跳转无误。
+
+## 2026-02-16 归档美赛 (MCM) 竞赛笔记
+
+- **时间**：2026-02-16 00:10 (UTC+8)
+- **变更摘要**：将 `docs/Projects/MCM` 目录移动至 `docs/archive/MCM`，并从导航栏中移除。
+- **问题说明**：进一步清理非核心内容，将竞赛性质的静态笔记移至归档区。
+- **策略方向**：物理移动文件，同步更新站点配置。
+- **具体改动**：
+    - 将目录 `docs/Projects/MCM` 及其子文件整体移动至 `docs/archive/MCM`。
+    - `mkdocs.yml`: 移除 `美赛 (MCM) 竞赛笔记` 及其子条目。
+- **影响面**：站点导航栏减少了一个条目，物理路径发生变更。
+- **风险与回滚**：无。
+- **验证**：检查 `docs/archive/MCM` 确认文件存在；查看 `mkdocs.yml` 确认条目已移除。
+
+## 2026-02-16 重命名个人工具脚本文件
+
+- **时间**：2026-02-16 00:15 (UTC+8)
+- **变更摘要**：将 `docs/Projects/myself_tools` 目录下的所有文件根据其内容重新命名为更规范的英文。
+- **具体改动**：
+    - `AI_nav_extension.md` -> `AI_Chat_Navigation_Plugin.md`
+    - `Git批量提交脚本.md` -> `Git_Interactive_Commit_Tool.md`
+    - `ppt_to_pdf.md` -> `PPT_to_PDF_Automation_Tool.md`
+    - 同步更新 `mkdocs.yml` 和 `docs/Projects/index.md` 中的链接。
+- **影响面**：文档内部链接与站点导航。
+- **验证**：检查文件物理名称，并验证导航链接是否正常跳转。
+
+## 2026-02-16 恢复并迁移样式指南页面
+
+- **时间**：2026-02-16 00:20 (UTC+8)
+- **变更摘要**：将 `docs/archive/AI_Internal/TestClaude.md` 迁移至 `docs/design/Style_Guide.md` 并重新加入导航。
+- **问题说明**：该文件包含了丰富的 MkDocs Material 组件用法示例，虽然之前被归档，但仍具有很高的参考价值，用户需要继续使用。
+- **策略方向**：将其存放在专门的 `design` 目录下，并作为“样式参考”模块展示。
+- **具体改动**：
+    - 移动文件：`docs/archive/AI_Internal/TestClaude.md` ➔ `docs/design/Style_Guide.md`。
+    - `mkdocs.yml`: 在导航栏新增 `样式参考: design/Style_Guide.md`。
+- **影响面**：新增一个全局可见的样式参考页面。
+- **验证**：检查 `docs/design/Style_Guide.md` 文件是否存在，并验证站点导航是否正常显示。
+
+## 2026-02-16 重写 Projects 模块首页
+
+- **时间**：2026-02-16 00:25 (UTC+8)
+- **变更摘要**：重写 `docs/Projects/index.md`，使其与站点其他模块 index 风格统一，内容更专业美观。
+- **问题说明**：原首页为简单列表，缺少 grid cards / mermaid 等高级组件，未展示 AI 对话导航插件，视觉上与 SQL 等模块首页风格不匹配。
+- **策略方向**：
+    1. 采用 grid cards 展示三个项目的核心亮点与技术标签。
+    2. 使用 Mermaid 图谱展示技术栈分布。
+    3. 新增项目速览表和设计理念总结。
+- **具体改动**：
+    - `docs/Projects/index.md`: 完全重写。
+- **影响面**：Projects 模块首页展示。
+- **风险与回滚**：无。可通过 Git 回退。
+- **验证**：`mkdocs serve` 预览确认卡片、Mermaid 图谱正常渲染。
