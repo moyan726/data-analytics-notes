@@ -3,10 +3,28 @@
 /* ========== 全局样式优化 ========== */
 :root {
   /* 自定义颜色变量 */
-  --md-primary-fg-color: #5c6bc0;
-  --md-primary-fg-color--light: #8e99f3;
-  --md-primary-fg-color--dark: #26418f;
-  --md-accent-fg-color: #ff4081;
+  /* 全局配色调整 - 复古纸质风格 */
+  --md-primary-fg-color: #5D4037;
+  /* 深棕色 */
+  --md-primary-fg-color--light: #8D6E63;
+  --md-primary-fg-color--dark: #3E2723;
+  --md-accent-fg-color: #D84315;
+  /* 砖红色 */
+
+  /* 背景透明度调整，透出纸纹 */
+  --md-default-bg-color: rgba(255, 255, 255, 0.65);
+  /* 卡片半透明白 */
+  --md-code-bg-color: rgba(0, 0, 0, 0.03);
+  /* 代码块微透 */
+
+  /* 文字颜色柔和化 */
+  --md-typeset-color: #3e2723;
+  /* 深褐灰色 */
+  --md-typeset-a-color: #5D4037;
+
+  /* 阴影调整 */
+  --md-shadow-z1: 0 4px 6px rgba(93, 64, 55, 0.1);
+  --md-shadow-z2: 0 4px 10px rgba(93, 64, 55, 0.15);
 }
 
 /* ========== 全局固定背景图片 ========== */
@@ -19,10 +37,10 @@ body::before {
   width: 100%;
   height: 100%;
   z-index: -2;
-  background-image: url("../assets/images/back.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url("../assets/images/paper_bg.png");
+  background-size: auto;
+  background-position: top left;
+  background-repeat: repeat;
 }
 
 /* 层2: 渐变遮罩 - 中间白色淡化，两边渐变透明 */
@@ -1093,4 +1111,315 @@ body::after {
   [data-md-color-scheme="slate"] .profile-left {
     border-bottom-color: rgba(255, 255, 255, 0.1);
   }
+}
+
+/* ========== 2026-02-15 22:30 配色优化 V2 (复古轻量化) ========== */
+
+/* 1. 顶栏 (Header) 透明化 */
+.md-header {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  /* 半透明浅色 */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(93, 64, 55, 0.1);
+  /* 极细分隔线 */
+  transition: background-color 0.3s ease;
+}
+
+/* 顶栏文字与图标颜色适配 */
+.md-header .md-header__title,
+.md-header .md-header__button,
+.md-header .md-icon,
+.md-tabs__link {
+  color: var(--md-primary-fg-color) !important;
+  /* 深棕色 */
+  text-shadow: none !important;
+}
+
+/* 搜索框适配 - 半透明复古风 */
+.md-search__input {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(93, 64, 55, 0.2);
+  color: var(--md-typeset-color) !important;
+}
+
+.md-search__input::placeholder {
+  color: rgba(62, 39, 35, 0.6);
+}
+
+/* 2. Hero 区域 (首页) 去色块 */
+.hero-section {
+  background: transparent !important;
+  /* 去除深色背景 */
+  box-shadow: none !important;
+  border: none !important;
+  padding: 4rem 1rem !important;
+  color: var(--md-typeset-color) !important;
+}
+
+.hero-section h1 {
+  color: var(--md-primary-fg-color);
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8),
+    4px 4px 0px rgba(93, 64, 55, 0.15);
+  /* 复古印章文字效果 */
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border-bottom: none !important;
+}
+
+.hero-section p {
+  color: var(--md-typeset-color);
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+/* Hero 按钮 - 线框幽灵按钮 */
+.hero-section .md-button {
+  background: transparent !important;
+  border: 2px solid var(--md-primary-fg-color) !important;
+  color: var(--md-primary-fg-color) !important;
+  box-shadow: none !important;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.hero-section .md-button:hover {
+  background: var(--md-primary-fg-color) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2) !important;
+}
+
+/* 3. 侧边栏/目录 (Sidebar & TOC) 轻量化 */
+.md-sidebar__scrollwrap,
+.md-sidebar__inner {
+  background: transparent !important;
+  /* 去除可能存在的背景色 */
+  box-shadow: none !important;
+}
+
+/* 右侧目录 (TOC) - 书签式风格 */
+.md-nav--secondary .md-nav__title {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--md-primary-fg-color) !important;
+  border-bottom: 2px solid rgba(93, 64, 55, 0.1);
+}
+
+.md-nav--secondary .md-nav__list {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.md-nav--secondary .md-nav__item {
+  border: none !important;
+}
+
+.md-nav--secondary .md-nav__link {
+  color: var(--md-typeset-color);
+  padding-left: 0.8rem;
+  border-left: 2px solid transparent;
+  /* 默认透明边框 */
+  transition: all 0.2s;
+}
+
+.md-nav--secondary .md-nav__link:hover {
+  color: var(--md-accent-fg-color);
+  border-left-color: rgba(216, 67, 21, 0.3);
+}
+
+.md-nav--secondary .md-nav__link--active {
+  color: var(--md-accent-fg-color);
+  font-weight: 700;
+  border-left-color: var(--md-accent-fg-color);
+  /* 激活时显示左边框 */
+  background: linear-gradient(to right, rgba(216, 67, 21, 0.05), transparent);
+}
+
+/* ========== 左侧导航栏 (Primary Sidebar) 深度优化 ========== */
+.md-nav--primary .md-nav__title {
+  background: transparent !important;
+  color: var(--md-primary-fg-color) !important;
+  box-shadow: none !important;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid rgba(93, 64, 55, 0.1);
+  margin-bottom: 0.5rem;
+}
+
+.md-nav--primary .md-nav__list {
+  background: transparent !important;
+}
+
+/* 一级菜单项 (Home, Python, SQL...) */
+.md-nav--primary>.md-nav__list>.md-nav__item {
+  border-bottom: 1px dashed rgba(93, 64, 55, 0.1);
+  /* 虚线分隔 */
+  margin-bottom: 0.2rem;
+}
+
+.md-nav--primary>.md-nav__list>.md-nav__item>.md-nav__link {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+  padding: 0.6rem 0.2rem;
+}
+
+/* 活跃的一级菜单 */
+.md-nav--primary>.md-nav__list>.md-nav__item--active>.md-nav__link {
+  color: var(--md-accent-fg-color);
+}
+
+/* 二级及以下菜单 - 书签风格 */
+.md-nav--primary .md-nav__item .md-nav__list {
+  margin-left: 0.5rem;
+  border-left: 2px solid rgba(93, 64, 55, 0.1);
+  /* 贯穿线 */
+}
+
+.md-nav--primary .md-nav__item .md-nav__item {
+  border: none !important;
+}
+
+.md-nav--primary .md-nav__item .md-nav__link {
+  padding-left: 0.8rem;
+  font-size: 0.95rem;
+  color: var(--md-typeset-color);
+  opacity: 0.9;
+  transition: all 0.2s;
+}
+
+.md-nav--primary .md-nav__item .md-nav__link:hover {
+  color: var(--md-accent-fg-color);
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.md-nav--primary .md-nav__item .md-nav__link--active {
+  color: var(--md-accent-fg-color);
+  font-weight: 700;
+  background: linear-gradient(to right, rgba(216, 67, 21, 0.05), transparent);
+  border-radius: 4px;
+}
+
+/* ========== 2026-02-15 23:00 视觉微调 (字体 & 底部) ========== */
+
+/* 1. 字体清晰度优化 */
+.hero-section h1 {
+  text-shadow: none !important;
+  /* 去除模糊的复古阴影 */
+  color: #3E2723 !important;
+  /* 极深棕色，确保高对比度 */
+  -webkit-font-smoothing: antialiased;
+  /* 抗锯齿 */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+.md-typeset {
+  /* 使用系统默认无衬线字体，通常在屏幕上最清晰 */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  text-shadow: none !important;
+}
+
+/* 2. 底部导航栏精简 */
+.md-footer__nav {
+  display: none !important;
+  /* 隐藏“上一页/下一页”大黑条 */
+}
+
+/* 3. 页脚版权栏美化 */
+.md-footer {
+  background: transparent !important;
+  margin-top: 4rem;
+  /* 增加底部留白 */
+}
+
+.md-footer__meta {
+  background-color: transparent !important;
+  /* 或者半透明浅色 background-color: rgba(255, 255, 255, 0.3) !important; */
+  border-top: 1px solid rgba(93, 64, 55, 0.1);
+}
+
+.md-footer__link {
+  color: var(--md-primary-fg-color) !important;
+}
+
+.md-copyright {
+  color: var(--md-typeset-color);
+  opacity: 0.7;
+  font-size: 0.85rem;
+}
+
+/* ========== 2026-02-15 23:25 细节打磨 (滚动条/链接/搜索框) ========== */
+
+/* 1. 滚动条配色修正 (深棕色) */
+::-webkit-scrollbar-thumb {
+  background: rgba(93, 64, 55, 0.3) !important;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(93, 64, 55, 0.6) !important;
+}
+
+/* 2. 链接“高光笔”特效 */
+.md-typeset a:not(.md-button):hover {
+  background: linear-gradient(to top, rgba(255, 235, 59, 0.4) 0%, rgba(255, 235, 59, 0.4) 40%, transparent 40%);
+  color: inherit !important;
+  border-bottom: none;
+  text-decoration: none;
+}
+
+/* 3. 搜索框复古化 (底部边框风格) */
+.md-search__input {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(93, 64, 55, 0.3) !important;
+  border-radius: 0 !important;
+  padding-left: 2rem !important;
+  /* 让出图标位置 */
+}
+
+
+/* ========== 2026-02-15 23:40 布局紧凑化 & 艺术字体 ========== */
+
+/* 1. 宽屏布局 (Compact Layout) */
+.md-grid {
+  max-width: 1600px !important;
+  /* 原为 1220px，增大以利用宽屏空间 */
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+/* 2. 左侧导航 (Primary Sidebar) 艺术字体 */
+.md-nav--primary {
+  /* 中文：华文行楷/楷体，英文：手写体/衬线体 */
+  /* 华文行楷 (STXingkai) 更具连笔手写感，与英文 Script 更搭 */
+  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "华文行楷", "KaiTi", "楷体", "FangSong", "仿宋", "Georgia", serif !important;
+}
+
+.md-nav--primary .md-nav__title {
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
+}
+
+.md-nav--primary>.md-nav__list>.md-nav__item>.md-nav__link {
+  font-size: 1.4rem !important;
+  /* 加大一级菜单字号，突出书写感 */
+  line-height: 1.6 !important;
+}
+
+/* 3. 顶部标题 (Header Title) 艺术化同步 */
+.md-header__title {
+  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "华文行楷", "KaiTi", "楷体", serif !important;
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  letter-spacing: 0.05em;
+}
+
+/* 右侧 TOC 也可以稍微艺术化，但保持可读性 */
+.md-nav--secondary {
+  font-family: "KaiTi", "楷体", "FangSong", "仿宋", serif !important;
 }
