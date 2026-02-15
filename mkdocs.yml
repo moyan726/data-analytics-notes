@@ -34,20 +34,9 @@ theme:
       example: octicons/beaker-16
       quote: octicons/quote-16
   palette:
-    # light mode
-    - scheme: default
-      primary: brown
-      accent: orange
-      toggle:
-        icon: material/brightness-7
-        name: 切换到深色模式
-    # dark mode
-    - scheme: slate
-      primary: brown
-      accent: orange
-      toggle:
-        icon: material/brightness-4
-        name: 切换到浅色模式
+    scheme: default
+    primary: brown
+    accent: orange
   features:
     # 导航功能
     # - navigation.tabs
