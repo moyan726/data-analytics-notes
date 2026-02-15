@@ -9,11 +9,11 @@ SQL (Structured Query Language) 是用于管理和查询关系型数据库的标
 - **易于学习**：语法接近自然语言
 - **功能强大**：可以处理复杂的数据查询和分析
 
-## 学习路径
+## 实战内容
 
-1. **[SQL 基础](AI_infrastructure/basic.md)** - 学习基本的 SQL 语法和查询
-2. **[SQL 高级](AI_infrastructure/advanced.md)** - 掌握高级查询技巧和优化
-3. **[最佳实践](AI_infrastructure/best-practices.md)** - 了解 SQL 编写的最佳实践
+- **[MySQL 核心教程](MySQL_Base_ITcase/index.md)** - 涵盖基础、进阶及实战案例
+- **[SQL 进阶：窗口函数](windows_function/index.md)** - 专项攻克窗口函数难点
+- **[项目：淘宝用户分析](TaoBao_project/index.md)** - 完整的数据清洗与分析实战项目
 
 ## 快速示例
 

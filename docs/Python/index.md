@@ -9,11 +9,11 @@ Python 是数据分析领域最流行的编程语言之一，拥有丰富的库�
 - **活跃的社区**：大量学习资源和开源项目
 - **跨平台支持**：Windows、macOS、Linux 均可运行
 
-## 学习路径
+## 实战内容
 
-1. **[Python 基础](infrastructure_by_AI/basic.md)** - 学习 Python 语法和基本概念
-2. **[数据分析](infrastructure_by_AI/data-analysis.md)** - 掌握数据处理和分析技巧
-3. **[常用库](infrastructure_by_AI/libraries.md)** - 深入了解数据分析相关的库
+- **[动手学数据分析](hands-on-data-analysis/index.md)** - 基于实战的数据分析学习路径
+- **[数据可视化基础](Data_Visualization/index.md)** - 掌握 Matplotlib、Seaborn 等绘图工具
+- **[机器学习](Machine-Learning/index.md)** - Python 机器学习实战笔记
 
 ## 核心库介绍
 
