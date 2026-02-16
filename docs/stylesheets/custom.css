@@ -223,89 +223,182 @@ body::after {
   }
 }
 
-/* ========== Hero 鍖哄煙鏍峰紡 ========== */
-.hero-section {
-  background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-primary-fg-color--dark) 100%);
-  color: white;
-  padding: 3rem 2rem;
+/* ========== 首屏紧凑 Hero (个人简介) ========== */
+.hero-compact {
+  margin: 1rem 0 2rem 0;
+}
+
+.hero-profile {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  background: var(--md-default-bg-color);
   border-radius: 16px;
-  margin-bottom: 2rem;
-  text-align: center;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
 }
 
-.hero-section::before {
+.hero-profile::before {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-  animation: heroGlow 15s ease-in-out infinite;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
 }
 
-@keyframes heroGlow {
-
-  0%,
-  100% {
-  }
-
-  50% {
-  }
+.hero-avatar {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--md-primary-fg-color);
+  padding: 3px;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.hero-section h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  position: relative;
+.hero-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.hero-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-info h1 {
+  font-size: 1.8rem;
+  margin: 0 0 0.3rem 0;
+  color: var(--md-typeset-color);
   border-bottom: none !important;
+}
+
+.hero-info .profile-role {
+  font-size: 0.9rem;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  background: rgba(93, 64, 55, 0.08);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.hero-info p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--md-typeset-color);
+  opacity: 0.85;
+  margin: 0.3rem 0 0.8rem 0;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.hero-badges img {
+  box-shadow: none !important;
+  border-radius: 3px !important;
+  transition: none !important;
+}
+
+.hero-badges img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.hero-links .md-button {
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: none;
+  transition: all 0.2s ease;
+  border: 2px solid var(--md-primary-fg-color) !important;
+  color: var(--md-primary-fg-color) !important;
+  background: transparent !important;
+  text-decoration: none !important;
+}
+
+.hero-links .md-button--primary {
+  background: var(--md-primary-fg-color) !important;
   color: white !important;
 }
 
-.hero-section .hero-subtitle {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  margin-bottom: 1.5rem;
-  position: relative;
+.hero-links .md-button:hover {
+  background: var(--md-primary-fg-color) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2);
 }
 
-.hero-section .hero-buttons {
+/* 首屏响应式 */
+@media screen and (max-width: 600px) {
+  .hero-profile {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .hero-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-badges {
+    justify-content: center;
+  }
+
+  .hero-links {
+    justify-content: center;
+  }
+}
+
+/* 项目卡片标签 */
+.card-tags {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
   flex-wrap: wrap;
-  position: relative;
+  gap: 0.3rem;
+  margin-bottom: 0.8rem;
 }
 
-.hero-section .md-button {
-  border-radius: 25px;
-  padding: 0.8rem 2rem;
-  font-weight: 600;
-  text-transform: none;
-  transition: all 0.3s ease;
+.card-tags img {
+  box-shadow: none !important;
+  border-radius: 3px !important;
+  transition: none !important;
 }
 
-.hero-section .md-button--primary {
-  background: white;
-  color: var(--md-primary-fg-color);
-  border: none;
+.card-tags img:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }
 
-.hero-section .md-button--primary:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+/* 重点项目卡片 */
+.card--featured {
+  border: 2px solid var(--md-primary-fg-color);
+  background: linear-gradient(135deg, rgba(93, 64, 55, 0.03) 0%, rgba(216, 67, 21, 0.03) 100%);
 }
 
-.hero-section .md-button--secondary {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
+.card--featured::before {
+  height: 6px;
 }
 
-.hero-section .md-button--secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
 
 /* ========== 鍗＄墖缃戞牸甯冨眬 ========== */
 .card-grid {
@@ -376,8 +469,7 @@ body::after {
   transition: transform 0.2s ease;
 }
 
-.card a:hover::after {
-}
+.card a:hover::after {}
 
 /* ========== 鏃堕棿绾挎牱寮?========== */
 .timeline {
@@ -475,40 +567,6 @@ body::after {
   fill: currentColor;
 }
 
-/* ========== 缁熻鍗＄墖 ========== */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.stat-card {
-  background: var(--md-default-bg-color);
-  padding: 1.5rem;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease;
-}
-
-.stat-card:hover {
-  transform: scale(1.05);
-}
-
-.stat-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--md-primary-fg-color);
-  display: block;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  opacity: 0.7;
-  margin-top: 0.3rem;
-}
-
 
 /* ========== Collapsible TOC Styles ========== */
 /* Hide all sub-level TOC lists by default */
@@ -547,77 +605,154 @@ body::after {
   align-items: center;
 }
 
-/* ========== 鍏充簬鎴?(Profile) 鍖哄煙浼樺寲 ========== */
-.profile-container {
-  background: var(--md-default-bg-color);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  margin: 2rem 0;
+/* ========== 紧凑型 Hero 布局 (首页顶部) ========== */
+.hero-compact {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  /* 纸质风格统一 */
+  background: #fdfbf7;
+  border-radius: 6px;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    inset 0 0 60px rgba(93, 64, 55, 0.05);
+  border: 1px solid rgba(93, 64, 55, 0.15);
   position: relative;
   overflow: hidden;
 }
 
-/* 椤堕儴瑁呴グ鏉?*/
-.profile-container::before {
+/* 顶部装饰线 */
+.hero-compact::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 2px dashed rgba(93, 64, 55, 0.1);
+  border-radius: 4px;
+  pointer-events: none;
 }
 
-.profile-avatar {
-  flex-shrink: 0;
-  width: 250px;
-  height: 300px;
-  border-radius: 50%;
-  border: 3px solid var(--md-primary-fg-color);
-  padding: 3px;
-  background: var(--md-default-bg-color);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+.hero-profile {
   display: flex;
+  gap: 3rem;
   align-items: center;
-  justify-content: center;
+  /* 移除内部背景，直接使用外层 */
+  background: transparent;
+  padding: 1rem 2rem;
+  position: relative;
+  z-index: 1;
 }
 
-.profile-avatar img {
+.hero-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.hero-avatar:hover {
+  transform: scale(1.05);
+  z-index: 2;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hero-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.profile-role {
-  font-size: 0.95rem;
+.hero-info {
+  text-align: left;
+  flex: 1;
+}
+
+.hero-info h1 {
+  margin: 0;
+  border-bottom: none;
+  /* 复古手写标题 */
+  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "华文行楷", serif;
+  font-size: 2.8rem;
+  color: var(--md-primary-fg-color);
+  text-shadow: 2px 2px 0px rgba(93, 64, 55, 0.1);
+  line-height: 1.2;
+}
+
+.hero-role {
+  font-size: 1rem;
   color: var(--md-primary-fg-color);
   font-weight: 600;
   background: rgba(92, 107, 192, 0.1);
-  padding: 0.2rem 0.8rem;
+  padding: 0.3rem 1rem;
   border-radius: 20px;
   display: inline-block;
+  margin-bottom: 1rem;
 }
 
-.profile-bio {
-  font-size: 1rem;
+.hero-bio {
+  font-size: 1.05rem;
   line-height: 1.6;
   color: var(--md-typeset-color);
   opacity: 0.9;
+  max-width: 700px;
+  margin-bottom: 1.5rem;
 }
 
-/* 鎶€鑳藉彲瑙嗗寲 (Skill Badges) */
-.skills-section {
-  margin-top: 1rem;
+.hero-bio p {
+  margin: 0 0 0.5rem 0;
 }
 
-.skills-title {
+.hero-bio p:last-child {
+  margin-bottom: 0;
+}
+
+.hero-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: var(--md-primary-fg-color);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-contact-btn:hover {
+  background: var(--md-accent-fg-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.hero-contact-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* 技能徽章 */
+.hero-skills-section {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.hero-skills-title {
   font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -628,13 +763,14 @@ body::after {
   display: block;
 }
 
-.skills-container {
+.hero-skills-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+  justify-content: center;
 }
 
-.skill-badge {
+.hero-skill-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -648,221 +784,41 @@ body::after {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
-.skill-badge:hover {
+.hero-skill-badge:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-color: var(--md-primary-fg-color);
   color: var(--md-primary-fg-color);
 }
 
-.skill-badge i {
+.hero-skill-badge i {
   font-size: 1.1em;
 }
 
+/* ========== 2026-02-15 22:30 配色优化 V2 (复古轻量化) ========== */
 
-/* ========== 缈昏浆鍗＄墖鏁堟灉 (Flip Card) ========== */
-.profile-flip-scene {
-  perspective: 1000px;
-  margin: 2rem 0;
-}
-
-.profile-inner {
-  position: relative;
-  width: 100%;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-style: preserve-3d;
-}
-
-.profile-inner.flipped {
-  transform: rotateY(180deg);
-}
-
-/* 璋冩暣 profile-container 鍦ㄧ炕杞満鏅笅鐨勮〃鐜?*/
-.profile-flip-scene .profile-container {
-  margin: 0;
-  /* 鐢?scene 鎺у埗 margin */
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.profile-front {
-  /* 榛樿姝ｉ潰 */
-  z-index: 2;
-}
-
-.profile-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-/* 鑳岄潰鍐呭鏍峰紡 */
-.contact-card-content {
-  text-align: center;
-  width: 100%;
-  padding: 1rem;
-}
-
-.contact-card-content h3 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  color: var(--md-primary-fg-color);
-}
-
-.contact-card-content p {
-  opacity: 0.8;
-  margin-bottom: 1.5rem;
-}
-
-.email-box {
-  background: rgba(92, 107, 192, 0.1);
-  padding: 0.8rem 1.2rem;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border: 1px dashed var(--md-primary-fg-color);
-  max-width: 100%;
-}
-
-.email-box span {
-  font-family: var(--md-code-font-family);
-  font-weight: 600;
-  color: var(--md-typeset-color);
-  word-break: break-all;
-}
-
-.copy-btn {
-  background: var(--md-default-bg-color);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: var(--md-typeset-color);
-}
-
-.copy-btn:hover {
-  background: var(--md-primary-fg-color);
-  color: white;
-  border-color: transparent;
-  transform: scale(1.1);
-}
-
-.copy-btn:active {
-  transform: scale(0.95);
-}
-
-
-/* ========== 宸﹀彸鍒嗗尯甯冨眬 ========== */
-.profile-main-row {
-  display: flex;
-  gap: 2.5rem;
-  align-items: stretch;
-}
-
-/* 宸︿晶锛欼P 褰㈣薄鍖?*/
-.profile-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  min-width: 160px;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.profile-identity {
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.profile-name {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--md-typeset-color);
-  white-space: nowrap;
-}
-
-/* 鍙充晶锛欱io 鍐呭鍖?*/
-.profile-right {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 1rem 0;
-}
-
-.profile-right .profile-bio {
-  font-size: 1.05rem;
-  line-height: 1.8;
-}
-
-.profile-bio p {
-  margin: 0 0 0.5rem 0;
-}
-
-.profile-bio p:last-child {
-  margin-bottom: 0;
-}
-
-/* 鍝嶅簲寮忥細绉诲姩绔爢鍙犲竷灞€ */
-@media screen and (max-width: 600px) {
-  .profile-main-row {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .profile-left {
-    border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    padding-bottom: 1.5rem;
-  }
-
-  .profile-right {
-    padding: 0;
-  }
-}
-
-
-@media screen and (max-width: 600px) {
-}
-
-/* ========== 2026-02-15 22:30 閰嶈壊浼樺寲 V2 (澶嶅彜杞婚噺鍖? ========== */
-
-/* 1. 椤舵爮 (Header) 閫忔槑鍖?*/
+/* 1. 顶栏 (Header) 透明化 */
 .md-header {
   background-color: rgba(255, 255, 255, 0.4) !important;
-  /* 鍗婇€忔槑娴呰壊 */
+  /* 半透明浅色 */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: none !important;
   border-bottom: 1px solid rgba(93, 64, 55, 0.1);
-  /* 鏋佺粏鍒嗛殧绾?*/
+  /* 极细分隔线 */
   transition: background-color 0.3s ease;
 }
 
-/* 椤舵爮鏂囧瓧涓庡浘鏍囬鑹查€傞厤 */
+/* 顶栏文字与图标颜色适配 */
 .md-header .md-header__title,
 .md-header .md-header__button,
 .md-header .md-icon,
 .md-tabs__link {
   color: var(--md-primary-fg-color) !important;
-  /* 娣辨鑹?*/
+  /* 深棕色 */
   text-shadow: none !important;
 }
 
-/* 鎼滅储妗嗛€傞厤 - 鍗婇€忔槑澶嶅彜椋?*/
+/* 搜索框适配 - 半透明复古风 */
 .md-search__input {
   background-color: rgba(255, 255, 255, 0.6) !important;
   border: 1px solid rgba(93, 64, 55, 0.2);
@@ -873,57 +829,17 @@ body::after {
   color: rgba(62, 39, 35, 0.6);
 }
 
-/* 2. Hero 鍖哄煙 (棣栭〉) 鍘昏壊鍧?*/
-.hero-section {
-  background: transparent !important;
-  /* 鍘婚櫎娣辫壊鑳屾櫙 */
-  box-shadow: none !important;
-  border: none !important;
-  padding: 4rem 1rem !important;
-  color: var(--md-typeset-color) !important;
-}
 
-.hero-section h1 {
-  color: var(--md-primary-fg-color);
-  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8),
-    4px 4px 0px rgba(93, 64, 55, 0.15);
-  /* 澶嶅彜鍗扮珷鏂囧瓧鏁堟灉 */
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  border-bottom: none !important;
-}
 
-.hero-section p {
-  color: var(--md-typeset-color);
-  opacity: 0.85;
-  font-weight: 500;
-}
-
-/* Hero 鎸夐挳 - 绾挎骞界伒鎸夐挳 */
-.hero-section .md-button {
-  background: transparent !important;
-  border: 2px solid var(--md-primary-fg-color) !important;
-  color: var(--md-primary-fg-color) !important;
-  box-shadow: none !important;
-  font-weight: 700;
-  transition: all 0.2s ease;
-}
-
-.hero-section .md-button:hover {
-  background: var(--md-primary-fg-color) !important;
-  color: #fff !important;
-  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2) !important;
-}
-
-/* 3. 渚ц竟鏍?鐩綍 (Sidebar & TOC) 杞婚噺鍖?*/
+/* 3. 侧边栏/目录 (Sidebar & TOC) 轻量化 */
 .md-sidebar__scrollwrap,
 .md-sidebar__inner {
   background: transparent !important;
-  /* 鍘婚櫎鍙兘瀛樺湪鐨勮儗鏅壊 */
+  /* 移除可能存在的背景色 */
   box-shadow: none !important;
 }
 
-/* 鍙充晶鐩綍 (TOC) - 涔︾寮忛鏍?*/
+/* 右侧目录 (TOC) - 书签式风格 */
 .md-nav--secondary .md-nav__title {
   background: transparent !important;
   box-shadow: none !important;
@@ -944,7 +860,7 @@ body::after {
   color: var(--md-typeset-color);
   padding-left: 0.8rem;
   border-left: 2px solid transparent;
-  /* 榛樿閫忔槑杈规 */
+  /* 默认透明边框 */
   transition: all 0.2s;
 }
 
@@ -957,11 +873,11 @@ body::after {
   color: var(--md-accent-fg-color);
   font-weight: 700;
   border-left-color: var(--md-accent-fg-color);
-  /* 婵€娲绘椂鏄剧ず宸﹁竟妗?*/
+  /* 激活时显示左边框 */
   background: linear-gradient(to right, rgba(216, 67, 21, 0.05), transparent);
 }
 
-/* ========== 宸︿晶瀵艰埅鏍?(Primary Sidebar) 娣卞害浼樺寲 ========== */
+/* ========== 左侧导航栏(Primary Sidebar) 深度优化 ========== */
 .md-nav--primary .md-nav__title {
   background: transparent !important;
   color: var(--md-primary-fg-color) !important;
@@ -976,10 +892,10 @@ body::after {
   background: transparent !important;
 }
 
-/* 涓€绾ц彍鍗曢」 (Home, Python, SQL...) */
+/* 一级菜单项 (Home, Python, SQL...) */
 .md-nav--primary>.md-nav__list>.md-nav__item {
   border-bottom: 1px dashed rgba(93, 64, 55, 0.1);
-  /* 铏氱嚎鍒嗛殧 */
+  /* 虚线分隔 */
   margin-bottom: 0.2rem;
 }
 
@@ -990,16 +906,16 @@ body::after {
   padding: 0.6rem 0.2rem;
 }
 
-/* 娲昏穬鐨勪竴绾ц彍鍗?*/
+/* 活跃的一级菜单 */
 .md-nav--primary>.md-nav__list>.md-nav__item--active>.md-nav__link {
   color: var(--md-accent-fg-color);
 }
 
-/* 浜岀骇鍙婁互涓嬭彍鍗?- 涔︾椋庢牸 */
+/* 二级及以下菜单 - 书签风格 */
 .md-nav--primary .md-nav__item .md-nav__list {
   margin-left: 0.5rem;
   border-left: 2px solid rgba(93, 64, 55, 0.1);
-  /* 璐┛绾?*/
+  /* 贯穿线 */
 }
 
 .md-nav--primary .md-nav__item .md-nav__item {
@@ -1026,42 +942,32 @@ body::after {
   border-radius: 4px;
 }
 
-/* ========== 2026-02-15 23:00 瑙嗚寰皟 (瀛椾綋 & 搴曢儴) ========== */
+/* ========== 2026-02-15 23:00 视觉微调 (字体 & 底部) ========== */
 
-/* 1. 瀛椾綋娓呮櫚搴︿紭鍖?*/
-.hero-section h1 {
-  text-shadow: none !important;
-  /* 鍘婚櫎妯＄硦鐨勫鍙ら槾褰?*/
-  color: #3E2723 !important;
-  /* 鏋佹繁妫曡壊锛岀‘淇濋珮瀵规瘮搴?*/
-  -webkit-font-smoothing: antialiased;
-  /* 鎶楅敮榻?*/
-  -moz-osx-font-smoothing: grayscale;
-}
 
 body,
 .md-typeset {
-  /* 浣跨敤绯荤粺榛樿鏃犺‖绾垮瓧浣擄紝閫氬父鍦ㄥ睆骞曚笂鏈€娓呮櫚 */
+  /* 使用系统默认无衬线字体，通常在屏幕上最清晰 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   text-shadow: none !important;
 }
 
-/* 2. 搴曢儴瀵艰埅鏍忕簿绠€ */
+/* 2. 底部导航栏精简 */
 .md-footer__nav {
   display: none !important;
-  /* 闅愯棌鈥滀笂涓€椤?涓嬩竴椤碘€濆ぇ榛戞潯 */
+  /* 隐藏“上一页 下一页”大黑条 */
 }
 
-/* 3. 椤佃剼鐗堟潈鏍忕編鍖?*/
+/* 3. 页脚版权栏美化 */
 .md-footer {
   background: transparent !important;
   margin-top: 4rem;
-  /* 澧炲姞搴曢儴鐣欑櫧 */
+  /* 增加底部留白 */
 }
 
 .md-footer__meta {
   background-color: transparent !important;
-  /* 鎴栬€呭崐閫忔槑娴呰壊 background-color: rgba(255, 255, 255, 0.3) !important; */
+  /* 或者半透明浅色 background-color: rgba(255, 255, 255, 0.3) !important; */
   border-top: 1px solid rgba(93, 64, 55, 0.1);
 }
 
@@ -1075,9 +981,9 @@ body,
   font-size: 0.85rem;
 }
 
-/* ========== 2026-02-15 23:25 缁嗚妭鎵撶（ (婊氬姩鏉?閾炬帴/鎼滅储妗? ========== */
+/* ========== 2026-02-15 23:25 细节打磨 (滚动条/链接/搜索框) ========== */
 
-/* 1. 婊氬姩鏉￠厤鑹蹭慨姝?(娣辨鑹? */
+/* 1. 滚动条配色修正(深棕色) */
 ::-webkit-scrollbar-thumb {
   background: rgba(93, 64, 55, 0.3) !important;
   border-radius: 4px;
@@ -1087,7 +993,7 @@ body,
   background: rgba(93, 64, 55, 0.6) !important;
 }
 
-/* 2. 閾炬帴鈥滈珮鍏夌瑪鈥濈壒鏁?*/
+/* 2. 链接“高亮笔”特效 */
 .md-typeset a:not(.md-button):hover {
   background: linear-gradient(to top, rgba(255, 235, 59, 0.4) 0%, rgba(255, 235, 59, 0.4) 40%, transparent 40%);
   color: inherit !important;
@@ -1095,32 +1001,32 @@ body,
   text-decoration: none;
 }
 
-/* 3. 鎼滅储妗嗗鍙ゅ寲 (搴曢儴杈规椋庢牸) */
+/* 3. 搜索框复古化 (底部边框风格) */
 .md-search__input {
   background-color: transparent !important;
   border: none !important;
   border-bottom: 2px solid rgba(93, 64, 55, 0.3) !important;
   border-radius: 0 !important;
   padding-left: 2rem !important;
-  /* 璁╁嚭鍥炬爣浣嶇疆 */
+  /* 留出图标位置 */
 }
 
 
-/* ========== 2026-02-15 23:40 甯冨眬绱у噾鍖?& 鑹烘湳瀛椾綋 ========== */
+/* ========== 2026-02-15 23:40 布局紧凑化 & 艺术字体 ========== */
 
-/* 1. 瀹藉睆甯冨眬 (Compact Layout) */
+/* 1. 宽屏布局 (Compact Layout) */
 .md-grid {
   max-width: 1600px !important;
-  /* 鍘熶负 1220px锛屽澶т互鍒╃敤瀹藉睆绌洪棿 */
+  /* 原为 1220px，增大以利用宽屏空间 */
   padding-left: 1rem !important;
   padding-right: 1rem !important;
 }
 
-/* 2. 宸︿晶瀵艰埅 (Primary Sidebar) 鑹烘湳瀛椾綋 */
+/* 2. 左侧导航 (Primary Sidebar) 艺术字体 */
 .md-nav--primary {
-  /* 涓枃锛氬崕鏂囪妤?妤蜂綋锛岃嫳鏂囷細鎵嬪啓浣?琛嚎浣?*/
-  /* 鍗庢枃琛屾シ (STXingkai) 鏇村叿杩炵瑪鎵嬪啓鎰燂紝涓庤嫳鏂?Script 鏇存惌 */
-  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "鍗庢枃琛屾シ", "KaiTi", "妤蜂綋", "FangSong", "浠垮畫", "Georgia", serif !important;
+  /* 中文：华文行楷，楷体；英文：手写体/衬线体 */
+  /* 华文行楷 (STXingkai) 更具连笔手写感，与英文 Script 更搭 */
+  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "华文行楷", "KaiTi", "楷体", "FangSong", "仿宋", "Georgia", serif !important;
 }
 
 .md-nav--primary .md-nav__title {
@@ -1130,47 +1036,406 @@ body,
 
 .md-nav--primary>.md-nav__list>.md-nav__item>.md-nav__link {
   font-size: 1.25rem !important;
-  /* 鍥炶皟鑷?1.25rem锛屾秷闄ゅ枾瀹惧ず涓绘劅 */
+  /* 回调至 1.25rem，消除喧宾夺主感 */
   line-height: 1.5 !important;
   font-weight: 600 !important;
-  /* 淇濇寔瀛楅噸 */
+  /* 保持字重 */
   text-shadow: 1px 1px 2px rgba(93, 64, 55, 0.1);
-  /* 淇濇寔寰槾褰?*/
+  /* 保持微阴影 */
 }
 
-/* 3. 椤堕儴鏍囬 (Header Title) 鑹烘湳鍖栧悓姝?*/
+/* 3. 顶部标题 (Header Title) 艺术化同步 */
 .md-header__title {
-  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "鍗庢枃琛屾シ", "KaiTi", "妤蜂綋", serif !important;
+  font-family: "Segoe Script", "Brush Script MT", "STXingkai", "华文行楷", "KaiTi", "楷体", serif !important;
   font-size: 1.5rem !important;
   font-weight: bold !important;
   letter-spacing: 0.05em;
 }
 
-/* ========== 2026-02-16 00:00 瑙嗚寰皟 (鍘婚噸 & 闅朵功) ========== */
+/* ========== 导航与字体微调 ========== */
 
-/* 1. 闅愯棌宸︿晶瀵艰埅鏍忛《閮ㄧ殑 Site Name (闃叉涓?Top Header 閲嶅) */
+/* 隐藏左侧导航栏顶部的 Site Name (防止与 Top Header 重复) */
 .md-nav--primary .md-nav__title {
   display: none !important;
 }
 
-/* 2. Hero 鏍囬 (棣栭〉澶у瓧) 鏀逛负闅朵功 */
-.hero-section h1 {
-  font-family: "LiSu", "闅朵功", "KaiTi", "妤蜂綋", serif !important;
-  font-weight: normal !important;
-  /* 闅朵功鑷甫鍘氬害锛屾棤闇€鍔犵矖 */
-  font-size: 3rem !important;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-}
-
-/* 3. 鎭㈠鍙充晶 TOC 鐩綍瀛椾綋 (妤蜂綋) */
+/* 右侧 TOC 目录字体 (楷体) */
 .md-nav--secondary {
-  font-family: "KaiTi", "妤蜂綋", "FangSong", "浠垮畫", serif !important;
+  font-family: "KaiTi", "楷体", "FangSong", "仿宋", serif !important;
   font-size: 0.95rem !important;
-  /* 淇濇寔閫備腑澶у皬 */
 }
 
-   2026-02-16  系统性覆盖浅色模式的 !important 样式
-   ========================================================================== */
+/* ========== 2026-02-16 系统性覆盖浅色模式的 !important 样式 ==========================================================================*/
 
 
+/* ========== 教育背景 (Education Book Style) 2026-02-16 ========== */
+
+.edu-book-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  perspective: 1500px;
+}
+
+.edu-book-cover {
+  display: flex;
+  background: #fdfbf7;
+  /* 米色纸张 */
+  border-radius: 6px;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    inset 0 0 40px rgba(93, 64, 55, 0.05);
+  /* 纸张陈旧感 */
+  border: 1px solid rgba(93, 64, 55, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* 中央折痕/装订线 */
+.edu-book-cover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.edu-page-left,
+.edu-page-right {
+  flex: 1;
+  padding: 3rem;
+  position: relative;
+}
+
+.edu-page-left {
+  border-right: 1px solid rgba(0, 0, 0, 0.03);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 左页内容 */
+.edu-school-logo {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.edu-page-left h3 {
+  font-family: "LiSu", "隶书", "KaiTi", "楷体", serif;
+  font-size: 2.2rem;
+  color: var(--md-primary-fg-color);
+  margin: 0.5rem 0;
+  border-bottom: none;
+}
+
+.edu-school-en {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 0.9rem;
+  color: var(--md-typeset-color);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+.edu-major-info {
+  background: rgba(93, 64, 55, 0.05);
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  border: 1px dashed rgba(93, 64, 55, 0.2);
+}
+
+.edu-major-info p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.edu-awards p {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+  color: var(--md-typeset-color);
+}
+
+/* 右页内容 */
+.edu-page-right h4 {
+  font-family: "KaiTi", "楷体", serif;
+  font-size: 1.4rem;
+  color: var(--md-primary-fg-color);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(93, 64, 55, 0.1);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.edu-courses-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* 课程胶囊样式优化 */
+.edu-course-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  background: rgba(93, 64, 55, 0.05);
+  /* 浅褐色背景 */
+  border: 1px solid rgba(93, 64, 55, 0.1);
+  border-radius: 4px;
+  /* 稍微方一点，像标签 */
+  font-size: 0.95rem;
+  color: var(--md-primary-fg-color);
+  font-family: "KaiTi", "楷体", serif;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  letter-spacing: 0.05em;
+}
+
+.edu-course-badge:hover {
+  background: var(--md-primary-fg-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
+  border-color: var(--md-primary-fg-color);
+}
+
+
+.edu-footer-note {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  color: var(--md-typeset-color);
+  opacity: 0.5;
+  font-style: italic;
+  text-align: right;
+}
+
+/* 响应式适配 */
+@media screen and (max-width: 768px) {
+  .edu-book-cover {
+    flex-direction: column;
+  }
+
+  .edu-book-cover::after {
+    display: none;
+  }
+
+  .edu-page-left {
+    border-right: none;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    padding: 2rem 1.5rem;
+  }
+
+  .edu-page-right {
+    padding: 2rem 1.5rem;
+  }
+
+  .edu-school-logo {
+    font-size: 3rem;
+  }
+
+  .edu-page-left h3 {
+    font-size: 1.8rem;
+  }
+}
+
+/* ========== Toast Notification ========== */
+
+/* ========== 竞赛与荣誉板块 ========== */
+.achievements-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.achievement-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: #fdfbf7;
+  border-radius: 12px;
+  padding: 1.8rem 2rem;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 0 40px rgba(93, 64, 55, 0.03);
+  border: 1px solid rgba(93, 64, 55, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.achievement-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* 左侧彩色装饰条 */
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  border-radius: 12px 0 0 12px;
+}
+
+.achievement--gold::before {
+  background: linear-gradient(180deg, #FFD700, #FFA000);
+}
+
+.achievement--purple::before {
+  background: linear-gradient(180deg, #7B1FA2, #CE93D8);
+}
+
+.achievement--blue::before {
+  background: linear-gradient(180deg, #1565C0, #64B5F6);
+}
+
+.achievement-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(93, 64, 55, 0.04);
+}
+
+.achievement--gold .achievement-icon {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.achievement--purple .achievement-icon {
+  background: rgba(123, 31, 162, 0.08);
+}
+
+.achievement--blue .achievement-icon {
+  background: rgba(21, 101, 192, 0.08);
+}
+
+.achievement-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-body h4 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--md-typeset-color);
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.achievement-level {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.achievement--gold .achievement-level {
+  background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+  color: #E65100;
+  border: 1px solid rgba(255, 160, 0, 0.3);
+}
+
+.achievement--purple .achievement-level {
+  background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+  color: #6A1B9A;
+  border: 1px solid rgba(123, 31, 162, 0.2);
+}
+
+.achievement--blue .achievement-level {
+  background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+  color: #0D47A1;
+  border: 1px solid rgba(21, 101, 192, 0.2);
+}
+
+.achievement-body p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--md-typeset-color);
+  opacity: 0.85;
+  margin: 0.5rem 0 0.8rem 0;
+}
+
+.achievement-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.achievement-tags span {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 0.15rem 0.6rem;
+  background: rgba(93, 64, 55, 0.06);
+  color: var(--md-primary-fg-color);
+  border-radius: 4px;
+  border: 1px solid rgba(93, 64, 55, 0.1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* 荣誉板块响应式 */
+@media screen and (max-width: 600px) {
+  .achievement-card {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .achievement-icon {
+    margin: 0 auto;
+  }
+
+  .achievement-body {
+    text-align: center;
+  }
+
+  .achievement-tags {
+    justify-content: center;
+  }
+}
+
+/* ========== Toast Notification (Original) ========== */
+.custom-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  z-index: 10000;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

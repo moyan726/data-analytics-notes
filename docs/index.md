@@ -1,79 +1,31 @@
-
-<div class="hero-section">
-<h1>数据分析知识库</h1>
-<p class="hero-subtitle">Python / SQL / Power BI 学习笔记与项目实战</p>
-<div class="hero-buttons">
-<a href="./Python/" class="md-button md-button--primary">开始学习 →</a>
-<a href="./Projects/" class="md-button md-button--secondary">查看项目</a>
-</div>
-
-</div>
-
----
-
-## 👋 关于我
-
-<div class="profile-flip-scene">
-  <div class="profile-inner">
-    <!-- 正面：个人简介 -->
-    <div class="profile-front profile-container">
-      <div class="profile-main-row">
-        <!-- 左侧：IP 形象区 -->
-        <div class="profile-left">
-          <div class="profile-avatar">
-            <img src="assets/images/touxiang.png" alt="jiaXing Yan">
-          </div>
-          <div class="profile-identity">
-            <h3 class="profile-name">JiaXing Yan</h3>
-           
-          </div>
-        </div>
-        <!-- 右侧：Bio 内容区 -->
-        <div class="profile-right">
-          <div class="profile-bio">
-           <span class="profile-role">Data Analyst</span>
-            <p>数据科学与大数据技术本科在读 (2023-2027)。</p>
-            <p>专注 <strong>数据分析 / 商业分析 / BI</strong>，致力于将复杂业务问题转化为清晰的洞察。</p>
-          </div>
-        </div>
+<div class="hero-compact">
+  <div class="hero-profile">
+    <div class="hero-avatar">
+      <img src="assets/images/touxiang.png" alt="JiaXing Yan">
+    </div>
+    <div class="hero-info">
+      <h1>JiaXing Yan</h1>
+      <span class="profile-role">Data Analyst</span>
+      <p>数据科学与大数据技术 · 本科在读 (2023-2027)<br>
+      专注 <strong>数据分析 / 商业分析 / BI</strong>，将复杂业务问题转化为清晰的数据洞察。</p>
+      <div class="hero-badges">
+        <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
+        <img src="https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white" alt="Pandas">
+        <img src="https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white" alt="NumPy">
+        <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" alt="MySQL">
+        <img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat&logo=powerbi&logoColor=black" alt="Power BI">
+        <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat&logo=plotly&logoColor=white" alt="Matplotlib">
       </div>
-      
-      <div class="skills-section">
-        <span class="skills-title">技术栈 Tech Stack</span>
-        <div class="skills-container">
-          <span class="skill-badge">🐍 Python (Pandas/NumPy)</span>
-          <span class="skill-badge">💾 SQL (MySQL)</span>
-          <span class="skill-badge">📊 Power BI (DAX)</span>
-          <span class="skill-badge">🤖 Machine Learning</span>
-          <span class="skill-badge">🕸️ MkDocs</span>
-          <span class="skill-badge">🐙 Git</span>
-        </div>
-      </div>
-
-      <div class="profile-links" style="margin-top: 1rem; display: flex; gap: 1rem;">
-        <a href="https://blog.csdn.net/2401_85669197" class="md-button md-button--primary" style="border-radius: 20px; font-size: 0.85rem;">
+      <div class="hero-links">
+        <a href="https://github.com/moyan726" class="md-button md-button--primary" title="GitHub">
+          GitHub
+        </a>
+        <a href="https://blog.csdn.net/2401_85669197" class="md-button" title="CSDN Blog">
           CSDN 博客
         </a>
-        <button onclick="toggleProfileFlip()" class="md-button" style="border-radius: 20px; font-size: 0.85rem; background: rgba(0,0,0,0.05); border: none; cursor: pointer;">
+        <a href="javascript:void(0)" class="md-button email-copy-btn" data-email="jiaxingyan05@163.com" title="jiaxingyan05@163.com">
           📧 联系我
-        </button>
-      </div>
-    </div>
-
-    <!-- 背面：联系方式 -->
-    <div class="profile-back profile-container">
-      <div class="contact-card-content">
-        <h3>📧 联系我</h3>
-        <p>欢迎交流技术与合作机会</p>
-        <div class="email-box">
-          <span id="my-email">jiaxingyan05@163.com</span>
-          <button onclick="copyEmail()" class="copy-btn" title="复制邮箱">
-            📋
-          </button>
-        </div>
-        <button onclick="toggleProfileFlip()" class="md-button" style="margin-top: 1.5rem; border-radius: 20px; font-size: 0.85rem; background: rgba(0,0,0,0.05); border: none; cursor: pointer;">
-          ↩ 返回主页
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -81,149 +33,173 @@
 
 ---
 
-## 🎓 学习路径
+## 🚀 项目实战
+
+<div class="card-grid">
+
+<div class="card card--featured">
+<div class="card-icon">📊</div>
+<h3>淘宝用户行为分析</h3>
+<p>基于 <strong>1 亿行</strong>数据集，使用<strong>分块读取</strong>与<strong>数据降维</strong>策略突破内存限制，完成漏斗转化与 RFM 价值分层分析。</p>
+<div class="card-tags">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL">
+<img src="https://img.shields.io/badge/1e8+_Rows-red?style=flat-square" alt="数据规模">
+<img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas">
+</div>
+<a href="./SQL/TaoBao_project/">查看详情</a>
+</div>
+
+<div class="card card--featured">
+<div class="card-icon">🏆</div>
+<h3>房地产价格预测算法挑战赛</h3>
+<p>DataCastle 竞赛 <strong>Rank 1 冠军</strong>。采用 <strong>Stacking 融合模型</strong> (XGBoost + LightGBM)，通过地理聚类等特征工程手段，以 <strong>167.13 (RMSE)</strong> 超低误差斩获榜首。</p>
+<div class="card-tags">
+<img src="https://img.shields.io/badge/🥇_Rank_1-FFD700?style=flat-square" alt="Rank 1">
+<img src="https://img.shields.io/badge/Stacking-orange?style=flat-square" alt="模型融合">
+<img src="https://img.shields.io/badge/XGBoost-189A1F?style=flat-square" alt="XGBoost">
+<img src="https://img.shields.io/badge/DataCastle-orange?style=flat-square" alt="DataCastle">
+</div>
+<a href="./Python/Machine-Learning/">查看详情</a>
+</div>
+
+
+
+<div class="card">
+<div class="card-icon">🔧</div>
+<h3>Git 交互式提交助手</h3>
+<p>PowerShell 脚本工具，实现分批提交、敏感文件警告、遗漏检测与可视化进度统计。</p>
+<div class="card-tags">
+<img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white" alt="PowerShell">
+<img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+</div>
+<a href="./Projects/myself_tools/Git_Interactive_Commit_Tool/">查看详情</a>
+</div>
+
+<div class="card">
+<div class="card-icon">🧩</div>
+<h3>AI 对话导航插件</h3>
+<p>浏览器扩展，为 Gemini / ChatGPT / Claude 长对话生成悬浮目录，纯原生 JS，体积 < 200KB。</p>
+<div class="card-tags">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
+<img src="https://img.shields.io/badge/Chrome_Extension-4285F4?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome Extension">
+</div>
+<a href="./Projects/myself_tools/AI_Chat_Navigation_Plugin/">查看详情</a>
+</div>
+
+</div>
+
+[:octicons-arrow-right-24: 查看全部项目](Projects/index.md){ .md-button }
+
+---
+
+## 📚 知识体系
 
 <div class="card-grid">
 
 <div class="card">
 <div class="card-icon">🐍</div>
-<h3>Python</h3>
-<p>数据处理、分析、可视化<br>Pandas / NumPy / Matplotlib</p>
-<a href="./Python/">开始学习</a>
+<h3>Python 数据分析</h3>
+<p>Pandas 数据清洗与重构、NumPy 计算、Matplotlib / Seaborn 可视化实践笔记。</p>
+<a href="./Python/">查看笔记</a>
 </div>
 
 <div class="card">
 <div class="card-icon">💾</div>
-<h3>SQL</h3>
-<p>查询、聚合、窗口函数<br>MySQL 性能优化与最佳实践</p>
-<a href="./SQL/">开始学习</a>
+<h3>SQL 数据库</h3>
+<p>MySQL 基础/进阶语法、窗口函数专题、性能优化最佳实践。</p>
+<a href="./SQL/">查看笔记</a>
 </div>
 
 <div class="card">
 <div class="card-icon">📊</div>
 <h3>Power BI</h3>
-<p>建模、DAX、可视化<br>仪表盘设计与数据洞察</p>
-<a href="./PowerBI/">开始学习</a>
-</div>
-
-<div class="card">
-<div class="card-icon">💡</div>
-<h3>项目实战</h3>
-<p>数据分析项目复盘<br>从 0 到 1 的完整流程</p>
-<a href="./Projects/">查看项目</a>
+<p>DAX 函数、数据建模、仪表盘设计与商业智能分析方法论。</p>
+<a href="./PowerBI/">查看笔记</a>
 </div>
 
 </div>
 
 ---
 
-## 📚 学习资料
+## 🏅 竞赛与荣誉
 
-<div class="card-grid">
+<div class="achievements-container">
 
-<div class="card">
-<div class="card-icon">📓</div>
-<h3>动手学数据分析</h3>
-<p>官方源文档资料，包含数据集、空白练习文件，以及博主自己扩展的 Markdown 和 Jupyter Notebook 笔记。</p>
-<a href="https://github.com/moyan726/data-analytics-notes/tree/main/Data_and_original_files/Python_Hands_on_data_analysis">查看资料</a>
+  <div class="achievement-card achievement--gold">
+    <div class="achievement-icon">🥇</div>
+    <div class="achievement-body">
+      <h4>DataCastle 房地产价格预测算法挑战赛</h4>
+      <span class="achievement-level">Rank 1 冠军</span>
+      <p> DataCastle 平台托管的校内算法优选赛 <strong>Rank 1</strong>。
+    在全场 <strong>376 次</strong> 模型提交的高频对抗中，通过 EDA 特征工程与 Stacking 策略，仅迭代 <strong>21 次</strong> 即以 <strong>167.13 (RMSE)</strong> 的最低误差锁定榜首。</p>
+      <div class="achievement-tags">
+        <span>算法竞赛</span><span>冠军</span>
+      </div>
+    </div>
+  </div>
 
-</div>
+  <div class="achievement-card achievement--purple">
+    <div class="achievement-icon">📜</div>
+    <div class="achievement-body">
+      <h4>省级大学生创新创业训练计划</h4>
+      <span class="achievement-level">省级立项 · 项目负责人</span>
+      <p>项目编号：S202410879245S。带领团队完成从需求挖掘到产品落地的全过程。</p>
+      <div class="achievement-tags">
+        <span>项目管理</span><span>创新创业</span>
+      </div>
+    </div>
+  </div>
 
-</div>
-
----
-
-## 🚀 项目展示
-
-!!! tip "推荐先看"
-    正在持续更新中，敬请期待！ 🚧
-
-<div class="card-grid">
-
-<div class="card">
-<div class="card-icon">🔧</div>
-<h3>Git 批量提交脚本</h3>
-<p>自动化批量提交多个仓库的 Git 脚本工具</p>
-<a href="./Projects/Git批量提交脚本/">查看详情</a>
-</div>
-
-<div class="card">
-<div class="card-icon">🔧</div>
-<h3>ppt批量转pdf文件</h3>
-<p>一键将所有 .ppt/.pptx 批量转换为 PDF，统一输出到目标目录</p>
-<a href="./Projects/ppt_to_pdf/">查看详情</a>
-</div>
-
-</div>
-
-
----
-
-## 🧰 我常用的工具
-
-<div class="stats-grid">
-
-<div class="stat-card">
-<span class="stat-number">🐍</span>
-<span class="stat-label">Python (Pandas)</span>
-</div>
-
-<div class="stat-card">
-<span class="stat-number">💾</span>
-<span class="stat-label">SQL (MySQL)</span>
-</div>
-
-<div class="stat-card">
-<span class="stat-number">📊</span>
-<span class="stat-label">Power BI</span>
-</div>
-
-<div class="stat-card">
-<span class="stat-number">🔀</span>
-<span class="stat-label">Git + GitHub</span>
-</div>
+  <div class="achievement-card achievement--blue">
+    <div class="achievement-icon">©️</div>
+    <div class="achievement-body">
+      <h4>国家软件著作权</h4>
+      <span class="achievement-level">证书号: 2025SR0936650</span>
+      <p>《便捷型智能洗头机预约系统 V1.0》，验证了从 0 到 1 的工程化交付能力。</p>
+      <div class="achievement-tags">
+        <span>知识产权</span><span>工程落地</span>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 ---
 
-## 📅 更新日志
+## 🎓 教育背景
 
-<div class="timeline">
-
-<div class="timeline-item">
-<div class="timeline-date">2025-12-22</div>
-<div class="timeline-content">
-<p><strong>ppt批量转pdf文件</strong> — 自动扫描指定文件夹，将所有 .ppt/.pptx 批量转换为 PDF，统一输出到目标目录</p>
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-date">2025-12-21</div>
-<div class="timeline-content">
-<p><strong>网站功能升级</strong> — 新增 Hero 区域、卡片布局、时间线样式、公告栏等美化功能；添加功能测试页</p>
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-date">2025-12-21</div>
-<div class="timeline-content">
-<p><strong>完善项目</strong> — 上传 Projects--Git 批量提交脚本</p>
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-date">2025-12-18</div>
-<div class="timeline-content">
-<p><strong>笔记更新</strong> — 完成 data-analytics-notes 第一章三节课程的笔记更新（PC端博客；GitHub仓库 .ipynb 和 .md 文件）</p>
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-date">2025-12-17</div>
-<div class="timeline-content">
-<p><strong>网站搭建</strong> — 完成 MkDocs Material 主题配置与部署</p>
-</div>
-</div>
-
+<div class="edu-book-container">
+  <div class="edu-book-cover">
+    <div class="edu-page-left">
+      <div class="edu-school-logo">🏫</div>
+      <h3>安徽科技工程大学</h3>
+      <p class="edu-school-en">Anhui Science and Technology Engineering University</p>
+      <div class="edu-major-info">
+        <p><strong>数据科学与大数据技术</strong><br>本科 (2023 - 2027)</p>
+      </div>
+      <div class="edu-awards">
+        <p>🥇 <strong>DataCastle 算法挑战赛 Rank 1</strong></p>
+        <p>📜 <strong>省级大创立项 (项目负责人)</strong></p>
+        <p>©️ <strong>国家软件著作权 × 1</strong></p>
+      </div>
+    </div>
+    <div class="edu-page-right">
+      <h4>核心课程 (Core Courses)</h4>
+      <div class="edu-courses-grid">
+        <span class="edu-course-badge" style="border-color: #3776AB; color: #3776AB; font-weight: 700; background: rgba(55, 118, 171, 0.1);">数据挖掘与分析</span>
+        <span class="edu-course-badge" style="border-color: #3776AB; color: #3776AB; font-weight: 700; background: rgba(55, 118, 171, 0.1);">Spark 大数据处理</span>
+        <span class="edu-course-badge" style="border-color: #3776AB; color: #3776AB; font-weight: 700; background: rgba(55, 118, 171, 0.1);">概率论与数理统计</span>
+        <span class="edu-course-badge">机器学习</span>
+        <span class="edu-course-badge">深度学习</span>
+        <span class="edu-course-badge">推荐算法</span>
+        <span class="edu-course-badge">Hadoop 大数据</span>
+        <span class="edu-course-badge">NoSQL 数据库</span>
+        <span class="edu-course-badge">数据可视化</span>
+        <span class="edu-course-badge">多元统计分析</span>
+      </div>
+      <div class="edu-footer-note">
+        * 聚焦数据分析方向
+      </div>
+    </div>
+  </div>
 </div>

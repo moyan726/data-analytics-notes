@@ -382,55 +382,9 @@
     }
   }
 
-  function initSideAnnouncement() {
-    var toggle = document.getElementById('side-announcement-toggle') || document.querySelector('.side-announcement-toggle')
-    if (!toggle) return
-
-    var storageKey = 'side_announcement_open'
-
-    function setOpen(open) {
-      toggle.checked = open
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
-      try {
-        localStorage.setItem(storageKey, open ? '1' : '0')
-      } catch (_) { }
-    }
-
-    if (!toggle.dataset.sideAnnouncementBound) {
-      toggle.dataset.sideAnnouncementBound = 'true'
-      toggle.addEventListener('change', function () {
-        setOpen(Boolean(toggle.checked))
-      })
-    }
-
-    var saved = null
-    try {
-      saved = localStorage.getItem(storageKey)
-    } catch (_) { }
-    if (saved === '1' || saved === '0') {
-      toggle.checked = saved === '1'
-    }
-    toggle.setAttribute('aria-expanded', toggle.checked ? 'true' : 'false')
-
-    if (!window.__sideAnnouncementEscBound) {
-      window.__sideAnnouncementEscBound = true
-      document.addEventListener('keydown', function (e) {
-        if (e.key !== 'Escape' && e.key !== 'Esc') return
-        var t = document.getElementById('side-announcement-toggle') || document.querySelector('.side-announcement-toggle')
-        if (!t || !t.checked) return
-        t.checked = false
-        t.setAttribute('aria-expanded', 'false')
-        try {
-          localStorage.setItem(storageKey, '0')
-        } catch (_) { }
-      })
-    }
-  }
-
   function onRouteUpdate() {
     enhanceImages()
     initTocScrollSync()
-    initSideAnnouncement()
     Promise.all([loadMermaidIfNeeded(), loadMathJaxIfNeeded()])
       .then(function () {
         renderMermaid()
@@ -444,43 +398,45 @@
   } else {
     document.addEventListener('DOMContentLoaded', onRouteUpdate)
   }
-})()
 
-// ========== Profile Flip Card Logic ==========
-window.toggleProfileFlip = function () {
-  var inner = document.querySelector('.profile-inner');
-  if (inner) {
-    inner.classList.toggle('flipped');
-  }
-};
-
-window.copyEmail = function () {
-  var email = document.getElementById('my-email').innerText;
-  navigator.clipboard.writeText(email).then(function () {
-    var btn = document.querySelector('.copy-btn');
-    var originalText = btn.innerHTML;
-    btn.innerHTML = '✅';
-    setTimeout(function () {
-      btn.innerHTML = originalText;
-    }, 2000);
-  }, function (err) {
-    console.error('Async: Could not copy text: ', err);
-    // Fallback for older browsers
-    var textArea = document.createElement("textarea");
-    textArea.value = email;
-    document.body.appendChild(textArea);
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      var btn = document.querySelector('.copy-btn');
-      var originalText = btn.innerHTML;
-      btn.innerHTML = '✅';
-      setTimeout(function () {
-        btn.innerHTML = originalText;
-      }, 2000);
-    } catch (err) {
-      console.error('Fallback: Oops, unable to copy', err);
+  // Email Copy Logic
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.closest('.email-copy-btn')) {
+      e.preventDefault();
+      var btn = e.target.closest('.email-copy-btn');
+      var email = btn.getAttribute('data-email');
+      if (email) {
+        navigator.clipboard.writeText(email).then(function () {
+          showToast('📋 邮箱已复制: ' + email);
+        }, function (err) {
+          console.error('Copy failed', err);
+          prompt('复制失败，请手动复制:', email);
+        });
+      }
     }
-    document.body.removeChild(textArea);
   });
-};
+
+  function showToast(message) {
+    // Remove existing toast
+    var existing = document.querySelector('.custom-toast');
+    if (existing) document.body.removeChild(existing);
+
+    var toast = document.createElement('div');
+    toast.className = 'custom-toast';
+    toast.innerText = message;
+    document.body.appendChild(toast);
+
+    // Trigger animation
+    requestAnimationFrame(function () {
+      toast.classList.add('show');
+    });
+
+    setTimeout(function () {
+      toast.classList.remove('show');
+      setTimeout(function () {
+        if (toast.parentNode) document.body.removeChild(toast);
+      }, 300);
+    }, 2000);
+  }
+
+})();
