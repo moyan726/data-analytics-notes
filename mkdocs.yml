@@ -145,14 +145,15 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - 样式参考: design/Style_Guide.md
   - Python:
       - Python/index.md
       - 实战：动手学数据分析:
           - 概览: Python/hands-on-data-analysis/index.md
           - 1.第一章合集整理: Python/hands-on-data-analysis/snippets/第一章合集整理.md
       - 机器学习: Python/Machine-Learning/index.md
-      - 数据可视化基础: Python/Data_Visualization/index.md
+      - 数据可视化:
+          - 基础概览: Python/Data_Visualization/index.md
+          - 看板搭建实战: Python/Data_Visualization/数据可视化看板搭建.md
   - SQL:
       - SQL/index.md
       - MySQL 核心教程 (基础/进阶):
@@ -177,6 +178,7 @@ nav:
           - Git 交互式提交助手: Projects/myself_tools/Git_Interactive_Commit_Tool.md
           - PPT 批量转 PDF 工具: Projects/myself_tools/PPT_to_PDF_Automation_Tool.md
           - AI 对话导航插件: Projects/myself_tools/AI_Chat_Navigation_Plugin.md
+      - 样式参考: Projects/Style_Guide.md
 
 extra:
   generator: false  # 隐藏 "Made with Material for MkDocs"
