@@ -1629,3 +1629,26 @@ input:focus-visible,
   font-size: 0.95rem;
   text-align: center;
 }
+
+/* ========== 2026-02-19 Content Alignment ========== */
+/* Center uploaded article images without affecting badge/icon strips */
+.md-typeset p > img,
+.md-typeset li > img,
+.md-typeset blockquote > img,
+.md-typeset figure > img {
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Center markdown tables and table text */
+.md-typeset table:not([class]) {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  text-align: center !important;
+  vertical-align: middle;
+}

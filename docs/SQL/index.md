@@ -87,9 +87,9 @@ graph LR
     Project --> Analysis["行为分析 & 漏斗"]
     Project --> RFM["RFM 用户分层"]
 
-    style Root fill:#7c4dff,stroke:#fff,stroke-width:2px,color:#fff
+    style Root fill:#dcd2ff,stroke:#4f2ea7,stroke-width:2px,color:#24124b
     style MySQL fill:#00bcd4,stroke:#fff,color:#fff
-    style WinFunc fill:#e91e63,stroke:#fff,color:#fff
+    style WinFunc fill:#ffd6e5,stroke:#a82757,stroke-width:2px,color:#4a1028
     style Project fill:#ff9800,stroke:#fff,color:#fff
 ```
 
