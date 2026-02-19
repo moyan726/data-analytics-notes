@@ -4,7 +4,11 @@
     mathjaxLoaded: false,
     mermaidLoading: null,
     mathjaxLoading: null,
-    mermaidInitialized: false
+    mermaidInitialized: false,
+    lightboxInitialized: false,
+    lightboxOpen: false,
+    lightboxLastFocused: null,
+    lightbox: null
   }
 
   function ensureScript(src, id) {
@@ -50,6 +54,221 @@
       if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy')
       if (!img.getAttribute('decoding')) img.setAttribute('decoding', 'async')
       if (!img.getAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'auto')
+    }
+  }
+
+  function setAriaLabelIfMissing(el, label) {
+    if (!el || !label) return
+    if (!el.getAttribute('aria-label')) {
+      el.setAttribute('aria-label', label)
+    }
+  }
+
+  function enhanceControlA11y() {
+    var selectorToLabel = [
+      { selector: 'label[for="__drawer"]', label: '打开主导航菜单' },
+      { selector: 'label[for="__search"]', label: '打开站内搜索' },
+      { selector: '.md-top', label: '返回页面顶部' },
+      { selector: '.md-search__input', label: '搜索文档内容' }
+    ]
+
+    for (var i = 0; i < selectorToLabel.length; i++) {
+      var item = selectorToLabel[i]
+      var elements = document.querySelectorAll(item.selector)
+      for (var j = 0; j < elements.length; j++) {
+        setAriaLabelIfMissing(elements[j], item.label)
+      }
+    }
+  }
+
+  function enhanceButtonA11y() {
+    var buttons = document.querySelectorAll('.md-typeset a.md-button')
+    for (var i = 0; i < buttons.length; i++) {
+      var button = buttons[i]
+      if (button.getAttribute('aria-label')) continue
+
+      var label = (button.textContent || '').replace(/\s+/g, ' ').trim()
+      if (label) {
+        button.setAttribute('aria-label', label)
+      }
+    }
+  }
+
+  function shouldSkipZoomForImage(img) {
+    if (!img) return true
+    if (img.closest('.hero-badges, .card-tags, .md-social, .md-header, .md-footer, .md-nav')) return true
+    if (img.getAttribute('data-no-zoom') === 'true') return true
+    return false
+  }
+
+  function bindZoomTrigger(el, opener) {
+    if (!el || typeof opener !== 'function') return
+    if (el.getAttribute('data-zoom-bound') === 'true') return
+
+    el.setAttribute('data-zoom-bound', 'true')
+
+    el.addEventListener('click', function (e) {
+      if (state.lightboxOpen) return
+      if (typeof e.button === 'number' && e.button !== 0) return
+      e.preventDefault()
+      e.stopPropagation()
+      opener()
+    })
+
+    el.addEventListener('keydown', function (e) {
+      if (state.lightboxOpen) return
+      if (e.key !== 'Enter' && e.key !== ' ') return
+      e.preventDefault()
+      e.stopPropagation()
+      opener()
+    })
+  }
+
+  function enhanceZoomableMedia() {
+    var root = document.querySelector('.md-typeset') || document
+
+    var images = root.querySelectorAll('img')
+    for (var i = 0; i < images.length; i++) {
+      var img = images[i]
+      if (shouldSkipZoomForImage(img)) continue
+      if (img.closest('.mermaid, .diagram-figure')) continue
+
+      var linked = img.closest('a')
+      if (linked && linked.getAttribute('href')) {
+        var href = linked.getAttribute('href')
+        var isImageLink = /\.(png|jpe?g|gif|webp|svg|bmp)$/i.test(href)
+        if (!isImageLink) continue
+      }
+
+      img.classList.add('zoomable-media')
+      if (!img.getAttribute('tabindex')) img.setAttribute('tabindex', '0')
+      setAriaLabelIfMissing(img, '点击放大查看图片')
+      if (!img.getAttribute('title')) img.setAttribute('title', '点击放大查看图片')
+
+      bindZoomTrigger(img, (function (currentImg) {
+        return function () {
+          openMediaLightboxFromImage(currentImg)
+        }
+      })(img))
+    }
+  }
+
+  function getFigureCaptionText(el) {
+    if (!el) return ''
+    var figure = el.closest('figure')
+    if (!figure) return ''
+    var caption = figure.querySelector('figcaption')
+    if (!caption || !caption.textContent) return ''
+    return caption.textContent.replace(/\s+/g, ' ').trim()
+  }
+
+  function ensureMediaLightbox() {
+    if (state.lightboxInitialized) return
+
+    var overlay = document.createElement('div')
+    overlay.className = 'media-lightbox'
+    overlay.setAttribute('hidden', '')
+    overlay.setAttribute('aria-hidden', 'true')
+    overlay.setAttribute('role', 'dialog')
+    overlay.setAttribute('aria-modal', 'true')
+
+    var closeBtn = document.createElement('button')
+    closeBtn.className = 'media-lightbox__close'
+    closeBtn.setAttribute('type', 'button')
+    closeBtn.setAttribute('aria-label', '关闭图片预览')
+    closeBtn.textContent = '×'
+
+    var content = document.createElement('div')
+    content.className = 'media-lightbox__content'
+
+    var image = document.createElement('img')
+    image.className = 'media-lightbox__image'
+    image.setAttribute('alt', '')
+
+    var caption = document.createElement('p')
+    caption.className = 'media-lightbox__caption'
+
+    content.appendChild(image)
+    content.appendChild(caption)
+    overlay.appendChild(closeBtn)
+    overlay.appendChild(content)
+    document.body.appendChild(overlay)
+
+    state.lightbox = {
+      overlay: overlay,
+      closeBtn: closeBtn,
+      image: image,
+      caption: caption
+    }
+
+    closeBtn.addEventListener('click', closeMediaLightbox)
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) {
+        closeMediaLightbox()
+      }
+    })
+
+    document.addEventListener('keydown', function (e) {
+      if (!state.lightboxOpen) return
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        closeMediaLightbox()
+      }
+    })
+
+    state.lightboxInitialized = true
+  }
+
+  function openMediaLightboxFromImage(img) {
+    if (!img) return
+    var src = img.currentSrc || img.getAttribute('src')
+    if (!src) {
+      showToast('图片无法预览')
+      return
+    }
+    ensureMediaLightbox()
+
+    var lb = state.lightbox
+    var captionText = getFigureCaptionText(img) || img.getAttribute('alt') || ''
+    lb.image.style.display = 'block'
+    lb.image.onerror = function () {
+      lb.image.onerror = null
+      showToast('图片加载失败，请稍后重试')
+      closeMediaLightbox()
+    }
+    lb.image.src = src
+    lb.image.alt = img.getAttribute('alt') || ''
+    lb.caption.textContent = captionText
+
+    showMediaLightbox()
+  }
+
+  function showMediaLightbox() {
+    var lb = state.lightbox
+    if (!lb) return
+
+    state.lightboxLastFocused = document.activeElement
+    state.lightboxOpen = true
+
+    lb.overlay.removeAttribute('hidden')
+    lb.overlay.setAttribute('aria-hidden', 'false')
+    document.body.classList.add('media-lightbox-open')
+    lb.closeBtn.focus()
+  }
+
+  function closeMediaLightbox() {
+    if (!state.lightbox || !state.lightboxOpen) return
+    var lb = state.lightbox
+
+    state.lightboxOpen = false
+    lb.overlay.setAttribute('hidden', '')
+    lb.overlay.setAttribute('aria-hidden', 'true')
+    lb.image.removeAttribute('src')
+    lb.caption.textContent = ''
+    document.body.classList.remove('media-lightbox-open')
+
+    if (state.lightboxLastFocused && typeof state.lightboxLastFocused.focus === 'function') {
+      state.lightboxLastFocused.focus()
     }
   }
 
@@ -106,6 +325,61 @@
         window.mermaid.run({ querySelector: '.mermaid' })
       }
     } catch (_) { }
+  }
+
+  function enhanceMermaidAccessibility() {
+    var blocks = document.querySelectorAll('.mermaid')
+    for (var i = 0; i < blocks.length; i++) {
+      var block = blocks[i]
+      var svg = block.querySelector('svg')
+      if (!svg) continue
+
+      svg.setAttribute('role', 'img')
+      svg.setAttribute('focusable', 'false')
+
+      var figure = block.closest('.diagram-figure')
+      var titleText = '流程图'
+      var descText = ''
+
+      if (figure) {
+        var caption = figure.querySelector('figcaption')
+        if (caption && caption.textContent) {
+          titleText = caption.textContent.trim()
+        }
+
+        var desc = figure.querySelector('.visually-hidden')
+        if (desc && desc.textContent) {
+          descText = desc.textContent.trim()
+        }
+      }
+
+      var svgId = svg.getAttribute('id') || ('mermaid-svg-' + i)
+      svg.setAttribute('id', svgId)
+
+      var titleId = svgId + '-title'
+      var descId = svgId + '-desc'
+
+      var titleEl = svg.querySelector('title')
+      if (!titleEl) {
+        titleEl = document.createElementNS('http://www.w3.org/2000/svg', 'title')
+        svg.insertBefore(titleEl, svg.firstChild)
+      }
+      titleEl.setAttribute('id', titleId)
+      titleEl.textContent = titleText
+
+      if (descText) {
+        var descEl = svg.querySelector('desc')
+        if (!descEl) {
+          descEl = document.createElementNS('http://www.w3.org/2000/svg', 'desc')
+          svg.insertBefore(descEl, titleEl.nextSibling)
+        }
+        descEl.setAttribute('id', descId)
+        descEl.textContent = descText
+        svg.setAttribute('aria-describedby', descId)
+      }
+
+      svg.setAttribute('aria-labelledby', titleId)
+    }
   }
 
   function loadMathJaxIfNeeded() {
@@ -384,10 +658,15 @@
 
   function onRouteUpdate() {
     enhanceImages()
+    enhanceControlA11y()
+    enhanceButtonA11y()
+    enhanceZoomableMedia()
     initTocScrollSync()
     Promise.all([loadMermaidIfNeeded(), loadMathJaxIfNeeded()])
       .then(function () {
         renderMermaid()
+        enhanceMermaidAccessibility()
+        enhanceZoomableMedia()
         typesetMath()
       })
       .catch(function () { })

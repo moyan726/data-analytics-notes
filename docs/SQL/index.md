@@ -25,7 +25,7 @@ description: SQL 数据查询学习专区：涵盖 MySQL 基础与进阶、窗�
     *   🔎 **进阶篇**：索引优化、SQL 调优、视图与锁机制
     *   🎯 附数据分析师**章节筛选建议**，避免无效学习
 
-    [:octicons-arrow-right-24: 进入 MySQL 核心教程](MySQL_Base_ITcase/index.md){ .md-button .md-button--primary }
+    [:octicons-arrow-right-24: 进入 MySQL 核心教程](MySQL_Base_ITcase/index.md){ .md-button .md-button--primary aria-label="进入 MySQL 核心教程，查看基础篇与进阶篇内容" title="进入 MySQL 核心教程（基础篇与进阶篇）" }
 
 -   :material-chart-timeline-variant:{ .lg .middle } __SQL 窗口函数专题__
 
@@ -37,7 +37,7 @@ description: SQL 数据查询学习专区：涵盖 MySQL 基础与进阶、窗�
     *   🖼️ **进阶篇**：帧子句 `ROWS` vs `RANGE`、`NTILE`、`CUME_DIST`
     *   ⚡ 配有完整测试数据与**易错点汇总**
 
-    [:octicons-arrow-right-24: 进入窗口函数专题](windows_function/index.md){ .md-button .md-button--primary }
+    [:octicons-arrow-right-24: 进入窗口函数专题](windows_function/index.md){ .md-button .md-button--primary aria-label="进入 SQL 窗口函数专题，查看基础与进阶内容" title="进入 SQL 窗口函数专题" }
 
 -   :material-cart-outline:{ .lg .middle } __实战：淘宝用户行为分析__
 
@@ -49,13 +49,15 @@ description: SQL 数据查询学习专区：涵盖 MySQL 基础与进阶、窗�
     *   📈 转化漏斗、RFM 用户分层、热门品类分析
     *   💡 附**小样本验证**策略与新手上路建议
 
-    [:octicons-arrow-right-24: 进入淘宝实战项目](TaoBao_project/index.md){ .md-button }
+    [:octicons-arrow-right-24: 进入淘宝实战项目](TaoBao_project/index.md){ .md-button aria-label="进入淘宝用户行为分析实战项目，查看完整分析流程" title="进入淘宝用户行为分析实战项目" }
 
 </div>
 
 ---
 
 ## 🧠 知识图谱
+
+<figure class="diagram-figure" role="group" aria-labelledby="sql-map-title" aria-describedby="sql-map-desc" markdown>
 
 ```mermaid
 graph LR
@@ -90,6 +92,11 @@ graph LR
     style WinFunc fill:#e91e63,stroke:#fff,color:#fff
     style Project fill:#ff9800,stroke:#fff,color:#fff
 ```
+
+<figcaption id="sql-map-title">SQL 学习路径知识图谱</figcaption>
+<p id="sql-map-desc" class="visually-hidden">图谱从 SQL 学习体系出发，分为 MySQL 核心教程、窗口函数专题与淘宝实战项目。MySQL 路径继续细分为基础篇与进阶篇，窗口函数覆盖排名、位移、帧子句和分布函数，实战项目覆盖导入、清洗、行为分析和 RFM 分层。</p>
+
+</figure>
 
 ---
 
