@@ -90,17 +90,46 @@ body::after {
   overflow: hidden;
 }
 
-/* ========== 琛ㄦ牸缇庡寲 ========== */
+/* ========== 表格美化 (自动居中) ========== */
+
+/* 1. 表格滚动容器：适应内容宽度并居中 */
+.md-typeset__table {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: fit-content !important;
+  max-width: 100%;
+  display: block;
+  /* 确保长表格仍可滚动 */
+  overflow-x: auto;
+}
+
+/* 2. 表格本体：圆角与阴影 */
 .md-typeset table:not([class]) {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  /* 双重保险：表格自身居中 */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: auto !important;
+  /* 防止表格被拉伸到 100% */
+  display: table !important;
 }
 
+/* 3. 表头：背景色与居中 */
 .md-typeset table:not([class]) th {
   background-color: var(--md-primary-fg-color);
   color: white;
   font-weight: 600;
+  text-align: center !important;
+  min-width: 80px;
+  /* 防止表头过窄 */
+}
+
+/* 4. 单元格：内容居中 */
+.md-typeset table:not([class]) td {
+  text-align: center !important;
 }
 
 /* ========== 渚ц竟鏍忎紭鍖?========== */
@@ -1632,10 +1661,10 @@ input:focus-visible,
 
 /* ========== 2026-02-19 Content Alignment ========== */
 /* Center uploaded article images without affecting badge/icon strips */
-.md-typeset p > img,
-.md-typeset li > img,
-.md-typeset blockquote > img,
-.md-typeset figure > img {
+.md-typeset p>img,
+.md-typeset li>img,
+.md-typeset blockquote>img,
+.md-typeset figure>img {
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;

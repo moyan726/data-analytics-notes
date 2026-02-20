@@ -544,3 +544,29 @@
 - **影响面**：文档站点导航结构更新，机器学习版块可访问性增强。
 - **风险与回滚**：无风险，回滚只需撤销 mkdocs.yml 相应行及 index.md 内容。
 - **验证**：本地 serve 预览（用户自行验证），链接指向正确。
+
+## 2026-02-20 表格自动居中对齐
+
+- **时间**：2026-02-20 09:10 (UTC+8)
+- **变更摘要**：为所有 Markdown 表格添加自动居中对齐样式，无需在每个 MD 文件中手动设置。
+- **问题说明**：用户希望上传的 MD 文件中的表格在网站渲染后自动水平居中并且单元格内容居中对齐，避免逐个手动调整。
+- **策略方向**：通过 CSS 全局覆盖 MkDocs Material 主题的默认表格样式，一次设置全站生效。
+- **具体改动**：
+    - `docs/stylesheets/custom.css`: 在"表格美化"区域追加以下规则：
+        - `.md-typeset table:not([class])`: 增加 `margin-left: auto; margin-right: auto; width: auto; display: table;` 实现表格水平居中
+        - `.md-typeset table:not([class]) th`: 增加 `text-align: center;` 表头文本居中
+        - 新增 `.md-typeset table:not([class]) td`: `text-align: center;` 单元格文本居中
+- **影响面**：全站所有无自定义 class 的 Markdown 表格自动居中显示，不影响带有自定义 class 的表格（如 `.sql-result`）。
+- **风险与回滚**：无风险。删除新增的 CSS 规则即可恢复默认左对齐。
+- **验证**：本地 `mkdocs serve` 预览任意包含表格的 MD 页面，确认表格水平居中且内容居中对齐。
+
+### 2026-02-20 修复表格居中不生效问题
+
+- **时间**：2026-02-20 09:15 (UTC+8)
+- **变更摘要**：增强 CSS 选择器权重并针对表格容器 `.md-typeset__table` 设置居中，解决主题默认样式覆盖问题。
+- **问题说明**：用户反馈之前的 CSS 修改未生效，表格依然靠左。原因为 MkDocs Material 主题将表格包裹在 `.md-typeset__table` 容器中，该容器默认宽度 100% 且左对齐，单改 table margin 无效。
+- **具体改动**：
+    - `.md-typeset__table`: 增加 `width: fit-content !important; margin: 0 auto !important;`，强制容器适应内容宽度并居中。
+    - 表格内部元素：为 `text-align: center` 和 `margin: auto` 增加 `!important` 标志，确保优先级最高。
+    - 修复了相关 CSS 注释的乱码。
+- **验证**：刷新页面，检查短表格是否已水平居中。
