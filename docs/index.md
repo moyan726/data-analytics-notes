@@ -171,24 +171,23 @@
 <div class="edu-book-container">
   <div class="edu-book-cover">
     <div class="edu-page-left">
-      <div class="edu-school-logo">🏫</div>
-      <h3>安徽科技工程大学</h3>
-      <p class="edu-school-en">Anhui Science and Technology Engineering University</p>
-      <div class="edu-major-info">
-        <p><strong>数据科学与大数据技术</strong><br>本科 (2023 - 2027)</p>
+      <div class="edu-school-header">
+        <div class="edu-school-logo">🏫</div>
+        <div class="edu-school-title">
+          <h3>安徽科技工程大学</h3>
+          <p class="edu-school-en">Anhui Science and Technology Engineering University</p>
+        </div>
       </div>
-      <div class="edu-awards">
-        <p>🥇 <strong>DataCastle 算法挑战赛 Rank 1</strong></p>
-        <p>📜 <strong>省级大创立项 (项目负责人)</strong></p>
-        <p>©️ <strong>国家软件著作权 × 1</strong></p>
+      <div class="edu-major-info">
+        <p><strong>本科专业：</strong>数据科学与大数据技术            <strong> 毕业时间：</strong>2027 年（预计）</p>
       </div>
     </div>
     <div class="edu-page-right">
       <h4>核心课程 (Core Courses)</h4>
       <div class="edu-courses-grid">
-        <span class="edu-course-badge" style="border-color: #3776AB; color: #3776AB; font-weight: 700; background: rgba(55, 118, 171, 0.1);">数据挖掘与分析</span>
-        <span class="edu-course-badge" style="border-color: #3776AB; color: #3776AB; font-weight: 700; background: rgba(55, 118, 171, 0.1);">Spark 大数据处理</span>
-        <span class="edu-course-badge" style="border-color: #3776AB; color: #3776AB; font-weight: 700; background: rgba(55, 118, 171, 0.1);">概率论与数理统计</span>
+        <span class="edu-course-badge">数据挖掘与分析</span>
+        <span class="edu-course-badge">Spark 大数据处理</span>
+        <span class="edu-course-badge">概率论与数理统计</span>
         <span class="edu-course-badge">机器学习</span>
         <span class="edu-course-badge">深度学习</span>
         <span class="edu-course-badge">推荐算法</span>
@@ -196,9 +195,6 @@
         <span class="edu-course-badge">NoSQL 数据库</span>
         <span class="edu-course-badge">数据可视化</span>
         <span class="edu-course-badge">多元统计分析</span>
-      </div>
-      <div class="edu-footer-note">
-        * 聚焦数据分析方向
       </div>
     </div>
   </div>

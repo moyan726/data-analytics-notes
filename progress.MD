@@ -570,3 +570,25 @@
     - 表格内部元素：为 `text-align: center` 和 `margin: auto` 增加 `!important` 标志，确保优先级最高。
     - 修复了相关 CSS 注释的乱码。
 - **验证**：刷新页面，检查短表格是否已水平居中。
+ 
+ 
+ -   �e���2 0 2 6 - 0 2 - 2 0   1 0 : 1 4 
+ -   �S�fXd����~�gNU X OS  ( ;Nu���O\N�e) 
+ -   ��f��cGS��u�BlL�l�S�vO\He�kNƉɉ&q�p_�[0
+ -   V{eu�eT��Oo`M�jVN:_Sl�So�e�Ǒ(u�g�{aSGrNfnxC T A _�[0
+ -   wQSO9e�R�
+     -   [ i n d e x . m d ]   GS�~��`/ {�����c:N  \ . c a r d - a c t i o n - l i n k \   &^	g  H o v e r   �{4Y�RHe0
+     -   [ i n d e x . m d ]   M�NO!k�~�Oo`ƉɉB\�~��m�R  \ . m e t a - i n f o - f a d e d \   Yto�W�I{Am4l�S0
+     -   [ i n d e x . m d ]   ͑�gYe��̀of��_�QYOVYy�U\:y�9e:N  \ . e d u - c o m p a c t - c a r d \   '}�QUS _*jT^@\0
+     -   [ c u s t o m . c s s ]   �m�R  \ . c a r d - a c t i o n - l i n k \ ,   \ . m e t a - i n f o - f a d e d \   �S  \ . e d u - c o m p a c t - c a r d \   I{7h_�~�g0
+ -   q_�Tb���X:_(u7b�H R 	�����e�vZ�&qaNl�Sa?a0
+ -   Θi�N�V�n��N���[�~�g7h_�te�G i t   C h e c k o u t   sS�S�V �0
+ -   �����7R�e�h�g��O\YTaSGr�v���c�N�NHe�g0W[SO1����^�S�eYe��aSGr�v'}�QU\:y0
+  
+ 
+- 时间：2026-02-20 11:10
+- 变更摘要：更新 index.md 教育背景模块结构
+- 问题说明：简化教育背景展示，移除冗余信息（奖项及注脚），合并专业与毕业时间信息。
+- 策略方向：优化 HTML 结构以实现更简洁的排版。
+- 具体改动：修改 docs/index.md，将专业与毕业时间合并到同一行，并移除 awards 和 footer-note 区域。
+- 验证：预览 index.md 确认结构正确。

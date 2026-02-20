@@ -1097,181 +1097,175 @@ body,
 /* ========== 2026-02-16 系统性覆盖浅色模式的 !important 样式 ==========================================================================*/
 
 
-/* ========== 教育背景 (Education Book Style) 2026-02-16 ========== */
+/* ========== 教育背景 (Flat Compact Style) 2026-02-20 ========== */
 
 .edu-book-container {
-  max-width: 900px;
-  margin: 3rem auto;
-  perspective: 1500px;
+  max-width: 880px;
+  margin: 1.8rem auto 2.2rem;
 }
 
 .edu-book-cover {
   display: flex;
-  background: #fdfbf7;
-  /* 米色纸张 */
-  border-radius: 6px;
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.1),
-    0 2px 4px rgba(0, 0, 0, 0.05),
-    inset 0 0 40px rgba(93, 64, 55, 0.05);
-  /* 纸张陈旧感 */
-  border: 1px solid rgba(93, 64, 55, 0.1);
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid rgba(55, 118, 171, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(22, 40, 60, 0.06);
   overflow: hidden;
-  position: relative;
 }
 
-/* 中央折痕/装订线 */
 .edu-book-cover::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 2px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
-  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  display: none;
 }
 
 .edu-page-left,
 .edu-page-right {
-  flex: 1;
-  padding: 3rem;
-  position: relative;
+  padding: 1.2rem 1.4rem;
 }
 
 .edu-page-left {
-  border-right: 1px solid rgba(0, 0, 0, 0.03);
-  text-align: center;
+  border-right: none;
+  border-bottom: 1px solid rgba(55, 118, 171, 0.14);
+  text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 0.8rem;
 }
 
-/* 左页内容 */
+.edu-school-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
 .edu-school-logo {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  opacity: 0.9;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin: 0;
+  font-size: 1.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #f4f8fd;
+  border: 1px solid rgba(55, 118, 171, 0.18);
+  opacity: 1;
+  flex-shrink: 0;
+}
+
+.edu-school-title {
+  min-width: 0;
 }
 
 .edu-page-left h3 {
-  font-family: "LiSu", "隶书", "KaiTi", "楷体", serif;
-  font-size: 2.2rem;
-  color: var(--md-primary-fg-color);
-  margin: 0.5rem 0;
+  margin: 0;
   border-bottom: none;
+  color: var(--md-primary-fg-color);
+  font-family: "KaiTi", "楷体", serif;
+  font-size: 1.45rem;
+  line-height: 1.2;
 }
 
 .edu-school-en {
+  margin: 0.15rem 0 0;
   font-family: "Times New Roman", Times, serif;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   color: var(--md-typeset-color);
-  opacity: 0.6;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 2rem;
+  opacity: 0.72;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1.35;
 }
 
 .edu-major-info {
-  background: rgba(93, 64, 55, 0.05);
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  margin-bottom: 2rem;
-  border: 1px dashed rgba(93, 64, 55, 0.2);
+  margin: 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(55, 118, 171, 0.2);
+  background: #f8fbff;
 }
 
 .edu-major-info p {
   margin: 0;
-  line-height: 1.6;
-}
-
-.edu-awards p {
-  margin: 0.4rem 0;
+  line-height: 1.5;
   font-size: 0.95rem;
-  color: var(--md-typeset-color);
 }
 
-/* 右页内容 */
+.edu-major-info p+p {
+  margin-top: 0.25rem;
+}
+
 .edu-page-right h4 {
+  margin: 0 0 0.75rem;
+  padding: 0;
+  border: none;
+  display: block;
   font-family: "KaiTi", "楷体", serif;
-  font-size: 1.4rem;
+  font-size: 1.16rem;
   color: var(--md-primary-fg-color);
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid rgba(93, 64, 55, 0.1);
-  padding-bottom: 0.5rem;
-  display: inline-block;
 }
 
 .edu-courses-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.45rem;
 }
 
-/* 课程胶囊样式优化 */
 .edu-course-badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.4rem 1rem;
-  background: rgba(93, 64, 55, 0.05);
-  /* 浅褐色背景 */
-  border: 1px solid rgba(93, 64, 55, 0.1);
-  border-radius: 4px;
-  /* 稍微方一点，像标签 */
-  font-size: 0.95rem;
+  padding: 0.25rem 0.72rem;
+  background: #f8fbff;
+  border: 1px solid rgba(55, 118, 171, 0.28);
+  border-radius: 999px;
+  font-size: 0.88rem;
   color: var(--md-primary-fg-color);
   font-family: "KaiTi", "楷体", serif;
   font-weight: 600;
-  transition: all 0.2s ease;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  transition: background-color 0.2s ease;
 }
 
 .edu-course-badge:hover {
-  background: var(--md-primary-fg-color);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
-  border-color: var(--md-primary-fg-color);
+  background: #edf4fd;
+  color: var(--md-primary-fg-color);
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(55, 118, 171, 0.35);
 }
 
-
 .edu-footer-note {
-  margin-top: 3rem;
-  font-size: 0.8rem;
-  color: var(--md-typeset-color);
-  opacity: 0.5;
-  font-style: italic;
-  text-align: right;
+  display: none;
 }
 
 /* 响应式适配 */
 @media screen and (max-width: 768px) {
-  .edu-book-cover {
-    flex-direction: column;
+  .edu-book-container {
+    margin: 1.4rem auto 1.8rem;
   }
 
-  .edu-book-cover::after {
-    display: none;
-  }
-
-  .edu-page-left {
-    border-right: none;
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
-    padding: 2rem 1.5rem;
-  }
-
+  .edu-page-left,
   .edu-page-right {
-    padding: 2rem 1.5rem;
+    padding: 1rem;
   }
 
   .edu-school-logo {
-    font-size: 3rem;
+    width: 2.3rem;
+    height: 2.3rem;
+    font-size: 1.5rem;
   }
 
   .edu-page-left h3 {
-    font-size: 1.8rem;
+    font-size: 1.25rem;
+  }
+
+  .edu-school-en {
+    font-size: 0.78rem;
+  }
+
+  .edu-course-badge {
+    font-size: 0.82rem;
   }
 }
 
