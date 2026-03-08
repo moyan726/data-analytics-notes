@@ -570,25 +570,41 @@
     - 表格内部元素：为 `text-align: center` 和 `margin: auto` 增加 `!important` 标志，确保优先级最高。
     - 修复了相关 CSS 注释的乱码。
 - **验证**：刷新页面，检查短表格是否已水平居中。
- 
- 
- -   �e���2 0 2 6 - 0 2 - 2 0   1 0 : 1 4 
- -   �S�fXd����~�gNU X OS  ( ;Nu���O\N�e) 
- -   ��f��cGS��u�BlL�l�S�vO\He�kNƉɉ&q�p_�[0
- -   V{eu�eT��Oo`M�jVN:_Sl�So�e�Ǒ(u�g�{aSGrNfnxC T A _�[0
- -   wQSO9e�R�
-     -   [ i n d e x . m d ]   GS�~��`/ {�����c:N  \ . c a r d - a c t i o n - l i n k \   &^	g  H o v e r   �{4Y�RHe0
-     -   [ i n d e x . m d ]   M�NO!k�~�Oo`ƉɉB\�~��m�R  \ . m e t a - i n f o - f a d e d \   Yto�W�I{Am4l�S0
-     -   [ i n d e x . m d ]   ͑�gYe��̀of��_�QYOVYy�U\:y�9e:N  \ . e d u - c o m p a c t - c a r d \   '}�QUS _*jT^@\0
-     -   [ c u s t o m . c s s ]   �m�R  \ . c a r d - a c t i o n - l i n k \ ,   \ . m e t a - i n f o - f a d e d \   �S  \ . e d u - c o m p a c t - c a r d \   I{7h_�~�g0
- -   q_�Tb���X:_(u7b�H R 	�����e�vZ�&qaNl�Sa?a0
- -   Θi�N�V�n��N���[�~�g7h_�te�G i t   C h e c k o u t   sS�S�V �0
- -   �����7R�e�h�g��O\YTaSGr�v���c�N�NHe�g0W[SO1����^�S�eYe��aSGr�v'}�QU\:y0
-  
- 
+
+
+## 2026-02-20 10:14 - 升级首屏 CTA 交互与信息层次
+
+- 时间：2026-02-20 10:14
+- 变更摘要：升级首屏 CTA（含跳转链接）的交互效果
+- 问题说明：提升信息层次感，采用更简洁的 CTA 标签样式
+- 策略方向：统一信息卡片，采用更简洁徽章标识 CTA 链接
+- 具体改动：
+    - [index.md] 升级链接/跳转按钮为 `.card-action-link` 并带 Hover 动效
+    - [index.md] 末尾次级信息调整迁移至 `.meta-info-faded` 淡色等宽字体
+    - [index.md] 重构教育背景展示改为 `.edu-compact-card` 紧凑单行布局
+    - [custom.css] 添加 `.card-action-link`、`.meta-info-faded` 及 `.edu-compact-card` 等样式结构
+- 影响：提升 HR 视角下简历信息的视觉层次感
+- 风险与回滚：可直接样式调整或 Git Checkout 回退
+- 验证：本地预览确认交互和徽章的链接信息有效，字体适配教育背景徽章的紧凑展示
+
 - 时间：2026-02-20 11:10
 - 变更摘要：更新 index.md 教育背景模块结构
 - 问题说明：简化教育背景展示，移除冗余信息（奖项及注脚），合并专业与毕业时间信息。
 - 策略方向：优化 HTML 结构以实现更简洁的排版。
 - 具体改动：修改 docs/index.md，将专业与毕业时间合并到同一行，并移除 awards 和 footer-note 区域。
 - 验证：预览 index.md 确认结构正确。
+
+---
+
+## 2026-03-08 17:15 - 新增 Excel 数据分析专栏
+
+- **变更摘要**：在站点新增 Excel 数据分析专栏（导航 + 首页卡片 + 专栏首页）
+- **问题说明**：用户需要一个 Excel 专栏作为后续内容更新的入口，当前站点缺少该分区
+- **策略方向**：复用现有专栏模式（如 SQL），创建 Excel 目录和 index.md，注册导航，添加知识体系卡片
+- **具体改动**：
+  - `[NEW] docs/Excel/index.md`：Excel 专栏首页，包含介绍、三块内容规划卡片（函数公式、数据透视表、图表可视化）
+  - `[MODIFY] mkdocs.yml`：nav 区域 Power BI 之后插入 Excel 导航条目
+  - `[MODIFY] docs/index.md`：知识体系卡片区添加 Excel 数据分析卡片
+- **影响面**：新增页面，无破坏性变更
+- **风险与回滚**：零风险，git revert 即可回退
+- **验证**：mkdocs.yml 导航结构正确、中文编码完好；index.md 卡片已添加

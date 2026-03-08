@@ -174,6 +174,10 @@ nav:
           - 附：实战建议: SQL/TaoBao_project/suggest.md
   - Power BI:
       - Power BI 系统指南: PowerBI/index.md
+  - Excel:
+      - Excel/index.md
+      - Excel 报表开发实战:
+          - 月度销售报表实战: Excel/ExcelBsae/ExcelBlog01.md
   - Projects:
       - Projects/index.md
       - 个人工具与自动化脚本:

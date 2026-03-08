@@ -15,6 +15,7 @@
         <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" alt="MySQL">
         <img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat&logo=powerbi&logoColor=black" alt="Power BI">
         <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat&logo=plotly&logoColor=white" alt="Matplotlib">
+        <img src="https://img.shields.io/badge/Excel-217346?style=flat&logo=microsoftexcel&logoColor=white" alt="Excel">
       </div>
       <div class="hero-links">
         <a href="https://github.com/moyan726" class="md-button md-button--primary" title="GitHub">
@@ -117,6 +118,13 @@
 <a href="./PowerBI/">查看笔记</a>
 </div>
 
+<div class="card">
+<div class="card-icon">📗</div>
+<h3>Excel 数据分析</h3>
+<p>函数公式、数据透视表、图表可视化，高效数据处理与分析利器。</p>
+<a href="./Excel/">查看笔记</a>
+</div>
+
 </div>
 
 ---
@@ -195,6 +203,7 @@
         <span class="edu-course-badge">NoSQL 数据库</span>
         <span class="edu-course-badge">数据可视化</span>
         <span class="edu-course-badge">多元统计分析</span>
+        <span class="edu-course-badge">数据库原理与应用MySQL</span>
       </div>
     </div>
   </div>
