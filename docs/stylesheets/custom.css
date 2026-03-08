@@ -1,34 +1,34 @@
 ﻿/* 鑷畾涔夋牱寮?- MkDocs Material 涓婚澧炲己 */
 
-/* ========== 鍏ㄥ眬鏍峰紡浼樺寲 ========== */
+/* ========== 全局样式优化 ========== */
 :root {
   /* 鑷畾涔夐鑹插彉閲?*/
-  /* 鍏ㄥ眬閰嶈壊璋冩暣 - 澶嶅彜绾歌川椋庢牸 */
+  /* 全局配色调整 - 复古纸质风格 */
   --md-primary-fg-color: #5D4037;
   /* 娣辨鑹?*/
   --md-primary-fg-color--light: #8D6E63;
   --md-primary-fg-color--dark: #3E2723;
   --md-accent-fg-color: #D84315;
-  /* 鐮栫孩鑹?*/
+  /* 砖红色 */
 
-  /* 鑳屾櫙閫忔槑搴﹁皟鏁达紝閫忓嚭绾哥汗 */
+  /* 背景透明度调整，透出纹理 */
   --md-default-bg-color: rgba(255, 255, 255, 0.65);
-  /* 鍗＄墖鍗婇€忔槑鐧?*/
+  /* 卡片半透明白 */
   --md-code-bg-color: rgba(0, 0, 0, 0.03);
-  /* 浠ｇ爜鍧楀井閫?*/
+  /* 代码块微透 */
 
-  /* 鏂囧瓧棰滆壊鏌斿拰鍖?*/
+  /* 文字颜色柔和化 */
   --md-typeset-color: #3e2723;
   /* 娣辫鐏拌壊 */
   --md-typeset-a-color: #5D4037;
 
-  /* 闃村奖璋冩暣 */
+  /* 阴影调整 */
   --md-shadow-z1: 0 4px 6px rgba(93, 64, 55, 0.1);
   --md-shadow-z2: 0 4px 10px rgba(93, 64, 55, 0.15);
 }
 
-/* ========== 鍏ㄥ眬鍥哄畾鑳屾櫙鍥剧墖 ========== */
-/* 灞?: 鑳屾櫙鍥剧墖 */
+/* ========== 全局固定背景图片 ========== */
+/* 层1: 背景图片 */
 body::before {
   content: "";
   position: fixed;
@@ -63,18 +63,18 @@ body::after {
   pointer-events: none;
 }
 
-/* ========== 浠ｇ爜鍧楃編鍖?========== */
+/* ========== 代码块美化 ========== */
 .highlight code {
   border-radius: 8px;
 }
 
-/* 浠ｇ爜鍧楅槾褰辨晥鏋?*/
+/* 代码块阴影效果 */
 .md-typeset pre {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 琛屽唴浠ｇ爜鏍峰紡 */
+/* 行内代码样式 */
 .md-typeset code:not(pre code) {
   background-color: rgba(92, 107, 192, 0.1);
   border-radius: 4px;
@@ -82,7 +82,7 @@ body::after {
   font-size: 0.9em;
 }
 
-/* ========== 鍗＄墖鏁堟灉 ========== */
+/* ========== 卡片效果 ========== */
 .md-typeset .admonition,
 .md-typeset details {
   border-radius: 8px;
@@ -132,7 +132,7 @@ body::after {
   text-align: center !important;
 }
 
-/* ========== 渚ц竟鏍忎紭鍖?========== */
+/* ========== 侧边栏优化 ========== */
 .md-nav__link {
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -142,18 +142,18 @@ body::after {
   background-color: rgba(92, 107, 192, 0.1);
 }
 
-/* 褰撳墠娲昏穬閾炬帴 */
+/* 当前活跃链接 */
 .md-nav__link--active {
   font-weight: 600;
 }
 
-/* ========== 椤堕儴瀵艰埅鏍?========== */
+/* ========== 顶部导航栏 ========== */
 .md-header {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* ========== 鎼滅储妗嗙編鍖?========== */
+/* ========== 搜索框美化 ========== */
 .md-search__input {
   border-radius: 20px;
 }
@@ -173,7 +173,7 @@ body::after {
   }
 }
 
-/* ========== 閾炬帴鏍峰紡 ========== */
+/* ========== 链接样式 ========== */
 .md-typeset a:not(.md-button) {
   text-decoration: none;
   border-bottom: 1px dashed var(--md-accent-fg-color);
@@ -197,7 +197,7 @@ body::after {
   padding-bottom: 0.3em;
 }
 
-/* ========== 婊氬姩鏉＄編鍖?========== */
+/* ========== 滚动条美化 ========== */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -217,7 +217,7 @@ body::after {
 }
 
 
-/* ========== 鍥剧墖鏍峰紡 ========== */
+/* ========== 图片样式 ========== */
 .md-typeset img {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -229,12 +229,12 @@ body::after {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* ========== 椤佃剼浼樺寲 ========== */
+/* ========== 页脚优化 ========== */
 .md-footer {
   margin-top: 2rem;
 }
 
-/* ========== 浠诲姟鍒楄〃缇庡寲 ========== */
+/* ========== 任务列表美化 ========== */
 .md-typeset .task-list-item input[type="checkbox"] {
   accent-color: var(--md-primary-fg-color);
 }
@@ -245,157 +245,10 @@ body::after {
   transition: all 0.2s ease;
 }
 
-/* ========== 鍝嶅簲寮忎紭鍖?========== */
+/* ========== 响应式优化 ========== */
 @media screen and (max-width: 76.1875em) {
   .md-nav__link:hover {
     transform: none;
-  }
-}
-
-/* ========== 首屏紧凑 Hero (个人简介) ========== */
-.hero-compact {
-  margin: 1rem 0 2rem 0;
-}
-
-.hero-profile {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  background: var(--md-default-bg-color);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-profile::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
-}
-
-.hero-avatar {
-  flex-shrink: 0;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid var(--md-primary-fg-color);
-  padding: 3px;
-  background: var(--md-default-bg-color);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.hero-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.hero-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.hero-info h1 {
-  font-size: 1.8rem;
-  margin: 0 0 0.3rem 0;
-  color: var(--md-typeset-color);
-  border-bottom: none !important;
-}
-
-.hero-info .profile-role {
-  font-size: 0.9rem;
-  color: var(--md-primary-fg-color);
-  font-weight: 600;
-  background: rgba(93, 64, 55, 0.08);
-  padding: 0.2rem 0.8rem;
-  border-radius: 20px;
-  display: inline-block;
-  margin-bottom: 0.5rem;
-}
-
-.hero-info p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--md-typeset-color);
-  opacity: 0.85;
-  margin: 0.3rem 0 0.8rem 0;
-}
-
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
-}
-
-.hero-badges img {
-  box-shadow: none !important;
-  border-radius: 3px !important;
-  transition: none !important;
-}
-
-.hero-badges img:hover {
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.hero-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.hero-links .md-button {
-  border-radius: 20px;
-  padding: 0.4rem 1.2rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: none;
-  transition: all 0.2s ease;
-  border: 2px solid var(--md-primary-fg-color) !important;
-  color: var(--md-primary-fg-color) !important;
-  background: transparent !important;
-  text-decoration: none !important;
-}
-
-.hero-links .md-button--primary {
-  background: var(--md-primary-fg-color) !important;
-  color: white !important;
-}
-
-.hero-links .md-button:hover {
-  background: var(--md-primary-fg-color) !important;
-  color: white !important;
-  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2);
-}
-
-/* 首屏响应式 */
-@media screen and (max-width: 600px) {
-  .hero-profile {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
-  }
-
-  .hero-info h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-badges {
-    justify-content: center;
-  }
-
-  .hero-links {
-    justify-content: center;
   }
 }
 
@@ -429,7 +282,7 @@ body::after {
 }
 
 
-/* ========== 鍗＄墖缃戞牸甯冨眬 ========== */
+/* ========== 卡片网格布局 ========== */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -498,9 +351,8 @@ body::after {
   transition: transform 0.2s ease;
 }
 
-.card a:hover::after {}
 
-/* ========== 鏃堕棿绾挎牱寮?========== */
+/* ========== 时间线样式 ========== */
 .timeline {
   position: relative;
   padding-left: 2rem;
@@ -859,7 +711,6 @@ body::after {
 }
 
 
-
 /* 3. 侧边栏/目录 (Sidebar & TOC) 轻量化 */
 .md-sidebar__scrollwrap,
 .md-sidebar__inner {
@@ -1094,8 +945,6 @@ body,
   font-size: 0.95rem !important;
 }
 
-/* ========== 2026-02-16 系统性覆盖浅色模式的 !important 样式 ==========================================================================*/
-
 
 /* ========== 教育背景 (Flat Compact Style) 2026-02-20 ========== */
 
@@ -1268,8 +1117,6 @@ body,
     font-size: 0.82rem;
   }
 }
-
-/* ========== Toast Notification ========== */
 
 /* ========== 竞赛与荣誉板块 ========== */
 .achievements-container {
