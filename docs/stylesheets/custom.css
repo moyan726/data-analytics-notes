@@ -495,14 +495,15 @@ body::after {
   padding: 2rem 1rem;
   margin: 2rem auto;
   max-width: 900px;
-  /* 纸质风格统一 */
-  background: #fdfbf7;
+  /* 纸质风格背景板 — !important 防止被 Material 主题变量覆盖 */
+  background: #fdfbf7 !important;
+  background-color: #fdfbf7 !important;
   border-radius: 6px;
   box-shadow:
     0 10px 20px rgba(0, 0, 0, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.05),
     inset 0 0 60px rgba(93, 64, 55, 0.05);
-  border: 1px solid rgba(93, 64, 55, 0.15);
+  border: 1px solid rgba(93, 64, 55, 0.15) !important;
   position: relative;
   overflow: hidden;
 }
@@ -573,15 +574,65 @@ body::after {
 }
 
 /* 角色标签（专业/职能）*/
-.hero-role {
-  font-size: 1rem;
+/* 角色标签 / 专业职能标签（.profile-role 与 .hero-role 共用）*/
+.hero-role,
+.profile-role {
+  font-size: 0.9rem;
   color: var(--md-primary-fg-color);
   font-weight: 600;
-  background: rgba(92, 107, 192, 0.1);
-  padding: 0.3rem 1rem;
+  background: rgba(93, 64, 55, 0.08);
+  padding: 0.2rem 0.8rem;
   border-radius: 20px;
   display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* 技能徽章条（shields.io 图片行）*/
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   margin-bottom: 1rem;
+}
+
+.hero-badges img {
+  box-shadow: none !important;
+  border-radius: 3px !important;
+  transition: none !important;
+}
+
+.hero-badges img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* 链接按钮组（横排 flex）*/
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.hero-links .md-button {
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: none;
+  transition: all 0.2s ease;
+  text-decoration: none !important;
+}
+
+.hero-links .md-button--primary {
+  background: var(--md-primary-fg-color) !important;
+  color: white !important;
+  border-color: var(--md-primary-fg-color) !important;
+}
+
+.hero-links .md-button:hover {
+  background: var(--md-primary-fg-color) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2);
 }
 
 /* 个人简介文字区 */
