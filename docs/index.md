@@ -1,7 +1,7 @@
 <div class="hero-compact">
   <div class="hero-profile">
     <div class="hero-avatar">
-      <img src="assets/images/touxiang.png" alt="JiaXing Yan">
+      <img src="assets/images/tx.png" alt="JiaXing Yan">
     </div>
     <div class="hero-info">
       <h1>JiaXing Yan</h1>
