@@ -183,7 +183,7 @@
         <div class="edu-school-logo">🏫</div>
         <div class="edu-school-title">
           <h3>安徽科技工程大学</h3>
-          <p class="edu-school-en">Anhui Science and Technology Engineering University</p>
+          <p class="edu-school-en">Anhui Science and Technology University</p>
         </div>
       </div>
       <div class="edu-major-info">
