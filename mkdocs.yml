@@ -186,6 +186,10 @@ nav:
           - Git 交互式提交助手: Projects/myself_tools/Git_Interactive_Commit_Tool.md
           - PPT 批量转 PDF 工具: Projects/myself_tools/PPT_to_PDF_Automation_Tool.md
           - AI 对话导航插件: Projects/myself_tools/AI_Chat_Navigation_Plugin.md
+      - 桥见九州 · 古桥时空图谱:
+          - 项目复盘: Projects/bridge-soul/blog_post.md
+          - AI 对话系统深度解析: Projects/bridge-soul/ai_deep_dive.md
+          - 视觉设计系统: Projects/bridge-soul/design_system.md
       - 样式参考: Projects/Style_Guide.md
 
 extra:

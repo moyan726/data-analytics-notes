@@ -39,6 +39,24 @@
 <div class="card-grid">
 
 <div class="card card--featured">
+<div class="card-icon">🌉</div>
+<h3>桥见九州 · 中国古桥时空图谱</h3>
+<p>全栈数据可视化系统，支持<strong>地图下钻</strong>、<strong>多维联动筛选</strong>、<strong>AI 智能问答</strong>。收录 <strong>100 座古桥</strong>、覆盖 <strong>22 省</strong>，"时域形义"四维信息架构。<strong>计算机设计大赛参赛作品</strong>。</p>
+<div class="card-tags">
+<img src="https://img.shields.io/badge/Vue_3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white" alt="Vue 3">
+<img src="https://img.shields.io/badge/ECharts-AA344D?style=flat-square&logo=apacheecharts&logoColor=white" alt="ECharts">
+<img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
+<img src="https://img.shields.io/badge/DeepSeek_AI-4285F4?style=flat-square" alt="DeepSeek">
+<img src="https://img.shields.io/badge/MCP-purple?style=flat-square" alt="MCP">
+</div>
+<div class="card-btn-group">
+<a href="./Projects/bridge-soul/blog_post/" class="btn-primary">项目复盘</a>
+<a href="./Projects/bridge-soul/ai_deep_dive/">AI 系统解析</a>
+<a href="./Projects/bridge-soul/design_system/">视觉设计</a>
+</div>
+</div>
+
+<div class="card card--featured">
 <div class="card-icon">📊</div>
 <h3>淘宝用户行为分析</h3>
 <p>基于 <strong>1 亿行</strong>数据集，使用<strong>分块读取</strong>与<strong>数据降维</strong>策略突破内存限制，完成漏斗转化与 RFM 价值分层分析。</p>
@@ -47,7 +65,9 @@
 <img src="https://img.shields.io/badge/1e8+_Rows-red?style=flat-square" alt="数据规模">
 <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas">
 </div>
-<a href="./SQL/TaoBao_project/">查看详情</a>
+<div class="card-btn-group">
+<a href="./SQL/TaoBao_project/" class="btn-primary">查看详情</a>
+</div>
 </div>
 
 <div class="card card--featured">
@@ -60,7 +80,9 @@
 <img src="https://img.shields.io/badge/XGBoost-189A1F?style=flat-square" alt="XGBoost">
 <img src="https://img.shields.io/badge/DataCastle-orange?style=flat-square" alt="DataCastle">
 </div>
-<a href="./Python/Machine-Learning/">查看详情</a>
+<div class="card-btn-group">
+<a href="./Python/Machine-Learning/" class="btn-primary">查看详情</a>
+</div>
 </div>
 
 
@@ -73,7 +95,9 @@
 <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white" alt="PowerShell">
 <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
 </div>
-<a href="./Projects/myself_tools/Git_Interactive_Commit_Tool/">查看详情</a>
+<div class="card-btn-group">
+<a href="./Projects/myself_tools/Git_Interactive_Commit_Tool/" class="btn-primary">查看详情</a>
+</div>
 </div>
 
 <div class="card">
@@ -84,7 +108,9 @@
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
 <img src="https://img.shields.io/badge/Chrome_Extension-4285F4?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome Extension">
 </div>
-<a href="./Projects/myself_tools/AI_Chat_Navigation_Plugin/">查看详情</a>
+<div class="card-btn-group">
+<a href="./Projects/myself_tools/AI_Chat_Navigation_Plugin/" class="btn-primary">查看详情</a>
+</div>
 </div>
 
 </div>
@@ -187,7 +213,7 @@
         </div>
       </div>
       <div class="edu-major-info">
-        <p><strong>本科专业：</strong>数据科学与大数据技术            <strong> 毕业时间：</strong>2027 年（预计）</p>
+        <p><strong>本科专业：</strong>数据科学与大数据技术            <strong> 毕业时间：</strong>2027 年</p>
       </div>
     </div>
     <div class="edu-page-right">
