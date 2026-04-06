@@ -1288,19 +1288,20 @@ body,
 
 /* ========== 竞赛与荣誉板块 ========== */
 .achievements-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin: 2rem 0;
 }
 
 .achievement-card {
   display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   background: #fdfbf7;
   border-radius: 12px;
-  padding: 1.8rem 2rem;
+  padding: 1.8rem 1.5rem;
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.06),
     inset 0 0 40px rgba(93, 64, 55, 0.03);
@@ -1312,42 +1313,43 @@ body,
 
 .achievement-card:hover {
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-/* 左侧彩色装饰条 */
+/* 顶部彩色装饰条 */
 .achievement-card::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 5px;
-  height: 100%;
-  border-radius: 12px 0 0 12px;
+  width: 100%;
+  height: 4px;
+  border-radius: 12px 12px 0 0;
 }
 
 .achievement--gold::before {
-  background: linear-gradient(180deg, #FFD700, #FFA000);
+  background: linear-gradient(90deg, #FFD700, #FFA000);
 }
 
 .achievement--purple::before {
-  background: linear-gradient(180deg, #7B1FA2, #CE93D8);
+  background: linear-gradient(90deg, #7B1FA2, #CE93D8);
 }
 
 .achievement--blue::before {
-  background: linear-gradient(180deg, #1565C0, #64B5F6);
+  background: linear-gradient(90deg, #1565C0, #64B5F6);
 }
 
 .achievement-icon {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   flex-shrink: 0;
-  width: 60px;
-  height: 60px;
+  width: 68px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 50%;
   background: rgba(93, 64, 55, 0.04);
+  margin-bottom: 0.6rem;
 }
 
 .achievement--gold .achievement-icon {
@@ -1362,14 +1364,9 @@ body,
   background: rgba(21, 101, 192, 0.08);
 }
 
-.achievement-body {
-  flex: 1;
-  min-width: 0;
-}
-
-.achievement-body h4 {
-  margin: 0 0 0.4rem 0;
-  font-size: 1.15rem;
+.achievement-card h4 {
+  margin: 0.3rem 0 0.2rem 0;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--md-typeset-color);
   border-bottom: none !important;
@@ -1378,11 +1375,11 @@ body,
 
 .achievement-level {
   display: inline-block;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 0.2rem 0.8rem;
+  padding: 0.2rem 0.75rem;
   border-radius: 20px;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.3rem;
   letter-spacing: 0.02em;
 }
 
@@ -1404,18 +1401,19 @@ body,
   border: 1px solid rgba(21, 101, 192, 0.2);
 }
 
-.achievement-body p {
-  font-size: 0.92rem;
-  line-height: 1.7;
+.achievement-card p {
+  font-size: 0.85rem;
+  line-height: 1.6;
   color: var(--md-typeset-color);
   opacity: 0.85;
-  margin: 0.5rem 0 0.8rem 0;
+  margin: 0.4rem 0 0.8rem 0;
 }
 
 .achievement-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  justify-content: center;
 }
 
 .achievement-tags span {
@@ -1431,24 +1429,14 @@ body,
 }
 
 /* 荣誉板块响应式 */
-@media screen and (max-width: 600px) {
-  .achievement-card {
-    flex-direction: column;
+@media screen and (max-width: 768px) {
+  .achievements-container {
+    grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .achievement-card {
     padding: 1.5rem;
-    text-align: center;
-  }
-
-  .achievement-icon {
-    margin: 0 auto;
-  }
-
-  .achievement-body {
-    text-align: center;
-  }
-
-  .achievement-tags {
-    justify-content: center;
   }
 }
 
@@ -1757,4 +1745,476 @@ input:focus-visible,
 .card .card-btn-group a.btn-primary:hover {
   background: #5f2b0f !important;
   border-color: #5f2b0f !important;
+}
+
+/* ========== 专业技能 (Professional Skills) ========== */
+
+/* — 主题色变量 — */
+:root {
+  --skill-data: #c0785c;
+  --skill-data-light: #fdf0eb;
+  --skill-bigdata: #6b8a7a;
+  --skill-bigdata-light: #eef5f1;
+  --skill-viz: #8b7bb5;
+  --skill-viz-light: #f1eef8;
+  --skill-stats: #c4915e;
+  --skill-stats-light: #fef5eb;
+  --skill-ai: #5a8a9a;
+  --skill-ai-light: #ebf3f6;
+}
+
+/* — 容器 — */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+/* — 卡片 — */
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #fdfbf7;
+  border-radius: 12px;
+  padding: 1.4rem 1rem 1.2rem;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 0 40px rgba(93, 64, 55, 0.03);
+  border: 1px solid rgba(93, 64, 55, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.skill-card h4 {
+  margin: 0.5rem 0 0.6rem 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--md-typeset-color);
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* — 顶部主题色条 — */
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 12px 12px 0 0;
+  transition: height 0.3s ease;
+}
+
+.skill-card:hover::before {
+  height: 5px;
+}
+
+/* 各主题色条 */
+.skill-card--data::before {
+  background: linear-gradient(90deg, var(--skill-data), #d4967e);
+}
+
+.skill-card--bigdata::before {
+  background: linear-gradient(90deg, var(--skill-bigdata), #8fb0a0);
+}
+
+.skill-card--viz::before {
+  background: linear-gradient(90deg, var(--skill-viz), #a99bd0);
+}
+
+.skill-card--stats::before {
+  background: linear-gradient(90deg, var(--skill-stats), #d7ad82);
+}
+
+.skill-card--ai::before {
+  background: linear-gradient(90deg, var(--skill-ai), #7fb0c0);
+}
+
+/* — 图标 — */
+.skill-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.1);
+}
+
+/* 各主题色图标背景 */
+.skill-card--data .skill-icon {
+  background: var(--skill-data-light);
+}
+
+.skill-card--bigdata .skill-icon {
+  background: var(--skill-bigdata-light);
+}
+
+.skill-card--viz .skill-icon {
+  background: var(--skill-viz-light);
+}
+
+.skill-card--stats .skill-icon {
+  background: var(--skill-stats-light);
+}
+
+.skill-card--ai .skill-icon {
+  background: var(--skill-ai-light);
+}
+
+/* — 正文区(已简化为直接子元素) — */
+
+/* — 标签 — */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+}
+
+.skill-tags span {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s ease;
+}
+
+.skill-card:hover .skill-tags span {
+  transform: translateY(-1px);
+}
+
+/* 各主题色标签 */
+.skill-card--data .skill-tags span {
+  background: var(--skill-data-light);
+  color: var(--skill-data);
+}
+
+.skill-card--bigdata .skill-tags span {
+  background: var(--skill-bigdata-light);
+  color: var(--skill-bigdata);
+}
+
+.skill-card--viz .skill-tags span {
+  background: var(--skill-viz-light);
+  color: var(--skill-viz);
+}
+
+.skill-card--stats .skill-tags span {
+  background: var(--skill-stats-light);
+  color: var(--skill-stats);
+}
+
+.skill-card--ai .skill-tags span {
+  background: var(--skill-ai-light);
+  color: var(--skill-ai);
+}
+
+/* — 响应式 — */
+@media screen and (max-width: 960px) {
+  .skills-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skill-card {
+    padding: 1rem 0.75rem;
+  }
+}
+
+/* ========== 项目实战 分层网格布局 ========== */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Hero 大卡：占满整行 */
+.card.card--hero {
+  grid-column: 1 / -1;
+  border: 2px solid var(--md-primary-fg-color);
+  background: linear-gradient(135deg, rgba(93, 64, 55, 0.04) 0%, rgba(216, 67, 21, 0.04) 100%);
+  padding: 2rem 2.5rem;
+}
+
+.card--hero::before {
+  height: 6px !important;
+}
+
+.card--hero .card-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.card--hero h3 {
+  font-size: 1.5rem;
+}
+
+/* 中等卡片 */
+.card.card--mid {
+  border: 2px solid var(--md-primary-fg-color);
+  background: linear-gradient(135deg, rgba(93, 64, 55, 0.03) 0%, rgba(216, 67, 21, 0.03) 100%);
+}
+
+.card--mid::before {
+  height: 5px !important;
+}
+
+/* 小卡片：更紧凑 */
+.card.card--small {
+  padding: 1.2rem;
+}
+
+.card--small .card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.card--small h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.card--small p {
+  font-size: 0.88rem;
+  margin-bottom: 0.6rem;
+}
+
+@media screen and (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card.card--hero {
+    padding: 1.5rem;
+  }
+
+  .card--hero h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ========== 板块提示文字（独立行，紧贴标题右侧对齐） ========== */
+.md-typeset .section-hint-bar {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--kb-text-muted) !important;
+  opacity: 0.5;
+  text-align: right;
+  margin-top: -1.2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+@media screen and (max-width: 600px) {
+  .md-typeset .section-hint-bar {
+    display: none;
+  }
+}
+
+/* ========== 知识体系 导航条 ========== */
+.knowledge-nav {
+  display: flex;
+  gap: 0;
+  margin: 2rem 0;
+  background: #fdfbf7;
+  border-radius: 12px;
+  border: 1px solid rgba(93, 64, 55, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.knowledge-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  text-decoration: none !important;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片悬停效果 - 个性化显示 */
+.knowledge-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(93, 64, 55, 0.08) 0%, rgba(216, 67, 21, 0.08) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.knowledge-item::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(93, 64, 55, 0.12);
+}
+
+.knowledge-item:not(:last-child)::after {
+  display: block !important;
+}
+
+.md-typeset .knowledge-item,
+.md-typeset .knowledge-item:hover {
+  border-bottom-style: solid !important;
+  color: inherit !important;
+  background-image: none !important;
+}
+
+.knowledge-item:hover {
+  background-color: rgba(93, 64, 55, 0.04) !important;
+  border-bottom-color: var(--md-primary-fg-color) !important;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(93, 64, 55, 0.15);
+}
+
+.knowledge-item:hover::before {
+  opacity: 1;
+}
+
+.knowledge-item:hover .knowledge-icon {
+  transform: scale(1.15) rotateZ(5deg);
+  animation: bounce-icon 0.6s ease;
+}
+
+.knowledge-item:hover .knowledge-title {
+  color: var(--md-accent-fg-color) !important;
+}
+
+.knowledge-item:hover .knowledge-desc {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 500;
+}
+
+/* 悬浮提示 - 淡淡的进入模块提示 */
+.knowledge-item:hover .knowledge-desc::after {
+  content: "↓ 点击进入此模块";
+  display: block;
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed rgba(93, 64, 55, 0.15);
+  font-size: 0.65rem;
+  font-weight: 400;
+  opacity: 0.35;
+  color: var(--md-primary-fg-color);
+  letter-spacing: 0.03em;
+  animation: hint-fade-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+}
+
+@keyframes hint-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+}
+
+/* 图标弹跳动画 */
+@keyframes bounce-icon {
+  0%, 100% {
+    transform: scale(1.15) rotateZ(5deg);
+  }
+  50% {
+    transform: scale(1.25) rotateZ(-5deg);
+  }
+}
+
+.knowledge-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.knowledge-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--kb-text-strong) !important;
+  margin-bottom: 0.3rem;
+}
+
+.knowledge-desc {
+  font-size: 0.8rem;
+  color: var(--kb-text-muted) !important;
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 768px) {
+  .knowledge-nav {
+    flex-wrap: wrap;
+  }
+
+  .knowledge-item {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .knowledge-item:not(:last-child)::after {
+    display: none;
+  }
+
+  .knowledge-item:nth-child(1),
+  .knowledge-item:nth-child(2) {
+    border-bottom: 1px solid rgba(93, 64, 55, 0.1);
+  }
+
+  .knowledge-item:hover {
+    transform: translateY(-6px) scale(1.01);
+  }
+
+  .knowledge-item:hover .knowledge-icon {
+    transform: scale(1.12) rotateZ(3deg);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .knowledge-item {
+    flex: 1 1 100%;
+  }
+
+  .knowledge-item:hover {
+    transform: translateY(-4px) scale(1.005);
+    box-shadow: 0 8px 20px rgba(93, 64, 55, 0.12);
+  }
+
+  .knowledge-item:hover .knowledge-icon {
+    transform: scale(1.1) rotateZ(2deg);
+  }
 }

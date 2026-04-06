@@ -1,4 +1,4 @@
-<div class="hero-compact">
+﻿<div class="hero-compact">
   <div class="hero-profile">
     <div class="hero-avatar">
       <img src="assets/images/tx.png" alt="JiaXing Yan">
@@ -34,11 +34,59 @@
 
 ---
 
-## 🚀 项目实战
+## 🛠️ 专业技能
 
-<div class="card-grid">
+<div class="skills-container">
 
-<div class="card card--featured">
+  <div class="skill-card skill-card--data">
+    <div class="skill-icon">🛢️</div>
+    <h4>数据处理与建模</h4>
+    <div class="skill-tags">
+      <span>Python</span><span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>SQL</span>
+    </div>
+  </div>
+
+  <div class="skill-card skill-card--bigdata">
+    <div class="skill-icon">⚙️</div>
+    <h4>大数据与数据工程</h4>
+    <div class="skill-tags">
+      <span>Spark</span><span>Hadoop</span><span>Docker</span><span>Hive</span><span>ETL</span>
+    </div>
+  </div>
+
+  <div class="skill-card skill-card--viz">
+    <div class="skill-icon">📊</div>
+    <h4>数据可视化与BI</h4>
+    <div class="skill-tags">
+      <span>Power BI</span><span>ECharts</span><span>Streamlit</span><span>Excel</span>
+    </div>
+  </div>
+
+  <div class="skill-card skill-card--stats">
+    <div class="skill-icon">📈</div>
+    <h4>业务分析与指标体系</h4>
+    <div class="skill-tags">
+      <span>A/B 测试</span><span>漏斗分析</span><span>Cohort</span><span>归因分析</span>
+    </div>
+  </div>
+
+  <div class="skill-card skill-card--ai">
+    <div class="skill-icon">🤖</div>
+    <h4>AI 工具应用</h4>
+    <div class="skill-tags">
+      <span>Claude Code</span><span>Codex</span><span>Trae</span><span>Prompt Engineering</span><span>MCP</span>
+    </div>
+  </div>
+
+</div>
+
+---
+
+## 💼 项目实战
+
+<div class="project-grid">
+
+<div class="card card--hero">
 <div class="card-icon">🌉</div>
 <h3>桥见九州 · 中国古桥时空图谱</h3>
 <p>全栈数据可视化系统，支持<strong>地图下钻</strong>、<strong>多维联动筛选</strong>、<strong>AI 智能问答</strong>。收录 <strong>100 座古桥</strong>、覆盖 <strong>22 省</strong>，"时域形义"四维信息架构。<strong>计算机设计大赛参赛作品</strong>。</p>
@@ -56,7 +104,7 @@
 </div>
 </div>
 
-<div class="card card--featured">
+<div class="card card--mid">
 <div class="card-icon">📊</div>
 <h3>淘宝用户行为分析</h3>
 <p>基于 <strong>1 亿行</strong>数据集，使用<strong>分块读取</strong>与<strong>数据降维</strong>策略突破内存限制，完成漏斗转化与 RFM 价值分层分析。</p>
@@ -70,7 +118,7 @@
 </div>
 </div>
 
-<div class="card card--featured">
+<div class="card card--mid">
 <div class="card-icon">🏆</div>
 <h3>房地产价格预测算法挑战赛</h3>
 <p>DataCastle 竞赛 <strong>Rank 1 冠军</strong>。采用 <strong>Stacking 融合模型</strong> (XGBoost + LightGBM)，通过地理聚类等特征工程手段，以 <strong>167.13 (RMSE)</strong> 超低误差斩获榜首。</p>
@@ -87,7 +135,7 @@
 
 
 
-<div class="card">
+<div class="card card--small">
 <div class="card-icon">🔧</div>
 <h3>Git 交互式提交助手</h3>
 <p>PowerShell 脚本工具，实现分批提交、敏感文件警告、遗漏检测与可视化进度统计。</p>
@@ -100,7 +148,7 @@
 </div>
 </div>
 
-<div class="card">
+<div class="card card--small">
 <div class="card-icon">🧩</div>
 <h3>AI 对话导航插件</h3>
 <p>浏览器扩展，为 Gemini / ChatGPT / Claude 长对话生成悬浮目录，纯原生 JS，体积 < 200KB。</p>
@@ -121,39 +169,34 @@
 
 ## 📚 知识体系
 
-<div class="card-grid">
+<div class="knowledge-nav">
 
-<div class="card">
-<div class="card-icon">🐍</div>
-<h3>Python 数据分析</h3>
-<p>Pandas 数据清洗与重构、NumPy 计算、Matplotlib / Seaborn 可视化实践笔记。</p>
-<a href="./Python/">查看笔记</a>
-</div>
+  <a href="./Python/" class="knowledge-item">
+    <span class="knowledge-icon">🐍</span>
+    <span class="knowledge-title">Python 数据分析</span>
+    <span class="knowledge-desc">Pandas · NumPy · Matplotlib · Seaborn</span>
+  </a>
 
-<div class="card">
-<div class="card-icon">💾</div>
-<h3>SQL 数据库</h3>
-<p>MySQL 基础/进阶语法、窗口函数专题、性能优化最佳实践。</p>
-<a href="./SQL/">查看笔记</a>
-</div>
+  <a href="./SQL/" class="knowledge-item">
+    <span class="knowledge-icon">💾</span>
+    <span class="knowledge-title">SQL 数据库</span>
+    <span class="knowledge-desc">基础/进阶 · 窗口函数 · 性能优化</span>
+  </a>
 
-<div class="card">
-<div class="card-icon">📊</div>
-<h3>Power BI</h3>
-<p>DAX 函数、数据建模、仪表盘设计与商业智能分析方法论。</p>
-<a href="./PowerBI/">查看笔记</a>
-</div>
+  <a href="./PowerBI/" class="knowledge-item">
+    <span class="knowledge-icon">📊</span>
+    <span class="knowledge-title">Power BI</span>
+    <span class="knowledge-desc">DAX · 数据建模 · 仪表盘设计</span>
+  </a>
 
-<div class="card">
-<div class="card-icon">📗</div>
-<h3>Excel 数据分析</h3>
-<p>函数公式、数据透视表、图表可视化，高效数据处理与分析利器。</p>
-<a href="./Excel/">查看笔记</a>
-</div>
+  <a href="./Excel/" class="knowledge-item">
+    <span class="knowledge-icon">📗</span>
+    <span class="knowledge-title">Excel 数据分析</span>
+    <span class="knowledge-desc">函数公式 · 透视表 · 图表可视化</span>
+  </a>
 
 </div>
 
----
 
 ## 🏅 竞赛与荣誉
 
@@ -161,38 +204,31 @@
 
   <div class="achievement-card achievement--gold">
     <div class="achievement-icon">🥇</div>
-    <div class="achievement-body">
-      <h4>DataCastle 房地产价格预测算法挑战赛</h4>
-      <span class="achievement-level">Rank 1 冠军</span>
-      <p> DataCastle 平台托管的校内算法优选赛 <strong>Rank 1</strong>。
-    在全场 <strong>376 次</strong> 模型提交的高频对抗中，通过 EDA 特征工程与 Stacking 策略，仅迭代 <strong>21 次</strong> 即以 <strong>167.13 (RMSE)</strong> 的最低误差锁定榜首。</p>
-      <div class="achievement-tags">
-        <span>算法竞赛</span><span>冠军</span>
-      </div>
+    <span class="achievement-level">Rank 1 冠军</span>
+    <h4>DataCastle 房价预测挑战赛</h4>
+    <p>校内算法赛 <strong>Rank 1</strong>，376 次提交中以 <strong>167.13 RMSE</strong> 锁定榜首。Stacking 融合 + EDA 特征工程，仅 21 次迭代。</p>
+    <div class="achievement-tags">
+      <span>算法竞赛</span><span>冠军</span>
     </div>
   </div>
 
   <div class="achievement-card achievement--purple">
     <div class="achievement-icon">📜</div>
-    <div class="achievement-body">
-      <h4>省级大学生创新创业训练计划</h4>
-      <span class="achievement-level">省级立项 · 项目负责人</span>
-      <p>项目编号：S202410879245S。带领团队完成从需求挖掘到产品落地的全过程。</p>
-      <div class="achievement-tags">
-        <span>项目管理</span><span>创新创业</span>
-      </div>
+    <span class="achievement-level">省级立项 · 项目负责人</span>
+    <h4>省级大创训练计划</h4>
+    <p>项目编号 S202410879245S。带领团队完成从需求挖掘到产品落地的全过程。</p>
+    <div class="achievement-tags">
+      <span>项目管理</span><span>创新创业</span>
     </div>
   </div>
 
   <div class="achievement-card achievement--blue">
     <div class="achievement-icon">©️</div>
-    <div class="achievement-body">
-      <h4>国家软件著作权</h4>
-      <span class="achievement-level">证书号: 2025SR0936650</span>
-      <p>《便捷型智能洗头机预约系统 V1.0》，验证了从 0 到 1 的工程化交付能力。</p>
-      <div class="achievement-tags">
-        <span>知识产权</span><span>工程落地</span>
-      </div>
+    <span class="achievement-level">证书号: 2025SR0936650</span>
+    <h4>国家软件著作权</h4>
+    <p>《便捷型智能洗头机预约系统 V1.0》，验证从 0 到 1 的工程化交付能力。</p>
+    <div class="achievement-tags">
+      <span>知识产权</span><span>工程落地</span>
     </div>
   </div>
 
