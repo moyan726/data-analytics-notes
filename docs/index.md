@@ -37,47 +37,41 @@
 ## 🛠️ 专业技能
 
 <div class="skills-container">
-
-  <div class="skill-card skill-card--data">
-    <div class="skill-icon">🛢️</div>
-    <h4>数据处理与建模</h4>
-    <div class="skill-tags">
-      <span>Python</span><span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>SQL</span>
-    </div>
-  </div>
-
-  <div class="skill-card skill-card--bigdata">
-    <div class="skill-icon">⚙️</div>
-    <h4>大数据与数据工程</h4>
-    <div class="skill-tags">
-      <span>Spark</span><span>Hadoop</span><span>Docker</span><span>Hive</span><span>ETL</span>
-    </div>
-  </div>
-
-  <div class="skill-card skill-card--viz">
-    <div class="skill-icon">📊</div>
-    <h4>数据可视化与BI</h4>
-    <div class="skill-tags">
-      <span>Power BI</span><span>ECharts</span><span>Streamlit</span><span>Excel</span>
-    </div>
-  </div>
-
-  <div class="skill-card skill-card--stats">
-    <div class="skill-icon">📈</div>
-    <h4>业务分析与指标体系</h4>
-    <div class="skill-tags">
-      <span>A/B 测试</span><span>漏斗分析</span><span>Cohort</span><span>归因分析</span>
-    </div>
-  </div>
-
-  <div class="skill-card skill-card--ai">
-    <div class="skill-icon">🤖</div>
-    <h4>AI 工具应用</h4>
-    <div class="skill-tags">
-      <span>Claude Code</span><span>Codex</span><span>Trae</span><span>Prompt Engineering</span><span>MCP</span>
-    </div>
-  </div>
-
+<div class="skill-card skill-card--data">
+<div class="skill-icon">🛢️</div>
+<h4>数据处理与建模</h4>
+<div class="skill-tags">
+<span>Python</span><span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>SQL</span>
+</div>
+</div>
+<div class="skill-card skill-card--bigdata">
+<div class="skill-icon">⚙️</div>
+<h4>大数据与数据工程</h4>
+<div class="skill-tags">
+<span>Spark</span><span>Hadoop</span><span>Docker</span><span>Hive</span><span>ETL</span>
+</div>
+</div>
+<div class="skill-card skill-card--viz">
+<div class="skill-icon">📊</div>
+<h4>数据可视化与BI</h4>
+<div class="skill-tags">
+<span>Power BI</span><span>ECharts</span><span>Streamlit</span><span>Excel</span>
+</div>
+</div>
+<div class="skill-card skill-card--stats">
+<div class="skill-icon">📈</div>
+<h4>业务分析与指标体系</h4>
+<div class="skill-tags">
+<span>A/B 测试</span><span>漏斗分析</span><span>Cohort</span><span>归因分析</span>
+</div>
+</div>
+<div class="skill-card skill-card--ai">
+<div class="skill-icon">🤖</div>
+<h4>AI 工具应用</h4>
+<div class="skill-tags">
+<span>Claude Code</span><span>Codex</span><span>Trae</span><span>Prompt Engineering</span><span>MCP</span>
+</div>
+</div>
 </div>
 
 ---
@@ -170,68 +164,59 @@
 ## 📚 知识体系
 
 <div class="knowledge-nav">
-
-  <a href="./Python/" class="knowledge-item">
-    <span class="knowledge-icon">🐍</span>
-    <span class="knowledge-title">Python 数据分析</span>
-    <span class="knowledge-desc">Pandas · NumPy · Matplotlib · Seaborn</span>
-  </a>
-
-  <a href="./SQL/" class="knowledge-item">
-    <span class="knowledge-icon">💾</span>
-    <span class="knowledge-title">SQL 数据库</span>
-    <span class="knowledge-desc">基础/进阶 · 窗口函数 · 性能优化</span>
-  </a>
-
-  <a href="./PowerBI/" class="knowledge-item">
-    <span class="knowledge-icon">📊</span>
-    <span class="knowledge-title">Power BI</span>
-    <span class="knowledge-desc">DAX · 数据建模 · 仪表盘设计</span>
-  </a>
-
-  <a href="./Excel/" class="knowledge-item">
-    <span class="knowledge-icon">📗</span>
-    <span class="knowledge-title">Excel 数据分析</span>
-    <span class="knowledge-desc">函数公式 · 透视表 · 图表可视化</span>
-  </a>
-
+<a href="./Python/" class="knowledge-item">
+<span class="knowledge-icon">🐍</span>
+<span class="knowledge-title">Python 数据分析</span>
+<span class="knowledge-desc">Pandas · NumPy · Matplotlib · Seaborn</span>
+</a>
+<a href="./SQL/" class="knowledge-item">
+<span class="knowledge-icon">💾</span>
+<span class="knowledge-title">SQL 数据库</span>
+<span class="knowledge-desc">基础/进阶 · 窗口函数 · 性能优化</span>
+</a>
+<a href="./PowerBI/" class="knowledge-item">
+<span class="knowledge-icon">📊</span>
+<span class="knowledge-title">Power BI</span>
+<span class="knowledge-desc">DAX · 数据建模 · 仪表盘设计</span>
+</a>
+<a href="./Excel/" class="knowledge-item">
+<span class="knowledge-icon">📗</span>
+<span class="knowledge-title">Excel 数据分析</span>
+<span class="knowledge-desc">函数公式 · 透视表 · 图表可视化</span>
+</a>
 </div>
 
 
 ## 🏅 竞赛与荣誉
 
 <div class="achievements-container">
-
-  <div class="achievement-card achievement--gold">
-    <div class="achievement-icon">🥇</div>
-    <span class="achievement-level">Rank 1 冠军</span>
-    <h4>DataCastle 房价预测挑战赛</h4>
-    <p>校内算法赛 <strong>Rank 1</strong>，376 次提交中以 <strong>167.13 RMSE</strong> 锁定榜首。Stacking 融合 + EDA 特征工程，仅 21 次迭代。</p>
-    <div class="achievement-tags">
-      <span>算法竞赛</span><span>冠军</span>
-    </div>
-  </div>
-
-  <div class="achievement-card achievement--purple">
-    <div class="achievement-icon">📜</div>
-    <span class="achievement-level">省级立项 · 项目负责人</span>
-    <h4>省级大创训练计划</h4>
-    <p>项目编号 S202410879245S。带领团队完成从需求挖掘到产品落地的全过程。</p>
-    <div class="achievement-tags">
-      <span>项目管理</span><span>创新创业</span>
-    </div>
-  </div>
-
-  <div class="achievement-card achievement--blue">
-    <div class="achievement-icon">©️</div>
-    <span class="achievement-level">证书号: 2025SR0936650</span>
-    <h4>国家软件著作权</h4>
-    <p>《便捷型智能洗头机预约系统 V1.0》，验证从 0 到 1 的工程化交付能力。</p>
-    <div class="achievement-tags">
-      <span>知识产权</span><span>工程落地</span>
-    </div>
-  </div>
-
+<div class="achievement-card achievement--gold">
+<div class="achievement-icon">🥇</div>
+<span class="achievement-level">Rank 1 冠军</span>
+<h4>DataCastle 房价预测挑战赛</h4>
+<p>校内算法赛 <strong>Rank 1</strong>，376 次提交中以 <strong>167.13 RMSE</strong> 锁定榜首。Stacking 融合 + EDA 特征工程，仅 21 次迭代。</p>
+<div class="achievement-tags">
+<span>算法竞赛</span><span>冠军</span>
+</div>
+</div>
+<div class="achievement-card achievement--purple">
+<div class="achievement-icon">📜</div>
+<span class="achievement-level">省级立项 · 项目负责人</span>
+<h4>省级大创训练计划</h4>
+<p>项目编号 S202410879245S。带领团队完成从需求挖掘到产品落地的全过程。</p>
+<div class="achievement-tags">
+<span>项目管理</span><span>创新创业</span>
+</div>
+</div>
+<div class="achievement-card achievement--blue">
+<div class="achievement-icon">©️</div>
+<span class="achievement-level">证书号: 2025SR0936650</span>
+<h4>国家软件著作权</h4>
+<p>《便捷型智能洗头机预约系统 V1.0》，验证从 0 到 1 的工程化交付能力。</p>
+<div class="achievement-tags">
+<span>知识产权</span><span>工程落地</span>
+</div>
+</div>
 </div>
 
 ---
@@ -239,34 +224,34 @@
 ## 🎓 教育背景
 
 <div class="edu-book-container">
-  <div class="edu-book-cover">
-    <div class="edu-page-left">
-      <div class="edu-school-header">
-        <div class="edu-school-logo">🏫</div>
-        <div class="edu-school-title">
-          <h3>安徽科技工程大学</h3>
-          <p class="edu-school-en">Anhui Science and Technology University</p>
-        </div>
-      </div>
-      <div class="edu-major-info">
-        <p><strong>本科专业：</strong>数据科学与大数据技术            <strong> 毕业时间：</strong>2027 年</p>
-      </div>
-    </div>
-    <div class="edu-page-right">
-      <h4>核心课程 (Core Courses)</h4>
-      <div class="edu-courses-grid">
-        <span class="edu-course-badge">数据挖掘与分析</span>
-        <span class="edu-course-badge">Spark 大数据处理</span>
-        <span class="edu-course-badge">概率论与数理统计</span>
-        <span class="edu-course-badge">机器学习</span>
-        <span class="edu-course-badge">深度学习</span>
-        <span class="edu-course-badge">推荐算法</span>
-        <span class="edu-course-badge">Hadoop 大数据</span>
-        <span class="edu-course-badge">NoSQL 数据库</span>
-        <span class="edu-course-badge">数据可视化</span>
-        <span class="edu-course-badge">多元统计分析</span>
-        <span class="edu-course-badge">数据库原理与应用MySQL</span>
-      </div>
-    </div>
-  </div>
+<div class="edu-book-cover">
+<div class="edu-page-left">
+<div class="edu-school-header">
+<div class="edu-school-logo">🏫</div>
+<div class="edu-school-title">
+<h3>安徽科技工程大学</h3>
+<p class="edu-school-en">Anhui Science and Technology University</p>
+</div>
+</div>
+<div class="edu-major-info">
+<p><strong>本科专业：</strong>数据科学与大数据技术            <strong> 毕业时间：</strong>2027 年</p>
+</div>
+</div>
+<div class="edu-page-right">
+<h4>核心课程 (Core Courses)</h4>
+<div class="edu-courses-grid">
+<span class="edu-course-badge">数据挖掘与分析</span>
+<span class="edu-course-badge">Spark 大数据处理</span>
+<span class="edu-course-badge">概率论与数理统计</span>
+<span class="edu-course-badge">机器学习</span>
+<span class="edu-course-badge">深度学习</span>
+<span class="edu-course-badge">推荐算法</span>
+<span class="edu-course-badge">Hadoop 大数据</span>
+<span class="edu-course-badge">NoSQL 数据库</span>
+<span class="edu-course-badge">数据可视化</span>
+<span class="edu-course-badge">多元统计分析</span>
+<span class="edu-course-badge">数据库原理与应用MySQL</span>
+</div>
+</div>
+</div>
 </div>
