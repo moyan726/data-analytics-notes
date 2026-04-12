@@ -129,6 +129,22 @@
 
 
 
+<div class="card card--mid">
+<div class="card-icon">🚴</div>
+<h3>Toman 共享单车经营分析</h3>
+<p>基于 2021—2022 双年骑行数据，完成 <strong>MySQL → SQL → Power BI</strong> 全链路分析，以价格弹性模型回答定价决策问题，仪表板已发布至 Power BI Service。</p>
+<div class="card-tags">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL">
+<img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black" alt="Power BI">
+<img src="https://img.shields.io/badge/SQL-E38C00?style=flat-square" alt="SQL">
+<img src="https://img.shields.io/badge/价格弹性分析-5C6BC0?style=flat-square" alt="业务分析">
+</div>
+<div class="card-btn-group">
+<a href="./PowerBI/Bicycle/datashow/" class="btn-primary">项目展示</a>
+<a href="./PowerBI/Bicycle/analytics/">经营分析复盘</a>
+</div>
+</div>
+
 <div class="card card--small">
 <div class="card-icon">🔧</div>
 <h3>Git 交互式提交助手</h3>

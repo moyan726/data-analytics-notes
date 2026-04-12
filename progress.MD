@@ -778,3 +778,43 @@
 - **影响面**：主页新增一个板块，无破坏性变更；CSS 替换仅影响技能相关类名
 - **风险与回滚**：零风险。Git 回退 `index.md` 和 `custom.css` 即可。
 - **验证**：`mkdocs serve` 本地预览确认 5 张卡片渲染正常、主题色区分清晰、hover 动效生效、响应式布局正确。
+
+## 2026-04-12 16:20 - Power BI Bicycle 图片按内容重命名与文档引用修正
+
+- **时间**：2026-04-12 16:20 (UTC+8)
+- **变更摘要**：将 Bicycle 看板截图从时间戳文件名重命名为语义化名称，并同步修正 Markdown 中的图片引用路径。
+- **问题说明**：docs/PowerBI/Bicycle/images 目录中的 5 张截图仍使用 image-时间戳.png 命名，无法从文件名识别内容；nalytics.md 里同时保留了 Typora 本地绝对路径，导致图片资源不可移植，文档迁移或构建时存在失效风险。触发条件是在整理 Power BI Bicycle 笔记并需要按内容检索、复用图片时。
+- **策略方向**：采用语义化、可移植的 ASCII 文件名，优先体现图表主题；在重命名图片的同时，把 nalytics.md 中对应引用改为相对路径 ./images/...，避免只改文件名而不修正文档引用。
+- **具体改动**：
+  - 计划将总览页、时段分析、月度趋势、季节对比/骑手分布、年度汇总表 5 张截图分别改为语义化名称。
+  - 同步更新 docs/PowerBI/Bicycle/analytics.md 中 5 处图片引用与 alt 文本。
+- **影响面**：包含 docs/PowerBI/Bicycle/images 下 5 张截图文件名，以及 docs/PowerBI/Bicycle/analytics.md 的图片链接；不包含数据文件、Power BI 报表、其他目录文档与站点配置。
+- **风险与回滚**：风险点是文件重命名后若引用未同步会导致文档图片失效；缓解措施是同次修改中一并替换 Markdown 引用并做结果校验。若需回滚，可按本次记录中的映射关系将文件名改回原值，并恢复 nalytics.md 对应 5 处引用。
+- **验证**：待执行重命名和引用替换后，校验 nalytics.md 中不再包含旧的 image-时间戳.png / Typora 绝对路径，并确认新文件均存在。
+- **关联信息**：目标目录为 docs/PowerBI/Bicycle/images，涉及文档为 docs/PowerBI/Bicycle/analytics.md。
+### 2026-04-12 16:23 补充验证
+
+- **验证结果**：docs/PowerBI/Bicycle/analytics.md 中 5 处图片引用已全部改为 ./images/... 相对路径，旧时间戳文件名与 Typora 绝对路径已清除；docs/PowerBI/Bicycle/images 中已存在以下新文件：dashboard-overview.png、hourly-revenue-analysis.png、monthly-riders-revenue-profit-trend.png、seasonal-revenue-and-rider-type.png、yearly-riders-profit-price-summary.png。
+- **文件映射**：image-20260412161403930.png -> dashboard-overview.png；image-20260412161241759.png -> hourly-revenue-analysis.png；image-20260412161303261.png -> monthly-riders-revenue-profit-trend.png；image-20260412161315358.png -> seasonal-revenue-and-rider-type.png；image-20260412161330336.png -> yearly-riders-profit-price-summary.png。
+- **偏差说明**：与原计划一致，无额外依赖变更。
+## 2026-04-12 16:37 - Power BI Bicycle analytics.md 专业化重构与逐图分析写入
+
+- **时间**：2026-04-12 16:37 (UTC+8)
+- **变更摘要**：将 `analytics.md` 从截图堆叠页面重构为面向数据分析师岗位的经营分析报告，并为 6 张图补充结构化分析。
+- **问题说明**：旧版 `analytics.md` 只有单张时段矩阵的长段说明，后续图片基本为空位，文档缺少统一结构、缺少 KPI 口径解释，也没有对年度对比、月度趋势、季节结构和用户结构形成完整分析闭环。看板中的 `45.21%` 指标名称还存在专业口径风险，容易在正式汇报或面试场景下被追问。
+- **策略方向**：以“整体重构 + 明确纠偏”为主，将全文改写为统一的分析师复盘报告；营收与利润统一采用与看板一致的整数单价口径；对每张图固定写入图表目的、关键发现、业务含义、分析边界，并显式说明利润率命名问题。
+- **具体改动**：
+  - 计划按 `dashboard-overview -> alldata -> hourly -> monthly -> seasonal -> yearly` 的顺序重排图片与正文。
+  - 计划删除旧版大段引用块，改成标准 Markdown 标题、段落、表格与短列表。
+  - 计划修正 `alldata.png` 的图片 alt 文本，并补写最终结论与经营建议。
+- **影响面**：仅影响 `docs/PowerBI/Bicycle/analytics.md` 与 `progress.MD` 追加记录；不修改 `bike_share_data` 原始数据、图片文件名、站点配置或第三方依赖。
+- **风险与回滚**：风险点是指标纠偏后与原看板标签表述不一致，可能与旧文案存在认知差异；缓解措施是在正文中同时保留看板数值并解释标准口径。若需回滚，可恢复修改前的 `analytics.md` 内容并保留本次进度记录。
+- **验证**：完成后检查 6 张图片后均有对应分析段落、核心数字与看板口径一致、旧空白占位消失、`45.21%` 与 `Average Revenue` 的解释改为专业口径。
+- **关联信息**：本次分析默认基于 `2021 + 2022` 双年全选视图；无依赖变更。
+### 2026-04-12 16:37 补充验证
+
+- **验证结果**：`analytics.md` 已重写为 7 个章节，6 张图片均在对应位置写入“图表目的/指标口径、关键发现、业务含义、分析边界或口径提醒”结构；`alldata.png` 的 alt 文本已修正为 `time-slicer-and-kpi-cards`。
+- **数据校验**：文中已对齐 `riders 3,292,679`、`revenue 15,220,292`、`profit 10,481,505.72`、`registered/casual = 81.17% / 18.83%`、`YoY riders = +64.88%` 等核心数字，且与看板整数价格口径一致。
+- **口径校验**：全文已明确说明 `45.21%` 不是标准 `profit / revenue`，并指出时段矩阵分析的是 `Average Revenue` 而非利润。
+- **结果检查**：文件中共存在 6 个图片引用，旧的 `alldata.png` alt 误标已清除；无新增依赖变更。
+- **偏差说明**：与实施计划一致，无额外范围变更。
