@@ -106,35 +106,32 @@ description: Toman Bike Share 共享单车经营分析全流程项目：MySQL �
 ## 三、技术工作流
 
 ```mermaid
-flowchart LR
-    A["📄 原始 CSV 文件\nbike_share_yr_0\nbike_share_yr_1\ncost_table"] --> B
+flowchart TD
+    RAW["📄 原始 CSV 文件\nbike_share_yr_0\nbike_share_yr_1 \ncost_table"]
 
     subgraph SQL ["🛢️ MySQL 数据处理"]
-        B["建库 & 数据导入"] --> C["字段类型清洗\nDATE / VARCHAR / FLOAT"]
-        C --> D["UNION ALL 合并两年"]
-        D --> E["LEFT JOIN 关联成本表\n计算 Revenue & Profit"]
-        E --> F["CREATE VIEW\nvw_bike_sales"]
+        direction LR
+        S1["① 建库 & 字段清洗\n类型规范化"] --> S2["② UNION ALL + LEFT JOIN\n计算 Revenue & Profit"] --> S3["③ CREATE VIEW\nvw_bike_sales"]
     end
 
     subgraph PBI ["📊 Power BI 建模"]
-        G["连接 MySQL View"] --> H["数据建模 & DAX 度量值"]
-        H --> I["仪表板设计 & 可视化"]
+        direction LR
+        G["① 连接 MySQL View"] --> H["② 数据建模 & DAX 度量值"] --> I["③ 仪表板设计 & 可视化"]
     end
 
     subgraph OUT ["💡 分析交付"]
-        J["KPI 总览"]
-        K["时段 / 季节 / 用户分析"]
-        L["价格弹性定价建议"]
+        direction LR
+        J["📊 KPI 总览"] ~~~ K["⏱ 时段 / 季节 / 用户分析"] ~~~ L["💰 价格弹性定价建议"]
     end
 
-    F --> G
-    I --> J
-    I --> K
-    I --> L
+    RAW --> SQL
+    SQL --> PBI
+    PBI --> OUT
 
     style SQL fill:#e3f2fd,stroke:#1565c0,color:#000
     style PBI fill:#fce4ec,stroke:#880e4f,color:#000
     style OUT fill:#e8f5e9,stroke:#1b5e20,color:#000
+    style RAW fill:#fff8e1,stroke:#f57f17,color:#000
 ```
 
 ---
@@ -265,9 +262,9 @@ LEFT JOIN cost_table b ON a.yr = b.yr;
 
     ---
 
-    **≈ 68.87%**
+    **68.87%**
 
-    Profit / Revenue 标准口径
+    `Profit / Revenue` 标准口径，DAX 已更新为 `DIVIDE(SUM([profit]), SUM([revenue]), 0)`
 
 </div>
 
