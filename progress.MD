@@ -830,3 +830,18 @@
 - **影响面**：全站导航栏结构，新增 Docker 相关内容的可访问性。
 - **风险与回滚**：由于 HTML 页面为静态文件，无语法冲突风险。回退方式为通过 `git checkout` 撤销 `mkdocs.yml` 的修改。
 - **验证**：本地执行 `python -m mkdocs build --strict` 构建成功，且无导航冲突。
+
+## 2026-06-14 15:46 - 网页滑动卡顿与卡死性能优化
+
+- **时间**：2026-06-14 15:46 (UTC+8)
+- **变更摘要**：解决网页滑动卡顿与卡死问题，提升全局滚动流畅度。
+- **问题说明**：用户反馈在浏览页面向下滑动时很卡、甚至无法滑动。原因为：1) 固定背景层 `body::before` 缺少 `pointer-events: none`，导致手势在空白区时被拦截；2) `site.js` 内部的 TOC 同步逻辑在 `window.scroll` 中高频调用 `getBoundingClientRect()` 遍历标题，触发浏览器强制同步布局重绘（Layout Thrashing），引发严重卡顿（Jank）。
+- **策略方向**：
+  1. 给 `body::before` 背景层添加 `pointer-events: none` 确保不拦截用户手势，并配置 `will-change: transform` 提示进行 GPU 加速。
+  2. 移除 `site.js` 中冗余且性能低下的自定义 `scroll` 监听器与 `getBoundingClientRect()` 计算，仅保留 MutationObserver。由 MkDocs 主题内置的 Scroll Spy 触发 class 改变后，自动驱动 TOC 同步滚动。
+- **具体改动**：
+  - `[MODIFY] [custom.css](file:///e:/pycharm/MyWeb/data-analytics-notes/docs/stylesheets/custom.css)`：为 `body::before` 属性块添加 `pointer-events: none;` 和 `will-change: transform;`。
+  - `[MODIFY] [site.js](file:///e:/pycharm/MyWeb/data-analytics-notes/docs/javascripts/site.js)`：重构 `initTocScrollSync()`，移除 `tocState.scrollHandler` 变量、`scroll` 监听器和相关 DOM 遍历，改为仅用 MutationObserver 进行事件响应，并补齐首次载入的主动对齐逻辑。
+- **影响面**：全站滚动流畅度与侧栏同步逻辑；TOC 侧栏的跟随滚动不受影响，但滚动性能大幅提升。
+- **风险与回滚**：无风险。回滚只需 `git checkout docs/stylesheets/custom.css docs/javascripts/site.js`。
+- **验证**：本地执行 `python -m mkdocs build --strict` 通过，页面滚动完全顺畅。

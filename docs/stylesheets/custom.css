@@ -41,6 +41,8 @@ body::before {
   background-size: auto;
   background-position: top left;
   background-repeat: repeat;
+  pointer-events: none;
+  will-change: transform;
 }
 
 /* 层2: 渐变遮罩 - 中间白色淡化，两侧渐变透明 */

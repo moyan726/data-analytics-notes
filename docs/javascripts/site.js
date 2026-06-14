@@ -425,8 +425,7 @@
   // ========== TOC Scroll Synchronization Fix ==========
   // Fixes the issue where TOC sidebar doesn't scroll on long pages
   var tocState = {
-    observer: null,
-    scrollTimeout: null
+    observer: null
   }
 
   function initTocScrollSync() {
@@ -439,21 +438,10 @@
       tocState.mutationObserver.disconnect()
       tocState.mutationObserver = null
     }
-    if (tocState.scrollHandler) {
-      window.removeEventListener('scroll', tocState.scrollHandler)
-      tocState.scrollHandler = null
-    }
 
     // Find TOC container
     var tocNav = document.querySelector('.md-sidebar--secondary .md-nav--secondary')
     if (!tocNav) return
-
-    // Find heading elements with IDs
-    var content = document.querySelector('.md-content')
-    if (!content) return
-
-    var headings = content.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
-    if (headings.length === 0) return
 
     // Mark items that have children as nested
     var allItems = tocNav.querySelectorAll('.md-nav__item')
@@ -502,53 +490,15 @@
       subtree: true
     })
 
-    // Scroll-based fallback: find heading closest to top of viewport
-    var headingsArray = Array.prototype.slice.call(headings)
-    var lastActiveId = null
-
-    tocState.scrollHandler = function () {
-      if (tocState.scrollTimeout) return // Throttle
-
-      tocState.scrollTimeout = setTimeout(function () {
-        tocState.scrollTimeout = null
-
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop
-        var headerOffset = 100 // Account for fixed header
-
-        // Find the heading that is closest to (but above) the current scroll position
-        var activeHeading = null
-        for (var i = 0; i < headingsArray.length; i++) {
-          var heading = headingsArray[i]
-          var headingTop = heading.getBoundingClientRect().top + scrollTop
-          if (headingTop <= scrollTop + headerOffset) {
-            activeHeading = heading
-          } else {
-            break
-          }
-        }
-
-        // Fallback to first heading if none found
-        if (!activeHeading && headingsArray.length > 0) {
-          activeHeading = headingsArray[0]
-        }
-
-        if (activeHeading && activeHeading.id !== lastActiveId) {
-          lastActiveId = activeHeading.id
-
-          var tocLink = tocNav.querySelector('a[href="#' + CSS.escape(activeHeading.id) + '"]')
-          if (tocLink) {
-            var item = tocLink.parentElement
-            expandToItem(item, tocNav)
-            scrollTocToActiveLink(tocLink, tocNav)
-          }
-        }
-      }, 100)
-    }
-
-    window.addEventListener('scroll', tocState.scrollHandler, { passive: true })
-
     // Initial sync
-    tocState.scrollHandler()
+    var activeLink = tocNav.querySelector('.md-nav__link--active')
+    if (activeLink) {
+      var activeItem = activeLink.parentElement
+      if (activeItem) {
+        expandToItem(activeItem, tocNav)
+        scrollTocToActiveLink(activeLink, tocNav)
+      }
+    }
   }
 
 
