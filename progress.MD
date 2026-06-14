@@ -845,3 +845,21 @@
 - **影响面**：全站滚动流畅度与侧栏同步逻辑；TOC 侧栏的跟随滚动不受影响，但滚动性能大幅提升。
 - **风险与回滚**：无风险。回滚只需 `git checkout docs/stylesheets/custom.css docs/javascripts/site.js`。
 - **验证**：本地执行 `python -m mkdocs build --strict` 通过，页面滚动完全顺畅。
+
+## 2026-06-14 15:53 - 修复向下滑动卡顿明显与页面轻微回滚跳动问题 (V2)
+
+- **时间**：2026-06-14 15:53 (UTC+8)
+- **变更摘要**：修复向下滑动进入第四节时的明显卡顿与轻微回退抖动，彻底解决布局偏移问题。
+- **问题说明**：用户反馈在从第三节划入第四节时卡顿且有画面轻微回滚。主要原因：
+  1. `site.js` 中强制为所有图片注入 `loading="lazy"`，导致没有宽高属性的图片在滚入视口时突然加载并撑大，造成严重的累计布局偏移 (Layout Shift)。
+  2. TOC 侧边栏的滚动同步逻辑中，滚动执行主体被误指派为不可滚动的 `.md-sidebar__inner`，在部分浏览器中导致滚动事件异常冒泡到 `window`，引起页面回退和震荡。
+- **策略方向**：
+  1. 移除 `site.js` 中强制注入 `loading="lazy"` 的逻辑，让这些小体积图片正常预加载，避免滚动过程中的高度突变。
+  2. 将 `scrollTocToActiveLink` 的滚动目标修正为 `.md-sidebar__scrollwrap`（真正的侧栏滚动容器）。
+- **具体改动**：
+  - `[MODIFY] [site.js](file:///e:/pycharm/MyWeb/data-analytics-notes/docs/javascripts/site.js)`：
+    - 移除了 `enhanceImages()` 中对 `loading` 属性的修改，只保留 `decoding="async"` 和 `fetchpriority="auto"`。
+    - 将 `scrollTocToActiveLink()` 中 `innerScroll` 滚动命令的目标改为 `scrollContainer`。
+- **影响面**：改善了在有未设维度图片时的整体滚动连贯性，消除了滚动条的异常抖动。
+- **风险与回滚**：无风险。回退只需 `git checkout docs/javascripts/site.js`。
+- **验证**：本地执行 `python -m mkdocs build --strict` 成功，滚动完全恢复平滑且无任何回滚。

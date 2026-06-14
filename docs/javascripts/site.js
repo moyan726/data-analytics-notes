@@ -51,7 +51,6 @@
     var images = root.querySelectorAll('img')
     for (var i = 0; i < images.length; i++) {
       var img = images[i]
-      if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy')
       if (!img.getAttribute('decoding')) img.setAttribute('decoding', 'async')
       if (!img.getAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'auto')
     }
@@ -596,12 +595,10 @@
       var containerHeight = scrollContainer.clientHeight
       var scrollTarget = linkOffsetTop - (containerHeight / 2) + (tocLink.offsetHeight / 2)
 
-      var innerScroll = scrollContainer.querySelector('.md-sidebar__inner') || scrollContainer
-
       try {
-        innerScroll.scrollTo({ top: scrollTarget, behavior: 'smooth' })
+        scrollContainer.scrollTo({ top: scrollTarget, behavior: 'smooth' })
       } catch (_) {
-        innerScroll.scrollTop = scrollTarget
+        scrollContainer.scrollTop = scrollTarget
       }
     }
   }
