@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kubernetes 零基础讲解教程 · 一次把概念讲明白</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F33; --navy-2:#13314E;
+    --paper:#EEF2F6; --surface:#FFFFFF; --line:#D5DEE6;
+    --ink:#16222E; --ink-soft:#46586A;
+    --cyan:#1D7FD7; --cyan-bright:#2DB7F5;
+    --amber:#E5912B; --green:#2FA37B; --red:#D9543F;
+    --shadow:0 1px 2px rgba(11,31,51,.06),0 8px 24px rgba(11,31,51,.06);
+    --radius:14px;
+    --display:"Space Grotesk","PingFang SC","Microsoft YaHei","Source Han Sans SC",sans-serif;
+    --body:"Inter","PingFang SC","Microsoft YaHei","Source Han Sans SC",sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:96px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+  a{color:var(--cyan);text-decoration:none}
+
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(11,31,51,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .header-top{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px}
+  .logo-mark{width:30px;height:30px;border-radius:7px;flex:none;background:linear-gradient(135deg,var(--cyan-bright),var(--cyan));display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700;font-size:13px}
+  .header-title{color:#fff;font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.2px}
+  .header-title small{display:block;color:#8fb5d6;font-weight:400;font-size:12px;font-family:var(--body)}
+  .nav-row{max-width:1080px;margin:0 auto;padding:0 14px 10px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin}
+  .nav-row::-webkit-scrollbar{height:5px}
+  .nav-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px}
+  .nav-chip{flex:none;font-size:12.5px;color:#bcd4e8;padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.14);white-space:nowrap;transition:.18s;font-weight:500}
+  .nav-chip:hover{color:#fff;border-color:var(--cyan-bright)}
+  .nav-chip.is-active{background:var(--cyan);color:#fff;border-color:var(--cyan)}
+
+  main{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+  section{scroll-margin-top:96px}
+
+  .hero{background:radial-gradient(120% 120% at 80% 0%,var(--navy-2),var(--navy));color:#eaf3fb;border-radius:0 0 22px 22px;padding:48px 30px 42px;margin:0 -20px 40px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(45,183,245,.22),transparent 70%)}
+  .hero .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:2px;color:var(--cyan-bright);text-transform:uppercase}
+  .hero h1{font-family:var(--display);font-weight:700;font-size:clamp(25px,5vw,38px);line-height:1.18;margin:14px 0 0;max-width:20ch}
+  .hero h1 em{font-style:normal;color:var(--cyan-bright)}
+  .hero p{max-width:62ch;color:#bcd4e8;margin:16px 0 0;font-size:16px}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;position:relative;z-index:1}
+  .hero-tags span{font-size:12.5px;font-family:var(--mono);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#cfe4f4;padding:5px 11px;border-radius:8px}
+
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:24px 0 6px}
+  .flow-node{flex:1 1 150px;min-width:150px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+  .flow-node .fn-icon{font-size:24px}
+  .flow-node .fn-en{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:1px}
+  .flow-node .fn-cn{font-family:var(--display);font-weight:600;font-size:15.5px;margin-top:2px}
+  .flow-node .fn-desc{font-size:12.5px;color:var(--ink-soft);margin-top:6px;line-height:1.5}
+  .flow-arrow{flex:none;align-self:center;display:flex;flex-direction:column;align-items:center;padding:0 6px;color:var(--cyan);font-family:var(--mono);font-size:11px;font-weight:500}
+  .flow-arrow b{font-size:18px;line-height:1}
+  @media(max-width:720px){.flow{flex-direction:column}.flow-arrow{flex-direction:row;gap:8px;transform:rotate(90deg);padding:6px 0}}
+
+  /* K8s architecture diagram */
+  .k-tier{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);margin:14px 0}
+  .k-tier.plane{border-top:3px solid var(--cyan)}
+  .k-tier.node{border-top:3px solid var(--green)}
+  .k-tier-label{font-family:var(--mono);font-size:11.5px;letter-spacing:1px;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;font-weight:600}
+  .k-tier.node .k-tier-label{color:var(--green)}
+  .k-comps{display:flex;flex-wrap:wrap;gap:8px}
+  .k-comp{flex:1 1 150px;min-width:140px;background:#f4f8fc;border:1px solid #d6e6f3;border-radius:10px;padding:9px 12px}
+  .k-comp b{display:block;font-family:var(--display);font-size:13px;color:var(--navy)}
+  .k-comp span{font-size:11.5px;color:var(--ink-soft);line-height:1.45}
+  .k-nodes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:600px){.k-nodes{grid-template-columns:1fr}}
+
+  .module{margin:46px 0 0;padding-top:8px}
+  .mod-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--navy);padding-bottom:10px}
+  .mod-num{font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;background:var(--navy);padding:3px 9px;border-radius:7px;flex:none}
+  .mod-head h2{font-family:var(--display);font-weight:700;font-size:clamp(20px,3.5vw,26px);margin:0;flex:1}
+  .mod-essence{font-size:14.5px;color:var(--ink-soft);margin:14px 0 0;padding-left:14px;border-left:3px solid var(--cyan)}
+
+  .plain{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:18px 0;box-shadow:var(--shadow)}
+  .plain h3{font-family:var(--display);font-size:16px;margin:0 0 8px;color:var(--navy)}
+  .plain h3:not(:first-child){margin-top:18px}
+  .plain h3 .tag{font-family:var(--mono);font-size:11px;background:#eef6fd;color:var(--cyan);padding:2px 7px;border-radius:6px;margin-right:7px;vertical-align:2px}
+  .plain p{margin:8px 0}
+  .analogy{background:#fff8ee;border-left:4px solid var(--amber);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .analogy b{color:#b46d12}
+
+  ul.clean{margin:10px 0;padding-left:0;list-style:none}
+  ul.clean li{position:relative;padding-left:20px;margin:7px 0;font-size:14.5px}
+  ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--cyan);font-weight:700}
+
+  code,.kbd{font-family:var(--mono);font-size:.9em;background:#eef2f6;border:1px solid #dde5ec;border-radius:5px;padding:1px 6px;color:#10405f}
+
+  .cmd{background:var(--navy);color:#dbeafc;border-radius:12px;padding:14px 16px;margin:14px 0;font-family:var(--mono);font-size:13px;overflow-x:auto;line-height:1.85}
+  .cmd .c-dim{color:#7fa6c4}
+  .cmd .c-key{color:var(--cyan-bright)}
+  .cmd .c-cmt{color:#6f8aa3;font-style:italic}
+
+  .tbl-wrap{overflow-x:auto;margin:16px 0}
+  table.cmp{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--surface);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  table.cmp th,table.cmp td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  table.cmp th{background:var(--navy);color:#fff;font-family:var(--display);font-weight:600;font-size:13px}
+  table.cmp tbody tr:nth-child(even){background:#f7fafc}
+  table.cmp td:first-child{font-weight:600;color:var(--navy-2);white-space:nowrap}
+
+  .exam{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(180deg,#fff7e9,#fff);border:1px solid #f0d6a6;border-left:4px solid var(--amber);border-radius:0 12px 12px 0;padding:13px 16px;margin:16px 0;font-size:14px}
+  .exam .x-tag{flex:none;font-family:var(--display);font-weight:700;font-size:12px;color:#fff;background:var(--amber);border-radius:6px;padding:3px 8px;letter-spacing:1px;margin-top:2px}
+  .exam .x-body{color:var(--ink)}
+  .exam .x-body b{color:#b46d12}
+  .wrong{color:var(--red);font-weight:600}
+  .right{color:var(--green);font-weight:600}
+
+  footer{max-width:1080px;margin:50px auto 0;padding:24px 20px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13.5px}
+
+  @media (prefers-reduced-motion:no-preference){
+    .plain,.flow-node{transition:box-shadow .2s}
+    .plain:hover{box-shadow:0 2px 4px rgba(11,31,51,.08),0 12px 30px rgba(11,31,51,.10)}
+  }
+  :focus-visible{outline:3px solid var(--cyan-bright);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="logo-mark">K8s</div>
+    <div class="header-title">Kubernetes 零基础讲解教程<small>从概念到记忆 · 关键处标注考点</small></div>
+  </div>
+  <nav class="nav-row" id="navRow">
+    <a class="nav-chip" href="#m1">① 它是什么/架构</a>
+    <a class="nav-chip" href="#m2">② Pod 最小单位</a>
+    <a class="nav-chip" href="#m3">③ 控制器</a>
+    <a class="nav-chip" href="#m4">④ Service & Ingress</a>
+    <a class="nav-chip" href="#m5">⑤ 探针</a>
+    <a class="nav-chip" href="#m6">⑥ 配置与存储</a>
+    <a class="nav-chip" href="#m7">⑦ 调度与资源</a>
+    <a class="nav-chip" href="#m8">⑧ 网络与安全</a>
+    <a class="nav-chip" href="#m9">⑨ kubectl 速查</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="eyebrow">FROM ZERO · 把名词一次讲明白</div>
+    <h1>Kubernetes 管的不是容器,<br>是你<em>「想要的状态」</em></h1>
+    <p>学过 Docker 后再看 K8s 会卡在"组件太多、名词太抽象"。这份讲义换个思路:先讲透 K8s 唯一的核心思想——<b>你只描述"我想要什么",它负责让现实一直保持成那样</b>。理解了这条主线,后面 Pod、Service、Deployment 这些就都是为它服务的零件。遇到易考易混处会用橙色「考点」框点一下。</p>
+    <div class="hero-tags"><span>Pod</span><span>Deployment</span><span>Service</span><span>Ingress</span><span>ConfigMap</span><span>PV/PVC</span><span>kubectl</span></div>
+  </section>
+
+  <!-- 1 -->
+  <section class="module" id="m1">
+    <div class="mod-head"><span class="mod-num">01</span><h2>K8s 是什么 + 集群长什么样</h2></div>
+    <p class="mod-essence">Docker 管一台机器上的几个容器;当容器有几十上百个、还要跨多台机器、自动重启、自动扩容时,就需要一个"总调度系统"——这就是 Kubernetes(K8s)。</p>
+
+    <div class="plain">
+      <h3>核心思想:声明式 + 自愈(最重要,先记牢)</h3>
+      <div class="analogy"><b>类比:恒温空调。</b>你不会手动开关压缩机,你只设一个目标:"我要 26 度"(<b>期望状态</b>)。空调自己不停地测当前温度、和目标比、然后调整,直到达到并维持 26 度。K8s 一模一样:你用 YAML 声明"我要 3 个 nginx 副本一直在线"(期望状态),K8s 的各种控制器就<b>不停地把现实拉回到这个目标</b>——挂了一个就自动补一个。这叫<b>控制循环 / 自愈</b>。</div>
+      <ul class="clean">
+        <li><b>声明式</b>:你描述"想要的结果",而不是"一步步怎么做"。</li>
+        <li><b>自愈</b>:Pod 挂了、节点宕了,K8s 自动重建/迁移,维持期望副本数。</li>
+        <li><b>Helm</b> 是 K8s 的<b>包管理器</b>(类比手机应用商店 / apt / npm),用 Chart 一键安装整套应用。</li>
+      </ul>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">架构</span>控制面(大脑)+ 工作节点(干活的)</h3>
+      <p>一个 K8s 集群分两部分:<b>控制面 Control Plane</b> 负责决策与记账,<b>工作节点 Node</b> 负责真正跑你的容器。</p>
+      <div class="k-tier plane">
+        <div class="k-tier-label">控制面 Control Plane · 集群的大脑/指挥部</div>
+        <div class="k-comps">
+          <div class="k-comp"><b>API Server</b><span>唯一入口/前台,所有操作都经过它</span></div>
+          <div class="k-comp"><b>etcd</b><span>分布式键值数据库,存全部集群状态(账本)</span></div>
+          <div class="k-comp"><b>Scheduler 调度器</b><span>决定新 Pod 该放到哪个节点</span></div>
+          <div class="k-comp"><b>Controller Manager</b><span>跑各种控制器,保证副本数等"对账"</span></div>
+        </div>
+      </div>
+      <div class="k-nodes">
+        <div class="k-tier node">
+          <div class="k-tier-label">工作节点 Node ①</div>
+          <div class="k-comps">
+            <div class="k-comp"><b>kubelet</b><span>节点上的工头,按指令运行/汇报 Pod</span></div>
+            <div class="k-comp"><b>kube-proxy</b><span>负责 Service 的流量转发/负载均衡</span></div>
+            <div class="k-comp"><b>容器运行时</b><span>containerd 等,真正跑容器</span></div>
+            <div class="k-comp"><b>Pod · Pod · …</b><span>你的应用就跑在这里</span></div>
+          </div>
+        </div>
+        <div class="k-tier node">
+          <div class="k-tier-label">工作节点 Node ②</div>
+          <div class="k-comps">
+            <div class="k-comp"><b>kubelet</b><span>同上</span></div>
+            <div class="k-comp"><b>kube-proxy</b><span>同上</span></div>
+            <div class="k-comp"><b>容器运行时</b><span>同上</span></div>
+            <div class="k-comp"><b>Pod · Pod · …</b><span>同上</span></div>
+          </div>
+        </div>
+      </div>
+      <p><b>CNI 插件</b>(Calico、Flannel、Cilium 等)负责给 Pod 分配 IP、打通 Pod 间网络——它解决的是"<b>网络</b>",而存储是 CSI 的事。</p>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 调度 Pod 的是 <b>kube-scheduler</b>(kubelet 只是按结果执行);② 存集群状态/配置的是 <b>etcd</b>;③ <b>CNI 负责 Pod 网络</b>(不是存储);④ <b>Helm 是包管理工具</b>(kubectl 是命令行、kubeadm 是装集群、kustomize 是配置定制)。</div></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="module" id="m2">
+    <div class="mod-head"><span class="mod-num">02</span><h2>Pod:K8s 的最小运行单位</h2></div>
+    <p class="mod-essence">K8s 不直接管"容器",而是管 <b>Pod</b>。Pod 是调度和运行的最小单位,里面可以装一个或多个紧密协作的容器。</p>
+
+    <div class="plain">
+      <h3><span class="tag">概念</span>Pod 是什么</h3>
+      <div class="analogy"><b>类比:豌豆荚。</b>Pod 是荚,里面的容器是豌豆。一个荚通常一颗豆(一个容器),也可放几颗(如主容器 + 日志收集边车)。同一个荚里的豆<b>共享同一个网络(用 localhost 互通、共用一个 IP)和存储卷</b>。</div>
+      <ul class="clean">
+        <li><b>initContainer(初始化容器)</b>:在主容器之前先跑的"准备工序",<b>按顺序串行执行,前一个成功才跑下一个</b>,全部成功后才启动主容器(常用于等依赖、初始化数据)。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">initContainer 是<b>顺序执行、前一个成功才执行后一个</b>,不是和主容器同时启动。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">生命周期</span>Pod 的状态、重启策略、优雅终止</h3>
+      <ul class="clean">
+        <li><b>阶段(phase)</b>:<code>Pending</code>(待调度)、<code>Running</code>、<code>Succeeded</code>、<code>Failed</code>、<code>Unknown</code>。</li>
+        <li><b>restartPolicy(重启策略)</b>:只有 <code>Always</code> / <code>OnFailure</code> / <code>Never</code> 三种。</li>
+        <li><b>优雅终止</b>:删 Pod 时不会立刻杀,先发 <code>SIGTERM</code> 让程序收尾,等 <code>terminationGracePeriodSeconds</code>(默认 30 秒),仍不退出才发 <code>SIGKILL</code> 强杀。</li>
+        <li><b>QoS 等级</b>:<code>Guaranteed</code> / <code>Burstable</code> / <code>BestEffort</code> 三档,资源紧张时优先牺牲 BestEffort。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① "<span class="wrong">Waiting</span>" 不是 Pod 阶段(它是<b>容器</b>状态);② restartPolicy <b>没有 UnlessStopped</b>(那是 Docker 的);③ 优雅终止是"<b>先 SIGTERM 再 SIGKILL</b>",<span class="wrong">不是立即杀死</span>;④ QoS 没有 "<span class="wrong">LowPriority</span>" 这一档。</div></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="module" id="m3">
+    <div class="mod-head"><span class="mod-num">03</span><h2>控制器:谁来保证 Pod 一直按期望跑</h2></div>
+    <p class="mod-essence">你几乎从不直接创建 Pod,而是创建"控制器",由它替你维持 Pod。不同场景用不同控制器。</p>
+
+    <div class="plain">
+      <h3><span class="tag">家族</span>常见控制器一览</h3>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>控制器</th><th>干什么 / 何时用</th></tr></thead>
+        <tbody>
+          <tr><td>ReplicaSet</td><td>保证<b>指定数量</b>的 Pod 副本一直在跑(Deployment 底层就靠它)</td></tr>
+          <tr><td>Deployment</td><td>管理无状态应用,声明式 + 支持<b>滚动更新/回滚</b>(最常用)</td></tr>
+          <tr><td>StatefulSet</td><td>管理有状态应用(数据库等):<b>稳定名字 + 有序启停 + 独立存储</b></td></tr>
+          <tr><td>DaemonSet</td><td>保证<b>每个节点跑一个</b> Pod(日志/监控 agent、网络插件)</td></tr>
+          <tr><td>Job / CronJob</td><td>一次性任务 / 定时任务</td></tr>
+        </tbody>
+      </table></div>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>对比</th><th>Deployment</th><th>StatefulSet</th></tr></thead>
+        <tbody>
+          <tr><td>Pod 名称</td><td>随机哈希</td><td>有序号(mysql-0、mysql-1)</td></tr>
+          <tr><td>网络标识</td><td>不稳定</td><td>稳定</td></tr>
+          <tr><td>存储</td><td>共享或不持久</td><td>每个 Pod 独立 PVC</td></tr>
+          <tr><td>启停顺序</td><td>并行</td><td>顺序(0→N,删除逆序)</td></tr>
+          <tr><td>适用</td><td>无状态应用</td><td>有状态应用(数据库)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 保证副本数的是 <b>ReplicaSet</b>;② StatefulSet 的专有特点是稳定标识/有序,"<span class="wrong">自动扩缩容</span>"不算它相对 Deployment 的特点(两者都能被 HPA 扩缩);③ DaemonSet = 每节点一个;④ Job <b>不是"失败后无限重试到成功"</b>,受 <code>backoffLimit</code> 限制(默认 6 次)。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">滚动更新</span>怎么做到"换版本不停服"</h3>
+      <div class="analogy"><b>类比:换轮胎不停车。</b>滚动更新一次只替换一部分 Pod:起一个新版的、确认就绪、再撤一个旧版的,逐个替换,服务全程在线。</div>
+      <p>两个旋钮控制节奏:<code>maxUnavailable</code>(最多允许几个不可用)、<code>maxSurge</code>(最多额外多起几个)。以 <code>maxUnavailable=0, maxSurge=1</code> 为例推一遍:</p>
+      <ul class="clean">
+        <li><code>maxUnavailable=0</code> → 任何时刻可用数<b>不能低于</b>期望数,即不能先删旧的。</li>
+        <li><code>maxSurge=1</code> → 总数最多到"期望+1",即允许临时多起一个。</li>
+        <li>结论:只能<b>先起 1 个新 Pod、就绪后再删 1 个旧 Pod</b>,如此逐个替换 → 零中断、较慢。</li>
+      </ul>
+      <div class="cmd">
+kubectl <span class="c-key">scale</span> deploy/web --replicas=3   <span class="c-cmt"># 扩缩容到 3 副本</span><br>
+kubectl <span class="c-key">rollout undo</span> deploy/web         <span class="c-cmt"># 回滚到上一个版本</span>
+      </div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <code>maxUnavailable=0, maxSurge=1</code> = <b>先创建新 Pod、再删旧 Pod</b>;② 回滚用 <code>kubectl rollout undo</code>。</div></div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="module" id="m4">
+    <div class="mod-head"><span class="mod-num">04</span><h2>Service &amp; Ingress:怎么找到 Pod、怎么对外暴露</h2></div>
+    <p class="mod-essence">Pod 会被随时重建,IP 一直变。想稳定地访问它们,就要在前面加一层固定入口——这就是 Service;想按域名/路径把外部 HTTP 流量分发出去,再加一层 Ingress。</p>
+
+    <div class="plain">
+      <h3><span class="tag">Service</span>一组 Pod 的"固定门牌 + 负载均衡"</h3>
+      <div class="analogy"><b>类比:公司总机号码。</b>员工(Pod)会换工位、换分机(IP 变),但对外的总机号(Service)永远不变,打进来自动转给某个在岗的人。Service 通过<b>标签选择器(selector)匹配后端 Pod</b>,并在它们之间做负载均衡。</div>
+      <ul class="clean">
+        <li><b>用 Service 名称(DNS)访问</b>:集群内 CoreDNS 把 Service 名解析成稳定的 ClusterIP,所以代码里写服务名而不是写死 IP。</li>
+        <li><b>Headless Service</b>(<code>clusterIP: None</code>):不分配 ClusterIP、不做负载均衡,DNS 直接返回各 Pod 的 IP 列表(常配合 StatefulSet 直连某个 Pod)。</li>
+        <li><b>ExternalName</b>:不代理流量,只返回一条 CNAME,把集群内的服务名映射到一个<b>外部域名</b>(让内部用统一名字访问外部服务)。</li>
+        <li><b>查后端</b>:<code>kubectl get endpoints</code> 或 <code>describe svc</code> 都能看 Service 关联了哪些 Pod。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 集群内访问 Service 推荐用 <b>Service 名称(DNS)</b>;② Headless Service = 无 ClusterIP + 不负载均衡 + 直接返回 Pod IP(三点都对);③ ExternalName = <b>映射到外部域名</b>;④ kube-proxy 模式有 userspace/iptables/ipvs,<span class="wrong">没有 bridge</span>;⑤ Service 层会话保持<b>只支持 ClientIP</b>(Cookie 是 Ingress 层的能力)。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">Ingress</span>七层"大堂经理",按域名/路径分流</h3>
+      <p>Service 偏 4 层;<b>Ingress</b> 在更上层,按 HTTP 的域名和路径(如 <code>/api</code> 进后端、<code>/</code> 进前端)把外部请求分发到不同 Service,还能统一管 HTTPS 证书。</p>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body"><b>Ingress 资源只是"规则"</b>,真正监听端口、执行规则、转发流量的是 <b>Ingress Controller</b>(如 nginx-ingress)。没有 Controller,Ingress 不生效。</div></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="module" id="m5">
+    <div class="mod-head"><span class="mod-num">05</span><h2>探针:Liveness vs Readiness</h2></div>
+    <p class="mod-essence">K8s 怎么知道你的容器"是不是还活着""能不能接客"?靠两种探针。它俩名字像,效果完全不同,是高频考点。</p>
+
+    <div class="plain">
+      <h3><span class="tag">两种探针</span>一个管重启,一个管流量</h3>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th></th><th>Liveness 存活探针</th><th>Readiness 就绪探针</th></tr></thead>
+        <tbody>
+          <tr><td>它问什么</td><td>"你还活着吗?"</td><td>"你准备好接客了吗?"</td></tr>
+          <tr><td>失败后果</td><td><b>重启容器</b></td><td><b>从 Service 的 Endpoints 摘除</b>(不再转发流量,但不重启)</td></tr>
+          <tr><td>用途</td><td>程序死锁/卡死时自动救活</td><td>启动慢/临时繁忙时,先别给它发请求</td></tr>
+        </tbody>
+      </table></div>
+      <div class="analogy"><b>记忆:</b>Live(活着)失败 → 把它<b>重启</b>;Ready(就绪)失败 → 暂时<b>别给它派活</b>(摘流量),等它缓过来再加回。</div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body"><b>Liveness 失败 → 重启容器;Readiness 失败 → 从 Endpoints 移除(停转流量)。</b>这两个结果千万别记反。</div></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="module" id="m6">
+    <div class="mod-head"><span class="mod-num">06</span><h2>配置与存储:ConfigMap / Secret / PV / PVC</h2></div>
+    <p class="mod-essence">代码不该把配置和密码写死。配置外置用 ConfigMap/Secret;数据要持久化、活得比 Pod 久,就用 PV/PVC。</p>
+
+    <div class="plain">
+      <h3><span class="tag">配置</span>ConfigMap vs Secret</h3>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th></th><th>ConfigMap</th><th>Secret</th></tr></thead>
+        <tbody>
+          <tr><td>用途</td><td>非敏感配置(参数、配置文件)</td><td>敏感信息(密码、token、证书)</td></tr>
+          <tr><td>数据形式</td><td>明文</td><td><b>base64 编码(注意:只是编码,不是加密)</b></td></tr>
+        </tbody>
+      </table></div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 存非敏感配置用 <b>ConfigMap</b>;② Secret 的值是 <b>base64 编码</b>——<span class="wrong">不等于加密</span>(要真加密得开 etcd 静态加密)。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">存储</span>PV 与 PVC</h3>
+      <div class="analogy"><b>类比:</b><b>PV(PersistentVolume)</b>是机房里"已经接好的一块硬盘";<b>PVC(PersistentVolumeClaim)</b>是你的"领用申请单"(我要 10G、可读写)。两者绑定后,Pod 就用这块存储。Pod 删了,数据还在 PV 上。</div>
+      <ul class="clean">
+        <li>绑定主要看<b>容量、访问模式、StorageClass</b>是否匹配(也可用标签选择器辅助筛选);PVC 不必指定具体 PV 名(动态供给会自动建 PV)。</li>
+        <li><b>访问模式</b>:<code>ReadWriteOnce(RWO)</code>、<code>ReadOnlyMany(ROX)</code>、<code>ReadWriteMany(RWX)</code>。</li>
+        <li><b>回收策略</b>(Retain/Delete/Recycle)决定删 PVC 后 PV 上的数据怎么处理。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① PV/PVC 可通过<b>标签选择器</b>匹配(且 PV 与 PVC 是一对一独占绑定);② 访问模式只有 RWO/ROX/RWX,"<span class="wrong">WriteOnceReadMany</span>" 不存在。</div></div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="module" id="m7">
+    <div class="mod-head"><span class="mod-num">07</span><h2>调度与资源:Pod 该去哪、能用多少</h2></div>
+    <p class="mod-essence">两个问题:① 怎么控制 Pod 调度到哪些节点(Taint/Toleration、nodeSelector);② 怎么声明 Pod 的资源用量(requests/limits),以及自动扩缩(HPA)和命名空间配额(ResourceQuota)。</p>
+
+    <div class="plain">
+      <h3><span class="tag">调度</span>Taint(污点)与 Toleration(容忍)</h3>
+      <div class="analogy"><b>类比:</b><b>Taint</b> 是给节点贴的"闲人免进"标签;<b>Toleration</b> 是 Pod 持有的"通行证"。节点有污点,只有带对应容忍的 Pod 才允许调度上去。</div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body"><b>Taint 定义在 Node 上,Toleration 定义在 Pod 上</b>——归属别记反。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">资源</span>requests / limits / HPA / ResourceQuota</h3>
+      <div class="analogy"><b>类比:订餐厅。</b><code>requests</code> 像订位时说"我至少要一张能坐 4 人的桌"——调度器据此<b>预留</b>资源、选节点;<code>limits</code> 是"上限",真用超了会被限流(CPU)或杀掉(内存 OOM)。</div>
+      <ul class="clean">
+        <li><b>requests</b>:调度依据(预留下限);<b>limits</b>:运行上限。两者作用不同。</li>
+        <li><b>HPA(水平自动扩缩)</b>:按 CPU/内存(或自定义指标)使用率,自动增减 Pod 副本数(需 metrics-server)。</li>
+        <li><b>ResourceQuota</b>:限制<b>单个 Namespace</b> 内的资源总量与对象数量。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <b>requests 用于调度、limits 用于限制</b>;② HPA 按 <b>CPU/内存使用率</b>扩缩;③ ResourceQuota 限制的是 <b>Namespace</b> 级资源(不是单 Pod、不是整集群)。</div></div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="module" id="m8">
+    <div class="mod-head"><span class="mod-num">08</span><h2>网络与安全:谁能通、谁能做什么</h2></div>
+    <p class="mod-essence">先记住 K8s 网络的"默认全通"原则,再看怎么用 NetworkPolicy 收紧、用 RBAC 管权限、用 SecurityContext 收紧 Pod。</p>
+
+    <div class="plain">
+      <h3><span class="tag">网络模型</span>三条硬性原则</h3>
+      <ul class="clean">
+        <li>每个 Pod 有<b>独立 IP</b>;同一 Pod 内的容器共享这个 IP。</li>
+        <li>所有 Pod 之间可以<b>不经 NAT 直接用 IP 互通</b>(默认扁平、全通)。</li>
+        <li>Service 只是<b>可选</b>的稳定入口,Pod 并非"必须经 Service"才能通信。</li>
+      </ul>
+      <div class="analogy"><b>NetworkPolicy</b> 像给 Pod 加防火墙规则(控制入站/出站),但它<b>需要支持它的 CNI 插件</b>(Calico、Cilium)才生效——光写策略、底层不支持等于白写。</div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 网络模型<b>不要求"Pod 必须通过 Service 访问"</b>(可直接 IP 通);② 不同 Namespace 的 Pod <b>默认可以互通</b>("不能通信"是错的);③ NetworkPolicy <b>需要 CNI 插件支持</b>。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">权限</span>RBAC 与 SecurityContext</h3>
+      <ul class="clean">
+        <li><b>RBAC</b>:控制"谁(用户/ServiceAccount)能对什么资源做什么操作"。<code>Role</code> 只在<b>某个 Namespace</b> 内有效;<code>ClusterRole</code> 作用于<b>整个集群</b>。</li>
+        <li><b>SecurityContext</b>:收紧 Pod/容器的权限,可设运行用户、Linux Capabilities、SELinux 标签,也能用 <code>runAsNonRoot: true</code> 禁止以 root 运行。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <b>Role 限单 Namespace、ClusterRole 全集群</b>;② SecurityContext <b>可以</b>用 <code>runAsNonRoot</code> 限制 root——"<span class="wrong">不能限制 root 权限</span>"是错误说法。</div></div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="module" id="m9">
+    <div class="mod-head"><span class="mod-num">09</span><h2>kubectl 命令地图 &amp; 排错速查</h2></div>
+    <p class="mod-essence">最后把高频命令按"做什么"归类。记住每条命令的用途,选择题里的命令辨析就稳了。</p>
+
+    <div class="plain">
+      <h3><span class="tag">命令地图</span>看 / 改 / 调试</h3>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>命令</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td>kubectl get pods -o wide</td><td>列资源;<code>-o wide</code> 显示 Pod 在哪个<b>节点</b></td></tr>
+          <tr><td>kubectl get pods -w</td><td><code>-w</code>(watch)<b>持续监听</b>资源变化</td></tr>
+          <tr><td>kubectl describe pod</td><td>看<b>详细信息 + 事件</b>(排错首选)</td></tr>
+          <tr><td>kubectl logs --tail=100 -f</td><td>看日志末尾 100 行并<b>持续跟踪</b></td></tr>
+          <tr><td>kubectl exec -it … -- sh</td><td>进容器开交互终端(<code>-i</code> 输入、<code>-t</code> 伪终端)</td></tr>
+          <tr><td>kubectl explain pod.spec</td><td>查 API 资源<b>字段文档</b></td></tr>
+          <tr><td>kubectl top pod/node</td><td>看 CPU/内存<b>用量</b>(需 metrics-server)</td></tr>
+          <tr><td>kubectl version</td><td>看客户端/服务端<b>版本</b></td></tr>
+          <tr><td>kubectl get events --sort-by=.metadata.creationTimestamp</td><td>看事件并<b>按时间排序</b></td></tr>
+          <tr><td>kubectl run test --image=busybox -it --rm</td><td>跑一个<b>临时</b>测试容器,退出即删</td></tr>
+        </tbody>
+      </table></div>
+      <h3><span class="tag">两组易混</span>apply/create 与 安全删节点</h3>
+      <ul class="clean">
+        <li><b>apply vs create</b>:<code>create</code> 是命令式、只能创建(对象已存在会报错);<code>apply</code> 是声明式,<b>能创建也能更新</b>(反复对账)。</li>
+        <li><b>安全删节点</b>:先 <code>kubectl drain &lt;node&gt;</code> 驱逐 Pod(并标记不可调度),等工作负载迁走后再 <code>kubectl delete node</code>。直接删或关机会中断业务。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 看详情/事件用 <code>describe</code>、看字段文档用 <code>explain</code>、持续监听用 <code>-w</code>、节点定位用 <code>-o wide</code>;② <b>apply 可建可改、create 只能建</b>;③ 安全删节点 = <b>先 drain 再 delete</b>;④ 临时容器用 <code>kubectl run ... --rm</code>。</div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  讲解范围:覆盖这套练习卷里 Kubernetes 单选题(51–100)所涉及的全部概念,并融入了简答/判断题中的 K8s 知识点。每个模块的橙色「考点」框,标的是最容易考、最容易混的地方。<br>
+  建议学法:先死磕模块 ① 的"恒温空调"心智模型(声明式 + 自愈)——这是理解整个 K8s 的钥匙 → 再按 ②→⑨ 顺序读 → 重点反复看探针、控制器、Service 三块的对比表与考点框。
+</footer>
+
+<script>
+(function(){
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.nav-chip'));
+  var map={};
+  chips.forEach(function(c){map[c.getAttribute('href').slice(1)]=c;});
+  var sections=Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  // 只对导航条容器做横向滚动，不触发页面级 scrollIntoView
+  var navRow=document.getElementById('navRow');
+  function scrollNavToChip(chip){
+    if(!navRow||!chip)return;
+    var chipCenter=chip.offsetLeft+chip.offsetWidth/2;
+    var target=chipCenter-navRow.offsetWidth/2;
+    navRow.scrollTo({left:Math.max(0,target),behavior:'smooth'});
+  }
+  if('IntersectionObserver' in window){
+    var rafPending=false;
+    var pendingActive=null;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){pendingActive=en.target.id;}
+      });
+      if(!rafPending&&pendingActive){
+        rafPending=true;
+        requestAnimationFrame(function(){
+          rafPending=false;
+          var id=pendingActive;pendingActive=null;
+          chips.forEach(function(c){c.classList.remove('is-active');});
+          var active=map[id];
+          if(active){active.classList.add('is-active');scrollNavToChip(active);}
+        });
+      }
+    // rootMargin 留出更宽激活窗口(顶部-30%,底部-60%)，章节边界不会频繁切换
+    },{rootMargin:'-30% 0px -60% 0px'});
+    sections.forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>

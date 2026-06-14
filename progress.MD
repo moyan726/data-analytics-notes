@@ -883,3 +883,16 @@
   1. 在页面中从第 3 章连续向下滚动至第 4、5 章，观察不再有卡顿或回滚。
   2. 向上返回正常丝滑。
   3. 快速点击 chip 跳转后再滚动，无异常。
+
+---
+
+- **时间**：2026-06-14 16:05（UTC+8）
+- **变更摘要**：将 Kubernetes.html 加入导航并应用滚动卡顿修复
+- **问题说明**：新文件 `Kubernetes.html` 已存在于 `docs/Projects/CoursesDocs/`，但未加入 `mkdocs.yml` 导航，且其 scroll-spy 脚本含有与旧版 Docker 页面相同的 `scrollIntoView` 卡顿 bug。
+- **策略方向**：复用已验证的修复方案，无需重新设计；导航与 Docker 课程并列在 Projects 下。
+- **具体改动**：
+  - `[MODIFY] mkdocs.yml`：在 Docker 零基础教程下方新增「Kubernetes 零基础教程」条目，指向 `Projects/CoursesDocs/Kubernetes.html`。
+  - `[MODIFY] Kubernetes.html`：替换 scroll-spy 脚本，移除 `scrollIntoView`，改用 `#navRow.scrollTo`，宽化 `rootMargin`，加 `rAF` 防抖。
+- **影响面**：导航新增入口；K8s 教程页面滚动行为一致。
+- **风险与回滚**：低风险。回退：`git checkout mkdocs.yml docs/Projects/CoursesDocs/Kubernetes.html`。
+- **验证**：`mkdocs build --strict` 2.92s 构建成功，无 Error/Warning。

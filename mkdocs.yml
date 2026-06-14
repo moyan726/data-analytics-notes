@@ -193,6 +193,8 @@ nav:
       - Docker 零基础教程:
           - 概念讲解: Projects/CoursesDocs/Docker-Knowledge.html
           - 50题自测: Projects/CoursesDocs/Docker.html
+      - Kubernetes 零基础教程:
+          - 概念讲解: Projects/CoursesDocs/Kubernetes.html
       - 桥见九州 · 古桥时空图谱:
           - 项目复盘: Projects/bridge-soul/blog_post.md
           - AI 对话系统深度解析: Projects/bridge-soul/ai_deep_dive.md
