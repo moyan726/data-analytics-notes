@@ -896,3 +896,16 @@
 - **影响面**：导航新增入口；K8s 教程页面滚动行为一致。
 - **风险与回滚**：低风险。回退：`git checkout mkdocs.yml docs/Projects/CoursesDocs/Kubernetes.html`。
 - **验证**：`mkdocs build --strict` 2.92s 构建成功，无 Error/Warning。
+
+---
+
+- **时间**：2026-06-14 16:08（UTC+8）
+- **变更摘要**：新建 CoursesDocs/index.md 作为云原生课程文件夹入口，解决文件夹无法直接打开的问题
+- **问题说明**：`docs/Projects/CoursesDocs/` 文件夹在侧边栏点击后没有落地页，只有子级 HTML 页面可以打开，用户体验差。
+- **策略方向**：新建 `index.md` 作为文件夹首页，采用与 `Projects/index.md` 一致的 `grid cards` + `admonitions` 风格，提供说明文字、mermaid 知识关系图、文档速览表和推荐学习路径。在 `mkdocs.yml` 中将 Docker/K8s 两个课程合并在「云原生课程」父节点下，以 `index.md` 为该节点首页。
+- **具体改动**：
+  - `[NEW] docs/Projects/CoursesDocs/index.md`：课程总览页，含 grid cards 跳转、mermaid 图、速览表、学习路径建议。
+  - `[MODIFY] mkdocs.yml`：Docker/K8s 两节提升到「云原生课程」父节点下，首页指向 `index.md`。
+- **影响面**：点击「云原生课程」直接呈现总览页；原有 Docker/K8s 子页链接不变。
+- **风险与回滚**：低风险。回退：`git checkout mkdocs.yml` + 删除 `docs/Projects/CoursesDocs/index.md`。
+- **验证**：`mkdocs build --strict` 3.12s 构建成功，无 Error/Warning。
