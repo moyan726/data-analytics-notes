@@ -863,3 +863,23 @@
 - **影响面**：改善了在有未设维度图片时的整体滚动连贯性，消除了滚动条的异常抖动。
 - **风险与回滚**：无风险。回退只需 `git checkout docs/javascripts/site.js`。
 - **验证**：本地执行 `python -m mkdocs build --strict` 成功，滚动完全恢复平滑且无任何回滚。
+
+---
+
+- **时间**：2026-06-14 16:00（UTC+8）
+- **变更摘要**：修复 Docker HTML 页面导航栏 chip 跳转引发的向下滚动卡顿与轻微回滚问题
+- **问题说明**：
+  `Docker.html` 和 `Docker-Knowledge.html` 中的 scroll-spy 脚本调用了浏览器原生 `scrollIntoView({block:'nearest',inline:'center'})`，该 API 会沿整个祖先链滚动（包括页面视口），导致用户向下穿越章节边界时浏览器同时执行"向下翻页"和"被 JS 拉回"两个相互冲突的滚动操作，产生卡顿和回滚。此外 `rootMargin:'-40% 0px -55% 0px'` 导致激活窗口仅剩 5%，章节边界处频繁多次触发 IntersectionObserver，进一步加剧闪烁。
+- **策略方向**：
+  1. 移除 `scrollIntoView` 调用，改为手动计算目标 chip 的水平偏移，仅对导航条容器 `#navRow` 执行 `scrollTo({behavior:'smooth'})`，彻底隔离页面级滚动影响。
+  2. 将 `rootMargin` 调整为 `-30% 0px -60% 0px`，激活窗口扩至 10%，减少边界频繁切换。
+  3. 引入 `requestAnimationFrame` 防抖，确保同一批次 IntersectionObserver 回调只更新一次激活状态。
+- **具体改动**：
+  - `[MODIFY] Docker.html`：替换 scroll-spy 脚本逻辑（约 19 行 → 38 行）。
+  - `[MODIFY] Docker-Knowledge.html`：同步应用相同修复。
+- **影响面**：导航 chip 高亮跟随行为不变，仅消除页面滚动干扰；navRow 横向滚动改为 smooth 模式，更流畅。
+- **风险与回滚**：低风险，纯前端 JS 改动。回退执行 `git checkout docs/Projects/CoursesDocs/`。
+- **验证**：
+  1. 在页面中从第 3 章连续向下滚动至第 4、5 章，观察不再有卡顿或回滚。
+  2. 向上返回正常丝滑。
+  3. 快速点击 chip 跳转后再滚动，无异常。

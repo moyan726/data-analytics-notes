@@ -853,17 +853,37 @@ docker <span class="c-key">system prune</span>        <span class="c-cmt"># 删�
   var map={};
   chips.forEach(function(c){var id=c.getAttribute('href').slice(1);map[id]=c;});
   var sections=Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  // 只对导航条容器做横向滚动，不触发页面级 scrollIntoView
+  var navRow=document.getElementById('navRow');
+  function scrollNavToChip(chip){
+    if(!navRow||!chip)return;
+    var rowRect=navRow.getBoundingClientRect();
+    var chipRect=chip.getBoundingClientRect();
+    // chip 相对于 navRow 的中心偏移
+    var chipCenter=chip.offsetLeft+chip.offsetWidth/2;
+    var target=chipCenter-navRow.offsetWidth/2;
+    navRow.scrollTo({left:Math.max(0,target),behavior:'smooth'});
+  }
   if('IntersectionObserver' in window){
+    var rafPending=false;
+    var pendingActive=null;
     var io=new IntersectionObserver(function(entries){
+      // 取最后一个正在进入的 section 作为当前激活项，防止多次触发抖动
       entries.forEach(function(en){
-        if(en.isIntersecting){
-          chips.forEach(function(c){c.classList.remove('is-active');});
-          var active=map[en.target.id];
-          if(active){active.classList.add('is-active');
-            active.scrollIntoView({block:'nearest',inline:'center'});}
-        }
+        if(en.isIntersecting){pendingActive=en.target.id;}
       });
-    },{rootMargin:'-40% 0px -55% 0px'});
+      if(!rafPending&&pendingActive){
+        rafPending=true;
+        requestAnimationFrame(function(){
+          rafPending=false;
+          var id=pendingActive;pendingActive=null;
+          chips.forEach(function(c){c.classList.remove('is-active');});
+          var active=map[id];
+          if(active){active.classList.add('is-active');scrollNavToChip(active);}
+        });
+      }
+    // rootMargin 留出更宽激活窗口(顶部-30%,底部-60%)，章节边界不会频繁切换
+    },{rootMargin:'-30% 0px -60% 0px'});
     sections.forEach(function(s){io.observe(s);});
   }
 })();
