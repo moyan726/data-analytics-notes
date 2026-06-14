@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docker 零基础讲解教程 · 一次把概念讲明白</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F33; --navy-2:#13314E;
+    --paper:#EEF2F6; --surface:#FFFFFF; --line:#D5DEE6;
+    --ink:#16222E; --ink-soft:#46586A;
+    --cyan:#1D7FD7; --cyan-bright:#2DB7F5;
+    --amber:#E5912B; --green:#2FA37B; --red:#D9543F;
+    --shadow:0 1px 2px rgba(11,31,51,.06),0 8px 24px rgba(11,31,51,.06);
+    --radius:14px;
+    --display:"Space Grotesk","PingFang SC","Microsoft YaHei","Source Han Sans SC",sans-serif;
+    --body:"Inter","PingFang SC","Microsoft YaHei","Source Han Sans SC",sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:96px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+  a{color:var(--cyan);text-decoration:none}
+
+  /* header / nav */
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(11,31,51,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .header-top{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px}
+  .logo-mark{width:30px;height:30px;border-radius:7px;flex:none;background:linear-gradient(135deg,var(--cyan-bright),var(--cyan));display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700}
+  .header-title{color:#fff;font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.2px}
+  .header-title small{display:block;color:#8fb5d6;font-weight:400;font-size:12px;font-family:var(--body)}
+  .nav-row{max-width:1080px;margin:0 auto;padding:0 14px 10px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin}
+  .nav-row::-webkit-scrollbar{height:5px}
+  .nav-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px}
+  .nav-chip{flex:none;font-size:12.5px;color:#bcd4e8;padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.14);white-space:nowrap;transition:.18s;font-weight:500}
+  .nav-chip:hover{color:#fff;border-color:var(--cyan-bright)}
+  .nav-chip.is-active{background:var(--cyan);color:#fff;border-color:var(--cyan)}
+
+  main{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+  section{scroll-margin-top:96px}
+
+  /* hero */
+  .hero{background:radial-gradient(120% 120% at 80% 0%,var(--navy-2),var(--navy));color:#eaf3fb;border-radius:0 0 22px 22px;padding:48px 30px 42px;margin:0 -20px 40px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(45,183,245,.22),transparent 70%)}
+  .hero .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:2px;color:var(--cyan-bright);text-transform:uppercase}
+  .hero h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,5vw,40px);line-height:1.15;margin:14px 0 0;max-width:18ch}
+  .hero h1 em{font-style:normal;color:var(--cyan-bright)}
+  .hero p{max-width:62ch;color:#bcd4e8;margin:16px 0 0;font-size:16px}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;position:relative;z-index:1}
+  .hero-tags span{font-size:12.5px;font-family:var(--mono);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#cfe4f4;padding:5px 11px;border-radius:8px}
+
+  /* flow diagram */
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:26px 0 6px}
+  .flow-node{flex:1 1 150px;min-width:150px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+  .flow-node .fn-icon{font-size:26px}
+  .flow-node .fn-en{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:1px}
+  .flow-node .fn-cn{font-family:var(--display);font-weight:600;font-size:17px;margin-top:2px}
+  .flow-node .fn-desc{font-size:13px;color:var(--ink-soft);margin-top:6px;line-height:1.5}
+  .flow-arrow{flex:none;align-self:center;display:flex;flex-direction:column;align-items:center;padding:0 6px;color:var(--cyan);font-family:var(--mono);font-size:12px;font-weight:500}
+  .flow-arrow b{font-size:20px;line-height:1}
+  @media(max-width:720px){.flow{flex-direction:column}.flow-arrow{flex-direction:row;gap:8px;transform:rotate(90deg);padding:6px 0}}
+  .registry-note{margin-top:14px;background:#eef6fd;border:1px dashed var(--cyan);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--navy-2)}
+
+  /* module */
+  .module{margin:46px 0 0;padding-top:8px}
+  .mod-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--navy);padding-bottom:10px}
+  .mod-num{font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;background:var(--navy);padding:3px 9px;border-radius:7px;flex:none}
+  .mod-head h2{font-family:var(--display);font-weight:700;font-size:clamp(20px,3.5vw,26px);margin:0;flex:1}
+  .mod-essence{font-size:14.5px;color:var(--ink-soft);margin:14px 0 0;padding-left:14px;border-left:3px solid var(--cyan)}
+
+  .plain{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:18px 0;box-shadow:var(--shadow)}
+  .plain h3{font-family:var(--display);font-size:16px;margin:0 0 8px;color:var(--navy)}
+  .plain h3+h3{margin-top:18px}
+  .plain h3 .tag{font-family:var(--mono);font-size:11px;background:#eef6fd;color:var(--cyan);padding:2px 7px;border-radius:6px;margin-right:7px;vertical-align:2px}
+  .plain p{margin:8px 0}
+  .analogy{background:#fff8ee;border-left:4px solid var(--amber);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .analogy b{color:#b46d12}
+
+  ul.clean{margin:10px 0;padding-left:0;list-style:none}
+  ul.clean li{position:relative;padding-left:20px;margin:7px 0;font-size:14.5px}
+  ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--cyan);font-weight:700}
+
+  code,.kbd{font-family:var(--mono);font-size:.92em;background:#eef2f6;border:1px solid #dde5ec;border-radius:5px;padding:1px 6px;color:#10405f}
+
+  .cmd{background:var(--navy);color:#dbeafc;border-radius:12px;padding:14px 16px;margin:14px 0;font-family:var(--mono);font-size:13.5px;overflow-x:auto;line-height:1.85}
+  .cmd .c-dim{color:#7fa6c4}
+  .cmd .c-key{color:var(--cyan-bright)}
+  .cmd .c-cmt{color:#6f8aa3;font-style:italic}
+
+  .tbl-wrap{overflow-x:auto;margin:16px 0}
+  table.cmp{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  table.cmp th,table.cmp td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  table.cmp th{background:var(--navy);color:#fff;font-family:var(--display);font-weight:600;font-size:13.5px}
+  table.cmp tbody tr:nth-child(even){background:#f7fafc}
+  table.cmp td:first-child{font-weight:600;color:var(--navy-2);white-space:nowrap}
+
+  /* 考点 callout */
+  .exam{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(180deg,#fff7e9,#fff);border:1px solid #f0d6a6;border-left:4px solid var(--amber);border-radius:0 12px 12px 0;padding:13px 16px;margin:16px 0;font-size:14px}
+  .exam .x-tag{flex:none;font-family:var(--display);font-weight:700;font-size:12px;color:#fff;background:var(--amber);border-radius:6px;padding:3px 8px;letter-spacing:1px;margin-top:2px}
+  .exam .x-body{color:var(--ink)}
+  .exam .x-body b{color:#b46d12}
+  .wrong{color:var(--red);font-weight:600}
+  .right{color:var(--green);font-weight:600}
+
+  footer{max-width:1080px;margin:50px auto 0;padding:24px 20px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13.5px}
+
+  @media (prefers-reduced-motion:no-preference){
+    .plain,.flow-node{transition:box-shadow .2s}
+    .plain:hover{box-shadow:0 2px 4px rgba(11,31,51,.08),0 12px 30px rgba(11,31,51,.10)}
+  }
+  :focus-visible{outline:3px solid var(--cyan-bright);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="logo-mark">D</div>
+    <div class="header-title">Docker 零基础讲解教程<small>从概念到记忆 · 关键处标注考点</small></div>
+  </div>
+  <nav class="nav-row" id="navRow">
+    <a class="nav-chip" href="#m1">① 它是什么</a>
+    <a class="nav-chip" href="#m2">② 镜像 Image</a>
+    <a class="nav-chip" href="#m3">③ 容器运行</a>
+    <a class="nav-chip" href="#m4">④ 数据持久化</a>
+    <a class="nav-chip" href="#m5">⑤ 网络</a>
+    <a class="nav-chip" href="#m6">⑥ 观测排错</a>
+    <a class="nav-chip" href="#m7">⑦ 仓库 Registry</a>
+    <a class="nav-chip" href="#m8">⑧ 安全与资源</a>
+    <a class="nav-chip" href="#m9">⑨ 编排与生态</a>
+    <a class="nav-chip" href="#m10">⑩ 底层与运维</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="eyebrow">FROM ZERO · 把名词一次讲明白</div>
+    <h1>Docker 不是虚拟机,<br>它是给应用打包的<em>「集装箱」</em></h1>
+    <p>这是一份讲义,不是题库。我们按"每个东西到底解决什么问题"把 Docker 拆成 10 个模块,每块都先用大白话和类比讲清楚,配上流程图与对比表。遇到容易考、容易混的地方,会用一个橙色的「考点」小框单独点一下,帮你记牢。建议从上往下读一遍。</p>
+    <div class="hero-tags"><span>镜像 image</span><span>容器 container</span><span>Dockerfile</span><span>Volume</span><span>network</span><span>registry</span><span>compose</span></div>
+  </section>
+
+  <!-- 1 -->
+  <section class="module" id="m1">
+    <div class="mod-head"><span class="mod-num">01</span><h2>Docker 到底是什么</h2></div>
+    <p class="mod-essence">一句话:Docker 让你把"应用 + 它需要的整套运行环境"打包成一个标准盒子,在任何机器上都能原样跑起来。理解它最快的方式,是和虚拟机对比。</p>
+
+    <div class="plain">
+      <h3>Docker vs 虚拟机:核心差异在"内核"</h3>
+      <div class="analogy"><b>类比:</b>虚拟机像在你家盖一整栋独立的房子——自带地基、水电、操作系统,笨重但彻底隔离;Docker 容器像在同一栋楼里隔出一个个房间,<b>大家共用一套地基和水电(宿主机内核)</b>,只是各自上锁。所以容器更轻、启动更快,但隔离没有虚拟机那么彻底。</div>
+      <ul class="clean">
+        <li><b>虚拟机</b>:每台 VM 有自己<b>独立的操作系统内核</b>,靠 Hypervisor 虚拟出一套硬件 → 重、慢、隔离强。</li>
+        <li><b>容器</b>:所有容器<b>共享宿主机的同一个 Linux 内核</b>,只是把进程、文件系统、网络隔离开 → 轻、秒级启动、性能损耗极小。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">容器既然共享内核,就<b>没有"独立内核"</b>。所以凡是说容器优势是"<span class="wrong">完全隔离的内核</span>"的,都是错的。容器相对虚拟机的真优势是:启动快、占资源少、性能损耗小。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3>三大件的关系:镜像 → 容器 → 仓库</h3>
+      <p>整个 Docker 世界就围绕三个东西转,先记住这张流程图,后面所有模块都是在补充它的细节:</p>
+      <div class="flow">
+        <div class="flow-node"><div class="fn-icon">📜</div><div class="fn-en">Dockerfile</div><div class="fn-cn">构建脚本</div><div class="fn-desc">一份"配方",写明用什么底座、装什么、怎么启动</div></div>
+        <div class="flow-arrow"><b>→</b>build</div>
+        <div class="flow-node"><div class="fn-icon">📦</div><div class="fn-en">Image</div><div class="fn-cn">镜像(只读模板)</div><div class="fn-desc">打包好的"集装箱蓝图",只读、可复制、分层</div></div>
+        <div class="flow-arrow"><b>→</b>run</div>
+        <div class="flow-node"><div class="fn-icon">🚢</div><div class="fn-en">Container</div><div class="fn-cn">容器(运行实例)</div><div class="fn-desc">镜像跑起来后的活进程,可读写、可启停删</div></div>
+      </div>
+      <div class="registry-note">📡 <b>仓库 Registry(如 Docker Hub)</b>是存放镜像的"码头仓库":用 <code>docker push</code> 上传镜像,用 <code>docker pull</code> 下载别人的镜像。镜像 ⇄ 仓库,容器从不直接进仓库。</div>
+      <div class="analogy"><b>记忆钩子:</b>镜像 = <b>菜谱+食材打包好的速冻盒</b>(只读、可无限复制);容器 = <b>把盒子加热端上桌的那一份饭</b>(吃了就少了,可以再热一份);仓库 = <b>超市冷柜</b>(存放和取用速冻盒的地方)。</div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body"><b>镜像是"只读模板"</b>;可读写的、跑起来的那个是"容器"。两者别说反:镜像不是运行实例,容器才是。</div></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="module" id="m2">
+    <div class="mod-head"><span class="mod-num">02</span><h2>镜像 Image:怎么造、怎么管</h2></div>
+    <p class="mod-essence">镜像是 Docker 里最核心的一块。搞懂三件事就行:它由 <b>Dockerfile</b> 构建、采用<b>分层</b>存储、并有一整套<b>造/搬/存/删</b>的命令。</p>
+
+    <div class="plain">
+      <h3><span class="tag">Dockerfile</span>造镜像的"配方"</h3>
+      <p>Dockerfile 是一行行指令,从底座开始一层层往上叠。常见指令:</p>
+      <ul class="clean">
+        <li><code>FROM</code> — 指定基础镜像(底座,如 <code>alpine</code>、<code>java:11</code>)。</li>
+        <li><code>RUN</code> — 构建时执行命令(装软件等)。<b>每条 RUN 都会生成一个新层</b>,所以习惯把多条命令合并、顺手清缓存,镜像才小。</li>
+        <li><code>COPY</code> / <code>ADD</code> — 把文件放进镜像(区别见下表)。</li>
+        <li><code>CMD</code> / <code>ENTRYPOINT</code> — 指定容器启动时跑什么(区别见下表)。</li>
+      </ul>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>对比</th><th>COPY</th><th>ADD</th></tr></thead>
+        <tbody>
+          <tr><td>基本复制</td><td>复制本地文件/目录</td><td>复制本地文件/目录</td></tr>
+          <tr><td>自动解压本地 tar</td><td>不支持</td><td>支持</td></tr>
+          <tr><td>从 URL 下载</td><td>不支持</td><td>支持</td></tr>
+          <tr><td>建议</td><td>能用 COPY 就用 COPY(行为更明确)</td><td>仅在确需解压/下载时用</td></tr>
+        </tbody>
+      </table></div>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>对比</th><th>CMD</th><th>ENTRYPOINT</th></tr></thead>
+        <tbody>
+          <tr><td>角色</td><td>默认命令/默认参数</td><td>固定入口(主程序)</td></tr>
+          <tr><td>能否被 run 覆盖</td><td>能被 <code>docker run</code> 后的参数覆盖</td><td>默认不被覆盖(需 <code>--entrypoint</code>)</td></tr>
+          <tr><td>两者同时存在</td><td colspan="2">CMD 充当 ENTRYPOINT 的<b>默认参数</b>(最终命令 = ENTRYPOINT + CMD)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① ADD 比 COPY 多了<b>"自动解压 + URL 下载"</b>;② CMD <b>能</b>被 run 覆盖、ENTRYPOINT <b>不易</b>被覆盖,二者同时存在时 <b>CMD 当默认参数</b>;③ 指定镜像入口点的指令是 <b>ENTRYPOINT</b>(填空常考)。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">分层 / 多阶段</span>镜像为什么是一层层的</h3>
+      <div class="analogy"><b>类比:</b>镜像像 PS 里的图层叠加。底层(系统)很多镜像都一样,就<b>只存一份、大家共享</b>(写时复制 CoW);你改动时只新增/改写最上面薄薄一层。</div>
+      <ul class="clean">
+        <li><b>分层的好处</b>:省存储(共享底层)、加速构建(命中缓存的层不重建)、便于分发共享。</li>
+        <li><b>多阶段构建(multi-stage)</b>:先在"编译阶段"用大镜像编译,再把成品拷进一个干净的小镜像,显著减小最终体积。</li>
+        <li><b>digest(摘要)</b>:对镜像内容算出的 SHA256,内容一变就变,用来<b>精确锁定不可变的镜像</b>(<code>image@sha256:...</code>);而 <code>tag</code> 只是版本标签、可移动、可重复。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 分层好处<b>不包括</b>"<span class="wrong">提高安全性</span>";② 多阶段构建的目的是<b>减小最终镜像体积</b>;③ <b>tag 区分版本,digest 才唯一标识内容</b>,别搞反。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">命令</span>镜像的造、搬、存、删</h3>
+      <div class="cmd">
+docker <span class="c-key">build</span> -t myapp:1.0 .        <span class="c-dim"># 按 Dockerfile 构建镜像</span><br>
+docker <span class="c-key">tag</span> myapp:1.0 myapp:latest   <span class="c-dim"># 打标签(区分版本)</span><br>
+docker <span class="c-key">pull</span> nginx               <span class="c-dim"># 拉取;不带 tag 默认 :latest</span><br>
+docker <span class="c-key">commit</span> 容器ID new:1.0       <span class="c-dim"># 把"运行中容器"固化成新镜像</span><br>
+docker <span class="c-key">save</span> myapp:1.0 -o app.tar    <span class="c-dim"># save = 导出"镜像"(含分层)</span><br>
+docker <span class="c-key">export</span> 容器ID -o snap.tar     <span class="c-dim"># export = 导出"容器快照"(扁平)</span><br>
+docker <span class="c-key">rmi</span> myapp:1.0           <span class="c-dim"># rmi = remove image,删镜像</span>
+      </div>
+      <ul class="clean">
+        <li><code>.dockerignore</code>:列出构建时<b>不打包进上下文</b>的文件(如 node_modules、.git),只在 build 时生效,用来加快构建、减小体积。</li>
+        <li>镜像最佳实践:用官方基础镜像、合并 RUN 清缓存、用<b>非 root</b> 用户运行、用 .dockerignore。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <code>save</code> 存<b>镜像</b>、<code>export</code> 存<b>容器快照</b>(最常混);② <code>pull</code> 默认拉 <b>:latest</b>;③ 删镜像是 <code>rmi</code>(<code>rm</code> 是删容器);④ "<span class="wrong">以 root 运行应用</span>"是错误实践,应用非 root。</div></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="module" id="m3">
+    <div class="mod-head"><span class="mod-num">03</span><h2>容器运行:docker run 与进容器</h2></div>
+    <p class="mod-essence">镜像跑起来就是容器。核心是把 <code>docker run</code> 的常用参数记牢,以及"怎么进到一个正在跑的容器里看一看"。</p>
+
+    <div class="plain">
+      <h3><span class="tag">docker run</span>启动容器的常用参数</h3>
+      <div class="cmd">
+docker <span class="c-key">run</span> <span class="c-dim">-d</span>                 <span class="c-cmt"># 后台运行(detached)</span><br>
+&nbsp;&nbsp;<span class="c-dim">--name</span> web            <span class="c-cmt"># 给容器起名</span><br>
+&nbsp;&nbsp;<span class="c-dim">-p</span> 8080:80            <span class="c-cmt"># 端口映射:宿主机:容器</span><br>
+&nbsp;&nbsp;<span class="c-dim">-v</span> /data/html:/usr/share/nginx/html  <span class="c-cmt"># 挂载目录</span><br>
+&nbsp;&nbsp;<span class="c-dim">-e</span> ENV=prod            <span class="c-cmt"># 设置环境变量</span><br>
+&nbsp;&nbsp;<span class="c-dim">--restart</span>=always      <span class="c-cmt"># 随 Docker 服务自动启动</span><br>
+&nbsp;&nbsp;<span class="c-dim">--rm</span>                  <span class="c-cmt"># 退出后自动删除容器(临时调试用)</span><br>
+&nbsp;&nbsp;nginx
+      </div>
+      <p>记忆口诀:<b>d 后台、name 起名、p 端口、v 挂载、e 变量、restart 自启、rm 用完即焚</b>。</p>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <code>-e</code> 设环境变量(Dockerfile 里用 ENV);② <code>--rm</code> = 退出后自动删容器;③ 自动随服务启动用 <code>--restart=always</code>(没有 --auto-start / --respawn 这些)。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">进容器</span>attach 与 exec 的区别</h3>
+      <div class="analogy"><b>类比:</b><code>attach</code> 像把屏幕接到容器"正在跑的主程序"上,看到的是它的输出,一不小心退出会把主程序(容器)停掉;<code>exec</code> 像在容器里<b>另开一个新窗口/新终端</b>,你进去敲命令,退出也不影响主程序。所以"进容器看看"几乎都用 exec。</div>
+      <div class="cmd">docker <span class="c-key">exec</span> -it 容器ID bash   <span class="c-cmt"># 进入运行中的容器,开一个交互 shell</span></div>
+      <p>其中 <code>-i</code> 保持输入打开、<code>-t</code> 分配伪终端,通常一起用。</p>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">"进入正在运行的容器"标准答案是 <b>docker exec</b>(attach 也能连但语义不同;run 是启动新容器;login 是登录仓库)。</div></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">状态</span>容器有哪些状态</h3>
+      <p>官方状态:<code>created</code>(已创建未启动)、<code>running</code>、<code>paused</code>(暂停)、<code>restarting</code>、<code>exited</code>(已退出,口语常叫 stopped)、<code>dead</code>。</p>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">"<span class="wrong">suspended</span>" 不是 Docker 容器状态——这是常见的迷惑选项。</div></div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="module" id="m4">
+    <div class="mod-head"><span class="mod-num">04</span><h2>数据持久化:容器删了数据还在吗</h2></div>
+    <p class="mod-essence">容器是"用完即焚"的,容器内写的数据会随容器删除而消失。要让数据活下去,就把它放到容器之外——这就是卷(Volume)和绑定挂载(Bind Mount)。</p>
+
+    <div class="plain">
+      <h3><span class="tag">两种挂载</span>Volume vs Bind Mount</h3>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>对比</th><th>Volume(卷)</th><th>Bind Mount(绑定挂载)</th></tr></thead>
+        <tbody>
+          <tr><td>写法</td><td><code>-v 卷名:/容器路径</code></td><td><code>-v /宿主机路径:/容器路径</code></td></tr>
+          <tr><td>由谁管理</td><td>Docker 管理(放在 Docker 目录下)</td><td>你指定宿主机上的具体目录</td></tr>
+          <tr><td>典型用途</td><td>数据库数据等,跨容器共享、更可移植</td><td>开发时挂源码、配置文件</td></tr>
+          <tr><td>相关命令</td><td><code>docker volume create/ls/rm</code></td><td>无需创建,直接给路径</td></tr>
+        </tbody>
+      </table></div>
+      <div class="analogy"><b>类比:</b>容器像一台笔记本,卷像一块<b>移动硬盘</b>。笔记本(容器)报废了,硬盘(卷)里的数据还在,插到新笔记本上就能继续用。</div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <code>-v</code> 冒号左边是<b>路径</b>就是 <b>Bind Mount</b>,是<b>卷名</b>就是 <b>Volume</b>;② 删容器时<b>命名卷默认不会被删</b>,需手动 <code>docker volume rm</code>——所以"删容器时卷也会被删"是<span class="wrong">错误</span>说法。</div></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="module" id="m5">
+    <div class="mod-head"><span class="mod-num">05</span><h2>网络:容器怎么通信、怎么被访问</h2></div>
+    <p class="mod-essence">两个问题:① 外面怎么访问到容器(端口映射);② 容器之间、容器和宿主机用什么"网络模式"连接(网络驱动)。</p>
+
+    <div class="plain">
+      <h3><span class="tag">端口映射</span>-p 宿主机端口:容器端口</h3>
+      <p>容器内部端口默认外面访问不到,需要用 <code>-p</code> 映射到宿主机端口,格式<b>恒为 host:container</b>。</p>
+      <div class="cmd">docker run -p <span class="c-key">8080</span>:<span class="c-key">80</span> nginx  <span class="c-cmt"># 访问 宿主机:8080 → 进入 容器:80</span></div>
+    </div>
+
+    <div class="plain">
+      <h3><span class="tag">网络驱动</span>bridge / host / overlay / macvlan / none</h3>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>驱动</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>bridge</td><td>默认,容器接到虚拟网桥、有自己的网段,靠端口映射对外</td></tr>
+          <tr><td>host</td><td>容器<b>直接共享宿主机网络栈</b>,无隔离、<b>性能最好</b>,不需端口映射</td></tr>
+          <tr><td>overlay</td><td>跨多台主机的容器组网(集群/Swarm 常用)</td></tr>
+          <tr><td>macvlan</td><td>给容器分配独立 MAC,像物理机一样接入局域网</td></tr>
+          <tr><td>none</td><td>不配置网络</td></tr>
+        </tbody>
+      </table></div>
+      <div class="analogy"><b>CNM(容器网络模型)三组件:</b><b>Sandbox</b>(容器的网络隔离环境)、<b>Endpoint</b>(连接点)、<b>Network</b>(一组可互通 Endpoint 的集合)。</div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <span class="wrong">vxlan</span> 是底层封装协议,<b>不是 Docker 网络驱动</b>;② <b>host 模式性能最好、共享宿主机网络栈</b>;③ <code>-p</code> 永远是 host:container;④ CNM 三件套是 Sandbox/Endpoint/Network,<span class="wrong">Bridge 是驱动不是 CNM 组件</span>。</div></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="module" id="m6">
+    <div class="mod-head"><span class="mod-num">06</span><h2>观测与排错:容器到底在干嘛</h2></div>
+    <p class="mod-essence">出问题时靠这几条命令"看现场":看日志、看资源、看进程、看详细配置。记住每条命令"看什么"就够了。</p>
+
+    <div class="plain">
+      <h3><span class="tag">命令地图</span>各看一个维度</h3>
+      <div class="tbl-wrap"><table class="cmp">
+        <thead><tr><th>命令</th><th>看什么</th></tr></thead>
+        <tbody>
+          <tr><td>docker logs</td><td>容器的<b>日志</b>输出</td></tr>
+          <tr><td>docker stats</td><td>实时<b>资源</b>占用(CPU/内存/网络/IO)</td></tr>
+          <tr><td>docker top</td><td>容器内运行的<b>进程</b>列表</td></tr>
+          <tr><td>docker inspect</td><td>容器/镜像的<b>详细配置</b>(返回 JSON)</td></tr>
+          <tr><td>docker ps</td><td>容器<b>列表</b>与状态(概览)</td></tr>
+          <tr><td>docker system df</td><td><b>磁盘</b>占用(镜像/容器/卷)</td></tr>
+        </tbody>
+      </table></div>
+      <ul class="clean">
+        <li><b>日志最佳实践</b>:应用把日志输出到 <b>stdout/stderr</b>,由 Docker 日志驱动统一收集;默认日志驱动是 <code>json-file</code>。</li>
+        <li><b>HEALTHCHECK</b>:定期探测容器是否健康,失败时状态变 <code>unhealthy</code>,可用 <code>docker inspect</code> 查看健康状态。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <code>inspect</code> 返回 <b>JSON</b>;② 看资源用 <code>stats</code>、看进程用 <code>top</code>、看日志用 <code>logs</code>、看磁盘用 <code>system df</code>——别张冠李戴;③ 默认日志驱动是 <b>json-file</b>;④ HEALTHCHECK 失败<b>只标 unhealthy,不会自动重启</b>容器。</div></div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="module" id="m7">
+    <div class="mod-head"><span class="mod-num">07</span><h2>仓库 Registry:镜像存哪、从哪取</h2></div>
+    <p class="mod-essence">镜像造好后要分发、要复用,就需要一个集中存放的地方。公共的叫 Docker Hub,公司里常自建私有仓库。</p>
+
+    <div class="plain">
+      <h3><span class="tag">概念</span>Docker Hub 与私有仓库</h3>
+      <ul class="clean">
+        <li><b>Docker Hub</b> = 官方公共<b>镜像仓库</b>,<code>docker pull nginx</code> 默认就是从这里拉。</li>
+        <li><b>私有 Registry</b> 默认监听 <b>5000</b> 端口(自建仓库用 <code>registry</code> 镜像)。</li>
+        <li>推送流程:<code>docker tag</code> 加上"仓库地址前缀" → <code>docker login</code> → <code>docker push</code>。</li>
+      </ul>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body"><b>Registry 默认端口是 5000</b>;别和 daemon 的 <b>2375(非加密)/ 2376(TLS)</b> 管理端口混淆。Docker Hub 的角色是"镜像仓库"。</div></div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="module" id="m8">
+    <div class="mod-head"><span class="mod-num">08</span><h2>安全与资源限制</h2></div>
+    <p class="mod-essence">容器共享内核 → 隔离不如虚拟机强 → 所以要主动收紧权限、限制资源,别让一个容器拖垮整台机器。</p>
+
+    <div class="plain">
+      <h3><span class="tag">安全</span>能力(Capabilities)与非 root</h3>
+      <ul class="clean">
+        <li>容器隔离<b>弱于虚拟机</b>(共享内核);默认 Docker 会丢弃一批高危能力,所以容器 root <b>≠</b> 宿主机完整 root。</li>
+        <li>可用 <code>--cap-add</code> / <code>--cap-drop</code> 精确增减 <b>Linux Capabilities</b>,按需收紧权限。</li>
+        <li>应用尽量用<b>非 root</b> 用户运行。</li>
+      </ul>
+      <h3><span class="tag">资源</span>限制 CPU 和内存</h3>
+      <div class="cmd">docker run <span class="c-key">--cpus</span>=1.5 <span class="c-key">--memory</span>=512m myapp
+docker <span class="c-key">update</span> --memory=1g 容器ID   <span class="c-cmt"># 运行后还能改</span></div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① 正确做法是用 <b>Linux Capabilities</b> 限权;② 默认容器 root 权限<b>不等于</b>宿主机 root(已丢弃高危能力);③ CPU 和内存<b>可同时限制</b>,且运行后能用 <code>docker update</code> 改。</div></div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="module" id="m9">
+    <div class="mod-head"><span class="mod-num">09</span><h2>编排与生态:单机之外的世界</h2></div>
+    <p class="mod-essence">一个容器好管,几十上百个就需要"编排工具"。先认清三个层级的工具,以及底层是谁在真正跑容器。</p>
+
+    <div class="plain">
+      <h3><span class="tag">分层</span>Compose / Swarm / 容器运行时</h3>
+      <ul class="clean">
+        <li><b>Docker Compose</b>:用一个 yml 文件<b>定义并运行多容器应用</b>(单机多服务,如 web+db),一条命令全拉起。</li>
+        <li><b>Docker Swarm</b>:Docker 自带的<b>集群编排</b>(多主机),特性有内置服务发现、滚动更新、overlay 跨主机网络等。</li>
+        <li><b>容器运行时(runtime)</b>:真正在底层创建并运行容器的组件——<code>containerd</code>、<code>runc</code>、<code>cri-o</code>。</li>
+      </ul>
+      <div class="analogy"><b>层级类比:</b>runc/containerd 是"发动机"(真正跑容器),Docker 引擎是"整车",Compose 是"一键发动一队车",Swarm/Kubernetes 是"调度整个车队的指挥中心"。</div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① Compose 的作用 = <b>定义并运行多容器应用</b>;② "<span class="wrong">自动容器重启</span>"是单机 Docker 的 <code>--restart</code> 功能,<b>不是 Swarm 特有</b>;③ <span class="wrong">kube-proxy</span> 是 K8s 组件,<b>不是容器运行时</b>(runtime 是 containerd/runc/cri-o)。</div></div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="module" id="m10">
+    <div class="mod-head"><span class="mod-num">10</span><h2>底层原理与运维杂项(查漏补缺)</h2></div>
+    <p class="mod-essence">剩下这些是零散但常考的点:命名空间隔离、存储驱动、重启与清理行为。归到一起扫一遍即可。</p>
+
+    <div class="plain">
+      <h3><span class="tag">底层</span>命名空间与存储驱动</h3>
+      <ul class="clean">
+        <li><b>PID 命名空间</b>让容器有独立的进程编号空间:容器内 PID 与宿主机不同、看不到宿主机进程、容器内第一个进程是 PID 1。容器默认<b>不限制</b>进程数,可用 <code>--pids-limit</code> 设上限。</li>
+        <li><b>存储驱动</b>:<code>overlay2</code> 是当前推荐;<code>devicemapper</code> 多用于老 CentOS/RHEL。</li>
+        <li><code>docker version</code> / <code>info</code> / <code>system info</code> 都能显示 Docker 信息,详略不同。</li>
+      </ul>
+      <h3><span class="tag">运维</span>重启与清理</h3>
+      <div class="cmd">
+docker <span class="c-key">restart</span> 容器        <span class="c-cmt"># ≈ 先 stop 再 start</span><br>
+docker <span class="c-key">container prune</span>     <span class="c-cmt"># 删所有"已停止"容器</span><br>
+docker <span class="c-key">system prune</span>        <span class="c-cmt"># 删停止容器+无用网络+悬空镜像+缓存</span>
+      </div>
+      <div class="exam"><span class="x-tag">考点</span><div class="x-body">① <code>overlay2</code> 推荐,<b><span class="wrong">aufs 不是 Linux 内核原生支持</span></b>;② <code>system prune</code> <b>不会</b>删"正在运行"的容器;③ <code>restart</code> ≈ stop+start;④ 容器默认 pid <b>无限制</b>;⑤ PID 命名空间隔离 → 上面三条同时成立。</div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  讲解范围:覆盖这套练习卷里 Docker 单选题(1–50)所涉及的全部概念,并融入了简答/填空/实操中的 Docker 知识点。每个模块的橙色「考点」框,标的是最容易考、最容易混的地方。<br>
+  建议学法:先按 ①→⑩ 顺序通读一遍建立框架 → 重点反复看每模块的"类比"和"考点框" → 合上页面,试着用自己的话把每个模块讲一遍。
+</footer>
+
+<script>
+(function(){
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.nav-chip'));
+  var map={};
+  chips.forEach(function(c){map[c.getAttribute('href').slice(1)]=c;});
+  var sections=Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          chips.forEach(function(c){c.classList.remove('is-active');});
+          var active=map[en.target.id];
+          if(active){active.classList.add('is-active');active.scrollIntoView({block:'nearest',inline:'center'});}
+        }
+      });
+    },{rootMargin:'-40% 0px -55% 0px'});
+    sections.forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>

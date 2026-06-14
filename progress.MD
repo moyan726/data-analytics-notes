@@ -818,3 +818,15 @@
 - **口径校验**：全文已明确说明 `45.21%` 不是标准 `profit / revenue`，并指出时段矩阵分析的是 `Average Revenue` 而非利润。
 - **结果检查**：文件中共存在 6 个图片引用，旧的 `alldata.png` alt 误标已清除；无新增依赖变更。
 - **偏差说明**：与实施计划一致，无额外范围变更。
+
+## 2026-06-14 15:42 - 集成 Docker 零基础教程模块
+
+- **时间**：2026-06-14 15:42 (UTC+8)
+- **变更摘要**：在项目导航栏集成 Docker 零基础教程模块并准备推送至 GitHub 仓库。
+- **问题说明**：用户物理新增了 `docs/Projects/CoursesDocs` 目录下的 Docker 零基础教程和 50 题自测页面，需要在网站导航栏中注册以便对外展示和预览。
+- **策略方向**：在 `mkdocs.yml` 配置文件的 `Projects` 节点下，新增 `Docker 零基础教程` 节点，配置 `概念讲解` 和 `50题自测` 的导航路径，保留原有结构不变。
+- **具体改动**：
+  - `[MODIFY] [mkdocs.yml](file:///e:/pycharm/MyWeb/data-analytics-notes/mkdocs.yml)`：在 `nav` -> `Projects` 中增加 `Docker 零基础教程` 分支及其指向的 HTML 文件。
+- **影响面**：全站导航栏结构，新增 Docker 相关内容的可访问性。
+- **风险与回滚**：由于 HTML 页面为静态文件，无语法冲突风险。回退方式为通过 `git checkout` 撤销 `mkdocs.yml` 的修改。
+- **验证**：本地执行 `python -m mkdocs build --strict` 构建成功，且无导航冲突。
